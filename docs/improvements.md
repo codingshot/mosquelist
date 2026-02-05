@@ -38,7 +38,7 @@ Actionable skills and improvements to make the app more useful, accurate, and ma
 | **Focus & keyboard** | All interactive elements focusable with visible focus ring; skip link, modal trap, and logical tab order. | High |
 | **Screen reader** | Landmarks, headings, aria-labels on icon buttons, live regions for dynamic content (e.g. search result count). | High |
 | **Touch targets** | Buttons and links at least 44×44px on mobile. | High |
-| **Reduced motion** | Respect `prefers-reduced-motion` for animations (already in `index.css`). | Done |
+| **Reduced motion** | Respect `prefers-reduced-motion` for animations (index.css) and Back to top scroll. | Done |
 
 ---
 
@@ -62,7 +62,7 @@ Actionable skills and improvements to make the app more useful, accurate, and ma
 | **Unit tests** | Search, filters, data helpers (getMosqueById, getUniqueCountries); keep coverage for new features. | Done |
 | **Component tests** | Key pages (Index, MosquePage) with providers; check headings, search, landmarks, buttons. | Done |
 | **E2E** | Critical paths: nav, search, filter, add to bucket list, open mosque page (e.g. Playwright). | Medium |
-| **Lint** | Fix existing ESLint errors (empty interfaces, conditional hooks, require in tailwind). | Medium |
+| **Lint** | Fix existing ESLint errors (empty interfaces, conditional hooks, require in tailwind). | Done |
 
 ---
 
@@ -80,6 +80,6 @@ Actionable skills and improvements to make the app more useful, accurate, and ma
 
 - **Before adding a mosque**: Check [skills.md](./skills.md) checklist; add at least one source; note if figure is approximate.
 - **Before release**: Run `npm run lint`, `npm run test`, `npm run build`; spot-check contrast and keyboard nav.
-- **Quarterly**: Re-audit top 10–15 mosques (capacity, area, dates); update `docs/skills.md` “Data sources” section.
+- **Quarterly**: Run `npm run fact-check`; re-audit top 10–15 mosques (capacity, area, dates); update `docs/skills.md` Latest audit and Fact-check schedule & log.
 
 Use this doc to pick the next improvement batch and to onboard contributors.

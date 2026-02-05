@@ -2,7 +2,7 @@ import { Mail, Heart } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer id="about" className="bg-foreground text-background py-12">
+    <footer id="about" className="print:hidden bg-foreground text-background py-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}

@@ -46,7 +46,7 @@ export default function MosquePage() {
       <MosqueSEO mosque={mosque} />
       <Navigation />
       <main id="main-content" className="container mx-auto px-4 pb-16 pt-24">
-        <div className="mb-6 flex flex-wrap items-center gap-2">
+        <div className="print:hidden mb-6 flex flex-wrap items-center gap-2">
           <Button variant="ghost" asChild className="-ml-2 gap-2">
             <Link to="/#mosques">
               <ArrowLeft className="h-4 w-4" />
@@ -108,7 +108,7 @@ export default function MosquePage() {
                 type="button"
                 variant="secondary"
                 size="icon"
-                className="absolute top-4 right-4 h-10 w-10 rounded-full bg-card/90 backdrop-blur-sm hover:bg-card"
+                className="print:hidden absolute top-4 right-4 h-10 w-10 rounded-full bg-card/90 backdrop-blur-sm hover:bg-card"
                 onClick={() => toggleFavorite(mosque.id)}
                 aria-label={isLiked ? "Remove from favorites" : "Add to favorites"}
               >

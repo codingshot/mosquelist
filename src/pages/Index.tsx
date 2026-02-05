@@ -6,6 +6,7 @@ import { MosqueGrid } from "@/components/MosqueGrid";
 import { Timeline } from "@/components/Timeline";
 import { BucketList } from "@/components/BucketList";
 import { Footer } from "@/components/Footer";
+import { BackToTop } from "@/components/BackToTop";
 
 const Index = () => {
   const { hash } = useLocation();
@@ -30,6 +31,7 @@ const Index = () => {
         <BucketList />
         <Footer />
       </main>
+      <BackToTop />
     </div>
   );
 };

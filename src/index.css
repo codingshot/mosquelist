@@ -277,6 +277,13 @@
   }
 }
 
+/* Print styles - Tailwind print:hidden used on nav, footer, buttons */
+@media print {
+  body {
+    background: white;
+  }
+}
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,

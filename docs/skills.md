@@ -56,6 +56,14 @@ Corrections applied: Al-Masjid an-Nabawi 1.5M capacity / 384,000 m²; Imam Reza 
 - **Great Mosque of Djenné**: Capacity corrected to **1,000** (interior; sources: Google Arts & Culture, Wikipedia). Previously 3,000. Area 75×75 m = 5,625 m² unchanged.
 - **Badshahi Mosque**: 100,000 total (10k hall + 90k courtyard); 1673; courtyard ~25,900 m² — confirmed.
 
+### Fact-check schedule & log
+
+**Keep fact-checking:** run `npm run fact-check` to print a checklist of all mosques (capacity, area, established). Re-verify using the source hierarchy above; document corrections here and in "Latest audit," then update `src/data/mosques.json` as needed.
+
+| Date       | Scope                    | Notes |
+|------------|--------------------------|--------|
+| 2025-02    | Process added            | Checklist script + this log. Next: quarterly top 10–15 re-audit. |
+
 ---
 
 ## 2. Quran references

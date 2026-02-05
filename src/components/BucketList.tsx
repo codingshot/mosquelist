@@ -74,7 +74,10 @@ export const BucketList = () => {
             {bucketList.length === 0 ? (
               <div className="px-6 py-8 text-center text-muted-foreground">
                 <p className="font-medium text-foreground mb-1">Your list is empty</p>
-                <p className="text-sm">Open &quot;Add More Mosques&quot; below to add mosques to track.</p>
+                <p className="text-sm mb-4">Browse mosques above and add them to your bucket list to track your spiritual journey.</p>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/#mosques">Browse Mosques</Link>
+                </Button>
               </div>
             ) : (
             <ul className="divide-y divide-dashed divide-border">
@@ -153,7 +156,7 @@ export const BucketList = () => {
             )}
 
             {/* Add More */}
-            <div className="px-6 py-4 border-t border-border">
+            <div className="print:hidden px-6 py-4 border-t border-border">
               <Sheet open={addSheetOpen} onOpenChange={setAddSheetOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" className="w-full gap-2">

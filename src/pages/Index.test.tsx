@@ -2,13 +2,16 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { BucketListProvider } from "@/contexts/BucketListContext";
 import Index from "./Index";
 
 function renderIndex() {
   return render(
     <MemoryRouter>
       <FavoritesProvider>
-        <Index />
+        <BucketListProvider>
+          <Index />
+        </BucketListProvider>
       </FavoritesProvider>
     </MemoryRouter>
   );

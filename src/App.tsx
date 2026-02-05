@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { BucketListProvider } from "@/contexts/BucketListContext";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import Index from "./pages/Index";
 
@@ -25,6 +26,7 @@ const SkipLink = () => (
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <FavoritesProvider>
+      <BucketListProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -39,6 +41,7 @@ const App = () => (
           </Suspense>
         </BrowserRouter>
       </TooltipProvider>
+      </BucketListProvider>
     </FavoritesProvider>
   </QueryClientProvider>
 );

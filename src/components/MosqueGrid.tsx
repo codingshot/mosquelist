@@ -258,7 +258,7 @@ export const MosqueGrid = () => {
         </div>
 
         {/* Search + filters row: mobile stacked, desktop inline */}
-        <div className="flex flex-col gap-4 mb-6 md:mb-8">
+        <div className="print:hidden flex flex-col gap-4 mb-6 md:mb-8">
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center">
             <div className="relative flex-1 w-full min-w-0">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
