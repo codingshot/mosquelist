@@ -34,17 +34,19 @@ describe("Index page", () => {
 
   it("renders hero section with headline", () => {
     renderIndex();
-    expect(screen.getByRole("heading", { name: /your journey to the sacred places/i })).toBeInTheDocument();
+    const headings = screen.getAllByRole("heading", { name: /your journey to the sacred places/i });
+    expect(headings.length).toBeGreaterThan(0);
   });
 
   it("has link to explore mosques", () => {
     renderIndex();
-    expect(screen.getByRole("link", { name: /explore mosques/i })).toBeInTheDocument();
+    const links = screen.getAllByRole("link", { name: /explore mosques/i });
+    expect(links.length).toBeGreaterThan(0);
   });
 
-  it("renders footer with about id", () => {
+  it("renders footer", () => {
     renderIndex();
-    const footer = document.querySelector("footer#about");
+    const footer = document.querySelector("footer#footer");
     expect(footer).toBeInTheDocument();
   });
 

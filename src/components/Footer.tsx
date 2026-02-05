@@ -3,7 +3,7 @@ import { Mail, Heart } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer id="about" className="print:hidden bg-foreground text-background py-12">
+    <footer id="footer" className="print:hidden bg-foreground text-background py-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -42,22 +42,22 @@ export const Footer = () => {
             <h4 className="font-serif text-lg font-semibold mb-4">Explore</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/explore" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#explore" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Browse Mosques
                 </Link>
               </li>
               <li>
-                <Link to="/lists" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#lists" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Curated Lists
                 </Link>
               </li>
               <li>
-                <Link to="/timeline" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#timeline" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Historical Timeline
                 </Link>
               </li>
               <li>
-                <Link to="/bucket-list" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#bucket-list" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   My Bucket List
                 </Link>
               </li>
@@ -79,22 +79,22 @@ export const Footer = () => {
             <h4 className="font-serif text-lg font-semibold mb-4">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/guides/travel" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#travel-guide" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Travel Guides
                 </Link>
               </li>
               <li>
-                <Link to="/guides/visitor-tips" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#visitor-tips" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Visitor Tips
                 </Link>
               </li>
               <li>
-                <Link to="/timeline" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#timeline" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Islamic Heritage
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/#about" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   About Us
                 </Link>
               </li>
