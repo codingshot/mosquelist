@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Menu, X, MapPin, Heart, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { favoriteCount } = useFavorites();
 
   const navLinks = [
-    { name: "Explore", href: "#mosques" },
-    { name: "Timeline", href: "#timeline" },
-    { name: "My List", href: "#bucket-list" },
-    { name: "About", href: "#about" },
+    { name: "Explore", href: "/#mosques" },
+    { name: "Timeline", href: "/#timeline" },
+    { name: "My List", href: "/#bucket-list" },
+    { name: "About", href: "/#about" },
   ];
 
   return (
@@ -17,14 +20,18 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full gradient-gold flex items-center justify-center">
-              <MapPin className="w-4 h-4 text-primary-foreground" />
-            </div>
-            <span className="font-serif text-xl font-semibold text-foreground">
+          <Link to="/" className="flex items-center gap-2 min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-md">
+            <img
+              src="/favicon.ico"
+              alt="MosqueList"
+              className="h-8 w-8 shrink-0 object-contain"
+              width={32}
+              height={32}
+            />
+            <span className="font-serif text-xl font-semibold text-foreground truncate">
               MosqueList
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -32,7 +39,7 @@ export const Navigation = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
               >
                 {link.name}
               </a>
@@ -41,20 +48,30 @@ export const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <Heart className="w-4 h-4" />
-              <span>0</span>
+            <Button variant="ghost" size="sm" className="gap-2" asChild>
+              <Link to="/#bucket-list">
+                <Heart className="w-4 h-4" />
+                <span>My List</span>
+                {favoriteCount > 0 && (
+                  <span className="ml-0.5 rounded-full bg-primary px-1.5 py-0 text-xs font-medium text-primary-foreground">
+                    {favoriteCount}
+                  </span>
+                )}
+              </Link>
             </Button>
-            <Button size="sm" className="gradient-gold text-primary-foreground hover:opacity-90">
-              Start Journey
+            <Button size="sm" className="gradient-gold text-primary-foreground hover:opacity-90" asChild>
+              <Link to="/#mosques">Start Journey</Link>
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - min 44px touch target */}
           <button
-            className="md:hidden p-2"
+            type="button"
+            className="md:hidden min-h-[44px] min-w-[44px] p-3 flex items-center justify-center rounded-md hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -63,7 +80,7 @@ export const Navigation = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-background border-b border-border animate-fade-up">
+        <div id="mobile-nav" className="md:hidden bg-background border-b border-border animate-fade-up" role="dialog" aria-label="Mobile menu">
           <div className="container mx-auto px-4 py-4 space-y-4">
             {navLinks.map((link) => (
               <a
@@ -75,8 +92,10 @@ export const Navigation = () => {
                 {link.name}
               </a>
             ))}
-            <Button className="w-full gradient-gold text-primary-foreground">
-              Start Your Journey
+            <Button className="w-full gradient-gold text-primary-foreground" asChild>
+              <Link to="/#mosques" onClick={() => setIsOpen(false)}>
+                Start Your Journey
+              </Link>
             </Button>
           </div>
         </div>

@@ -6,24 +6,89 @@
     <title>MosqueList - Discover the World's Most Magnificent Mosques</title>
     <meta name="description" content="Explore, plan, and track your spiritual journey to the world's most beautiful and significant mosques. From Mecca to Istanbul, create your personal prayer bucket list." />
     <meta name="author" content="ummah.build" />
-    <meta name="keywords" content="mosques, Islamic travel, Hajj, Umrah, Muslim travel, prayer, Masjid al-Haram, Al-Aqsa, mosque tourism" />
+    <meta name="keywords" content="mosques, Islamic travel, Hajj, Umrah, Muslim travel, prayer, Masjid al-Haram, Al-Aqsa, mosque tourism, bucket list, spiritual journey, Muslim travel guide" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#b8860b" />
+    <meta name="application-name" content="MosqueList" />
 
     <meta property="og:title" content="MosqueList - Discover the World's Most Magnificent Mosques" />
     <meta property="og:description" content="Explore, plan, and track your spiritual journey to the world's most beautiful mosques. Create your personal prayer bucket list." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="https://mosquelist.com/meta.png" />
     <meta property="og:url" content="https://mosquelist.com" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@mosquelist" />
     <meta name="twitter:title" content="MosqueList - Discover the World's Most Magnificent Mosques" />
     <meta name="twitter:description" content="Your journey to the sacred places begins here. Explore mosques worldwide." />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:image" content="https://mosquelist.com/meta.png" />
 
     <link rel="canonical" href="https://mosquelist.com" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "MosqueList",
+      "description": "Discover, explore, and plan your spiritual journey to the world's most magnificent mosques. Create your prayer bucket list from Mecca to Istanbul.",
+      "url": "https://mosquelist.com",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ummah.build"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://mosquelist.com/#mosques?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <style>
+      #app-loading {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: hsl(40 30% 97%);
+        z-index: 9999;
+      }
+      #app-loading .loading-logo-wrap {
+        position: relative;
+        width: 64px;
+        height: 64px;
+      }
+      #app-loading .loading-logo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      #app-loading .loading-spinner {
+        position: absolute;
+        inset: -6px;
+        border: 3px solid hsl(35 25% 85%);
+        border-top-color: hsl(38 70% 45%);
+        border-radius: 50%;
+        animation: app-loading-spin 0.9s linear infinite;
+      }
+      @keyframes app-loading-spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
 
   <body>
+    <div id="app-loading" aria-hidden="true">
+      <div class="loading-logo-wrap">
+        <img src="/favicon.ico" alt="" class="loading-logo" width="64" height="64" />
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

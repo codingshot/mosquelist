@@ -1,8 +1,12 @@
 import heroImage from "@/assets/hero-mosque.jpg";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Compass } from "lucide-react";
+import { mosques, getUniqueCountries } from "@/data/mosques";
 
 export const HeroSection = () => {
+  const mosqueCount = mosques.length;
+  const countryCount = getUniqueCountries().length;
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -10,6 +14,9 @@ export const HeroSection = () => {
         <img
           src={heroImage}
           alt="Masjid al-Haram at sunset"
+          fetchpriority="high"
+          width={1920}
+          height={1080}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
@@ -45,25 +52,31 @@ export const HeroSection = () => {
             <Button
               size="lg"
               className="gradient-gold text-primary-foreground text-lg px-8 py-6 rounded-full hover:opacity-90 transition-all hover:scale-105"
+              asChild
             >
-              <MapPin className="w-5 h-5 mr-2" />
-              Explore Mosques
+              <Link to="/#mosques">
+                <MapPin className="w-5 h-5 mr-2" />
+                Explore Mosques
+              </Link>
             </Button>
             <Button
               variant="outline"
               size="lg"
               className="text-lg px-8 py-6 rounded-full border-2 hover:bg-card"
+              asChild
             >
-              <Users className="w-5 h-5 mr-2" />
-              Start My List
+              <Link to="/#bucket-list">
+                <Users className="w-5 h-5 mr-2" />
+                Start My List
+              </Link>
             </Button>
           </div>
 
-          {/* Stats */}
+          {/* Stats - derived from live data */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 pt-12 max-w-2xl mx-auto">
             <div className="text-center">
               <p className="font-serif text-3xl md:text-4xl font-bold text-foreground">
-                100+
+                {mosqueCount}+
               </p>
               <p className="text-sm text-muted-foreground">Mosques Listed</p>
             </div>
@@ -75,7 +88,7 @@ export const HeroSection = () => {
             </div>
             <div className="text-center">
               <p className="font-serif text-3xl md:text-4xl font-bold text-foreground">
-                40+
+                {countryCount}+
               </p>
               <p className="text-sm text-muted-foreground">Countries</p>
             </div>
@@ -84,7 +97,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
         <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex justify-center pt-2">
           <div className="w-1.5 h-3 bg-primary rounded-full" />
         </div>

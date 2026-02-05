@@ -1,32 +1,27 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { mosques } from "@/data/mosques";
-import { Check, Plus, MapPin, Plane } from "lucide-react";
+import { Check, Plus, MapPin, Plane, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-interface BucketListItem {
-  mosqueId: string;
-  visited: boolean;
-}
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { useBucketList } from "@/hooks/useBucketList";
 
 export const BucketList = () => {
-  const [bucketList, setBucketList] = useState<BucketListItem[]>(
-    mosques.slice(0, 5).map((m) => ({
-      mosqueId: m.id,
-      visited: false,
-    }))
-  );
-
-  const toggleVisited = (mosqueId: string) => {
-    setBucketList((prev) =>
-      prev.map((item) =>
-        item.mosqueId === mosqueId
-          ? { ...item, visited: !item.visited }
-          : item
-      )
-    );
-  };
-
-  const visitedCount = bucketList.filter((item) => item.visited).length;
+  const {
+    bucketList,
+    toggleVisited,
+    addToBucketList,
+    removeFromBucketList,
+    visitedCount,
+    mosquesNotInList,
+  } = useBucketList();
+  const [addSheetOpen, setAddSheetOpen] = useState(false);
 
   return (
     <section id="bucket-list" className="py-16 md:py-24 bg-paper-cream">
@@ -60,7 +55,7 @@ export const BucketList = () => {
               <div
                 className="h-full gradient-gold transition-all duration-500"
                 style={{
-                  width: `${(visitedCount / bucketList.length) * 100}%`,
+                  width: `${bucketList.length ? (visitedCount / bucketList.length) * 100 : 0}%`,
                 }}
               />
             </div>
@@ -76,6 +71,12 @@ export const BucketList = () => {
             </div>
 
             {/* Items */}
+            {bucketList.length === 0 ? (
+              <div className="px-6 py-8 text-center text-muted-foreground">
+                <p className="font-medium text-foreground mb-1">Your list is empty</p>
+                <p className="text-sm">Open &quot;Add More Mosques&quot; below to add mosques to track.</p>
+              </div>
+            ) : (
             <ul className="divide-y divide-dashed divide-border">
               {bucketList.map((item) => {
                 const mosque = mosques.find((m) => m.id === item.mosqueId);
@@ -114,33 +115,98 @@ export const BucketList = () => {
                             : "text-foreground"
                         }`}
                       >
-                        {mosque.name}
+                        <Link
+                          to={`/mosque/${mosque.id}`}
+                          className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        >
+                          {mosque.name}
+                        </Link>
                       </h4>
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <MapPin className="w-3 h-3" />
+                        <MapPin className="w-3 h-3 shrink-0" />
                         <span>
                           {mosque.location}, {mosque.country}
                         </span>
                       </div>
                     </div>
 
-                    {/* Status */}
-                    {item.visited && (
-                      <span className="font-handwriting text-primary text-sm">
-                        Alhamdulillah! ✓
-                      </span>
-                    )}
+                    {/* Status / Remove */}
+                    <div className="flex items-center gap-2">
+                      {item.visited && (
+                        <span className="font-handwriting text-primary text-sm">
+                          Alhamdulillah! ✓
+                        </span>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => removeFromBucketList(item.mosqueId)}
+                        className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        aria-label={`Remove ${mosque.name} from list`}
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
                   </li>
                 );
               })}
             </ul>
+            )}
 
             {/* Add More */}
             <div className="px-6 py-4 border-t border-border">
-              <Button variant="ghost" className="w-full gap-2">
-                <Plus className="w-4 h-4" />
-                Add More Mosques
-              </Button>
+              <Sheet open={addSheetOpen} onOpenChange={setAddSheetOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" className="w-full gap-2">
+                    <Plus className="w-4 h-4" />
+                    Add More Mosques
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="bottom" className="h-[70vh] overflow-hidden flex flex-col">
+                  <SheetHeader>
+                    <SheetTitle>Add a mosque to your list</SheetTitle>
+                  </SheetHeader>
+                  <div className="flex-1 overflow-y-auto py-4">
+                    {mosquesNotInList.length === 0 ? (
+                      <p className="text-muted-foreground text-center py-6">
+                        All {mosques.length} mosques are already in your list.{" "}
+                        <Link
+                          to="/#mosques"
+                          className="text-primary hover:underline"
+                          onClick={() => setAddSheetOpen(false)}
+                        >
+                          Explore mosques
+                        </Link>
+                      </p>
+                    ) : (
+                      <ul className="space-y-2">
+                        {mosquesNotInList.map((mosque) => (
+                          <li key={mosque.id}>
+                            <div className="flex items-center justify-between gap-4 rounded-lg border border-border p-3 hover:bg-secondary/50">
+                              <div className="min-w-0">
+                                <p className="font-medium text-foreground truncate">
+                                  {mosque.name}
+                                </p>
+                                <p className="text-sm text-muted-foreground flex items-center gap-1">
+                                  <MapPin className="w-3 h-3 shrink-0" />
+                                  {mosque.location}, {mosque.country}
+                                </p>
+                              </div>
+                              <Button
+                                size="sm"
+                                className="shrink-0"
+                                onClick={() => addToBucketList(mosque.id)}
+                              >
+                                <Plus className="w-4 h-4 mr-1" />
+                                Add
+                              </Button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
 

@@ -1,4 +1,4 @@
-import { MapPin, Mail, Heart } from "lucide-react";
+import { Mail, Heart } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -8,9 +8,13 @@ export const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                <MapPin className="w-4 h-4 text-primary-foreground" />
-              </div>
+              <img
+                src="/favicon.ico"
+                alt="MosqueList"
+                className="h-8 w-8 shrink-0 object-contain"
+                width={32}
+                height={32}
+              />
               <span className="font-serif text-xl font-semibold">
                 MosqueList
               </span>
@@ -19,11 +23,11 @@ export const Footer = () => {
               Helping Muslims discover, explore, and plan visits to the world's
               most magnificent mosques. Start your spiritual journey today.
             </p>
-            <p className="text-background/50 text-sm mt-4">
+            <p className="text-background/70 text-sm mt-4">
               A project by{" "}
               <a
                 href="https://ummah.build"
-                className="text-primary hover:underline"
+                className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -37,22 +41,27 @@ export const Footer = () => {
             <h4 className="font-serif text-lg font-semibold mb-4">Explore</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#mosques" className="text-background/70 hover:text-primary transition-colors">
+                <a href="/#mosques" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Browse Mosques
                 </a>
               </li>
               <li>
-                <a href="#timeline" className="text-background/70 hover:text-primary transition-colors">
+                <a href="/#timeline" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Historical Timeline
                 </a>
               </li>
               <li>
-                <a href="#bucket-list" className="text-background/70 hover:text-primary transition-colors">
+                <a href="/#bucket-list" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Create Bucket List
                 </a>
               </li>
               <li>
-                <a href="#" className="text-background/70 hover:text-primary transition-colors">
+                <a
+                  href="https://www.islamicfinder.org/prayer-times/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded"
+                >
                   Prayer Times
                 </a>
               </li>
@@ -64,23 +73,31 @@ export const Footer = () => {
             <h4 className="font-serif text-lg font-semibold mb-4">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-background/70 hover:text-primary transition-colors">
+                <a href="/#mosques" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Travel Guides
                 </a>
               </li>
               <li>
-                <a href="#" className="text-background/70 hover:text-primary transition-colors">
+                <a href="/#mosques" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Visitor Tips
                 </a>
               </li>
               <li>
-                <a href="#" className="text-background/70 hover:text-primary transition-colors">
+                <a href="/#timeline" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Islamic Heritage
                 </a>
               </li>
               <li>
-                <a href="#" className="text-background/70 hover:text-primary transition-colors">
+                <a href="/#about" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:hello@mosquelist.com?subject=MosqueList%20feedback%20or%20suggestion"
+                  className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded"
+                >
+                  Suggest a mosque
                 </a>
               </li>
             </ul>
@@ -89,14 +106,15 @@ export const Footer = () => {
 
         {/* Bottom */}
         <div className="border-t border-background/20 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-background/50 text-sm text-center md:text-left">
+          <p className="text-background/70 text-sm text-center md:text-left">
             © 2025 MosqueList. Made with{" "}
             <Heart className="w-4 h-4 inline text-primary" /> for the Ummah.
           </p>
           <div className="flex items-center gap-4">
             <a
               href="mailto:hello@mosquelist.com"
-              className="text-background/70 hover:text-primary transition-colors"
+              className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded inline-flex"
+              aria-label="Email us"
             >
               <Mail className="w-5 h-5" />
             </a>

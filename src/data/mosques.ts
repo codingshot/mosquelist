@@ -1,225 +1,30 @@
-export interface Mosque {
-  id: string;
-  name: string;
-  arabicName?: string;
-  location: string;
-  country: string;
-  capacity: number;
-  established: string;
-  area: number;
-  annualVisitors: string;
-  facilities: string[];
-  significance: string;
-  description: string;
-  imageUrl: string;
-  isHolySite: boolean;
-  architecturalStyle?: string;
-  womenPrayerArea: boolean;
-  touristFriendly: boolean;
+import type { Mosque, TimelineEvent, MosquesData } from "@/types/mosque";
+
+import data from "./mosques.json";
+
+const { mosques: mosquesList, timelineEvents: timeline } = data as MosquesData;
+
+export type { Mosque, TimelineEvent };
+export const mosques: Mosque[] = mosquesList;
+export const timelineEvents: TimelineEvent[] = timeline;
+
+export function getMosqueById(id: string): Mosque | undefined {
+  return mosques.find((m) => m.id === id);
 }
 
-export const mosques: Mosque[] = [
-  {
-    id: "masjid-al-haram",
-    name: "Masjid al-Haram",
-    arabicName: "المسجد الحرام",
-    location: "Mecca",
-    country: "Saudi Arabia",
-    capacity: 4000000,
-    established: "638 CE",
-    area: 400800,
-    annualVisitors: "8-10 million (Hajj) + millions (Umrah)",
-    facilities: ["Hotels", "Restaurants", "Medical centers", "Multilingual guides", "Wheelchair access", "Cooling systems", "Information centers"],
-    significance: "The holiest site in Islam, home to the Kaaba",
-    description: "Masjid al-Haram, also known as the Grand Mosque, is the largest mosque in the world and surrounds Islam's holiest place, the Kaaba, in the city of Mecca. Muslims around the world face the Kaaba during their five daily prayers.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: true,
-    architecturalStyle: "Islamic Architecture with Modern Expansions",
-    womenPrayerArea: true,
-    touristFriendly: false,
-  },
-  {
-    id: "masjid-an-nabawi",
-    name: "Al-Masjid an-Nabawi",
-    arabicName: "المسجد النبوي",
-    location: "Medina",
-    country: "Saudi Arabia",
-    capacity: 1600000,
-    established: "622 CE",
-    area: 400000,
-    annualVisitors: "7 million",
-    facilities: ["Hotels", "Museums", "Prayer halls for women", "Libraries", "Courtyards", "Umbrella shading system", "Medical facilities"],
-    significance: "Second holiest site in Islam, burial place of Prophet Muhammad ﷺ",
-    description: "The Prophet's Mosque is the second-holiest site in Islam, built by Prophet Muhammad himself in 622 CE. It houses the tomb of the Prophet and is one of the largest mosques in the world with its iconic green dome.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: true,
-    architecturalStyle: "Classical Islamic with Ottoman and Modern elements",
-    womenPrayerArea: true,
-    touristFriendly: false,
-  },
-  {
-    id: "al-aqsa",
-    name: "Al-Aqsa Mosque",
-    arabicName: "المسجد الأقصى",
-    location: "Jerusalem",
-    country: "Palestine",
-    capacity: 400000,
-    established: "705 CE",
-    area: 144000,
-    annualVisitors: "~5 million (pre-conflict)",
-    facilities: ["Guided tours", "Islamic Museum nearby", "Limited tourist facilities"],
-    significance: "Third holiest site in Islam, destination of the Prophet's night journey",
-    description: "Al-Aqsa Mosque, meaning 'The Farthest Mosque', is located in the Old City of Jerusalem. It is the third-holiest site in Islam and was the original qibla (direction of prayer) before Mecca.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: true,
-    architecturalStyle: "Umayyad Architecture",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-  {
-    id: "imam-reza-shrine",
-    name: "Imam Reza Shrine",
-    arabicName: "حرم امام رضا",
-    location: "Mashhad",
-    country: "Iran",
-    capacity: 700000,
-    established: "818 CE",
-    area: 598657,
-    annualVisitors: "20-30 million",
-    facilities: ["Hotels", "Museums", "Libraries", "Restaurants", "Medical centers", "Prayer halls"],
-    significance: "Largest mosque in the world by area, shrine of Imam Reza",
-    description: "The Imam Reza Shrine is a complex containing the mausoleum of Imam Reza, the eighth Imam of Twelver Shia. It is the largest mosque in the world by dimension and the second most visited religious site in the world.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: false,
-    architecturalStyle: "Persian Islamic Architecture",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-  {
-    id: "sheikh-zayed",
-    name: "Sheikh Zayed Grand Mosque",
-    arabicName: "جامع الشيخ زايد الكبير",
-    location: "Abu Dhabi",
-    country: "UAE",
-    capacity: 41000,
-    established: "2007",
-    area: 30000,
-    annualVisitors: "5-6 million",
-    facilities: ["Guided tours (multiple languages)", "Visitor center", "Gift shops", "Photography permitted", "Dining facilities", "Library", "Reflection pools"],
-    significance: "One of the largest mosques in the world, architectural masterpiece",
-    description: "The Sheikh Zayed Grand Mosque is one of the most beautiful mosques in the world, featuring 82 domes, over 1,000 columns, and the world's largest hand-knotted carpet. It's open to visitors of all faiths.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: false,
-    architecturalStyle: "Moorish, Mughal, Ottoman fusion",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-  {
-    id: "hassan-ii",
-    name: "Hassan II Mosque",
-    arabicName: "مسجد الحسن الثاني",
-    location: "Casablanca",
-    country: "Morocco",
-    capacity: 105000,
-    established: "1993",
-    area: 90000,
-    annualVisitors: "1.2 million",
-    facilities: ["Guided tours", "Museum", "Library", "Conference rooms", "Hammam", "Oceanfront viewing areas"],
-    significance: "Largest mosque in Africa, built on the Atlantic Ocean",
-    description: "Hassan II Mosque stands partially over the Atlantic Ocean, with a retractable roof and the world's tallest minaret at 210 meters. It's a masterpiece of Moroccan craftsmanship and one of the few mosques open to non-Muslims.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: false,
-    architecturalStyle: "Moorish Architecture",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-  {
-    id: "blue-mosque",
-    name: "Blue Mosque (Sultan Ahmed)",
-    arabicName: "جامع السلطان أحمد",
-    location: "Istanbul",
-    country: "Turkey",
-    capacity: 10000,
-    established: "1616",
-    area: 2352,
-    annualVisitors: "3.5 million",
-    facilities: ["Tourist entrance", "Multilingual guides", "Information panels", "Nearby bazaar and restaurants", "Photography allowed in designated areas"],
-    significance: "Iconic Ottoman mosque, known for its blue tiles",
-    description: "The Sultan Ahmed Mosque, popularly known as the Blue Mosque, is famous for its hand-painted blue tiles adorning its interior. With six minarets and a magnificent dome, it's one of Istanbul's most iconic landmarks.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: false,
-    architecturalStyle: "Classical Ottoman",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-  {
-    id: "faisal-mosque",
-    name: "Faisal Mosque",
-    arabicName: "فیصل مسجد",
-    location: "Islamabad",
-    country: "Pakistan",
-    capacity: 300000,
-    established: "1986",
-    area: 54000,
-    annualVisitors: "800,000",
-    facilities: ["Islamic University", "Library", "Museum", "Lecture halls", "Courtyards", "Parking facilities"],
-    significance: "National mosque of Pakistan, unique tent-like design",
-    description: "Faisal Mosque is the national mosque of Pakistan, located at the foot of Margalla Hills. Its unique design resembles a desert Bedouin tent, blending contemporary architecture with traditional Islamic elements.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: false,
-    architecturalStyle: "Contemporary Turkish-Arab",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-  {
-    id: "istiqlal-mosque",
-    name: "Istiqlal Mosque",
-    arabicName: "مسجد الاستقلال",
-    location: "Jakarta",
-    country: "Indonesia",
-    capacity: 200000,
-    established: "1978",
-    area: 93400,
-    annualVisitors: "1.5 million",
-    facilities: ["Visitor center", "Guided tours", "Library", "Conference halls", "Parking facilities"],
-    significance: "Largest mosque in Southeast Asia, symbol of Indonesian independence",
-    description: "Istiqlal Mosque is the national mosque of Indonesia and the largest mosque in Southeast Asia. Its name means 'Independence' in Arabic, commemorating Indonesian independence. It features interfaith dialogue, standing across from Jakarta Cathedral.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: false,
-    architecturalStyle: "Modern Functionalist with Islamic elements",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-  {
-    id: "grand-jamia",
-    name: "Grand Jamia Mosque",
-    arabicName: "بحریہ ٹاؤن گرینڈ جامعہ مسجد",
-    location: "Karachi",
-    country: "Pakistan",
-    capacity: 950000,
-    established: "2020",
-    area: 250000,
-    annualVisitors: "500,000 (estimated)",
-    facilities: ["Islamic learning centers", "Library", "Exhibition halls", "Museum", "Parking for 5,000 vehicles"],
-    significance: "Third largest mosque in the world by capacity",
-    description: "The Grand Jamia Mosque in Bahria Town Karachi is one of the world's largest mosques by capacity. Its design is inspired by the Selimiye Mosque in Turkey, featuring stunning Ottoman architecture with modern amenities.",
-    imageUrl: "/placeholder.svg",
-    isHolySite: false,
-    architecturalStyle: "Ottoman Revival",
-    womenPrayerArea: true,
-    touristFriendly: true,
-  },
-];
+export function getMosqueBySlug(slug: string): Mosque | undefined {
+  return mosques.find((m) => m.id === slug);
+}
 
-export const timelineEvents = [
-  { year: "622", mosque: "Al-Masjid an-Nabawi", event: "Built by Prophet Muhammad ﷺ in Medina" },
-  { year: "638", mosque: "Masjid al-Haram", event: "First expansion by Caliph Umar" },
-  { year: "705", mosque: "Al-Aqsa Mosque", event: "Umayyad Caliph al-Walid I completes construction" },
-  { year: "818", mosque: "Imam Reza Shrine", event: "Shrine established for Imam Reza" },
-  { year: "1616", mosque: "Blue Mosque", event: "Sultan Ahmed I completes construction in Istanbul" },
-  { year: "1978", mosque: "Istiqlal Mosque", event: "Indonesia's national mosque inaugurated" },
-  { year: "1986", mosque: "Faisal Mosque", event: "Pakistan's national mosque completed" },
-  { year: "1993", mosque: "Hassan II Mosque", event: "Completed in Casablanca, Morocco" },
-  { year: "2007", mosque: "Sheikh Zayed Grand Mosque", event: "Inaugurated in Abu Dhabi" },
-  { year: "2020", mosque: "Grand Jamia Mosque", event: "Completed in Karachi, Pakistan" },
-];
+export function getUniqueCountries(): string[] {
+  return [...new Set(mosques.map((m) => m.country))].sort();
+}
+
+/** Unique architectural styles for filter (sorted). */
+export function getUniqueArchitecturalStyles(): string[] {
+  const set = new Set<string>();
+  mosques.forEach((m) => {
+    if (m.architecturalStyle) set.add(m.architecturalStyle);
+  });
+  return [...set].sort();
+}

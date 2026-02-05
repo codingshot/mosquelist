@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { timelineEvents } from "@/data/mosques";
 import { Calendar } from "lucide-react";
 
@@ -50,7 +51,12 @@ export const Timeline = () => {
                       {event.year} CE
                     </span>
                     <h3 className="font-serif text-xl font-semibold text-foreground mt-1">
-                      {event.mosque}
+                      <Link
+                        to={`/mosque/${event.mosqueId}`}
+                        className="hover:text-primary hover:underline focus:outline-none focus:underline"
+                      >
+                        {event.mosque}
+                      </Link>
                     </h3>
                     <p className="text-muted-foreground mt-2">{event.event}</p>
                   </div>
