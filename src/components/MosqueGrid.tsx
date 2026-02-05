@@ -33,9 +33,13 @@ const PARAM_WOMEN = "women";
 const PARAM_TOURIST = "tourist";
 const PARAM_CAP_MIN = "capMin";
 const PARAM_CAP_MAX = "capMax";
+const PARAM_AREA_MIN = "areaMin";
+const PARAM_AREA_MAX = "areaMax";
+const PARAM_EST_MIN = "estMin";
+const PARAM_EST_MAX = "estMax";
 const PARAM_STYLE = "style";
 
-type FilterType = "all" | "holy" | "tourist";
+type FilterType = "all" | "holy" | "tourist" | "biggest";
 type ViewType = "grid" | "list";
 type SortType = "name" | "capacity" | "established" | "country";
 
@@ -57,6 +61,10 @@ function useMosqueSearchParams() {
   const touristOnly = searchParams.get(PARAM_TOURIST) === "1";
   const capMin = searchParams.get(PARAM_CAP_MIN) ?? "";
   const capMax = searchParams.get(PARAM_CAP_MAX) ?? "";
+  const areaMin = searchParams.get(PARAM_AREA_MIN) ?? "";
+  const areaMax = searchParams.get(PARAM_AREA_MAX) ?? "";
+  const estMin = searchParams.get(PARAM_EST_MIN) ?? "";
+  const estMax = searchParams.get(PARAM_EST_MAX) ?? "";
   const architecturalStyle = searchParams.get(PARAM_STYLE) ?? "";
 
   const setParam = useCallback(
@@ -80,6 +88,10 @@ function useMosqueSearchParams() {
   const setTouristOnly = (v: boolean) => setParam(PARAM_TOURIST, v ? "1" : "");
   const setCapMin = (v: string) => setParam(PARAM_CAP_MIN, v);
   const setCapMax = (v: string) => setParam(PARAM_CAP_MAX, v);
+  const setAreaMin = (v: string) => setParam(PARAM_AREA_MIN, v);
+  const setAreaMax = (v: string) => setParam(PARAM_AREA_MAX, v);
+  const setEstMin = (v: string) => setParam(PARAM_EST_MIN, v);
+  const setEstMax = (v: string) => setParam(PARAM_EST_MAX, v);
   const setArchitecturalStyle = (v: string) => setParam(PARAM_STYLE, v);
 
   return {
@@ -92,6 +104,10 @@ function useMosqueSearchParams() {
     touristOnly,
     capMin,
     capMax,
+    areaMin,
+    areaMax,
+    estMin,
+    estMax,
     architecturalStyle,
     setQuery,
     setFilter,
@@ -102,6 +118,10 @@ function useMosqueSearchParams() {
     setTouristOnly,
     setCapMin,
     setCapMax,
+    setAreaMin,
+    setAreaMax,
+    setEstMin,
+    setEstMax,
     setArchitecturalStyle,
   };
 }
@@ -117,6 +137,10 @@ export const MosqueGrid = () => {
     touristOnly,
     capMin,
     capMax,
+    areaMin,
+    areaMax,
+    estMin,
+    estMax,
     setQuery,
     setFilter,
     setView,
@@ -126,6 +150,10 @@ export const MosqueGrid = () => {
     setTouristOnly,
     setCapMin,
     setCapMax,
+    setAreaMin,
+    setAreaMax,
+    setEstMin,
+    setEstMax,
     architecturalStyle,
     setArchitecturalStyle,
   } = useMosqueSearchParams();
@@ -169,6 +197,10 @@ export const MosqueGrid = () => {
     touristOnly ||
     capMin !== "" ||
     capMax !== "" ||
+    areaMin !== "" ||
+    areaMax !== "" ||
+    estMin !== "" ||
+    estMax !== "" ||
     architecturalStyle !== "";
 
   const activeFilterCount = [
@@ -177,6 +209,10 @@ export const MosqueGrid = () => {
     touristOnly,
     capMin,
     capMax,
+    areaMin,
+    areaMax,
+    estMin,
+    estMax,
     architecturalStyle,
   ].filter(Boolean).length;
 
@@ -193,6 +229,10 @@ export const MosqueGrid = () => {
     setTouristOnly(false);
     setCapMin("");
     setCapMax("");
+    setAreaMin("");
+    setAreaMax("");
+    setEstMin("");
+    setEstMax("");
     setArchitecturalStyle("");
   }, [
     setQuery,
@@ -202,6 +242,10 @@ export const MosqueGrid = () => {
     setTouristOnly,
     setCapMin,
     setCapMax,
+    setAreaMin,
+    setAreaMax,
+    setEstMin,
+    setEstMax,
     setArchitecturalStyle,
   ]);
 
@@ -210,6 +254,7 @@ export const MosqueGrid = () => {
 
     if (filter === "holy") list = list.filter((m) => m.isHolySite);
     if (filter === "tourist") list = list.filter((m) => m.touristFriendly);
+    if (filter === "biggest") list = list.filter((m) => m.capacity >= 100_000);
     if (country) list = list.filter((m) => m.country === country);
     if (womenOnly) list = list.filter((m) => m.womenPrayerArea);
     if (touristOnly) list = list.filter((m) => m.touristFriendly);
@@ -220,6 +265,16 @@ export const MosqueGrid = () => {
     const maxCap = capMax ? parseInt(capMax, 10) : NaN;
     if (!Number.isNaN(minCap)) list = list.filter((m) => m.capacity >= minCap);
     if (!Number.isNaN(maxCap)) list = list.filter((m) => m.capacity <= maxCap);
+
+    const minArea = areaMin ? parseInt(areaMin, 10) : NaN;
+    const maxArea = areaMax ? parseInt(areaMax, 10) : NaN;
+    if (!Number.isNaN(minArea)) list = list.filter((m) => m.area >= minArea);
+    if (!Number.isNaN(maxArea)) list = list.filter((m) => m.area <= maxArea);
+
+    const minEst = estMin ? parseInt(estMin, 10) : NaN;
+    const maxEst = estMax ? parseInt(estMax, 10) : NaN;
+    if (!Number.isNaN(minEst)) list = list.filter((m) => establishedYear(m.established) >= minEst);
+    if (!Number.isNaN(maxEst)) list = list.filter((m) => establishedYear(m.established) <= maxEst);
 
     list = filterMosquesByQuery(list, query);
 
@@ -242,7 +297,7 @@ export const MosqueGrid = () => {
       }
     });
     return sorted;
-  }, [query, filter, country, womenOnly, touristOnly, capMin, capMax, architecturalStyle, sort]);
+  }, [query, filter, country, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
   return (
     <section id="mosques" className="py-16 md:py-24 bg-paper-cream islamic-pattern">
@@ -264,7 +319,7 @@ export const MosqueGrid = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
               <Input
                 type="search"
-                placeholder="Name, city, country or style — e.g. Blue Mosque Istanbul"
+                placeholder="Search by name, city, country, style, history — e.g. blue istanbul, mughal, hajj"
                 value={searchInput}
                 onChange={(e) => setQueryDebounced(e.target.value)}
                 className="pl-9 pr-9 w-full"
@@ -307,6 +362,14 @@ export const MosqueGrid = () => {
                 className={filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}
               >
                 Tourist
+              </Button>
+              <Button
+                variant={filter === "biggest" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setFilter("biggest")}
+                className={filter === "biggest" ? "gradient-gold text-primary-foreground" : ""}
+              >
+                Biggest
               </Button>
               <Select value={sort} onValueChange={(v) => setSort((v || "name") as SortType)}>
                 <SelectTrigger className="w-[140px] h-11 shrink-0" aria-label="Sort by">
@@ -433,6 +496,56 @@ export const MosqueGrid = () => {
                           placeholder="e.g. 500000"
                           value={capMax}
                           onChange={(e) => setCapMax(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-2">
+                        <Label htmlFor="areaMin">Min area (m²)</Label>
+                        <Input
+                          id="areaMin"
+                          type="number"
+                          min={0}
+                          placeholder="e.g. 10000"
+                          value={areaMin}
+                          onChange={(e) => setAreaMin(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="areaMax">Max area (m²)</Label>
+                        <Input
+                          id="areaMax"
+                          type="number"
+                          min={0}
+                          placeholder="e.g. 100000"
+                          value={areaMax}
+                          onChange={(e) => setAreaMax(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-2">
+                        <Label htmlFor="estMin">Established after (year)</Label>
+                        <Input
+                          id="estMin"
+                          type="number"
+                          min={500}
+                          max={2100}
+                          placeholder="e.g. 1900"
+                          value={estMin}
+                          onChange={(e) => setEstMin(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="estMax">Established before (year)</Label>
+                        <Input
+                          id="estMax"
+                          type="number"
+                          min={500}
+                          max={2100}
+                          placeholder="e.g. 2000"
+                          value={estMax}
+                          onChange={(e) => setEstMax(e.target.value)}
                         />
                       </div>
                     </div>

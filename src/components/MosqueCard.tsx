@@ -1,6 +1,6 @@
 import type { Mosque } from "@/types/mosque";
 import { Link } from "react-router-dom";
-import { Heart, MapPin, Users, Star, ChevronRight } from "lucide-react";
+import { Heart, MapPin, Users, Star, ChevronRight, Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useFavorites } from "@/contexts/FavoritesContext";
@@ -9,6 +9,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { getGoogleMapsUrl } from "@/lib/maps";
 
 interface MosqueCardProps {
   mosque: Mosque;
@@ -129,6 +130,19 @@ export const MosqueCard = ({ mosque, index }: MosqueCardProps) => {
             Capacity: {formatCapacity(mosque.capacity)} · Est. {mosque.established}
           </p>
           <p className="text-sm text-foreground line-clamp-2">{mosque.significance}</p>
+          {(mosque.coordinates || mosque.location) && (
+            <a
+              href={getGoogleMapsUrl(mosque.coordinates ?? null, `${mosque.name}, ${mosque.location}, ${mosque.country}`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+              aria-label="Open in Google Maps"
+            >
+              <Map className="h-3 w-3" />
+              Open in Maps
+            </a>
+          )}
           <p className="text-xs text-primary font-medium">Click to open full page</p>
         </div>
       </HoverCardContent>

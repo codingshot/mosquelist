@@ -13,6 +13,9 @@ function getSearchText(m: Mosque): string {
     m.significance,
     m.description,
     m.architecturalStyle ?? "",
+    m.history ?? "",
+    m.tourismNotes ?? "",
+    m.architectureNotes ?? "",
     ...(m.facilities ?? []),
   ];
   return parts.join(" ").toLowerCase();

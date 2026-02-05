@@ -24,6 +24,8 @@ Actionable skills and improvements to make the app more useful, accurate, and ma
 | **Share & deep links** | Share button per mosque (copy link). `/mosque/:id` and `/#mosques?q=...` work when shared. | Done |
 | **Add to bucket list from detail** | Mosque detail page has “Add to bucket list” / “In your bucket list” button. | Done |
 | **Map view** | Optional map (e.g. Leaflet/Mapbox) showing mosque locations; link from mosque card/detail. | Medium |
+| **Map links** | Google Maps and Apple Maps links on mosque pages and cards. | Done |
+| **History, tourism, architecture** | Extended history, tourism notes, architecture notes, official websites. | Done |
 | **Prayer times** | Link to trusted prayer times service (e.g. IslamicFinder). | Done |
 | **Offline / PWA** | Service worker, cache static + mosque JSON for basic offline use. | Low |
 | **i18n** | Arabic (and optionally Urdu, Indonesian) for UI and key content; RTL layout. | Low |

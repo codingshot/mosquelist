@@ -5,10 +5,11 @@ import { getMosqueBySlug } from "@/data/mosques";
 import { MosqueSEO } from "@/components/MosqueSEO";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBucketList } from "@/hooks/useBucketList";
-import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus } from "lucide-react";
+import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -40,6 +41,9 @@ export default function MosquePage() {
 
   const isLiked = isFavorite(mosque.id);
   const isInBucketList = bucketList.some((item) => item.mosqueId === mosque.id);
+  const address = `${mosque.name}, ${mosque.location}, ${mosque.country}`;
+  const googleMapsUrl = getGoogleMapsUrl(mosque.coordinates ?? null, address);
+  const appleMapsUrl = getAppleMapsUrl(mosque.coordinates ?? null, address);
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,6 +155,44 @@ export default function MosquePage() {
                   </span>
                 )}
               </div>
+              <div className="print:hidden mt-3 flex flex-wrap gap-2">
+                <a
+                  href={googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                  aria-label="Open in Google Maps"
+                >
+                  <Map className="h-4 w-4" />
+                  Google Maps
+                </a>
+                <span className="text-muted-foreground">·</span>
+                <a
+                  href={appleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                  aria-label="Open in Apple Maps"
+                >
+                  <Map className="h-4 w-4" />
+                  Apple Maps
+                </a>
+                {mosque.officialWebsite && (
+                  <>
+                    <span className="text-muted-foreground">·</span>
+                    <a
+                      href={mosque.officialWebsite}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                      aria-label="Official website"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      Official site
+                    </a>
+                  </>
+                )}
+              </div>
 
               <p className="mt-6 text-lg leading-relaxed text-foreground">{mosque.description}</p>
 
@@ -186,6 +228,27 @@ export default function MosquePage() {
                 <h2 className="font-serif text-xl font-semibold text-foreground">Significance</h2>
                 <p className="mt-2 text-muted-foreground">{mosque.significance}</p>
               </div>
+
+              {mosque.history && (
+                <div className="mt-6">
+                  <h2 className="font-serif text-xl font-semibold text-foreground">History</h2>
+                  <p className="mt-2 text-muted-foreground">{mosque.history}</p>
+                </div>
+              )}
+
+              {mosque.architectureNotes && (
+                <div className="mt-6">
+                  <h2 className="font-serif text-xl font-semibold text-foreground">Architecture</h2>
+                  <p className="mt-2 text-muted-foreground">{mosque.architectureNotes}</p>
+                </div>
+              )}
+
+              {mosque.tourismNotes && (
+                <div className="mt-6">
+                  <h2 className="font-serif text-xl font-semibold text-foreground">Visitor information</h2>
+                  <p className="mt-2 text-muted-foreground">{mosque.tourismNotes}</p>
+                </div>
+              )}
 
               {mosque.facilities && mosque.facilities.length > 0 && (
                 <div className="mt-6">

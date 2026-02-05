@@ -4,6 +4,8 @@ export interface Mosque {
   arabicName?: string;
   location: string;
   country: string;
+  /** Lat/lng for map links (Google Maps, Apple Maps) */
+  coordinates?: { lat: number; lng: number };
   capacity: number;
   established: string;
   area: number;
@@ -14,6 +16,14 @@ export interface Mosque {
   imageUrl: string;
   isHolySite: boolean;
   architecturalStyle?: string;
+  /** Extended architecture notes */
+  architectureNotes?: string;
+  /** Historical context and timeline */
+  history?: string;
+  /** Visitor tips, best times, dress code, etc. */
+  tourismNotes?: string;
+  /** Official mosque or government tourism site */
+  officialWebsite?: string;
   womenPrayerArea: boolean;
   touristFriendly: boolean;
 }

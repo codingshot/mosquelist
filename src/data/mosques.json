@@ -17,7 +17,11 @@
       "isHolySite": true,
       "architecturalStyle": "Islamic Architecture with Modern Expansions",
       "womenPrayerArea": true,
-      "touristFriendly": false
+      "touristFriendly": false,
+      "coordinates": {"lat": 21.4225, "lng": 39.8262},
+      "history": "The mosque surrounds the Kaaba, the ancient house of worship believed built by Prophet Ibrahim. Expanded through the centuries—under Caliph Umar (638), Ottoman Sultan Selim II (1571), and Saudi expansions (1950s onward)—it is the focal point of Hajj and Umrah.",
+      "tourismNotes": "Non-Muslims may not enter. Hajj visa required for pilgrimage. Dress modestly; Ihram for Hajj. Best visited during Ramadan or Hajj season for spiritual atmosphere.",
+      "officialWebsite": "https://www.gph.gov.sa"
     },
     {
       "id": "masjid-an-nabawi",
@@ -36,7 +40,11 @@
       "isHolySite": true,
       "architecturalStyle": "Classical Islamic with Ottoman and Modern elements",
       "womenPrayerArea": true,
-      "touristFriendly": false
+      "touristFriendly": false,
+      "coordinates": {"lat": 24.4672, "lng": 39.6111},
+      "history": "Built by Prophet Muhammad ﷺ in 622 CE after the Hijrah. The green dome marks the Prophet's burial place. Successively expanded by Umayyads, Abbasids, Mamluks, Ottomans, and Saudi rulers.",
+      "tourismNotes": "Non-Muslims may not enter. Visitors need valid visa. Women pray in designated areas. The Rawdah (green carpet area) is highly sought—visit early morning for shorter queues.",
+      "officialWebsite": "https://www.gph.gov.sa"
     },
     {
       "id": "al-aqsa",
@@ -55,7 +63,11 @@
       "isHolySite": true,
       "architecturalStyle": "Umayyad Architecture",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 31.776, "lng": 35.2356},
+      "history": "Construction began under Umayyad Caliph Abd al-Malik (685 CE); completed by his son al-Walid I (705 CE). The Dome of the Rock enshrines the Foundation Stone. Al-Aqsa mosque lies south.",
+      "architectureNotes": "Early Islamic architecture with Byzantine and Persian influences. Gold dome, blue and turquoise tilework, marble columns.",
+      "tourismNotes": "Check current access and security. Modest dress required. Non-Muslims may visit the compound at designated times."
     },
     {
       "id": "imam-reza-shrine",
@@ -74,7 +86,11 @@
       "isHolySite": false,
       "architecturalStyle": "Persian Islamic Architecture",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 36.287, "lng": 59.6162},
+      "history": "The shrine of Imam Reza, the eighth Imam of Twelver Shia Islam, was established in 818 CE after his martyrdom. The complex grew under Samanids, Safavids, and Qajars.",
+      "architectureNotes": "Persian-Islamic style with turquoise domes, golden minarets, and intricate tilework (kashi-kari).",
+      "tourismNotes": "Non-Muslims may visit most areas. Dress modestly; women need chador (provided). Peak pilgrimage during Nowruz and Ramadan."
     },
     {
       "id": "sheikh-zayed",
@@ -93,7 +109,12 @@
       "isHolySite": false,
       "architecturalStyle": "Moorish, Mughal, Ottoman fusion",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 24.4126, "lng": 54.4747},
+      "history": "Commissioned by Sheikh Zayed bin Sultan Al Nahyan, founder of the UAE. Completed in 2007, it honors Islamic and global cultures.",
+      "architectureNotes": "82 domes, 1,000+ columns, 24-carat gold chandeliers, and the world's largest hand-knotted carpet. White marble and semi-precious stone inlays.",
+      "tourismNotes": "Free guided tours for non-Muslims. Modest dress required; abayas provided for women. Best time: morning. Photography allowed. Closed Friday morning.",
+      "officialWebsite": "https://www.szgmc.gov.ae"
     },
     {
       "id": "hassan-ii",
@@ -112,7 +133,12 @@
       "isHolySite": false,
       "architecturalStyle": "Moorish Architecture",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 33.6089, "lng": -7.6327},
+      "history": "Built to commemorate King Hassan II's 60th birthday. Construction 1986–1993. Designed by French architect Michel Pinseau. Minaret at 210 m is the world's tallest.",
+      "architectureNotes": "Traditional Moroccan zellige tilework, carved wood, and plaster. Retractable roof over the main prayer hall.",
+      "tourismNotes": "Guided tours for non-Muslims. Modest dress required. Tours run several times daily.",
+      "officialWebsite": "https://www.fmh2.ma"
     },
     {
       "id": "blue-mosque",
@@ -131,7 +157,11 @@
       "isHolySite": false,
       "architecturalStyle": "Classical Ottoman",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 41.0054, "lng": 28.9768},
+      "history": "Built 1609–1616 by Sultan Ahmed I. Architect Sedefkar Mehmed Agha drew on Hagia Sophia and Mimar Sinan. Six minarets caused controversy; Sultan funded a seventh at Mecca.",
+      "architectureNotes": "Famous for 20,000+ hand-painted blue Iznik tiles. Central dome 43 m high. Six minarets. Classic Ottoman layout.",
+      "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet."
     },
     {
       "id": "faisal-mosque",
@@ -150,7 +180,8 @@
       "isHolySite": false,
       "architecturalStyle": "Contemporary Turkish-Arab",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 33.7295, "lng": 73.0372}
     },
     {
       "id": "istiqlal-mosque",
@@ -169,7 +200,8 @@
       "isHolySite": false,
       "architecturalStyle": "Modern Functionalist with Islamic elements",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": -6.1702, "lng": 106.8294}
     },
     {
       "id": "grand-jamia",
@@ -188,7 +220,8 @@
       "isHolySite": false,
       "architecturalStyle": "Ottoman Revival",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 24.8128, "lng": 67.0693}
     },
     {
       "id": "badshahi-mosque",
@@ -207,7 +240,11 @@
       "isHolySite": false,
       "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 31.5881, "lng": 74.3095},
+      "history": "Built by Emperor Aurangzeb in 1673. The largest mosque in the world for over 300 years until Faisal Mosque (1986).",
+      "architectureNotes": "Red sandstone and marble. Symmetrical courtyard, octagonal minarets, Persian calligraphy.",
+      "tourismNotes": "Open to visitors. Modest dress required. Located near Lahore Fort. Best in morning light."
     },
     {
       "id": "sultan-qaboos-grand-mosque",
@@ -226,7 +263,10 @@
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic with Omani influence",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 23.5852, "lng": 58.4048},
+      "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; abayas provided. One of world's largest chandeliers and carpets.",
+      "officialWebsite": "https://www.muq.gov.om"
     },
     {
       "id": "putra-mosque",
@@ -245,7 +285,9 @@
       "isHolySite": false,
       "architecturalStyle": "Malay and Persian",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 2.927, "lng": 101.6869},
+      "tourismNotes": "Visitor access. Rose-tinted granite. Waterfront location on Putrajaya Lake. Photography allowed."
     },
     {
       "id": "sultan-omar-ali-saifuddin",
@@ -264,7 +306,9 @@
       "isHolySite": false,
       "architecturalStyle": "Mughal and Malay",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 4.8903, "lng": 114.9422},
+      "tourismNotes": "Visitor viewing. Stands in artificial lagoon. Golden dome. One of Southeast Asia's most photographed mosques."
     },
     {
       "id": "baitul-mukarram",
@@ -283,7 +327,8 @@
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 23.729, "lng": 90.4112}
     },
     {
       "id": "taj-ul-masajid",
@@ -302,7 +347,8 @@
       "isHolySite": false,
       "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 23.2542, "lng": 77.4062}
     },
     {
       "id": "great-mosque-of-djenne",
@@ -321,7 +367,11 @@
       "isHolySite": false,
       "architecturalStyle": "Sudano-Sahelian",
       "womenPrayerArea": true,
-      "touristFriendly": false
+      "touristFriendly": false,
+      "coordinates": {"lat": 13.9055, "lng": -4.5553},
+      "history": "Rebuilt in 1907. UNESCO World Heritage since 1988. Largest adobe building in the world. Replastered annually by the community during the Crepissage festival.",
+      "architectureNotes": "Sudano-Sahelian style. Mud bricks, wooden beams (toron) protruding from walls. Three minarets.",
+      "tourismNotes": "Interior access for non-Muslims is limited. Best viewed from outside during the annual replastering festival."
     },
     {
       "id": "grand-mosque-kuwait",
@@ -340,7 +390,168 @@
       "isHolySite": false,
       "architecturalStyle": "Islamic with Kuwaiti elements",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "coordinates": {"lat": 29.3745, "lng": 47.9728}
+    },
+    {
+      "id": "jama-masjid-delhi",
+      "name": "Jama Masjid",
+      "arabicName": "مسجد جهان نما",
+      "location": "Delhi",
+      "country": "India",
+      "capacity": 25000,
+      "established": "1656",
+      "area": 12000,
+      "annualVisitors": "~1 million",
+      "facilities": ["Courtyards", "Guided tours", "Minaret climb", "Nearby bazaar"],
+      "significance": "India's largest mosque, Mughal architectural masterpiece",
+      "description": "Jama Masjid in Old Delhi was commissioned by Emperor Shah Jahan and completed in 1656. Built of red sandstone and white marble, it features three domes and two 40-meter minarets. The courtyard can hold 25,000 worshippers.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jama_Masjid_-_Delhi.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Mughal",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {"lat": 28.6508, "lng": 77.2335},
+      "history": "Built by Shah Jahan 1644–1656. Same emperor as the Taj Mahal. The mosque faces west toward Mecca.",
+      "architectureNotes": "Red sandstone and white marble. Three domes, two minarets. Symmetrical courtyard. Persian and Indian influences.",
+      "tourismNotes": "Open to visitors. Modest dress required; robes provided. Climb minaret for city views. Closed during prayer. Near Chandni Chowk."
+    },
+    {
+      "id": "al-azhar-mosque",
+      "name": "Al-Azhar Mosque",
+      "arabicName": "جامع الأزهر",
+      "location": "Cairo",
+      "country": "Egypt",
+      "capacity": 20000,
+      "established": "970 CE",
+      "area": 12000,
+      "annualVisitors": "Millions (mosque and university)",
+      "facilities": ["Al-Azhar University", "Library", "Guided tours", "Historic minarets"],
+      "significance": "One of the world's oldest universities, center of Islamic learning",
+      "description": "Al-Azhar Mosque was founded in 970 CE by the Fatimid Caliphate. It houses Al-Azhar University, one of the world's oldest degree-granting universities. A center of Sunni Islamic scholarship for over a millennium.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Azhar_Mosque_Cairo.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Fatimid, Mamluk, Ottoman",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {"lat": 30.0459, "lng": 31.2622},
+      "history": "Founded 970 CE by Fatimid Caliph al-Mu'izz. Al-Azhar University established 988. Expanded by Mamluks and Ottomans. Major center of Islamic scholarship.",
+      "architectureNotes": "Fatimid foundation with Mamluk and Ottoman additions. Multiple minarets from different eras. Marble, stucco, wood carvings.",
+      "tourismNotes": "Non-Muslims may visit. Modest dress required. Near Khan el-Khalili bazaar. Combine with Islamic Cairo tour.",
+      "officialWebsite": "https://www.azhar.eg"
+    },
+    {
+      "id": "islamic-center-washington",
+      "name": "Islamic Center of Washington",
+      "arabicName": "المسجد الإسلامي بواشنطن",
+      "location": "Washington, D.C.",
+      "country": "USA",
+      "capacity": 6000,
+      "established": "1957",
+      "area": 30000,
+      "annualVisitors": "Major landmark, interfaith visitors",
+      "facilities": ["Library", "Cultural center", "Guided tours", "Gift shop"],
+      "significance": "First major mosque in Washington D.C., diplomatic and cultural landmark",
+      "description": "The Islamic Center of Washington was dedicated in 1957. Designed by Italian architect Mario Rossi, it blends traditional Islamic architecture with modern elements. Serves the diplomatic community and visitors from around the world.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Islamic_Center_of_Washington.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Mamluk Revival",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {"lat": 38.9174, "lng": -77.065},
+      "history": "Founded by Muslim diplomats. Dedicated 1957. President Eisenhower attended. Designed by Mario Rossi in Mamluk style.",
+      "architectureNotes": "Mamluk-inspired. Minaret 50 m. Persian carpets, Turkish tiles, Egyptian woodwork. Stained glass.",
+      "tourismNotes": "Non-Muslims welcome. Modest dress required; abayas provided. Near Embassy Row. Free tours.",
+      "officialWebsite": "https://www.islamiccenterdc.org"
+    },
+    {
+      "id": "imam-ali-shrine",
+      "name": "Imam Ali Shrine",
+      "arabicName": "حرم الإمام علي",
+      "location": "Najaf",
+      "country": "Iraq",
+      "capacity": 800000,
+      "established": "977 CE",
+      "area": 280000,
+      "annualVisitors": "8-15 million",
+      "facilities": ["Hotels", "Restaurants", "Medical centers", "Libraries", "Courtyards", "Shrine complex"],
+      "significance": "One of Shia Islam's holiest sites, tomb of Imam Ali",
+      "description": "The Imam Ali Shrine in Najaf is the burial place of Imam Ali, the fourth Caliph and first Imam of Shia Islam. One of the world's largest mosque complexes by capacity and area, it attracts millions of pilgrims annually.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Imam_Ali_Mosque_in_Najaf%2C_Iraq.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Persian Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {"lat": 31.9961, "lng": 44.3147},
+      "history": "The shrine was established in 977 CE. Rebuilt and expanded many times. The golden dome and minarets were added in Ottoman and Qajar eras. A major center of Shia scholarship.",
+      "tourismNotes": "Non-Muslims may visit. Modest dress required; abayas provided for women. Check travel advisories before visiting."
+    },
+    {
+      "id": "national-mosque-malaysia",
+      "name": "National Mosque of Malaysia",
+      "arabicName": "المسجد الوطني",
+      "location": "Kuala Lumpur",
+      "country": "Malaysia",
+      "capacity": 15000,
+      "established": "1965",
+      "area": 53000,
+      "annualVisitors": "Millions",
+      "facilities": ["Visitor center", "Guided tours", "Library", "Islamic arts museum nearby"],
+      "significance": "National mosque of Malaysia, modernist Islamic architecture",
+      "description": "The National Mosque of Malaysia was completed in 1965. Its distinctive folded plate roof and 73-meter minaret make it a landmark of Kuala Lumpur. Designed by a team of three architects in a modernist Islamic style.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/National_Mosque_of_Malaysia.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Modernist Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {"lat": 3.1742, "lng": 101.6869},
+      "history": "Built to commemorate Malaysian independence (1957). Completed 1965. Named Masjid Negara.",
+      "architectureNotes": "Folded plate concrete roof instead of traditional dome. 73 m minaret. Capacity 15,000.",
+      "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; robes provided. Near Lake Gardens and KL Bird Park."
+    },
+    {
+      "id": "djamaa-el-djazair",
+      "name": "Djamaa el Djazaïr",
+      "arabicName": "جامع الجزائر",
+      "location": "Algiers",
+      "country": "Algeria",
+      "capacity": 120000,
+      "established": "2019",
+      "area": 400000,
+      "annualVisitors": "Major national landmark",
+      "facilities": ["Library", "Museum", "Research center", "Helipad", "Panoramic sea view"],
+      "significance": "Africa's largest mosque, world's third-largest mosque",
+      "description": "Djamaa el Djazaïr, also known as the Great Mosque of Algiers, was completed in 2019. It features the world's tallest minaret at 265 meters and is the largest mosque in Africa.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Grande_Mosquee_dAlger.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Contemporary Islamic with Algerian influences",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {"lat": 36.7369, "lng": 3.0869},
+      "history": "Construction 2012–2019. Designed by KSP Jürgen Engel Architekten. World's tallest minaret (265 m).",
+      "architectureNotes": "Contemporary design with traditional elements. 265 m minaret. Interior space 20,000 m². Seismic-resistant.",
+      "tourismNotes": "Guided tours for non-Muslims. Modest dress required. Located on the Bay of Algiers."
+    },
+    {
+      "id": "birmingham-central-mosque",
+      "name": "Birmingham Central Mosque",
+      "arabicName": "المسجد المركزي في برمنغهام",
+      "location": "Birmingham",
+      "country": "United Kingdom",
+      "capacity": 5000,
+      "established": "1975",
+      "area": 6000,
+      "annualVisitors": "One of UK's largest mosques",
+      "facilities": ["Library", "Islamic school", "Community center", "Parking"],
+      "significance": "One of the UK's largest and oldest purpose-built mosques",
+      "description": "Birmingham Central Mosque opened in 1975 and serves one of the UK's largest Muslim communities. Its golden dome and minarets are a prominent landmark in the city.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Central_Mosque.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic with traditional elements",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {"lat": 52.4944, "lng": -1.8739},
+      "tourismNotes": "Visitors welcome. Modest dress required. Contact for tour arrangements."
     }
   ],
   "timelineEvents": [
@@ -355,6 +566,13 @@
     { "year": "1993", "mosque": "Hassan II Mosque", "mosqueId": "hassan-ii", "event": "Completed in Casablanca, Morocco" },
     { "year": "2001", "mosque": "Sultan Qaboos Grand Mosque", "mosqueId": "sultan-qaboos-grand-mosque", "event": "Opened in Muscat, Oman" },
     { "year": "2007", "mosque": "Sheikh Zayed Grand Mosque", "mosqueId": "sheikh-zayed", "event": "Inaugurated in Abu Dhabi" },
-    { "year": "2023", "mosque": "Grand Jamia Mosque", "mosqueId": "grand-jamia", "event": "Completed in Karachi, Pakistan" }
+    { "year": "2023", "mosque": "Grand Jamia Mosque", "mosqueId": "grand-jamia", "event": "Completed in Karachi, Pakistan" },
+    { "year": "1656", "mosque": "Jama Masjid", "mosqueId": "jama-masjid-delhi", "event": "Shah Jahan completes India's largest mosque in Delhi" },
+    { "year": "970", "mosque": "Al-Azhar Mosque", "mosqueId": "al-azhar-mosque", "event": "Founded by Fatimid Caliphate in Cairo" },
+    { "year": "1957", "mosque": "Islamic Center of Washington", "mosqueId": "islamic-center-washington", "event": "Dedicated in Washington D.C., first major mosque in the capital" },
+    { "year": "977", "mosque": "Imam Ali Shrine", "mosqueId": "imam-ali-shrine", "event": "Shrine established in Najaf, Iraq" },
+    { "year": "1965", "mosque": "National Mosque of Malaysia", "mosqueId": "national-mosque-malaysia", "event": "National mosque of Malaysia completed in Kuala Lumpur" },
+    { "year": "1975", "mosque": "Birmingham Central Mosque", "mosqueId": "birmingham-central-mosque", "event": "One of UK's largest mosques opened in Birmingham" },
+    { "year": "2019", "mosque": "Djamaa el Djazaïr", "mosqueId": "djamaa-el-djazair", "event": "Africa's largest mosque completed in Algiers" }
   ]
 }
