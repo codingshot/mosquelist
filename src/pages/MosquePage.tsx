@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -10,6 +11,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
+import { getExploreUrl } from "@/lib/explore-url";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -20,6 +22,10 @@ function formatCapacity(capacity: number) {
 export default function MosquePage() {
   const { id } = useParams<{ id: string }>();
   const mosque = id ? getMosqueBySlug(id) : undefined;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   const { isFavorite, toggleFavorite } = useFavorites();
   const { bucketList, addToBucketList } = useBucketList();
 
@@ -31,7 +37,7 @@ export default function MosquePage() {
           <h1 className="font-serif text-3xl font-bold text-foreground">Mosque not found</h1>
           <p className="mt-2 text-muted-foreground">The mosque you're looking for doesn't exist.</p>
           <Button asChild className="mt-6">
-            <Link to="/">Back to Explore</Link>
+            <Link to="/explore">Back to Explore</Link>
           </Button>
         </main>
         <Footer />
@@ -52,7 +58,7 @@ export default function MosquePage() {
       <main id="main-content" className="container mx-auto px-4 pb-16 pt-24">
         <div className="print:hidden mb-6 flex flex-wrap items-center gap-2">
           <Button variant="ghost" asChild className="-ml-2 gap-2">
-            <Link to="/#mosques">
+            <Link to="/explore">
               <ArrowLeft className="h-4 w-4" />
               Back to Explore
             </Link>
@@ -75,7 +81,7 @@ export default function MosquePage() {
           </Button>
           {isInBucketList ? (
             <Button variant="secondary" size="sm" className="gap-2" asChild>
-              <Link to="/#bucket-list">In your bucket list</Link>
+              <Link to="/bucket-list">In your bucket list</Link>
             </Button>
           ) : (
             <Button
@@ -122,16 +128,35 @@ export default function MosquePage() {
               </Button>
               <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2">
                 {mosque.isHolySite && (
-                  <Badge className="bg-primary text-primary-foreground">
-                    <Star className="mr-1 h-3 w-3" />
-                    Holy Site
+                  <Badge className="bg-primary text-primary-foreground" asChild>
+                    <Link
+                      to={getExploreUrl({ filter: "holy" })}
+                      className="hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md"
+                    >
+                      <Star className="mr-1 h-3 w-3" />
+                      Holy Site
+                    </Link>
                   </Badge>
                 )}
                 {mosque.touristFriendly && (
-                  <Badge variant="secondary">Tourist Friendly</Badge>
+                  <Badge variant="secondary" asChild>
+                    <Link
+                      to={getExploreUrl({ tourist: true })}
+                      className="hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
+                    >
+                      Tourist Friendly
+                    </Link>
+                  </Badge>
                 )}
                 {mosque.womenPrayerArea && (
-                  <Badge variant="secondary">Women's Prayer Area</Badge>
+                  <Badge variant="secondary" asChild>
+                    <Link
+                      to={getExploreUrl({ women: true })}
+                      className="hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
+                    >
+                      Women&apos;s Prayer Area
+                    </Link>
+                  </Badge>
                 )}
               </div>
             </div>
@@ -145,14 +170,23 @@ export default function MosquePage() {
               )}
               <div className="mt-3 flex flex-wrap items-center gap-4 text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <MapPin className="h-4 w-4" />
-                  {mosque.location}, {mosque.country}
+                  <MapPin className="h-4 w-4 shrink-0" />
+                  {mosque.location},{" "}
+                  <Link
+                    to={getExploreUrl({ country: mosque.country })}
+                    className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                  >
+                    {mosque.country}
+                  </Link>
                 </span>
                 {mosque.architecturalStyle && (
-                  <span className="flex items-center gap-1">
-                    <Building2 className="h-4 w-4" />
+                  <Link
+                    to={getExploreUrl({ style: mosque.architecturalStyle })}
+                    className="flex items-center gap-1 text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                  >
+                    <Building2 className="h-4 w-4 shrink-0" />
                     {mosque.architecturalStyle}
-                  </span>
+                  </Link>
                 )}
               </div>
               <div className="print:hidden mt-3 flex flex-wrap gap-2">
@@ -256,8 +290,13 @@ export default function MosquePage() {
                   <ul className="mt-2 flex flex-wrap gap-2">
                     {mosque.facilities.map((f) => (
                       <li key={f}>
-                        <Badge variant="outline" className="font-normal">
-                          {f}
+                        <Badge variant="outline" className="font-normal" asChild>
+                          <Link
+                            to={getExploreUrl({ q: f })}
+                            className="hover:bg-secondary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                          >
+                            {f}
+                          </Link>
                         </Badge>
                       </li>
                     ))}

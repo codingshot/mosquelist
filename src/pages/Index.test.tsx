@@ -32,29 +32,14 @@ describe("Index page", () => {
     expect(main?.getAttribute("id")).toBe("main-content");
   });
 
-  it("renders Explore Mosques section with heading", () => {
+  it("renders hero section with headline", () => {
     renderIndex();
-    expect(screen.getByRole("heading", { name: /explore magnificent mosques/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /your journey to the sacred places/i })).toBeInTheDocument();
   });
 
-  it("renders search input with accessible label", () => {
+  it("has link to explore mosques", () => {
     renderIndex();
-    const search = screen.getByRole("searchbox", {
-      name: /search mosques/i,
-    });
-    expect(search).toBeInTheDocument();
-  });
-
-  it("renders mosque grid section", () => {
-    renderIndex();
-    const section = document.getElementById("mosques");
-    expect(section).toBeInTheDocument();
-  });
-
-  it("renders bucket list section", () => {
-    renderIndex();
-    const section = document.getElementById("bucket-list");
-    expect(section).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /explore mosques/i })).toBeInTheDocument();
   });
 
   it("renders footer with about id", () => {
@@ -63,9 +48,4 @@ describe("Index page", () => {
     expect(footer).toBeInTheDocument();
   });
 
-  it("filter buttons are accessible", () => {
-    renderIndex();
-    expect(screen.getByRole("button", { name: /grid view/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /list view/i })).toBeInTheDocument();
-  });
 });

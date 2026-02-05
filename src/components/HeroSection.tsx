@@ -19,7 +19,7 @@ export const HeroSection = () => {
           height={1080}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background" />
       </div>
 
       {/* Content */}
@@ -34,14 +34,14 @@ export const HeroSection = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight [text-shadow:_0_1px_3px_rgba(0,0,0,0.12)]">
             Your Journey to the{" "}
-            <span className="text-gradient-gold">Sacred Places</span>{" "}
+            <span className="hero-text-gold">Sacred Places</span>{" "}
             Begins Here
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-foreground/95 max-w-2xl mx-auto [text-shadow:_0_1px_3px_rgba(0,0,0,0.2)]">
             Explore, plan, and track your spiritual journey to the world's most
             beautiful and significant mosques. From Mecca to Istanbul, create
             your personal prayer bucket list.
@@ -54,7 +54,7 @@ export const HeroSection = () => {
               className="gradient-gold text-primary-foreground text-lg px-8 py-6 rounded-full hover:opacity-90 transition-all hover:scale-105"
               asChild
             >
-              <Link to="/#mosques">
+              <Link to="/explore">
                 <MapPin className="w-5 h-5 mr-2" />
                 Explore Mosques
               </Link>
@@ -65,7 +65,7 @@ export const HeroSection = () => {
               className="text-lg px-8 py-6 rounded-full border-2 hover:bg-card"
               asChild
             >
-              <Link to="/#bucket-list">
+              <Link to="/lists">
                 <Users className="w-5 h-5 mr-2" />
                 Start My List
               </Link>

@@ -20,8 +20,9 @@ Actionable skills and improvements to make the app more useful, accurate, and ma
 
 | Skill | Description | Priority |
 |-------|-------------|----------|
-| **Sort & default order** | Let users sort explore grid by name, capacity, established date, or country; persist in URL. | Done |
-| **Share & deep links** | Share button per mosque (copy link). `/mosque/:id` and `/#mosques?q=...` work when shared. | Done |
+| **Sort & default order** | Let users sort explore grid by name, capacity, area, established date, or country; persist in URL. | Done |
+| **Share & deep links** | Share button per mosque (copy link). `/mosque/:id` and `/explore?q=...` work when shared. | Done |
+| **Section routes** | Explore, Timeline, Bucket List, About as dedicated routes with SEO. | Done |
 | **Add to bucket list from detail** | Mosque detail page has “Add to bucket list” / “In your bucket list” button. | Done |
 | **Map view** | Optional map (e.g. Leaflet/Mapbox) showing mosque locations; link from mosque card/detail. | Medium |
 | **Map links** | Google Maps and Apple Maps links on mosque pages and cards. | Done |

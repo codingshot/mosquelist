@@ -4,6 +4,29 @@ Use this prompt to find and populate in-depth mosque data for MosqueList. The ou
 
 ---
 
+## Country-by-country research workflow
+
+To systematically build coverage across Muslim-majority countries:
+
+1. **List Muslim-majority countries** – OIC members, Pew Research data, or Wikipedia "List of Muslim majority countries."
+2. **Identify largest city** – Use population data (e.g. city proper or metro) for each country.
+3. **Find main mosque** – In the largest city, identify the national mosque, grand mosque, or most significant congregational mosque (by capacity, area, or historical importance).
+4. **Research dimensions** – Capacity (prayer hall + courtyard if applicable), floor area (m²), established date, architectural style.
+5. **Apply prompt** – Use the prompt below with **[MOSQUE NAME]**, **[CITY]**, **[COUNTRY]** and fill all schema fields.
+
+### Priority countries (by population / significance)
+
+| Region | Countries |
+|--------|-----------|
+| Middle East | Saudi Arabia, Iran, Iraq, Egypt, Turkey, UAE, Yemen, Syria, Jordan, Lebanon, Palestine, Kuwait, Bahrain, Qatar, Oman |
+| South Asia | Pakistan, Bangladesh, India (with significant Muslim population), Afghanistan |
+| Southeast Asia | Indonesia, Malaysia, Brunei |
+| Central Asia | Uzbekistan, Kazakhstan, Turkmenistan, Kyrgyzstan, Tajikistan, Azerbaijan |
+| Africa | Algeria, Morocco, Sudan, Senegal, Mali, Niger, Nigeria, Chad, Somalia, Tunisia, Libya |
+| Europe | Bosnia and Herzegovina, Albania, Kosovo |
+
+---
+
 ## Prompt
 
 Find detailed, accurate information about **[MOSQUE NAME]** in **[CITY]**, **[COUNTRY]** for inclusion in a mosque discovery app. Research from authoritative sources (official mosque/government sites, Britannica, Encyclopaedia of Islam, Wikipedia with cited references) and produce a JSON object matching the schema below.

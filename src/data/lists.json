@@ -1,0 +1,98 @@
+{
+  "lists": [
+    {
+      "slug": "holy-sites",
+      "name": "Holy Sites",
+      "description": "The three holiest sites in Islam—Mecca, Medina, and Jerusalem.",
+      "mosqueIds": ["masjid-al-haram", "masjid-an-nabawi", "al-aqsa"]
+    },
+    {
+      "slug": "biggest-mosques",
+      "name": "Biggest Mosques",
+      "description": "World's largest mosques by capacity—from millions to hundreds of thousands.",
+      "mosqueIds": [
+        "masjid-al-haram",
+        "masjid-an-nabawi",
+        "imam-reza-shrine",
+        "imam-ali-shrine",
+        "grand-jamia",
+        "faisal-mosque",
+        "istiqlal-mosque",
+        "djamaa-el-djazair",
+        "hassan-ii",
+        "heydar-mosque",
+        "massalikoul-djinane-mosque",
+        "imam-abdul-wahhab-mosque",
+        "badshahi-mosque",
+        "taj-ul-masajid",
+        "baitul-mukarram"
+      ]
+    },
+    {
+      "slug": "saudi-arabia",
+      "name": "Saudi Arabia",
+      "description": "Mosques across the Kingdom of Saudi Arabia.",
+      "mosqueIds": ["masjid-al-haram", "masjid-an-nabawi"]
+    },
+    {
+      "slug": "turkey",
+      "name": "Turkey",
+      "description": "Magnificent Ottoman and historic mosques in Turkey.",
+      "mosqueIds": ["blue-mosque", "suleymaniye-mosque"]
+    },
+    {
+      "slug": "pakistan",
+      "name": "Pakistan",
+      "description": "Major mosques in Pakistan—from Mughal masterpieces to modern marvels.",
+      "mosqueIds": ["grand-jamia", "faisal-mosque", "badshahi-mosque"]
+    },
+    {
+      "slug": "indonesia",
+      "name": "Indonesia",
+      "description": "Southeast Asia's largest mosques in Indonesia.",
+      "mosqueIds": ["istiqlal-mosque"]
+    },
+    {
+      "slug": "egypt",
+      "name": "Egypt",
+      "description": "Historic and iconic mosques in Egypt.",
+      "mosqueIds": ["al-azhar-mosque"]
+    },
+    {
+      "slug": "uae",
+      "name": "United Arab Emirates",
+      "description": "Grand mosques across the UAE.",
+      "mosqueIds": ["sheikh-zayed"]
+    },
+    {
+      "slug": "india",
+      "name": "India",
+      "description": "Mughal and historic mosques in India.",
+      "mosqueIds": ["jama-masjid-delhi", "taj-ul-masajid"]
+    },
+    {
+      "slug": "malaysia",
+      "name": "Malaysia",
+      "description": "Mosques across Malaysia.",
+      "mosqueIds": ["national-mosque-malaysia", "putra-mosque"]
+    },
+    {
+      "slug": "morocco",
+      "name": "Morocco",
+      "description": "Moroccan architectural masterpieces.",
+      "mosqueIds": ["hassan-ii"]
+    },
+    {
+      "slug": "iraq",
+      "name": "Iraq",
+      "description": "Holy and historic shrines in Iraq.",
+      "mosqueIds": ["imam-ali-shrine"]
+    },
+    {
+      "slug": "iran",
+      "name": "Iran",
+      "description": "Major Shia shrines and mosques in Iran.",
+      "mosqueIds": ["imam-reza-shrine"]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { BucketListProvider } from "@/contexts/BucketListContext";
+import ListDetailPage from "./ListDetailPage";
+
+function renderListDetail(route: string) {
+  return render(
+    <MemoryRouter initialEntries={[route]}>
+      <FavoritesProvider>
+        <BucketListProvider>
+          <Routes>
+            <Route path="/lists/:slug" element={<ListDetailPage />} />
+          </Routes>
+        </BucketListProvider>
+      </FavoritesProvider>
+    </MemoryRouter>
+  );
+}
+
+describe("ListDetailPage", () => {
+  it("renders holy sites list with mosques", () => {
+    renderListDetail("/lists/holy-sites");
+    expect(screen.getByRole("heading", { level: 1, name: /holy sites/i })).toBeInTheDocument();
+    expect(screen.getByText(/masjid al-haram/i)).toBeInTheDocument();
+    expect(screen.getByText(/al-masjid an-nabawi/i)).toBeInTheDocument();
+  });
+
+  it("has Add All and Add buttons when list has mosques not in bucket list", () => {
+    renderListDetail("/lists/turkey");
+    expect(screen.getByRole("button", { name: /add all to my list/i })).toBeInTheDocument();
+    const addButtons = screen.getAllByRole("button", { name: /^add$/i });
+    expect(addButtons.length).toBeGreaterThan(0);
+  });
+
+  it("shows not found for invalid slug", () => {
+    renderListDetail("/lists/invalid-slug-xyz");
+    expect(screen.getByRole("heading", { level: 1, name: /not found/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /browse lists/i })).toHaveAttribute("href", "/lists");
+  });
+});

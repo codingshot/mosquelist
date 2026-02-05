@@ -197,6 +197,14 @@
     @apply bg-gradient-to-r from-primary via-[hsl(var(--gold-light))] to-primary bg-clip-text text-transparent;
   }
 
+  .hero-text-gold {
+    @apply bg-gradient-to-r from-primary via-[hsl(var(--gold-light))] to-primary bg-clip-text text-transparent;
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.12),
+      0 0 1px rgba(0, 0, 0, 0.2);
+  }
+
   .mosque-card-shadow {
     box-shadow: 
       0 4px 6px -1px rgba(0, 0, 0, 0.1),

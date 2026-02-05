@@ -1,6 +1,13 @@
 import { mosques, getUniqueCountries, getUniqueArchitecturalStyles } from "@/data/mosques";
 import { filterMosquesByQuery } from "@/lib/search";
 import { MosqueCard } from "./MosqueCard";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { useSearchParams } from "react-router-dom";
 import { useMemo, useCallback, useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Filter, LayoutGrid, List, SlidersHorizontal, Search, X, ArrowUpDown, XCircle } from "lucide-react";
+import { Filter, LayoutGrid, List, AlignLeft, Smartphone, SlidersHorizontal, Search, X, ArrowUpDown, XCircle } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -40,8 +47,8 @@ const PARAM_EST_MAX = "estMax";
 const PARAM_STYLE = "style";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
-type ViewType = "grid" | "list";
-type SortType = "name" | "capacity" | "established" | "country";
+type ViewType = "grid" | "list" | "compact" | "swipe";
+type SortType = "holyCapacity" | "name" | "capacity" | "area" | "established" | "country";
 
 /** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007) */
 function establishedYear(established: string): number {
@@ -54,8 +61,12 @@ function useMosqueSearchParams() {
 
   const query = searchParams.get(PARAM_QUERY) ?? "";
   const filter = (searchParams.get(PARAM_FILTER) as FilterType) ?? "all";
-  const view = (searchParams.get(PARAM_VIEW) as ViewType) ?? "grid";
-  const sort = (searchParams.get(PARAM_SORT) as SortType) || "name";
+  const viewParam = searchParams.get(PARAM_VIEW);
+  const view: ViewType =
+    viewParam === "grid" || viewParam === "list" || viewParam === "compact" || viewParam === "swipe"
+      ? viewParam
+      : "grid";
+  const sort = (searchParams.get(PARAM_SORT) as SortType) || "holyCapacity";
   const country = searchParams.get(PARAM_COUNTRY) ?? "";
   const womenOnly = searchParams.get(PARAM_WOMEN) === "1";
   const touristOnly = searchParams.get(PARAM_TOURIST) === "1";
@@ -94,6 +105,10 @@ function useMosqueSearchParams() {
   const setEstMax = (v: string) => setParam(PARAM_EST_MAX, v);
   const setArchitecturalStyle = (v: string) => setParam(PARAM_STYLE, v);
 
+  const clearAllFilters = useCallback(() => {
+    setSearchParams(new URLSearchParams(), { replace: true });
+  }, [setSearchParams]);
+
   return {
     query,
     filter,
@@ -123,6 +138,7 @@ function useMosqueSearchParams() {
     setEstMin,
     setEstMax,
     setArchitecturalStyle,
+    clearAllFilters,
   };
 }
 
@@ -156,6 +172,7 @@ export const MosqueGrid = () => {
     setEstMax,
     architecturalStyle,
     setArchitecturalStyle,
+    clearAllFilters: clearAllFiltersFromHook,
   } = useMosqueSearchParams();
 
   const countries = useMemo(() => getUniqueCountries(), []);
@@ -163,6 +180,20 @@ export const MosqueGrid = () => {
 
   const [searchInput, setSearchInput] = useState(query);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+      const target = e.target as HTMLElement;
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)
+        return;
+      e.preventDefault();
+      searchInputRef.current?.focus();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   useEffect(() => {
     setSearchInput(query);
@@ -222,32 +253,8 @@ export const MosqueGrid = () => {
       debounceRef.current = null;
     }
     setSearchInput("");
-    setQuery("");
-    setFilter("all");
-    setCountry("");
-    setWomenOnly(false);
-    setTouristOnly(false);
-    setCapMin("");
-    setCapMax("");
-    setAreaMin("");
-    setAreaMax("");
-    setEstMin("");
-    setEstMax("");
-    setArchitecturalStyle("");
-  }, [
-    setQuery,
-    setFilter,
-    setCountry,
-    setWomenOnly,
-    setTouristOnly,
-    setCapMin,
-    setCapMax,
-    setAreaMin,
-    setAreaMax,
-    setEstMin,
-    setEstMax,
-    setArchitecturalStyle,
-  ]);
+    clearAllFiltersFromHook();
+  }, [clearAllFiltersFromHook]);
 
   const filteredMosques = useMemo(() => {
     let list = mosques;
@@ -278,13 +285,18 @@ export const MosqueGrid = () => {
 
     list = filterMosquesByQuery(list, query);
 
-    const order = sort || "name";
+    const order = sort || "holyCapacity";
     const sorted = [...list].sort((a, b) => {
       switch (order) {
+        case "holyCapacity":
+          if (a.isHolySite !== b.isHolySite) return a.isHolySite ? -1 : 1;
+          return b.capacity - a.capacity;
         case "name":
           return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
         case "capacity":
           return b.capacity - a.capacity;
+        case "area":
+          return b.area - a.area;
         case "established": {
           const ya = establishedYear(a.established);
           const yb = establishedYear(b.established);
@@ -318,8 +330,9 @@ export const MosqueGrid = () => {
             <div className="relative flex-1 w-full min-w-0">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
               <Input
+                ref={searchInputRef}
                 type="search"
-                placeholder="Search by name, city, country, style, history — e.g. blue istanbul, mughal, hajj"
+                placeholder="Search by name, city, country, style, history — Press / to focus"
                 value={searchInput}
                 onChange={(e) => setQueryDebounced(e.target.value)}
                 className="pl-9 pr-9 w-full"
@@ -337,70 +350,96 @@ export const MosqueGrid = () => {
                 </button>
               )}
             </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Filter className="w-5 h-5 text-muted-foreground shrink-0" aria-hidden />
-              <Button
-                variant={filter === "all" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setFilter("all")}
-                className={filter === "all" ? "gradient-gold text-primary-foreground" : ""}
-              >
-                All
-              </Button>
-              <Button
-                variant={filter === "holy" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setFilter("holy")}
-                className={filter === "holy" ? "gradient-gold text-primary-foreground" : ""}
-              >
-                Holy Sites
-              </Button>
-              <Button
-                variant={filter === "tourist" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setFilter("tourist")}
-                className={filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}
-              >
-                Tourist
-              </Button>
-              <Button
-                variant={filter === "biggest" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setFilter("biggest")}
-                className={filter === "biggest" ? "gradient-gold text-primary-foreground" : ""}
-              >
-                Biggest
-              </Button>
-              <Select value={sort} onValueChange={(v) => setSort((v || "name") as SortType)}>
-                <SelectTrigger className="w-[140px] h-11 shrink-0" aria-label="Sort by">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <Filter className="w-5 h-5 text-muted-foreground shrink-0 hidden sm:block" aria-hidden />
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 touch-manipulation">
+                <Button
+                  variant={filter === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setFilter("all")}
+                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "all" ? "gradient-gold text-primary-foreground" : ""}`}
+                >
+                  All
+                </Button>
+                <Button
+                  variant={filter === "holy" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setFilter("holy")}
+                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "holy" ? "gradient-gold text-primary-foreground" : ""}`}
+                >
+                  Holy Sites
+                </Button>
+                <Button
+                  variant={filter === "tourist" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setFilter("tourist")}
+                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}`}
+                >
+                  Tourist
+                </Button>
+                <Button
+                  variant={filter === "biggest" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setFilter("biggest")}
+                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "biggest" ? "gradient-gold text-primary-foreground" : ""}`}
+                >
+                  Biggest
+                </Button>
+              </div>
+              <Select value={sort} onValueChange={(v) => setSort((v || "holyCapacity") as SortType)}>
+                <SelectTrigger className="w-[160px] h-11 min-h-[44px] shrink-0 touch-manipulation" aria-label="Sort by">
                   <ArrowUpDown className="mr-2 h-4 w-4 shrink-0" />
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="holyCapacity">Holy first, then biggest</SelectItem>
                   <SelectItem value="name">Name</SelectItem>
                   <SelectItem value="capacity">Capacity</SelectItem>
+                  <SelectItem value="area">Area</SelectItem>
                   <SelectItem value="established">Date</SelectItem>
                   <SelectItem value="country">Country</SelectItem>
                 </SelectContent>
               </Select>
-              <div className="flex gap-1">
+              <div className="flex gap-1" role="group" aria-label="View mode">
                 <Button
                   variant={view === "grid" ? "secondary" : "ghost"}
                   size="icon"
-                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0"
+                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
                   onClick={() => setView("grid")}
                   aria-label="Grid view"
+                  aria-pressed={view === "grid"}
                 >
                   <LayoutGrid className="w-5 h-5" />
                 </Button>
                 <Button
                   variant={view === "list" ? "secondary" : "ghost"}
                   size="icon"
-                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0"
+                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
                   onClick={() => setView("list")}
                   aria-label="List view"
+                  aria-pressed={view === "list"}
                 >
                   <List className="w-5 h-5" />
+                </Button>
+                <Button
+                  variant={view === "compact" ? "secondary" : "ghost"}
+                  size="icon"
+                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                  onClick={() => setView("compact")}
+                  aria-label="Compact view"
+                  aria-pressed={view === "compact"}
+                >
+                  <AlignLeft className="w-5 h-5" />
+                </Button>
+                <Button
+                  variant={view === "swipe" ? "secondary" : "ghost"}
+                  size="icon"
+                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                  onClick={() => setView("swipe")}
+                  aria-label="Swipe mode"
+                  aria-pressed={view === "swipe"}
+                >
+                  <Smartphone className="w-5 h-5" />
                 </Button>
               </div>
               <Sheet>
@@ -587,7 +626,7 @@ export const MosqueGrid = () => {
               )}
               {filter !== "all" && (
                 <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
-                  {filter === "holy" ? "Holy Sites" : "Tourist"}
+                  {filter === "holy" ? "Holy Sites" : filter === "tourist" ? "Tourist" : "Biggest"}
                   <button
                     type="button"
                     onClick={() => setFilter("all")}
@@ -690,17 +729,46 @@ export const MosqueGrid = () => {
           </p>
         )}
 
-        <div
-          className={`grid gap-6 ${
-            view === "grid"
-              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              : "grid-cols-1 max-w-3xl mx-auto"
-          }`}
-        >
-          {filteredMosques.map((mosque, index) => (
-            <MosqueCard key={mosque.id} mosque={mosque} index={index} />
-          ))}
-        </div>
+        {view === "swipe" ? (
+          <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+                dragFree: false,
+                containScroll: "trimSnaps",
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 sm:-ml-4">
+                {filteredMosques.map((mosque, index) => (
+                  <CarouselItem key={mosque.id} className="pl-2 sm:pl-4 basis-full">
+                    <MosqueCard mosque={mosque} index={index} view="swipe" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="-left-2 sm:-left-4 h-12 w-12 min-h-[44px] min-w-[44px] touch-manipulation" aria-label="Previous mosque" />
+              <CarouselNext className="-right-2 sm:-right-4 h-12 w-12 min-h-[44px] min-w-[44px] touch-manipulation" aria-label="Next mosque" />
+            </Carousel>
+            <p className="text-center text-sm text-muted-foreground mt-3">
+              Swipe or use arrows to browse
+            </p>
+          </div>
+        ) : (
+          <div
+            className={`grid gap-4 sm:gap-6 ${
+              view === "grid"
+                ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                : view === "compact"
+                  ? "grid-cols-1 max-w-2xl mx-auto gap-2"
+                  : "grid-cols-1 max-w-3xl mx-auto"
+            }`}
+          >
+            {filteredMosques.map((mosque, index) => (
+              <MosqueCard key={mosque.id} mosque={mosque} index={index} view={view} />
+            ))}
+          </div>
+        )}
 
         {filteredMosques.length === 0 && (
           <div className="text-center py-12 space-y-4">

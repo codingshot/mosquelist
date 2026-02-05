@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/contexts/FavoritesContext";
@@ -7,12 +7,14 @@ import { useFavorites } from "@/contexts/FavoritesContext";
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { favoriteCount } = useFavorites();
+  const location = useLocation();
 
   const navLinks = [
-    { name: "Explore", href: "/#mosques" },
-    { name: "Timeline", href: "/#timeline" },
-    { name: "My List", href: "/#bucket-list" },
-    { name: "About", href: "/#about" },
+    { name: "Explore", to: "/explore" },
+    { name: "Lists", to: "/lists" },
+    { name: "Timeline", to: "/timeline" },
+    { name: "My List", to: "/bucket-list" },
+    { name: "About", to: "/about" },
   ];
 
   return (
@@ -36,20 +38,22 @@ export const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                to={link.to}
+                className={`text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded ${
+                  location.pathname === link.to ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
             <Button variant="ghost" size="sm" className="gap-2" asChild>
-              <Link to="/#bucket-list">
+              <Link to="/bucket-list">
                 <Heart className="w-4 h-4" />
                 <span>My List</span>
                 {favoriteCount > 0 && (
@@ -60,7 +64,7 @@ export const Navigation = () => {
               </Link>
             </Button>
             <Button size="sm" className="gradient-gold text-primary-foreground hover:opacity-90" asChild>
-              <Link to="/#mosques">Start Journey</Link>
+              <Link to="/explore">Start Journey</Link>
             </Button>
           </div>
 
@@ -83,17 +87,17 @@ export const Navigation = () => {
         <div id="mobile-nav" className="md:hidden bg-background border-b border-border animate-fade-up" role="dialog" aria-label="Mobile menu">
           <div className="container mx-auto px-4 py-4 space-y-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.to}
                 className="block text-lg font-medium text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
             <Button className="w-full gradient-gold text-primary-foreground" asChild>
-              <Link to="/#mosques" onClick={() => setIsOpen(false)}>
+              <Link to="/explore" onClick={() => setIsOpen(false)}>
                 Start Your Journey
               </Link>
             </Button>

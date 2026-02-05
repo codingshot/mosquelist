@@ -74,10 +74,15 @@ export const BucketList = () => {
             {bucketList.length === 0 ? (
               <div className="px-6 py-8 text-center text-muted-foreground">
                 <p className="font-medium text-foreground mb-1">Your list is empty</p>
-                <p className="text-sm mb-4">Browse mosques above and add them to your bucket list to track your spiritual journey.</p>
-                <Button variant="outline" size="sm" asChild>
-                  <Link to="/#mosques">Browse Mosques</Link>
-                </Button>
+                <p className="text-sm mb-4">Browse curated lists or the full mosque list and add places to track your spiritual journey.</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/lists">Curated Lists</Link>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/explore">Browse All Mosques</Link>
+                  </Button>
+                </div>
               </div>
             ) : (
             <ul className="divide-y divide-dashed divide-border">
@@ -95,7 +100,7 @@ export const BucketList = () => {
                     {/* Checkbox */}
                     <button
                       onClick={() => toggleVisited(item.mosqueId)}
-                      className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${
+                      className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all shrink-0 ${
                         item.visited
                           ? "bg-primary border-primary"
                           : "border-border hover:border-primary"
@@ -108,6 +113,24 @@ export const BucketList = () => {
                         <Check className="w-4 h-4 text-primary-foreground" />
                       )}
                     </button>
+
+                    {/* Mosque image inline */}
+                    {mosque.imageUrl && (
+                      <Link
+                        to={`/mosque/${mosque.id}`}
+                        className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-border bg-muted"
+                      >
+                        <img
+                          src={mosque.imageUrl}
+                          alt=""
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/placeholder.svg";
+                          }}
+                        />
+                      </Link>
+                    )}
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
@@ -173,19 +196,32 @@ export const BucketList = () => {
                       <p className="text-muted-foreground text-center py-6">
                         All {mosques.length} mosques are already in your list.{" "}
                         <Link
-                          to="/#mosques"
+                          to="/explore"
                           className="text-primary hover:underline"
                           onClick={() => setAddSheetOpen(false)}
                         >
-                          Explore mosques
+                          Browse the full mosque list
                         </Link>
                       </p>
                     ) : (
                       <ul className="space-y-2">
                         {mosquesNotInList.map((mosque) => (
                           <li key={mosque.id}>
-                            <div className="flex items-center justify-between gap-4 rounded-lg border border-border p-3 hover:bg-secondary/50">
-                              <div className="min-w-0">
+                            <div className="flex items-center gap-4 rounded-lg border border-border p-3 hover:bg-secondary/50">
+                              {mosque.imageUrl && (
+                                <div className="shrink-0 w-12 h-12 rounded-md overflow-hidden border border-border bg-muted">
+                                  <img
+                                    src={mosque.imageUrl}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                      e.currentTarget.onerror = null;
+                                      e.currentTarget.src = "/placeholder.svg";
+                                    }}
+                                  />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
                                 <p className="font-medium text-foreground truncate">
                                   {mosque.name}
                                 </p>

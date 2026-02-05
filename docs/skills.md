@@ -63,6 +63,7 @@ Corrections applied: Al-Masjid an-Nabawi 1.5M capacity / 384,000 m²; Imam Reza 
 | Date       | Scope                    | Notes |
 |------------|--------------------------|--------|
 | 2025-02    | Process added            | Checklist script + this log. Next: quarterly top 10–15 re-audit. |
+| 2025-02    | Country expansion        | Added 11 mosques: Afghanistan (Kabul), Jordan (Amman), Qatar (Doha), Bahrain (Manama), Senegal (Dakar), Azerbaijan (Baku), Lebanon (Beirut), Sudan (Khartoum), Bosnia (Sarajevo), Kazakhstan (Astana), Tunisia (Tunis). |
 
 ---
 

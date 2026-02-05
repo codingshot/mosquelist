@@ -10,6 +10,14 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import Index from "./pages/Index";
 
 const MosquePage = lazy(() => import("./pages/MosquePage"));
+const ExplorePage = lazy(() => import("./pages/ExplorePage"));
+const TimelinePage = lazy(() => import("./pages/TimelinePage"));
+const BucketListPage = lazy(() => import("./pages/BucketListPage"));
+const ListsPage = lazy(() => import("./pages/ListsPage"));
+const ListDetailPage = lazy(() => import("./pages/ListDetailPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const TravelGuidePage = lazy(() => import("./pages/TravelGuidePage"));
+const VisitorTipsPage = lazy(() => import("./pages/VisitorTipsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -35,6 +43,14 @@ const App = () => (
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/explore" element={<ExplorePage />} />
+              <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/bucket-list" element={<BucketListPage />} />
+              <Route path="/lists" element={<ListsPage />} />
+              <Route path="/lists/:slug" element={<ListDetailPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/guides/travel" element={<TravelGuidePage />} />
+              <Route path="/guides/visitor-tips" element={<VisitorTipsPage />} />
               <Route path="/mosque/:id" element={<MosquePage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
