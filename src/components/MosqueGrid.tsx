@@ -1,4 +1,5 @@
 import { mosques, getUniqueCountries, getUniqueArchitecturalStyles } from "@/data/mosques";
+import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
 import { filterMosquesByQuery } from "@/lib/search";
 import { MosqueCard } from "./MosqueCard";
 import {
@@ -36,6 +37,7 @@ const PARAM_FILTER = "filter";
 const PARAM_VIEW = "view";
 const PARAM_SORT = "sort";
 const PARAM_COUNTRY = "country";
+const PARAM_REGION = "region";
 const PARAM_WOMEN = "women";
 const PARAM_TOURIST = "tourist";
 const PARAM_CAP_MIN = "capMin";
@@ -68,6 +70,7 @@ function useMosqueSearchParams() {
       : "grid";
   const sort = (searchParams.get(PARAM_SORT) as SortType) || "holyCapacity";
   const country = searchParams.get(PARAM_COUNTRY) ?? "";
+  const region = searchParams.get(PARAM_REGION) ?? "";
   const womenOnly = searchParams.get(PARAM_WOMEN) === "1";
   const touristOnly = searchParams.get(PARAM_TOURIST) === "1";
   const capMin = searchParams.get(PARAM_CAP_MIN) ?? "";
@@ -95,6 +98,7 @@ function useMosqueSearchParams() {
   const setView = (v: ViewType) => setParam(PARAM_VIEW, v);
   const setSort = (v: SortType) => setParam(PARAM_SORT, v);
   const setCountry = (v: string) => setParam(PARAM_COUNTRY, v);
+  const setRegion = (v: string) => setParam(PARAM_REGION, v);
   const setWomenOnly = (v: boolean) => setParam(PARAM_WOMEN, v ? "1" : "");
   const setTouristOnly = (v: boolean) => setParam(PARAM_TOURIST, v ? "1" : "");
   const setCapMin = (v: string) => setParam(PARAM_CAP_MIN, v);
@@ -115,6 +119,7 @@ function useMosqueSearchParams() {
     view,
     sort,
     country,
+    region,
     womenOnly,
     touristOnly,
     capMin,
@@ -129,6 +134,7 @@ function useMosqueSearchParams() {
     setView,
     setSort,
     setCountry,
+    setRegion,
     setWomenOnly,
     setTouristOnly,
     setCapMin,
@@ -149,6 +155,7 @@ export const MosqueGrid = () => {
     view,
     sort,
     country,
+    region,
     womenOnly,
     touristOnly,
     capMin,
@@ -176,6 +183,7 @@ export const MosqueGrid = () => {
   } = useMosqueSearchParams();
 
   const countries = useMemo(() => getUniqueCountries(), []);
+  const regions = useMemo(() => getUniqueRegions(countries), [countries]);
   const styles = useMemo(() => getUniqueArchitecturalStyles(), []);
 
   const [searchInput, setSearchInput] = useState(query);
@@ -224,6 +232,7 @@ export const MosqueGrid = () => {
     query !== "" ||
     filter !== "all" ||
     country !== "" ||
+    region !== "" ||
     womenOnly ||
     touristOnly ||
     capMin !== "" ||
@@ -236,6 +245,7 @@ export const MosqueGrid = () => {
 
   const activeFilterCount = [
     country,
+    region,
     womenOnly,
     touristOnly,
     capMin,
@@ -263,6 +273,7 @@ export const MosqueGrid = () => {
     if (filter === "tourist") list = list.filter((m) => m.touristFriendly);
     if (filter === "biggest") list = list.filter((m) => m.capacity >= 100_000);
     if (country) list = list.filter((m) => m.country === country);
+    if (region) list = list.filter((m) => getRegionForCountry(m.country) === region);
     if (womenOnly) list = list.filter((m) => m.womenPrayerArea);
     if (touristOnly) list = list.filter((m) => m.touristFriendly);
     if (architecturalStyle)
@@ -309,7 +320,7 @@ export const MosqueGrid = () => {
       }
     });
     return sorted;
-  }, [query, filter, country, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
+  }, [query, filter, country, region, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
   return (
     <section id="mosques" className="py-16 md:py-24 bg-paper-cream islamic-pattern scroll-mt-20">
@@ -332,11 +343,11 @@ export const MosqueGrid = () => {
               <Input
                 ref={searchInputRef}
                 type="search"
-                placeholder="Search by name, city, country, style, history — Press / to focus"
+                placeholder="Search by name, city, country, region, style — Press / to focus"
                 value={searchInput}
                 onChange={(e) => setQueryDebounced(e.target.value)}
                 className="pl-9 pr-9 w-full"
-                aria-label="Search mosques by name, location, country, or description"
+                aria-label="Search mosques by name, location, country, region, or description"
                 autoComplete="off"
               />
               {searchInput && (
@@ -468,6 +479,22 @@ export const MosqueGrid = () => {
                     <SheetTitle>Advanced filters</SheetTitle>
                   </SheetHeader>
                   <div className="mt-6 space-y-6">
+                    <div className="space-y-2">
+                      <Label>Region</Label>
+                      <Select value={region || "all"} onValueChange={(v) => setRegion(v === "all" ? "" : v)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Any region" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Any region</SelectItem>
+                          {regions.map((r) => (
+                            <SelectItem key={r} value={r}>
+                              {r}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
                     <div className="space-y-2">
                       <Label>Country</Label>
                       <Select value={country || "all"} onValueChange={(v) => setCountry(v === "all" ? "" : v)}>
@@ -641,6 +668,19 @@ export const MosqueGrid = () => {
                     onClick={() => setFilter("all")}
                     className="rounded-full p-0.5 hover:bg-muted"
                     aria-label="Remove filter"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </Badge>
+              )}
+              {region && (
+                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
+                  {region}
+                  <button
+                    type="button"
+                    onClick={() => setRegion("")}
+                    className="rounded-full p-0.5 hover:bg-muted"
+                    aria-label={`Remove region ${region}`}
                   >
                     <X className="w-3 h-3" />
                   </button>

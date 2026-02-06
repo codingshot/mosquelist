@@ -6,8 +6,12 @@ import { PageSEO } from "@/components/PageSEO";
 import { curatedLists } from "@/data/lists";
 import { List, MapPin, Star, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useBucketList } from "@/hooks/useBucketList";
 
 export default function ListsPage() {
+  const { bucketList } = useBucketList();
+  const bucketSet = new Set(bucketList.map((i) => i.mosqueId));
+
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
@@ -36,29 +40,39 @@ export default function ListsPage() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {curatedLists.map((list) => (
-                <Link
-                  key={list.slug}
-                  to={`/lists/${list.slug}`}
-                  className="group block rounded-xl border border-border bg-card p-6 hover:border-primary/50 hover:shadow-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="min-w-0 flex-1">
-                      <h2 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {list.name}
-                      </h2>
-                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                        {list.description}
-                      </p>
-                      <p className="mt-3 text-sm font-medium text-primary">
-                        {list.mosqueIds.length} mosque
-                        {list.mosqueIds.length !== 1 ? "s" : ""}
-                      </p>
+              {curatedLists.map((list) => {
+                const inListCount = list.mosqueIds.filter((id) =>
+                  bucketSet.has(id)
+                ).length;
+                return (
+                  <Link
+                    key={list.slug}
+                    to={`/lists/${list.slug}`}
+                    className="group block rounded-xl border border-border bg-card p-6 hover:border-primary/50 hover:shadow-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0 flex-1">
+                        <h2 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {list.name}
+                        </h2>
+                        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                          {list.description}
+                        </p>
+                        <p className="mt-3 text-sm font-medium text-primary">
+                          {list.mosqueIds.length} mosque
+                          {list.mosqueIds.length !== 1 ? "s" : ""}
+                        </p>
+                        {inListCount > 0 && (
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            {inListCount} of {list.mosqueIds.length} in your list
+                          </p>
+                        )}
+                      </div>
+                      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     </div>
-                    <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="mt-12 text-center">

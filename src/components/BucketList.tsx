@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { mosques } from "@/data/mosques";
-import { Check, Plus, MapPin, Plane, X, GripVertical } from "lucide-react";
+import { Check, Plus, MapPin, Plane, X, GripVertical, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -10,6 +10,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useBucketList } from "@/hooks/useBucketList";
 import {
   DndContext,
@@ -141,6 +148,14 @@ function BucketListItemRow({
   );
 }
 
+type BucketFilter = "all" | "unvisited" | "visited";
+type BucketSort =
+  | "list-order"
+  | "name"
+  | "country"
+  | "visited-first"
+  | "unvisited-first";
+
 export const BucketList = () => {
   const {
     bucketList,
@@ -152,6 +167,39 @@ export const BucketList = () => {
     mosquesNotInList,
   } = useBucketList();
   const [addSheetOpen, setAddSheetOpen] = useState(false);
+  const [filter, setFilter] = useState<BucketFilter>("all");
+  const [sort, setSort] = useState<BucketSort>("list-order");
+
+  const displayedItems = useMemo(() => {
+    let items = bucketList
+      .map((item) => {
+        const mosque = mosques.find((m) => m.id === item.mosqueId);
+        return mosque ? { item, mosque } : null;
+      })
+      .filter((x): x is NonNullable<typeof x> => x != null);
+
+    if (filter === "visited") items = items.filter((x) => x.item.visited);
+    else if (filter === "unvisited") items = items.filter((x) => !x.item.visited);
+
+    if (sort === "name")
+      items = [...items].sort((a, b) =>
+        a.mosque.name.localeCompare(b.mosque.name)
+      );
+    else if (sort === "country")
+      items = [...items].sort((a, b) =>
+        a.mosque.country.localeCompare(b.mosque.country)
+      );
+    else if (sort === "visited-first")
+      items = [...items].sort((a, b) =>
+        a.item.visited === b.item.visited ? 0 : a.item.visited ? -1 : 1
+      );
+    else if (sort === "unvisited-first")
+      items = [...items].sort((a, b) =>
+        a.item.visited === b.item.visited ? 0 : !a.item.visited ? -1 : 1
+      );
+
+    return items;
+  }, [bucketList, filter, sort]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -198,6 +246,47 @@ export const BucketList = () => {
             </div>
           </div>
 
+          {/* Filter & Sort */}
+          {bucketList.length > 0 && (
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <div className="flex rounded-lg border border-border overflow-hidden">
+                {(["all", "unvisited", "visited"] as const).map((f) => (
+                  <button
+                    key={f}
+                    type="button"
+                    onClick={() => setFilter(f)}
+                    className={`px-3 py-2 text-sm font-medium transition-colors ${
+                      filter === f
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-card hover:bg-secondary/50 text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {f === "all" && `All (${bucketList.length})`}
+                    {f === "unvisited" &&
+                      `Unvisited (${bucketList.length - visitedCount})`}
+                    {f === "visited" && `Visited (${visitedCount})`}
+                  </button>
+                ))}
+              </div>
+              <Select
+                value={sort}
+                onValueChange={(v) => setSort(v as BucketSort)}
+              >
+                <SelectTrigger className="w-[180px] gap-2">
+                  <ArrowUpDown className="h-4 w-4 shrink-0" />
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="list-order">List order</SelectItem>
+                  <SelectItem value="name">Name A–Z</SelectItem>
+                  <SelectItem value="country">Country</SelectItem>
+                  <SelectItem value="visited-first">Visited first</SelectItem>
+                  <SelectItem value="unvisited-first">Unvisited first</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
           {/* Checklist */}
           <div className="bg-card rounded-xl border border-border overflow-hidden paper-texture mosque-card-shadow">
             {/* Header */}
@@ -228,27 +317,33 @@ export const BucketList = () => {
               onDragEnd={(event: DragEndEvent) => {
                 const { active, over } = event;
                 if (over && active.id !== over.id) {
-                  const oldIndex = bucketList.findIndex(
+                  const fromIndex = bucketList.findIndex(
                     (i) => i.mosqueId === active.id
                   );
-                  const newIndex = bucketList.findIndex(
+                  const toIndex = bucketList.findIndex(
                     (i) => i.mosqueId === over.id
                   );
-                  if (oldIndex !== -1 && newIndex !== -1) {
-                    reorderBucketList(oldIndex, newIndex);
+                  if (fromIndex !== -1 && toIndex !== -1) {
+                    reorderBucketList(fromIndex, toIndex);
                   }
                 }
               }}
             >
               <SortableContext
-                items={bucketList.map((i) => i.mosqueId)}
+                items={displayedItems.map((x) => x.item.mosqueId)}
                 strategy={verticalListSortingStrategy}
               >
                 <ul className="divide-y divide-dashed divide-border">
-                  {bucketList.map((item) => {
-                    const mosque = mosques.find((m) => m.id === item.mosqueId);
-                    if (!mosque) return null;
-                    return (
+                  {displayedItems.length === 0 ? (
+                    <li className="px-6 py-8 text-center text-muted-foreground">
+                      {filter === "visited"
+                        ? "No visited mosques yet. Mark some as visited when you go!"
+                        : filter === "unvisited"
+                          ? "All mosques visited! Alhamdulillah! 🎉"
+                          : "No items to show."}
+                    </li>
+                  ) : (
+                    displayedItems.map(({ item, mosque }) => (
                       <BucketListItemRow
                         key={item.mosqueId}
                         item={item}
@@ -256,8 +351,8 @@ export const BucketList = () => {
                         toggleVisited={toggleVisited}
                         removeFromBucketList={removeFromBucketList}
                       />
-                    );
-                  })}
+                    ))
+                  )}
                 </ul>
               </SortableContext>
             </DndContext>

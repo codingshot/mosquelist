@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
@@ -26,10 +26,14 @@ function formatCapacity(capacity: number) {
   return String(capacity);
 }
 
+type ListFilter = "all" | "in-list" | "not-in-list";
+
 export default function ListDetailPage() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const { addToBucketList, bucketList } = useBucketList();
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [listFilter, setListFilter] = useState<ListFilter>("all");
 
   const list = slug ? getListBySlug(slug) : undefined;
   const listMosques = list
@@ -71,6 +75,22 @@ export default function ListDetailPage() {
       `Added all ${notInList.length} mosque${notInList.length > 1 ? "s" : ""} to your list`
     );
   };
+
+  const addAllAndGoToList = () => {
+    notInList.forEach((m) => addToBucketList(m.id));
+    toast.success(
+      `Added all ${notInList.length} mosque${notInList.length > 1 ? "s" : ""} to your list`
+    );
+    navigate("/bucket-list");
+  };
+
+  const filteredMosques = useMemo(() => {
+    if (listFilter === "in-list")
+      return listMosques.filter((m) => bucketSet.has(m.id));
+    if (listFilter === "not-in-list")
+      return listMosques.filter((m) => !bucketSet.has(m.id));
+    return listMosques;
+  }, [listMosques, bucketSet, listFilter]);
 
   if (!list) {
     return (
@@ -129,14 +149,25 @@ export default function ListDetailPage() {
             {/* Actions */}
             <div className="flex flex-wrap items-center gap-3 mb-8">
               {!allInList && notInList.length > 0 && (
-                <Button
-                  size="sm"
-                  className="gradient-gold text-primary-foreground gap-2"
-                  onClick={addAll}
-                >
-                  <PlusCircle className="h-4 w-4" />
-                  Add All to My List
-                </Button>
+                <>
+                  <Button
+                    size="sm"
+                    className="gradient-gold text-primary-foreground gap-2"
+                    onClick={addAll}
+                  >
+                    <PlusCircle className="h-4 w-4" />
+                    Add All to My List
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    className="gap-2"
+                    onClick={addAllAndGoToList}
+                  >
+                    <PlusCircle className="h-4 w-4" />
+                    Add All &amp; Go to My List
+                  </Button>
+                </>
               )}
               {allInList && (
                 <Button variant="secondary" size="sm" asChild>
@@ -180,9 +211,29 @@ export default function ListDetailPage() {
               )}
             </div>
 
+            {/* Filter */}
+            {(notInList.length > 0 && listMosques.some((m) => bucketSet.has(m.id))) && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {(["all", "in-list", "not-in-list"] as const).map((f) => (
+                  <Button
+                    key={f}
+                    variant={listFilter === f ? "secondary" : "ghost"}
+                    size="sm"
+                    onClick={() => setListFilter(f)}
+                  >
+                    {f === "all" && `All (${listMosques.length})`}
+                    {f === "in-list" &&
+                      `In my list (${listMosques.filter((m) => bucketSet.has(m.id)).length})`}
+                    {f === "not-in-list" &&
+                      `Not in list (${notInList.length})`}
+                  </Button>
+                ))}
+              </div>
+            )}
+
             {/* Mosque list */}
             <ul className="space-y-4">
-              {listMosques.map((mosque) => {
+              {filteredMosques.map((mosque) => {
                 const inBucket = bucketSet.has(mosque.id);
                 const selected = selectedIds.has(mosque.id);
                 return (
@@ -269,9 +320,11 @@ export default function ListDetailPage() {
               })}
             </ul>
 
-            {listMosques.length === 0 && (
+            {filteredMosques.length === 0 && (
               <p className="text-center text-muted-foreground py-12">
-                No mosques in this list yet.
+                {listMosques.length === 0
+                  ? "No mosques in this list yet."
+                  : "No mosques match this filter."}
               </p>
             )}
           </div>

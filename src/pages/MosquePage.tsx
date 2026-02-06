@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
 import { getExploreUrl } from "@/lib/explore-url";
+import { getRegionForCountry } from "@/data/regions";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -197,6 +198,21 @@ export default function MosquePage() {
                   >
                     {mosque.country}
                   </Link>
+                  {(() => {
+                    const region = getRegionForCountry(mosque.country);
+                    if (!region) return null;
+                    return (
+                      <>
+                        <span className="text-muted-foreground/60">·</span>
+                        <Link
+                          to={getExploreUrl({ region })}
+                          className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                        >
+                          {region}
+                        </Link>
+                      </>
+                    );
+                  })()}
                 </span>
                 {mosque.architecturalStyle && (
                   <Link

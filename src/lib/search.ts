@@ -1,15 +1,18 @@
 import type { Mosque } from "@/types/mosque";
+import { getRegionForCountry } from "@/data/regions";
 
 /**
  * Build a single searchable string from mosque fields (normalized to lowercase).
  * Used for matching so we only lowercase once per mosque.
  */
 function getSearchText(m: Mosque): string {
+  const region = getRegionForCountry(m.country) ?? "";
   const parts = [
     m.name,
     m.arabicName ?? "",
     m.location,
     m.country,
+    region,
     m.significance,
     m.description,
     m.architecturalStyle ?? "",
