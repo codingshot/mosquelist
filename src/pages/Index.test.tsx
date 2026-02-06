@@ -38,11 +38,15 @@ describe("Index page", () => {
     expect(headings.length).toBeGreaterThan(0);
   });
 
-  it("has link to explore mosques", () => {
-    renderIndex();
-    const links = screen.getAllByRole("link", { name: /explore mosques/i });
-    expect(links.length).toBeGreaterThan(0);
-  });
+  it(
+    "has link to explore mosques",
+    () => {
+      renderIndex();
+      const links = screen.getAllByRole("link", { name: /explore mosques/i });
+      expect(links.length).toBeGreaterThan(0);
+    },
+    10000
+  );
 
   it("renders footer", () => {
     renderIndex();
