@@ -385,6 +385,15 @@ export const MosqueGrid = () => {
                 >
                   Biggest
                 </Button>
+                {hasActiveFilters && (
+                  <button
+                    type="button"
+                    onClick={clearAllFilters}
+                    className="text-sm text-muted-foreground hover:text-foreground underline-offset-4 hover:underline touch-manipulation min-h-[44px] sm:min-h-0 sm:self-center"
+                  >
+                    Clear filters
+                  </button>
+                )}
               </div>
               <Select value={sort} onValueChange={(v) => setSort((v || "holyCapacity") as SortType)}>
                 <SelectTrigger className="w-[160px] h-11 min-h-[44px] shrink-0 touch-manipulation" aria-label="Sort by">

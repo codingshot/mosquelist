@@ -68,13 +68,30 @@ export default function MosquePage() {
             variant="outline"
             size="sm"
             className="gap-2"
-            onClick={() => {
+            onClick={async () => {
               const url = window.location.origin + "/mosque/" + mosque.id;
-              void navigator.clipboard.writeText(url).then(() => {
+              const title = `${mosque.name} – MosqueList`;
+              const text = `Discover ${mosque.name} in ${mosque.location}, ${mosque.country}`;
+              if (typeof navigator.share === "function") {
+                try {
+                  await navigator.share({
+                    title,
+                    text,
+                    url,
+                  });
+                  toast.success("Shared successfully");
+                } catch (err) {
+                  if ((err as Error).name !== "AbortError") {
+                    await navigator.clipboard.writeText(url);
+                    toast.success("Link copied to clipboard");
+                  }
+                }
+              } else {
+                await navigator.clipboard.writeText(url);
                 toast.success("Link copied to clipboard");
-              });
+              }
             }}
-            aria-label="Copy link to share"
+            aria-label="Share mosque"
           >
             <Share2 className="h-4 w-4" />
             Share

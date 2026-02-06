@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "fact-check": "node scripts/fact-check-checklist.js",
-    "populate-mosquedata1": "node scripts/populate-mosquedata1.js"
+    "populate-mosquedata1": "node scripts/populate-mosquedata1.js",
+    "merge-mosques": "node scripts/merge-mosques.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

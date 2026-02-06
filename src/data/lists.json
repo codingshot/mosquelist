@@ -16,16 +16,31 @@
         "imam-reza-shrine",
         "imam-ali-shrine",
         "grand-jamia",
-        "faisal-mosque",
+        "astana-grand-mosque",
         "istiqlal-mosque",
         "djamaa-el-djazair",
+        "jamkaran-mosque",
         "hassan-ii",
+        "umayyad-mosque",
+        "badshahi-mosque",
+        "bahria-grand-mosque",
+        "taj-ul-masajid",
+        "camlica-mosque",
+        "al-jabbar-grand-mosque",
+        "jameh-mosque-of-makki",
+        "al-akbar-mosque",
+        "al-saleh-mosque",
+        "baitul-mukarram",
+        "faisal-mosque",
         "heydar-mosque",
         "massalikoul-djinane-mosque",
         "imam-abdul-wahhab-mosque",
-        "badshahi-mosque",
-        "taj-ul-masajid",
-        "baitul-mukarram"
+        "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
+        "sultan-salahuddin-abdul-aziz-mosque",
+        "jakarta-islamic-center",
+        "at-tin-mosque",
+        "sabanci-central-mosque",
+        "jama-masjid-delhi"
       ]
     },
     {
@@ -38,25 +53,56 @@
       "slug": "turkey",
       "name": "Turkey",
       "description": "Magnificent Ottoman and historic mosques in Turkey.",
-      "mosqueIds": ["blue-mosque", "suleymaniye-mosque"]
+      "mosqueIds": [
+        "blue-mosque",
+        "suleymaniye-mosque",
+        "camlica-mosque",
+        "sabanci-central-mosque",
+        "hagia-sophia-istanbul",
+        "selahaddin-eyyubi-mosque",
+        "kocatepe-mosque"
+      ]
     },
     {
       "slug": "pakistan",
       "name": "Pakistan",
       "description": "Major mosques in Pakistan—from Mughal masterpieces to modern marvels.",
-      "mosqueIds": ["grand-jamia", "faisal-mosque", "badshahi-mosque"]
+      "mosqueIds": [
+        "grand-jamia",
+        "faisal-mosque",
+        "badshahi-mosque",
+        "bahria-grand-mosque",
+        "cmh-masjid-jhelum",
+        "shah-jahan-mosque-thatta"
+      ]
     },
     {
       "slug": "indonesia",
       "name": "Indonesia",
       "description": "Southeast Asia's largest mosques in Indonesia.",
-      "mosqueIds": ["istiqlal-mosque"]
+      "mosqueIds": [
+        "istiqlal-mosque",
+        "al-akbar-mosque",
+        "at-tin-mosque",
+        "dian-al-mahri-mosque",
+        "jakarta-islamic-center",
+        "al-jabbar-grand-mosque",
+        "grand-mosque-of-west-sumatra",
+        "raja-hamidah-great-mosque-of-batam",
+        "grand-mosque-of-sabilal-muhtadin",
+        "great-mosque-of-central-java",
+        "al-azhom-grand-mosque"
+      ]
     },
     {
       "slug": "egypt",
       "name": "Egypt",
       "description": "Historic and iconic mosques in Egypt.",
-      "mosqueIds": ["al-azhar-mosque"]
+      "mosqueIds": [
+        "al-azhar-mosque",
+        "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
+        "al-fattah-al-aleem-mosque"
+      ]
     },
     {
       "slug": "uae",
@@ -68,13 +114,26 @@
       "slug": "india",
       "name": "India",
       "description": "Mughal and historic mosques in India.",
-      "mosqueIds": ["jama-masjid-delhi", "taj-ul-masajid"]
+      "mosqueIds": [
+        "jama-masjid-delhi",
+        "taj-ul-masajid",
+        "jamia-masjid-srinagar",
+        "jamiul-futuh-indian-grand-masjid",
+        "aqsa-mosque-qadian"
+      ]
     },
     {
       "slug": "malaysia",
       "name": "Malaysia",
       "description": "Mosques across Malaysia.",
-      "mosqueIds": ["national-mosque-malaysia", "putra-mosque"]
+      "mosqueIds": [
+        "national-mosque-malaysia",
+        "putra-mosque",
+        "sultan-salahuddin-abdul-aziz-mosque",
+        "tuanku-mizan-zainal-abidin-mosque",
+        "federal-territory-mosque",
+        "al-kauthar-mosque"
+      ]
     },
     {
       "slug": "morocco",
@@ -92,7 +151,57 @@
       "slug": "iran",
       "name": "Iran",
       "description": "Major Shia shrines and mosques in Iran.",
-      "mosqueIds": ["imam-reza-shrine"]
+      "mosqueIds": ["imam-reza-shrine", "jamkaran-mosque"]
+    },
+    {
+      "slug": "kazakhstan",
+      "name": "Kazakhstan",
+      "description": "Central Asia's grandest mosques.",
+      "mosqueIds": ["astana-grand-mosque", "hazrat-sultan-mosque"]
+    },
+    {
+      "slug": "syria",
+      "name": "Syria",
+      "description": "Historic Umayyad and Islamic heritage.",
+      "mosqueIds": ["umayyad-mosque"]
+    },
+    {
+      "slug": "yemen",
+      "name": "Yemen",
+      "description": "Major mosques in Yemen.",
+      "mosqueIds": ["al-saleh-mosque"]
+    },
+    {
+      "slug": "algeria",
+      "name": "Algeria",
+      "description": "North African mosque heritage.",
+      "mosqueIds": [
+        "djamaa-el-djazair",
+        "1st-november-1954-great-mosque",
+        "emir-abdelkader-mosque"
+      ]
+    },
+    {
+      "slug": "west-africa",
+      "name": "West Africa",
+      "description": "Major mosques across West Africa.",
+      "mosqueIds": [
+        "massalikoul-djinane-mosque",
+        "grand-mosque-of-conakry",
+        "great-mosque-of-djenne"
+      ]
+    },
+    {
+      "slug": "china",
+      "name": "China",
+      "description": "Historic mosques in China.",
+      "mosqueIds": ["id-kah-mosque"]
+    },
+    {
+      "slug": "philippines",
+      "name": "Philippines",
+      "description": "Major mosques in the Philippines.",
+      "mosqueIds": ["sultan-haji-hassanal-bolkiah-mosque"]
     }
   ]
 }

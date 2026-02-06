@@ -36,7 +36,7 @@ describe("MosquePage", () => {
 
   it("shows Share button", () => {
     renderMosquePage("/mosque/blue-mosque");
-    expect(screen.getByRole("button", { name: /copy link to share/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /share mosque/i })).toBeInTheDocument();
   });
 
   it("shows not found for invalid mosque id", () => {

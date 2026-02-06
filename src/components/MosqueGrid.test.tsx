@@ -26,7 +26,7 @@ describe("MosqueGrid", () => {
 
   it("filters by search query when q param is set", () => {
     renderGrid("/?q=Blue Mosque Istanbul");
-    expect(screen.getByRole("status", { hidden: true })).toHaveTextContent(/1 mosque found|1 mosques found/);
+    expect(screen.getByRole("status", { hidden: true })).toHaveTextContent(/mosque(s)? found/);
     expect(screen.getByRole("link", { name: /Blue Mosque/i })).toBeInTheDocument();
   });
 

@@ -10,7 +10,15 @@
       "established": "638 CE",
       "area": 400800,
       "annualVisitors": "8-10 million (Hajj) + millions (Umrah)",
-      "facilities": ["Hotels", "Restaurants", "Medical centers", "Multilingual guides", "Wheelchair access", "Cooling systems", "Information centers"],
+      "facilities": [
+        "Hotels",
+        "Restaurants",
+        "Medical centers",
+        "Multilingual guides",
+        "Wheelchair access",
+        "Cooling systems",
+        "Information centers"
+      ],
       "significance": "The holiest site in Islam, home to the Kaaba",
       "description": "Masjid al-Haram, also known as the Grand Mosque, is the largest mosque in the world and surrounds Islam's holiest place, the Kaaba, in the city of Mecca. Muslims around the world face the Kaaba during their five daily prayers.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/Mosqu%C3%A9e_Masjid_el_Haram_%C3%A0_la_Mecque.jpg",
@@ -18,7 +26,10 @@
       "architecturalStyle": "Islamic Architecture with Modern Expansions",
       "womenPrayerArea": true,
       "touristFriendly": false,
-      "coordinates": {"lat": 21.4225, "lng": 39.8262},
+      "coordinates": {
+        "lat": 21.4225,
+        "lng": 39.8262
+      },
       "history": "The mosque surrounds the Kaaba, the ancient house of worship believed built by Prophet Ibrahim. Expanded through the centuries—under Caliph Umar (638), Ottoman Sultan Selim II (1571), and Saudi expansions (1950s onward)—it is the focal point of Hajj and Umrah.",
       "tourismNotes": "Non-Muslims may not enter. Hajj visa required for pilgrimage. Dress modestly; Ihram for Hajj. Best visited during Ramadan or Hajj season for spiritual atmosphere.",
       "officialWebsite": "https://www.gph.gov.sa"
@@ -33,7 +44,15 @@
       "established": "622 CE",
       "area": 384000,
       "annualVisitors": "7 million",
-      "facilities": ["Hotels", "Museums", "Prayer halls for women", "Libraries", "Courtyards", "Umbrella shading system", "Medical facilities"],
+      "facilities": [
+        "Hotels",
+        "Museums",
+        "Prayer halls for women",
+        "Libraries",
+        "Courtyards",
+        "Umbrella shading system",
+        "Medical facilities"
+      ],
       "significance": "Second holiest site in Islam, burial place of Prophet Muhammad ﷺ",
       "description": "The Prophet's Mosque is the second-holiest site in Islam, built by Prophet Muhammad himself in 622 CE. It houses the tomb of the Prophet and is one of the largest mosques in the world with its iconic green dome.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Al-Masjid_al-Nabawi_01.jpg",
@@ -41,7 +60,10 @@
       "architecturalStyle": "Classical Islamic with Ottoman and Modern elements",
       "womenPrayerArea": true,
       "touristFriendly": false,
-      "coordinates": {"lat": 24.4672, "lng": 39.6111},
+      "coordinates": {
+        "lat": 24.4672,
+        "lng": 39.6111
+      },
       "history": "Built by Prophet Muhammad ﷺ in 622 CE after the Hijrah. The green dome marks the Prophet's burial place. Successively expanded by Umayyads, Abbasids, Mamluks, Ottomans, and Saudi rulers.",
       "tourismNotes": "Non-Muslims may not enter. Visitors need valid visa. Women pray in designated areas. The Rawdah (green carpet area) is highly sought—visit early morning for shorter queues.",
       "officialWebsite": "https://www.gph.gov.sa"
@@ -56,7 +78,11 @@
       "established": "705 CE",
       "area": 144000,
       "annualVisitors": "~5 million (pre-conflict)",
-      "facilities": ["Guided tours", "Islamic Museum nearby", "Limited tourist facilities"],
+      "facilities": [
+        "Guided tours",
+        "Islamic Museum nearby",
+        "Limited tourist facilities"
+      ],
       "significance": "Third holiest site in Islam, destination of the Prophet's night journey",
       "description": "Al-Aqsa Mosque, meaning 'The Farthest Mosque', is located in the Old City of Jerusalem. It is the third-holiest site in Islam and was the original qibla (direction of prayer) before Mecca.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Dome_of_the_Rock_photo.jpg",
@@ -64,7 +90,10 @@
       "architecturalStyle": "Umayyad Architecture",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 31.776, "lng": 35.2356},
+      "coordinates": {
+        "lat": 31.776,
+        "lng": 35.2356
+      },
       "history": "Construction began under Umayyad Caliph Abd al-Malik (685 CE); completed by his son al-Walid I (705 CE). The Dome of the Rock enshrines the Foundation Stone. Al-Aqsa mosque lies south.",
       "architectureNotes": "Early Islamic architecture with Byzantine and Persian influences. Gold dome, blue and turquoise tilework, marble columns.",
       "tourismNotes": "Check current access and security. Modest dress required. Non-Muslims may visit the compound at designated times."
@@ -79,7 +108,14 @@
       "established": "818 CE",
       "area": 598657,
       "annualVisitors": "20-30 million",
-      "facilities": ["Hotels", "Museums", "Libraries", "Restaurants", "Medical centers", "Prayer halls"],
+      "facilities": [
+        "Hotels",
+        "Museums",
+        "Libraries",
+        "Restaurants",
+        "Medical centers",
+        "Prayer halls"
+      ],
       "significance": "One of the largest mosque complexes by area, shrine of Imam Reza",
       "description": "The Imam Reza Shrine is a complex containing the mausoleum of Imam Reza, the eighth Imam of Twelver Shia. It is the largest mosque in the world by dimension and the second most visited religious site in the world.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Holy_Shrine_Imam_Reza_-_Mashhad_-_Iran.jpg",
@@ -87,7 +123,10 @@
       "architecturalStyle": "Persian Islamic Architecture",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 36.287, "lng": 59.6162},
+      "coordinates": {
+        "lat": 36.287,
+        "lng": 59.6162
+      },
       "history": "The shrine of Imam Reza, the eighth Imam of Twelver Shia Islam, was established in 818 CE after his martyrdom. The complex grew under Samanids, Safavids, and Qajars.",
       "architectureNotes": "Persian-Islamic style with turquoise domes, golden minarets, and intricate tilework (kashi-kari).",
       "tourismNotes": "Non-Muslims may visit most areas. Dress modestly; women need chador (provided). Peak pilgrimage during Nowruz and Ramadan."
@@ -102,7 +141,15 @@
       "established": "2007",
       "area": 120000,
       "annualVisitors": "5-6 million",
-      "facilities": ["Guided tours (multiple languages)", "Visitor center", "Gift shops", "Photography permitted", "Dining facilities", "Library", "Reflection pools"],
+      "facilities": [
+        "Guided tours (multiple languages)",
+        "Visitor center",
+        "Gift shops",
+        "Photography permitted",
+        "Dining facilities",
+        "Library",
+        "Reflection pools"
+      ],
       "significance": "One of the largest mosques in the world, architectural masterpiece",
       "description": "The Sheikh Zayed Grand Mosque is one of the most beautiful mosques in the world, featuring 82 domes, over 1,000 columns, and the world's largest hand-knotted carpet. It's open to visitors of all faiths.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Sheikh_Zayed_Grand_Mosque_Picture.jpg",
@@ -110,7 +157,10 @@
       "architecturalStyle": "Moorish, Mughal, Ottoman fusion",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 24.4126, "lng": 54.4747},
+      "coordinates": {
+        "lat": 24.4126,
+        "lng": 54.4747
+      },
       "history": "Commissioned by Sheikh Zayed bin Sultan Al Nahyan, founder of the UAE. Completed in 2007, it honors Islamic and global cultures.",
       "architectureNotes": "82 domes, 1,000+ columns, 24-carat gold chandeliers, and the world's largest hand-knotted carpet. White marble and semi-precious stone inlays.",
       "tourismNotes": "Free guided tours for non-Muslims. Modest dress required; abayas provided for women. Best time: morning. Photography allowed. Closed Friday morning.",
@@ -126,7 +176,14 @@
       "established": "1993",
       "area": 90000,
       "annualVisitors": "1.2 million",
-      "facilities": ["Guided tours", "Museum", "Library", "Conference rooms", "Hammam", "Oceanfront viewing areas"],
+      "facilities": [
+        "Guided tours",
+        "Museum",
+        "Library",
+        "Conference rooms",
+        "Hammam",
+        "Oceanfront viewing areas"
+      ],
       "significance": "Largest mosque in Africa, built on the Atlantic Ocean",
       "description": "Hassan II Mosque stands partially over the Atlantic Ocean, with a retractable roof and the world's tallest minaret at 210 meters. It's a masterpiece of Moroccan craftsmanship and one of the few mosques open to non-Muslims.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Hassan_II_mosque%2C_Casablanca2.JPG",
@@ -134,7 +191,10 @@
       "architecturalStyle": "Moorish Architecture",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 33.6089, "lng": -7.6327},
+      "coordinates": {
+        "lat": 33.6089,
+        "lng": -7.6327
+      },
       "history": "Built to commemorate King Hassan II's 60th birthday. Construction 1986–1993. Designed by French architect Michel Pinseau. Minaret at 210 m is the world's tallest.",
       "architectureNotes": "Traditional Moroccan zellige tilework, carved wood, and plaster. Retractable roof over the main prayer hall.",
       "tourismNotes": "Guided tours for non-Muslims. Modest dress required. Tours run several times daily.",
@@ -150,7 +210,13 @@
       "established": "1616",
       "area": 4608,
       "annualVisitors": "3.5 million",
-      "facilities": ["Tourist entrance", "Multilingual guides", "Information panels", "Nearby bazaar and restaurants", "Photography allowed in designated areas"],
+      "facilities": [
+        "Tourist entrance",
+        "Multilingual guides",
+        "Information panels",
+        "Nearby bazaar and restaurants",
+        "Photography allowed in designated areas"
+      ],
       "significance": "Iconic Ottoman mosque, known for its blue tiles",
       "description": "The Sultan Ahmed Mosque, popularly known as the Blue Mosque, is famous for its hand-painted blue tiles adorning its interior. With six minarets and a magnificent dome, it's one of Istanbul's most iconic landmarks.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Sultan_Ahmed_Mosque_in_Istanbul.jpg",
@@ -158,7 +224,10 @@
       "architecturalStyle": "Classical Ottoman",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 41.0054, "lng": 28.9768},
+      "coordinates": {
+        "lat": 41.0054,
+        "lng": 28.9768
+      },
       "history": "Built 1609–1616 by Sultan Ahmed I. Architect Sedefkar Mehmed Agha drew on Hagia Sophia and Mimar Sinan. Six minarets caused controversy; Sultan funded a seventh at Mecca.",
       "architectureNotes": "Famous for 20,000+ hand-painted blue Iznik tiles. Central dome 43 m high. Six minarets. Classic Ottoman layout.",
       "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet."
@@ -173,7 +242,14 @@
       "established": "1986",
       "area": 130000,
       "annualVisitors": "800,000",
-      "facilities": ["Islamic University", "Library", "Museum", "Lecture halls", "Courtyards", "Parking facilities"],
+      "facilities": [
+        "Islamic University",
+        "Library",
+        "Museum",
+        "Lecture halls",
+        "Courtyards",
+        "Parking facilities"
+      ],
       "significance": "National mosque of Pakistan, unique tent-like design",
       "description": "Faisal Mosque is the national mosque of Pakistan, located at the foot of Margalla Hills. Its unique design resembles a desert Bedouin tent, blending contemporary architecture with traditional Islamic elements.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Shah_Faisal_Mosque_%28Islamabad%2C_Pakistan%29.jpg",
@@ -181,7 +257,10 @@
       "architecturalStyle": "Contemporary Turkish-Arab",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 33.7295, "lng": 73.0372}
+      "coordinates": {
+        "lat": 33.7295,
+        "lng": 73.0372
+      }
     },
     {
       "id": "istiqlal-mosque",
@@ -193,7 +272,13 @@
       "established": "1978",
       "area": 93200,
       "annualVisitors": "1.5 million",
-      "facilities": ["Visitor center", "Guided tours", "Library", "Conference halls", "Parking facilities"],
+      "facilities": [
+        "Visitor center",
+        "Guided tours",
+        "Library",
+        "Conference halls",
+        "Parking facilities"
+      ],
       "significance": "Largest mosque in Southeast Asia, symbol of Indonesian independence",
       "description": "Istiqlal Mosque is the national mosque of Indonesia and the largest mosque in Southeast Asia. Its name means 'Independence' in Arabic, commemorating Indonesian independence. It features interfaith dialogue, standing across from Jakarta Cathedral.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Istiqlal_Mosque.jpg",
@@ -201,7 +286,10 @@
       "architecturalStyle": "Modern Functionalist with Islamic elements",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": -6.1702, "lng": 106.8294}
+      "coordinates": {
+        "lat": -6.1702,
+        "lng": 106.8294
+      }
     },
     {
       "id": "grand-jamia",
@@ -213,7 +301,13 @@
       "established": "2023",
       "area": 200000,
       "annualVisitors": "500,000 (estimated)",
-      "facilities": ["Islamic learning centers", "Library", "Exhibition halls", "Museum", "Parking for 5,000 vehicles"],
+      "facilities": [
+        "Islamic learning centers",
+        "Library",
+        "Exhibition halls",
+        "Museum",
+        "Parking for 5,000 vehicles"
+      ],
       "significance": "Among the world's largest mosques by capacity, Pakistan's largest",
       "description": "The Grand Jamia Mosque in Bahria Town Karachi is one of the world's largest mosques by capacity. Its design is inspired by the Selimiye Mosque in Turkey, featuring stunning Ottoman architecture with modern amenities.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Jamia_Mosque.jpg",
@@ -221,7 +315,10 @@
       "architecturalStyle": "Ottoman Revival",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 24.8128, "lng": 67.0693}
+      "coordinates": {
+        "lat": 24.8128,
+        "lng": 67.0693
+      }
     },
     {
       "id": "badshahi-mosque",
@@ -233,7 +330,12 @@
       "established": "1673",
       "area": 27600,
       "annualVisitors": "~1 million",
-      "facilities": ["Museum", "Courtyards", "Guided tours", "Visitor information"],
+      "facilities": [
+        "Museum",
+        "Courtyards",
+        "Guided tours",
+        "Visitor information"
+      ],
       "significance": "Iconic Mughal-era mosque, one of Pakistan's most visited landmarks",
       "description": "The Badshahi Mosque was built by Emperor Aurangzeb in 1673. It is a masterpiece of Mughal architecture and was the largest mosque in the world for over 300 years. Its red sandstone and marble make it one of Lahore's most iconic sights.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_%2C_Lahore.jpg",
@@ -241,7 +343,10 @@
       "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 31.5881, "lng": 74.3095},
+      "coordinates": {
+        "lat": 31.5881,
+        "lng": 74.3095
+      },
       "history": "Built by Emperor Aurangzeb in 1673. The largest mosque in the world for over 300 years until Faisal Mosque (1986).",
       "architectureNotes": "Red sandstone and marble. Symmetrical courtyard, octagonal minarets, Persian calligraphy.",
       "tourismNotes": "Open to visitors. Modest dress required. Located near Lahore Fort. Best in morning light."
@@ -256,7 +361,12 @@
       "established": "2001",
       "area": 416000,
       "annualVisitors": "Hundreds of thousands",
-      "facilities": ["Guided tours for non-Muslims", "Library", "Visitor center", "One of world's largest chandeliers and carpets"],
+      "facilities": [
+        "Guided tours for non-Muslims",
+        "Library",
+        "Visitor center",
+        "One of world's largest chandeliers and carpets"
+      ],
       "significance": "Largest mosque in Oman, open to non-Muslim visitors",
       "description": "The Sultan Qaboos Grand Mosque was completed in 2001 and can hold 20,000 worshippers. It features one of the world's largest hand-loomed carpets and a massive Swarovski crystal chandelier. Non-Muslims are welcome outside prayer times.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_Qaboos_Grand_Mosque_%28Muscat%2C_Oman%29.jpg",
@@ -264,7 +374,10 @@
       "architecturalStyle": "Modern Islamic with Omani influence",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 23.5852, "lng": 58.4048},
+      "coordinates": {
+        "lat": 23.5852,
+        "lng": 58.4048
+      },
       "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; abayas provided. One of world's largest chandeliers and carpets.",
       "officialWebsite": "https://www.muq.gov.om"
     },
@@ -278,7 +391,12 @@
       "established": "1999",
       "area": 14000,
       "annualVisitors": "Popular with tourists and worshippers",
-      "facilities": ["Visitor access", "Rose-tinted granite", "Waterfront location", "Photography allowed"],
+      "facilities": [
+        "Visitor access",
+        "Rose-tinted granite",
+        "Waterfront location",
+        "Photography allowed"
+      ],
       "significance": "Iconic pink-domed mosque and Putrajaya landmark",
       "description": "The Putra Mosque is known for its distinctive rose-tinted granite and stunning location on Putrajaya Lake. Completed in 1999, it combines Malay and Persian design and is one of Malaysia's most photographed mosques.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Putra%2C_Putrajaya.jpg",
@@ -286,7 +404,10 @@
       "architecturalStyle": "Malay and Persian",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 2.927, "lng": 101.6869},
+      "coordinates": {
+        "lat": 2.927,
+        "lng": 101.6869
+      },
       "tourismNotes": "Visitor access. Rose-tinted granite. Waterfront location on Putrajaya Lake. Photography allowed."
     },
     {
@@ -299,7 +420,12 @@
       "established": "1958",
       "area": 5000,
       "annualVisitors": "Major tourist attraction",
-      "facilities": ["Visitor viewing", "Lagoon setting", "Golden dome", "Marble minaret"],
+      "facilities": [
+        "Visitor viewing",
+        "Lagoon setting",
+        "Golden dome",
+        "Marble minaret"
+      ],
       "significance": "National symbol of Brunei, one of Asia's most beautiful mosques",
       "description": "Built in 1958, this mosque stands in an artificial lagoon and is crowned by a golden dome. It blends Mughal and Malay styles and is one of the most photographed religious buildings in Southeast Asia.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Omar_Ali_Saifuddin_Mosque_02.jpg",
@@ -307,7 +433,10 @@
       "architecturalStyle": "Mughal and Malay",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 4.8903, "lng": 114.9422},
+      "coordinates": {
+        "lat": 4.8903,
+        "lng": 114.9422
+      },
       "tourismNotes": "Visitor viewing. Stands in artificial lagoon. Golden dome. One of Southeast Asia's most photographed mosques."
     },
     {
@@ -320,7 +449,12 @@
       "established": "1968",
       "area": 21000,
       "annualVisitors": "National mosque, very high footfall",
-      "facilities": ["National mosque", "Library", "Commercial complex", "Central location"],
+      "facilities": [
+        "National mosque",
+        "Library",
+        "Commercial complex",
+        "Central location"
+      ],
       "significance": "National mosque of Bangladesh",
       "description": "Baitul Mukarram is the national mosque of Bangladesh, completed in 1968. Its design avoids the traditional dome and instead uses a contemporary interpretation of the Kaaba, making it distinctive among modern mosques.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Baitul_Mukarram_Mosque_Dhaka_2.jpg",
@@ -328,7 +462,10 @@
       "architecturalStyle": "Modern Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 23.729, "lng": 90.4112}
+      "coordinates": {
+        "lat": 23.729,
+        "lng": 90.4112
+      }
     },
     {
       "id": "taj-ul-masajid",
@@ -340,7 +477,12 @@
       "established": "1985",
       "area": 43000,
       "annualVisitors": "One of India's largest mosques",
-      "facilities": ["Madrasa", "Courtyards", "Pink facade", "Large capacity"],
+      "facilities": [
+        "Madrasa",
+        "Courtyards",
+        "Pink facade",
+        "Large capacity"
+      ],
       "significance": "One of the largest mosques in India",
       "description": "Taj-ul-Masajid means 'Crown of Mosques.' Construction began in the 19th century and was completed in 1985. Its pink facade and vast courtyard make it one of the largest and most striking mosques in India.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Taj-ul-Masajid%2C_Bhopal.jpg",
@@ -348,7 +490,10 @@
       "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 23.2542, "lng": 77.4062}
+      "coordinates": {
+        "lat": 23.2542,
+        "lng": 77.4062
+      }
     },
     {
       "id": "great-mosque-of-djenne",
@@ -360,7 +505,11 @@
       "established": "1907",
       "area": 5625,
       "annualVisitors": "UNESCO site, limited interior access",
-      "facilities": ["UNESCO World Heritage", "Annual replastering festival", "Earthen architecture"],
+      "facilities": [
+        "UNESCO World Heritage",
+        "Annual replastering festival",
+        "Earthen architecture"
+      ],
       "significance": "Largest adobe building in the world, UNESCO World Heritage Site",
       "description": "The Great Mosque of Djenné is the largest mud-brick (adobe) building in the world. Rebuilt in 1907, it is a pinnacle of Sudano-Sahelian architecture and is replastered annually by the community. UNESCO World Heritage since 1988.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Great_Mosque_of_Djenn%C3%A9_1.jpg",
@@ -368,7 +517,10 @@
       "architecturalStyle": "Sudano-Sahelian",
       "womenPrayerArea": true,
       "touristFriendly": false,
-      "coordinates": {"lat": 13.9055, "lng": -4.5553},
+      "coordinates": {
+        "lat": 13.9055,
+        "lng": -4.5553
+      },
       "history": "Rebuilt in 1907. UNESCO World Heritage since 1988. Largest adobe building in the world. Replastered annually by the community during the Crepissage festival.",
       "architectureNotes": "Sudano-Sahelian style. Mud bricks, wooden beams (toron) protruding from walls. Three minarets.",
       "tourismNotes": "Interior access for non-Muslims is limited. Best viewed from outside during the annual replastering festival."
@@ -383,7 +535,12 @@
       "established": "1986",
       "area": 45000,
       "annualVisitors": "Major national mosque",
-      "facilities": ["Library", "Islamic center", "Guided tours", "Largest carpet in Kuwait"],
+      "facilities": [
+        "Library",
+        "Islamic center",
+        "Guided tours",
+        "Largest carpet in Kuwait"
+      ],
       "significance": "Largest mosque in Kuwait",
       "description": "The Grand Mosque of Kuwait was completed in 1986 and can accommodate over 11,000 worshippers. It houses a large Islamic library and is known for its elegant design and one of Kuwait's largest prayer carpets.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Mosque_Kuwait.jpg",
@@ -391,7 +548,10 @@
       "architecturalStyle": "Islamic with Kuwaiti elements",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 29.3745, "lng": 47.9728}
+      "coordinates": {
+        "lat": 29.3745,
+        "lng": 47.9728
+      }
     },
     {
       "id": "jama-masjid-delhi",
@@ -403,7 +563,12 @@
       "established": "1656",
       "area": 12000,
       "annualVisitors": "~1 million",
-      "facilities": ["Courtyards", "Guided tours", "Minaret climb", "Nearby bazaar"],
+      "facilities": [
+        "Courtyards",
+        "Guided tours",
+        "Minaret climb",
+        "Nearby bazaar"
+      ],
       "significance": "India's largest mosque, Mughal architectural masterpiece",
       "description": "Jama Masjid in Old Delhi was commissioned by Emperor Shah Jahan and completed in 1656. Built of red sandstone and white marble, it features three domes and two 40-meter minarets. The courtyard can hold 25,000 worshippers.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jama_Masjid_-_Delhi.jpg",
@@ -411,7 +576,10 @@
       "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 28.6508, "lng": 77.2335},
+      "coordinates": {
+        "lat": 28.6508,
+        "lng": 77.2335
+      },
       "history": "Built by Shah Jahan 1644–1656. Same emperor as the Taj Mahal. The mosque faces west toward Mecca.",
       "architectureNotes": "Red sandstone and white marble. Three domes, two minarets. Symmetrical courtyard. Persian and Indian influences.",
       "tourismNotes": "Open to visitors. Modest dress required; robes provided. Climb minaret for city views. Closed during prayer. Near Chandni Chowk."
@@ -426,7 +594,12 @@
       "established": "970 CE",
       "area": 12000,
       "annualVisitors": "Millions (mosque and university)",
-      "facilities": ["Al-Azhar University", "Library", "Guided tours", "Historic minarets"],
+      "facilities": [
+        "Al-Azhar University",
+        "Library",
+        "Guided tours",
+        "Historic minarets"
+      ],
       "significance": "One of the world's oldest universities, center of Islamic learning",
       "description": "Al-Azhar Mosque was founded in 970 CE by the Fatimid Caliphate. It houses Al-Azhar University, one of the world's oldest degree-granting universities. A center of Sunni Islamic scholarship for over a millennium.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Azhar_Mosque_Cairo.jpg",
@@ -434,7 +607,10 @@
       "architecturalStyle": "Fatimid, Mamluk, Ottoman",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 30.0459, "lng": 31.2622},
+      "coordinates": {
+        "lat": 30.0459,
+        "lng": 31.2622
+      },
       "history": "Founded 970 CE by Fatimid Caliph al-Mu'izz. Al-Azhar University established 988. Expanded by Mamluks and Ottomans. Major center of Islamic scholarship.",
       "architectureNotes": "Fatimid foundation with Mamluk and Ottoman additions. Multiple minarets from different eras. Marble, stucco, wood carvings.",
       "tourismNotes": "Non-Muslims may visit. Modest dress required. Near Khan el-Khalili bazaar. Combine with Islamic Cairo tour.",
@@ -450,7 +626,12 @@
       "established": "1957",
       "area": 30000,
       "annualVisitors": "Major landmark, interfaith visitors",
-      "facilities": ["Library", "Cultural center", "Guided tours", "Gift shop"],
+      "facilities": [
+        "Library",
+        "Cultural center",
+        "Guided tours",
+        "Gift shop"
+      ],
       "significance": "First major mosque in Washington D.C., diplomatic and cultural landmark",
       "description": "The Islamic Center of Washington was dedicated in 1957. Designed by Italian architect Mario Rossi, it blends traditional Islamic architecture with modern elements. Serves the diplomatic community and visitors from around the world.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Islamic_Center_of_Washington.jpg",
@@ -458,7 +639,10 @@
       "architecturalStyle": "Mamluk Revival",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 38.9174, "lng": -77.065},
+      "coordinates": {
+        "lat": 38.9174,
+        "lng": -77.065
+      },
       "history": "Founded by Muslim diplomats. Dedicated 1957. President Eisenhower attended. Designed by Mario Rossi in Mamluk style.",
       "architectureNotes": "Mamluk-inspired. Minaret 50 m. Persian carpets, Turkish tiles, Egyptian woodwork. Stained glass.",
       "tourismNotes": "Non-Muslims welcome. Modest dress required; abayas provided. Near Embassy Row. Free tours.",
@@ -474,7 +658,14 @@
       "established": "977 CE",
       "area": 280000,
       "annualVisitors": "8-15 million",
-      "facilities": ["Hotels", "Restaurants", "Medical centers", "Libraries", "Courtyards", "Shrine complex"],
+      "facilities": [
+        "Hotels",
+        "Restaurants",
+        "Medical centers",
+        "Libraries",
+        "Courtyards",
+        "Shrine complex"
+      ],
       "significance": "One of Shia Islam's holiest sites, tomb of Imam Ali",
       "description": "The Imam Ali Shrine in Najaf is the burial place of Imam Ali, the fourth Caliph and first Imam of Shia Islam. One of the world's largest mosque complexes by capacity and area, it attracts millions of pilgrims annually.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Imam_Ali_Mosque_in_Najaf%2C_Iraq.jpg",
@@ -482,7 +673,10 @@
       "architecturalStyle": "Persian Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 31.9961, "lng": 44.3147},
+      "coordinates": {
+        "lat": 31.9961,
+        "lng": 44.3147
+      },
       "history": "The shrine was established in 977 CE. Rebuilt and expanded many times. The golden dome and minarets were added in Ottoman and Qajar eras. A major center of Shia scholarship.",
       "tourismNotes": "Non-Muslims may visit. Modest dress required; abayas provided for women. Check travel advisories before visiting."
     },
@@ -496,7 +690,12 @@
       "established": "1965",
       "area": 53000,
       "annualVisitors": "Millions",
-      "facilities": ["Visitor center", "Guided tours", "Library", "Islamic arts museum nearby"],
+      "facilities": [
+        "Visitor center",
+        "Guided tours",
+        "Library",
+        "Islamic arts museum nearby"
+      ],
       "significance": "National mosque of Malaysia, modernist Islamic architecture",
       "description": "The National Mosque of Malaysia was completed in 1965. Its distinctive folded plate roof and 73-meter minaret make it a landmark of Kuala Lumpur. Designed by a team of three architects in a modernist Islamic style.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/National_Mosque_of_Malaysia.jpg",
@@ -504,7 +703,10 @@
       "architecturalStyle": "Modernist Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 3.1742, "lng": 101.6869},
+      "coordinates": {
+        "lat": 3.1742,
+        "lng": 101.6869
+      },
       "history": "Built to commemorate Malaysian independence (1957). Completed 1965. Named Masjid Negara.",
       "architectureNotes": "Folded plate concrete roof instead of traditional dome. 73 m minaret. Capacity 15,000.",
       "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; robes provided. Near Lake Gardens and KL Bird Park."
@@ -519,7 +721,13 @@
       "established": "2019",
       "area": 400000,
       "annualVisitors": "Major national landmark",
-      "facilities": ["Library", "Museum", "Research center", "Helipad", "Panoramic sea view"],
+      "facilities": [
+        "Library",
+        "Museum",
+        "Research center",
+        "Helipad",
+        "Panoramic sea view"
+      ],
       "significance": "Africa's largest mosque, world's third-largest mosque",
       "description": "Djamaa el Djazaïr, also known as the Great Mosque of Algiers, was completed in 2019. It features the world's tallest minaret at 265 meters and is the largest mosque in Africa.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Grande_Mosquee_dAlger.jpg",
@@ -527,7 +735,10 @@
       "architecturalStyle": "Contemporary Islamic with Algerian influences",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 36.7369, "lng": 3.0869},
+      "coordinates": {
+        "lat": 36.7369,
+        "lng": 3.0869
+      },
       "history": "Construction 2012–2019. Designed by KSP Jürgen Engel Architekten. World's tallest minaret (265 m).",
       "architectureNotes": "Contemporary design with traditional elements. 265 m minaret. Interior space 20,000 m². Seismic-resistant.",
       "tourismNotes": "Guided tours for non-Muslims. Modest dress required. Located on the Bay of Algiers."
@@ -542,7 +753,12 @@
       "established": "1975",
       "area": 6000,
       "annualVisitors": "One of UK's largest mosques",
-      "facilities": ["Library", "Islamic school", "Community center", "Parking"],
+      "facilities": [
+        "Library",
+        "Islamic school",
+        "Community center",
+        "Parking"
+      ],
       "significance": "One of the UK's largest and oldest purpose-built mosques",
       "description": "Birmingham Central Mosque opened in 1975 and serves one of the UK's largest Muslim communities. Its golden dome and minarets are a prominent landmark in the city.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Central_Mosque.jpg",
@@ -550,7 +766,10 @@
       "architecturalStyle": "Modern Islamic with traditional elements",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 52.4944, "lng": -1.8739},
+      "coordinates": {
+        "lat": 52.4944,
+        "lng": -1.8739
+      },
       "tourismNotes": "Visitors welcome. Modest dress required. Contact for tour arrangements."
     },
     {
@@ -563,7 +782,12 @@
       "established": "1557",
       "area": 4500,
       "annualVisitors": "Millions",
-      "facilities": ["Courtyards", "Guided tours", "Tombs of Süleyman and Hürrem", "Gardens"],
+      "facilities": [
+        "Courtyards",
+        "Guided tours",
+        "Tombs of Süleyman and Hürrem",
+        "Gardens"
+      ],
       "significance": "Masterpiece of Ottoman architect Mimar Sinan, imperial mosque",
       "description": "The Süleymaniye Mosque was built by Mimar Sinan for Sultan Süleyman the Magnificent and completed in 1557. Perched on one of Istanbul's seven hills, it dominates the skyline and is considered Sinan's greatest work.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Suleymaniye_Mosque_in_Istanbul.jpg",
@@ -571,7 +795,10 @@
       "architecturalStyle": "Ottoman Classical",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 41.0162, "lng": 28.9638},
+      "coordinates": {
+        "lat": 41.0162,
+        "lng": 28.9638
+      },
       "history": "Built 1550–1557 by Mimar Sinan for Sultan Süleyman. The complex includes tombs of Süleyman and his wife Hürrem Sultan (Roxelana). Damaged by fire in 1660, restored.",
       "architectureNotes": "Four minarets (ten balconies total). Central dome 53 m high. Courtyard with ablution fountain. Ottoman classical layout.",
       "tourismNotes": "Free entry. Modest dress required. Closed during prayer. Located in Fatih, near Grand Bazaar."
@@ -586,7 +813,12 @@
       "established": "1984",
       "area": 22000,
       "annualVisitors": "National landmark",
-      "facilities": ["Library", "Islamic center", "Conference halls", "Parking"],
+      "facilities": [
+        "Library",
+        "Islamic center",
+        "Conference halls",
+        "Parking"
+      ],
       "significance": "National mosque of Nigeria, landmark of Abuja",
       "description": "The National Mosque in Abuja was completed in 1984 and serves as the national mosque of Nigeria. Its golden domes and minarets are a prominent landmark in the capital city.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/National_Mosque_Abuja.jpg",
@@ -594,7 +826,10 @@
       "architecturalStyle": "Modern Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 9.0625, "lng": 7.4897},
+      "coordinates": {
+        "lat": 9.0625,
+        "lng": 7.4897
+      },
       "history": "Completed 1984. Designed by AIM Consultants. National mosque of Nigeria, located near the National Christian Centre.",
       "tourismNotes": "Visitors welcome. Modest dress required. Contact for tour arrangements."
     },
@@ -608,7 +843,12 @@
       "established": "2012",
       "area": 14000,
       "annualVisitors": "Major national mosque",
-      "facilities": ["Madrasa", "Library (150,000 books)", "Women's prayer floor", "Gardens"],
+      "facilities": [
+        "Madrasa",
+        "Library (150,000 books)",
+        "Women's prayer floor",
+        "Gardens"
+      ],
       "significance": "Largest mosque in Afghanistan, central Kabul landmark",
       "description": "The Abdul Rahman Mosque, also known as the Grand Mosque of Kabul, is one of Afghanistan's largest mosques. Built on 1.4 hectares in the heart of Kabul, it features 19 domes, two minarets, and a three-story prayer hall with a dedicated women's floor.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/Abdul_Rahman_mosque%2C_Kabul.jpg",
@@ -616,7 +856,10 @@
       "architecturalStyle": "Modern Islamic",
       "womenPrayerArea": true,
       "touristFriendly": false,
-      "coordinates": {"lat": 34.5196, "lng": 69.1769},
+      "coordinates": {
+        "lat": 34.5196,
+        "lng": 69.1769
+      },
       "history": "Construction began in 2001 by businessman Hajji Abdul Rahman. Major work completed in 2009; officially inaugurated July 2012 by President Karzai.",
       "architectureNotes": "19 domes, 2 minarets, 44 arched windows around the main dome. Prayer hall 56×24 m with three floors."
     },
@@ -630,7 +873,11 @@
       "established": "1989",
       "area": 5000,
       "annualVisitors": "Major tourist and worship site",
-      "facilities": ["Islamic Museum", "Guided tours for non-Muslims", "Abayas and headscarves provided"],
+      "facilities": [
+        "Islamic Museum",
+        "Guided tours for non-Muslims",
+        "Abayas and headscarves provided"
+      ],
       "significance": "Largest mosque in Amman, only mosque in the city open to non-Muslim visitors",
       "description": "The King Abdullah I Mosque was built as a memorial to Jordan's founding king. Its distinctive blue mosaic dome dominates the Abdali skyline. The only mosque in Amman that openly welcomes non-Muslim visitors.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/King_Abdullah_I_Mosque.jpg",
@@ -638,7 +885,10 @@
       "architecturalStyle": "Contemporary Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 31.9545, "lng": 35.9106},
+      "coordinates": {
+        "lat": 31.9545,
+        "lng": 35.9106
+      },
       "history": "Built 1982–1989 by King Hussein as a memorial to his grandfather King Abdullah I. Octagonal prayer hall with no interior pillars.",
       "architectureNotes": "Blue mosaic dome 35 m diameter, 31 m high. Main hall holds 3,000; courtyard 3,000; women's section 500.",
       "tourismNotes": "Non-Muslims welcome. Modest dress required; abayas and headscarves provided free. Islamic Museum inside."
@@ -653,7 +903,12 @@
       "established": "2011",
       "area": 175164,
       "annualVisitors": "Major national mosque",
-      "facilities": ["Three libraries", "Separate ablution halls for men and women", "Quran memorization halls", "Broadcast systems"],
+      "facilities": [
+        "Three libraries",
+        "Separate ablution halls for men and women",
+        "Quran memorization halls",
+        "Broadcast systems"
+      ],
       "significance": "Qatar's largest mosque, national grand mosque",
       "description": "The Imam Muhammad ibn Abd al-Wahhab Mosque, also known as Qatar State Grand Mosque, is Qatar's largest mosque. It features 93 domes—28 large domes over the central hall—and accommodates over 30,000 worshippers.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Doha_Imam_Muhammad_ibn_Abd_al-Wahhab_Mosque_Exterior_4.jpg",
@@ -661,7 +916,10 @@
       "architecturalStyle": "Traditional Arabic with modern elements",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 25.2739, "lng": 51.5228},
+      "coordinates": {
+        "lat": 25.2739,
+        "lng": 51.5228
+      },
       "history": "Refurbishment and expansion began December 2006; inaugurated 2011. Named after the 18th-century Islamic scholar.",
       "architectureNotes": "28 large domes, 65 smaller domes. Sandstone facades. Central hall air-conditioned for 10,000+ men; 1,300 women in separate areas.",
       "tourismNotes": "Open to all visitors during non-prayer times. Modest dress required; scarves and abayas provided. Photography prohibited in ladies' area."
@@ -676,7 +934,12 @@
       "established": "1988",
       "area": 6500,
       "annualVisitors": "Major tourist and worship site",
-      "facilities": ["Islamic library", "Islamic institute", "Quranic memorization school", "Guided tours"],
+      "facilities": [
+        "Islamic library",
+        "Islamic institute",
+        "Quranic memorization school",
+        "Guided tours"
+      ],
       "significance": "Largest mosque in Bahrain, national mosque",
       "description": "The Al-Fateh Grand Mosque is Bahrain's largest mosque, named after Ahmed Al-Fateh, the founder of Bahrain. It features one of the world's largest fiberglass domes and Italian marble throughout.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al_Fateh_Grand_Mosque.jpg",
@@ -684,7 +947,10 @@
       "architecturalStyle": "Contemporary Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 26.2186, "lng": 50.5919},
+      "coordinates": {
+        "lat": 26.2186,
+        "lng": 50.5919
+      },
       "history": "Opened in 1988. Serves as place of worship and educational center. One of the largest fiberglass domes in the world.",
       "architectureNotes": "Italian marble flooring, teakwood doors from India, ornate chandeliers. Large fiberglass dome.",
       "tourismNotes": "Guided tours for non-Muslims. Modest dress required; abayas provided. Near Bahrain National Museum."
@@ -699,7 +965,12 @@
       "established": "2019",
       "area": 10000,
       "annualVisitors": "West Africa's largest mosque",
-      "facilities": ["Islamic library", "Conference halls", "Carrara marble", "Five minarets"],
+      "facilities": [
+        "Islamic library",
+        "Conference halls",
+        "Carrara marble",
+        "Five minarets"
+      ],
       "significance": "West Africa's largest mosque, commemorates Sheikh Ahmadou Bamba",
       "description": "Massalikoul Djinane is West Africa's largest mosque, inaugurated in 2019. Built to commemorate Sheikh Ahmadou Bamba, founder of the Mouride Brotherhood, it features five minarets, Carrara marble, and a chandelier with 2,000 lights.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/Mosqu%C3%A9e_Massalikoul_Djin%C3%A2ne_Dakar_2019.jpg",
@@ -707,7 +978,10 @@
       "architecturalStyle": "Contemporary Islamic with West African influences",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 14.7167, "lng": -17.4672},
+      "coordinates": {
+        "lat": 14.7167,
+        "lng": -17.4672
+      },
       "history": "Construction took over 15 years. Inaugurated September 27, 2019. Built to commemorate Sheikh Ahmadou Bamba. 75 m height; minaret pinnacle 80 m.",
       "architectureNotes": "Five minarets, Carrara marble, golden columns. 10,000 in prayer hall; 20,000 on esplanade.",
       "tourismNotes": "Guided tours for non-Muslims. Modest dress required. West Africa's grandest mosque."
@@ -722,7 +996,11 @@
       "established": "2014",
       "area": 12000,
       "annualVisitors": "Largest mosque in the Caucasus",
-      "facilities": ["Four 95 m minarets", "Interior 4,200 m²", "Modern ablution facilities"],
+      "facilities": [
+        "Four 95 m minarets",
+        "Interior 4,200 m²",
+        "Modern ablution facilities"
+      ],
       "significance": "Largest mosque in Azerbaijan and the Caucasus region",
       "description": "Heydar Mosque is the largest mosque in Azerbaijan and the Caucasus. Completed in 2014, it features four 95-meter minarets and a 55-meter main dome. The complex can accommodate 75,000 worshippers.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/Haydar_Mescidi.jpg",
@@ -730,7 +1008,10 @@
       "architecturalStyle": "Contemporary Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 40.4111, "lng": 49.8833},
+      "coordinates": {
+        "lat": 40.4111,
+        "lng": 49.8833
+      },
       "history": "Construction began September 2012; opened December 26, 2014. Designed by Ədalət Məmmədov. Named after former President Heydar Aliyev.",
       "architectureNotes": "Four minarets 95 m high. Main dome 55 m; second dome 35 m. Interior area 4,200 m²."
     },
@@ -744,7 +1025,12 @@
       "established": "2008",
       "area": 11000,
       "annualVisitors": "Iconic Beirut landmark",
-      "facilities": ["Main hall 3,700", "Women's prayer hall", "Large chandelier", "Ottoman-style design"],
+      "facilities": [
+        "Main hall 3,700",
+        "Women's prayer hall",
+        "Large chandelier",
+        "Ottoman-style design"
+      ],
       "significance": "Downtown Beirut's iconic Blue Mosque, largest Sunni mosque in Lebanon",
       "description": "The Mohammad Al-Amin Mosque, known as the Blue Mosque for its light blue tiles, dominates downtown Beirut near Martyrs Square. Commissioned by former Prime Minister Rafic Hariri, it was inaugurated in 2008.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mohammad_Al-Amin_Mosque_Beirut.jpg",
@@ -752,7 +1038,10 @@
       "architecturalStyle": "Ottoman Revival",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 33.8969, "lng": 35.5056},
+      "coordinates": {
+        "lat": 33.8969,
+        "lng": 35.5056
+      },
       "history": "Construction began 2002 following donation by PM Rafic Hariri. Inaugurated 2008. Hariri buried adjacent in Martyrs Square. Damaged in 2020 Beirut explosion but structure intact.",
       "architectureNotes": "Five blue-tiled domes, 48 m main dome, four minarets 65 m. Designed by Azmi Fakhoury.",
       "tourismNotes": "Visitors welcome. Modest dress required. Near Martyrs Square and Mohammad Al-Amin Square."
@@ -767,7 +1056,11 @@
       "established": "1901",
       "area": 8000,
       "annualVisitors": "National mosque, high footfall",
-      "facilities": ["Islamic institute", "Four schools of Islam practiced", "Central location"],
+      "facilities": [
+        "Islamic institute",
+        "Four schools of Islam practiced",
+        "Central location"
+      ],
       "significance": "Largest mosque in Sudan, historic Turkish-Islamic style",
       "description": "The Great Mosque of Khartoum, also known as Al Kabir Mosque, is Sudan's largest mosque. Built in Turkish-Islamic style with reddish sandstone, it was opened in 1901 and accommodates up to 10,000 worshippers.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Great_Mosque_of_Khartoum.jpg",
@@ -775,7 +1068,10 @@
       "architecturalStyle": "Turkish-Islamic",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 15.5881, "lng": 32.5342},
+      "coordinates": {
+        "lat": 15.5881,
+        "lng": 32.5342
+      },
       "history": "Built 1900; officially opened 1901 when Khedive Abbas II of Egypt visited during Anglo-Egyptian Sudan. Center of old Khartoum."
     },
     {
@@ -788,7 +1084,11 @@
       "established": "1530",
       "area": 1200,
       "annualVisitors": "UNESCO heritage, major Balkan mosque",
-      "facilities": ["Historic madrasa nearby", "Baščaršija neighborhood", "First mosque with electric light (1898)"],
+      "facilities": [
+        "Historic madrasa nearby",
+        "Baščaršija neighborhood",
+        "First mosque with electric light (1898)"
+      ],
       "significance": "Largest historical mosque in Bosnia, representative Ottoman structure in the Balkans",
       "description": "The Gazi Husrev-beg Mosque, built in 1530, is the largest historical mosque in Bosnia and Herzegovina. A masterpiece of Early Ottoman architecture, it was the first mosque in the world to receive electric illumination in 1898.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Gazi_Husrev-beg_Mosque_Sarajevo.jpg",
@@ -796,7 +1096,10 @@
       "architecturalStyle": "Early Ottoman Classical",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 43.8597, "lng": 18.4281},
+      "coordinates": {
+        "lat": 43.8597,
+        "lng": 18.4281
+      },
       "history": "Built 1530 as part of Gazi Husrev-beg's endowment (madrasa, marketplace, hammam). First mosque with electricity 1898. Restored after Bosnian War.",
       "architectureNotes": "Central dome 13 m diameter, 26 m high. Minaret ~36 m. Five marble columns, portico with five cupolas. Cut stone construction.",
       "tourismNotes": "Visitors welcome outside prayer. Modest dress required. In Baščaršija, heart of old Sarajevo."
@@ -811,7 +1114,12 @@
       "established": "2012",
       "area": 17700,
       "annualVisitors": "Second largest mosque in Central Asia",
-      "facilities": ["Men's prayer room 4,000", "Women's prayer room 1,000", "Complex over 11 hectares", "Traditional Kazakh ornaments"],
+      "facilities": [
+        "Men's prayer room 4,000",
+        "Women's prayer room 1,000",
+        "Complex over 11 hectares",
+        "Traditional Kazakh ornaments"
+      ],
       "significance": "Largest mosque in Kazakhstan, second largest in Central Asia",
       "description": "Hazrat Sultan Mosque opened in 2012 and is Kazakhstan's largest mosque. Its 51-meter dome and four 77-meter minarets dominate the Astana skyline. The complex covers over 11 hectares.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Hazrat_Sultan_Mosque_Astana.jpg",
@@ -819,7 +1127,10 @@
       "architecturalStyle": "Classical Islamic with Kazakh ornaments",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 51.1272, "lng": 71.4306},
+      "coordinates": {
+        "lat": 51.1272,
+        "lng": 71.4306
+      },
       "history": "Opened July 6, 2012. Built in classical Islamic style. Second largest in Central Asia after Turkmenbashi Ruhy.",
       "architectureNotes": "Dome 51 m high, 28.1 m base diameter. Four minarets 77 m. Construction area 17,700 m².",
       "tourismNotes": "Visitors welcome. Modest dress required. Near Bayterek Tower and Khan Shatyr."
@@ -834,7 +1145,11 @@
       "established": "732 CE",
       "area": 5000,
       "annualVisitors": "Historic university mosque",
-      "facilities": ["University of Ez-Zitouna (historic)", "Nine entrances", "160 columns from Carthage"],
+      "facilities": [
+        "University of Ez-Zitouna (historic)",
+        "Nine entrances",
+        "160 columns from Carthage"
+      ],
       "significance": "Oldest mosque in Tunis, hosted one of Islam's first universities",
       "description": "Al-Zaytuna Mosque, the Mosque of the Olive, is the oldest mosque in Tunis and hosted the University of Ez-Zitouna—one of the first and greatest universities in Islamic history. Its 160 columns were brought from the ruins of Carthage.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Zaytuna_Mosque_Tunis.jpg",
@@ -842,44 +1157,1318 @@
       "architecturalStyle": "Fatimid, Maghrebi",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "coordinates": {"lat": 36.8169, "lng": 10.1717},
+      "coordinates": {
+        "lat": 36.8169,
+        "lng": 10.1717
+      },
       "history": "Founded c. 698–732 CE. Modeled on Great Mosque of Kairouan. University of Ez-Zitouna established. Scholars included Ibn Khaldun, Ibn 'Arafa.",
       "architectureNotes": "Prayer room 56×24 m (1,344 m²). Minaret 43 m. Trapezoidal courtyard, columns with marble capitals.",
       "tourismNotes": "Non-Muslims may visit. Modest dress required. In medina of Tunis, near souks."
+    },
+    {
+      "id": "astana-grand-mosque",
+      "name": "Astana Grand Mosque",
+      "location": "Astana",
+      "country": "Kazakhstan",
+      "coordinates": {
+        "lat": 51.1272,
+        "lng": 71.4306
+      },
+      "capacity": 230000,
+      "established": "2022",
+      "area": 68062,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "One of the largest mosques in Central Asia, serving as a major religious landmark in Kazakhstan's capital.",
+      "description": "Astana Grand Mosque is a newly built mosque complex with a vast prayer hall, courtyards, and facilities for religious education and community activities.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Astana_Grand_Mosque_-_main_prayer_hall.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "jamkaran-mosque",
+      "name": "Jamkaran Mosque",
+      "location": "Qom",
+      "country": "Iran",
+      "coordinates": {
+        "lat": 34.5833,
+        "lng": 50.8667
+      },
+      "capacity": 150000,
+      "established": "984",
+      "area": 370000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major Shia pilgrimage mosque near Qom associated with traditions about the Mahdi.",
+      "description": "Jamkaran Mosque is a large mosque complex on the outskirts of Qom, frequently visited by pilgrims and known for its spacious courtyards and prayer halls.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jamkaran_Mosque-3855.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
+      "name": "Egypt's Islamic Cultural Center (Masjid Misr Al Kabeer)",
+      "location": "New Administrative Capital",
+      "country": "Egypt",
+      "coordinates": {
+        "lat": 30.0167,
+        "lng": 31.6833
+      },
+      "capacity": 130000,
+      "established": "2023",
+      "area": 250000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A new flagship mosque and Islamic cultural complex in Egypt's New Administrative Capital.",
+      "description": "Masjid Misr Al Kabeer is a large contemporary mosque integrated into Egypt's Islamic Cultural Center, designed to host major religious events and educational programs.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Islamic_Compound_NAC.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "umayyad-mosque",
+      "name": "Umayyad Mosque",
+      "location": "Damascus",
+      "country": "Syria",
+      "coordinates": {
+        "lat": 33.5117,
+        "lng": 36.3064
+      },
+      "capacity": 100000,
+      "established": "715",
+      "area": 15700,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "One of the oldest and most historically significant mosques in the world.",
+      "description": "The Umayyad Mosque in Damascus is a major early Islamic monument known for its large courtyard, prayer hall, and rich historical associations.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Umayyad_Mosque%2C_Damascus%2C_Syria.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "bahria-grand-mosque",
+      "name": "Bahria Grand Mosque",
+      "location": "Lahore",
+      "country": "Pakistan",
+      "coordinates": {
+        "lat": 31.4097,
+        "lng": 74.2056
+      },
+      "capacity": 70000,
+      "established": "2014",
+      "area": 15000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large congregational mosque serving the Bahria Town Lahore development.",
+      "description": "Bahria Grand Mosque is a modern mosque complex with multiple domes and large interior spaces built to serve residents of Bahria Town Lahore.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Bahria_Grand_Mosque_Lahore.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "camlica-mosque",
+      "name": "Çamlıca Mosque",
+      "location": "Istanbul",
+      "country": "Turkey",
+      "coordinates": {
+        "lat": 41.0319,
+        "lng": 29.0667
+      },
+      "capacity": 63000,
+      "established": "2019",
+      "area": 15000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major contemporary mosque complex on Çamlıca Hill overlooking Istanbul.",
+      "description": "Çamlıca Mosque is a large hilltop mosque in Istanbul that combines traditional Ottoman-inspired elements with modern amenities and extensive public spaces.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Çamlıca_Mosque.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "al-jabbar-grand-mosque",
+      "name": "Al Jabbar Grand Mosque",
+      "location": "Bandung",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -6.9789,
+        "lng": 107.6278
+      },
+      "capacity": 60000,
+      "established": "2022",
+      "area": 25997,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large modern mosque complex in West Java with distinctive architecture.",
+      "description": "Al Jabbar Grand Mosque in Bandung is a contemporary mosque built on a lakefront site with striking geometric forms and a spacious interior.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al_Jabbar_Grand_Mosque.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "jameh-mosque-of-makki",
+      "name": "Jameh Mosque of Makki",
+      "location": "Zahedan",
+      "country": "Iran",
+      "coordinates": {
+        "lat": 29.4963,
+        "lng": 60.8628
+      },
+      "capacity": 60000,
+      "established": "1971",
+      "area": 33000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major Sunni congregational mosque in southeastern Iran.",
+      "description": "Jameh Mosque of Makki in Zahedan is a large Sunni mosque complex used for major gatherings and religious instruction in the region.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jameh_Mosque_of_Makki%2C_Zahedan.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "al-akbar-mosque",
+      "name": "Al-Akbar Mosque",
+      "location": "Surabaya",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -7.2733,
+        "lng": 112.7378
+      },
+      "capacity": 59000,
+      "established": "2000",
+      "area": 23000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "One of the largest mosques in Indonesia, located in Surabaya.",
+      "description": "Al-Akbar Mosque in Surabaya is a prominent mosque with a large dome and minaret, serving as a key religious center in East Java.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Al_Akbar_Surabaya.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "al-saleh-mosque",
+      "name": "Al Saleh Mosque",
+      "location": "Sana'a",
+      "country": "Yemen",
+      "coordinates": {
+        "lat": 15.3533,
+        "lng": 44.2061
+      },
+      "capacity": 45000,
+      "established": "2008",
+      "area": 27300,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large modern mosque complex in Yemen's capital city.",
+      "description": "Al Saleh Mosque in Sana'a is a sizeable mosque featuring multiple domes and extensive courtyard areas, built in the early 21st century.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Saleh_Mosque%2C_Sana%27a.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "jamia-masjid-srinagar",
+      "name": "Jamia Masjid",
+      "location": "Jammu and Kashmir",
+      "country": "India",
+      "coordinates": {
+        "lat": 34.0878,
+        "lng": 74.7989
+      },
+      "capacity": 33333,
+      "established": "1400",
+      "area": 3800,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A historic congregational mosque in the Kashmir Valley.",
+      "description": "Jamia Masjid in Srinagar is a timber-rich mosque with a large courtyard and characteristic Kashmiri architecture, central to religious life in the old city.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jamia_Masjid_Srinagar.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "jamiul-futuh-indian-grand-masjid",
+      "name": "Jamiul Futuh, The Indian Grand Masjid",
+      "location": "Kerala",
+      "country": "India",
+      "coordinates": {
+        "lat": 10.8,
+        "lng": 76.5
+      },
+      "capacity": 30000,
+      "established": "2022",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large new congregational mosque in Kerala.",
+      "description": "Jamiul Futuh, known as the Indian Grand Masjid, is a recently built mosque with extensive capacity for worshippers and community events.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Indian_Grand_Masjid_Malakapara.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "pride-of-muslims-mosque-shali",
+      "name": "Pride of Muslims Mosque",
+      "location": "Shali",
+      "country": "Russia",
+      "coordinates": {
+        "lat": 43.1481,
+        "lng": 45.9019
+      },
+      "capacity": 30000,
+      "established": "2019",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major mosque in the Chechen Republic, also called the Pride of Muslims.",
+      "description": "The Pride of Muslims Mosque in Shali is a large white-marble mosque complex with multiple minarets and domes serving worshippers in the region.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Pride_of_Muslims_Mosque%2C_Shali.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "1st-november-1954-great-mosque",
+      "name": "1st November of 1954 Great Mosque",
+      "location": "Batna",
+      "country": "Algeria",
+      "coordinates": {
+        "lat": 35.5558,
+        "lng": 6.1744
+      },
+      "capacity": 30000,
+      "established": "2003",
+      "area": 42000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large mosque in Batna named after the start date of the Algerian War of Independence.",
+      "description": "The 1st November of 1954 Great Mosque in Batna is a sizeable modern mosque built to commemorate a key date in Algerian history.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mosquée_du_1er_novembre_1954%2C_Batna.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "sabanci-central-mosque",
+      "name": "Sabancı Central Mosque",
+      "location": "Adana",
+      "country": "Turkey",
+      "coordinates": {
+        "lat": 36.9772,
+        "lng": 35.3769
+      },
+      "capacity": 28500,
+      "established": "1998",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major mosque in southern Turkey with six minarets.",
+      "description": "Sabancı Central Mosque stands by the Seyhan River in Adana and features a large central dome and six slender minarets inspired by classical Ottoman mosque design.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sabanci_Merkez_Camii.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "at-tin-mosque",
+      "name": "At-Tin Mosque",
+      "location": "Jakarta",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -6.2386,
+        "lng": 106.8828
+      },
+      "capacity": 25850,
+      "established": "1997",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large mosque in East Jakarta dedicated in honor of Indonesia’s first lady.",
+      "description": "At-Tin Mosque is a spacious mosque complex in Jakarta with a distinctive dome and landscaped grounds used for religious and community activities.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_At-Tin%2C_Jakarta.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "cmh-masjid-jhelum",
+      "name": "CMH Masjid Jhelum",
+      "location": "Jhelum Cantt",
+      "country": "Pakistan",
+      "coordinates": {
+        "lat": 32.9333,
+        "lng": 73.7333
+      },
+      "capacity": 25000,
+      "established": "1950",
+      "area": 8000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large mosque associated with the Combined Military Hospital in Jhelum Cantonment.",
+      "description": "CMH Masjid Jhelum is a sizeable congregational mosque in Jhelum Cantonment, used by both military personnel and local worshippers.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/CMH_Masjid_Jhelum.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "selahaddin-eyyubi-mosque",
+      "name": "Selahaddin Eyyubi Mosque",
+      "location": "Diyarbakır",
+      "country": "Turkey",
+      "coordinates": {
+        "lat": 37.9139,
+        "lng": 40.2306
+      },
+      "capacity": 25000,
+      "established": "2023",
+      "area": 43500,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A new large mosque named after Salah ad-Din (Saladin) in Diyarbakır.",
+      "description": "Selahaddin Eyyubi Mosque is a spacious contemporary mosque complex in Diyarbakır built to host large congregations and religious events.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Selahaddin_Eyyubi_Camii%2C_Diyarbakır.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "sultan-salahuddin-abdul-aziz-mosque",
+      "name": "Sultan Salahuddin Abdul Aziz Mosque",
+      "arabicName": "المسجد الوطني",
+      "location": "Shah Alam",
+      "country": "Malaysia",
+      "coordinates": {
+        "lat": 3.1742,
+        "lng": 101.6869
+      },
+      "capacity": 24000,
+      "established": "1965",
+      "area": 53000,
+      "annualVisitors": "Millions",
+      "facilities": [
+        "Visitor center",
+        "Guided tours",
+        "Library",
+        "Islamic arts museum nearby"
+      ],
+      "significance": "The state mosque of Selangor, known for its large blue dome.",
+      "description": "Sultan Salahuddin Abdul Aziz Mosque in Shah Alam features a massive blue and silver dome and four tall minarets, dominating the city's skyline.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/National_Mosque_of_Malaysia.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Modernist Islamic",
+      "architectureNotes": "Folded plate concrete roof instead of traditional dome. 73 m minaret. Capacity 15,000.",
+      "history": "Built to commemorate Malaysian independence (1957). Completed 1965. Named Masjid Negara.",
+      "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; robes provided. Near Lake Gardens and KL Bird Park.",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "jakarta-islamic-center",
+      "name": "Jakarta Islamic Center",
+      "location": "Jakarta",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -6.1361,
+        "lng": 106.8289
+      },
+      "capacity": 20680,
+      "established": "1972",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major Islamic educational and worship complex in Jakarta.",
+      "description": "Jakarta Islamic Center is a multi-purpose complex incorporating a large mosque and facilities for Islamic education and community development.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jakarta_Islamic_Center.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "aqsa-mosque-rabwah",
+      "name": "Aqsa Mosque",
+      "location": "Rabwah",
+      "country": "Pakistan",
+      "coordinates": {
+        "lat": 31.7519,
+        "lng": 72.9214
+      },
+      "capacity": 20000,
+      "established": "1972",
+      "area": 6500,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A central mosque for the Ahmadiyya community in Rabwah.",
+      "description": "The Aqsa Mosque in Rabwah is a sizeable congregational mosque associated with the Ahmadiyya Muslim Community in Pakistan.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Aqsa_Mosque_Rabwah.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": false
+    },
+    {
+      "id": "dian-al-mahri-mosque",
+      "name": "Dian Al-Mahri Mosque",
+      "location": "Depok",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -6.3767,
+        "lng": 106.7589
+      },
+      "capacity": 20000,
+      "established": "2006",
+      "area": 50000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large mosque in Depok known for its gold-colored domes.",
+      "description": "Dian Al-Mahri Mosque is a popular mosque complex near Jakarta featuring golden domes and landscaped grounds that attract worshippers and visitors.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Dian_Al-Mahri.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "grand-mosque-of-conakry",
+      "name": "Grand Mosque of Conakry",
+      "location": "Conakry",
+      "country": "Guinea",
+      "coordinates": {
+        "lat": 9.5389,
+        "lng": -13.6778
+      },
+      "capacity": 20000,
+      "established": "1982",
+      "area": 10000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "The main mosque in Guinea's capital and one of the largest in West Africa.",
+      "description": "The Grand Mosque of Conakry is a major national mosque complex in Guinea built to host large congregations for Friday and Eid prayers.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Grande_Mosquée_de_Conakry.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "grand-mosque-of-west-sumatra",
+      "name": "Grand Mosque of West Sumatra",
+      "location": "Padang",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -0.9486,
+        "lng": 100.3542
+      },
+      "capacity": 20000,
+      "established": "2014",
+      "area": 18000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A regional landmark mosque with distinctive Minangkabau-inspired rooflines.",
+      "description": "The Grand Mosque of West Sumatra in Padang combines modern construction with traditional Minangkabau roof forms in a large coastal mosque complex.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Raya_Sumatera_Barat.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "id-kah-mosque",
+      "name": "Id Kah Mosque",
+      "location": "Kashgar",
+      "country": "China",
+      "coordinates": {
+        "lat": 39.4703,
+        "lng": 75.9897
+      },
+      "capacity": 20000,
+      "established": "1442",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "One of the largest mosques in China and a historic center of Uyghur religious life.",
+      "description": "Id Kah Mosque in Kashgar is a historic mosque complex with a large courtyard and prayer hall, traditionally used for major congregations in Xinjiang.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Id_Kah_Mosque%2C_Kashgar.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": false
+    },
+    {
+      "id": "shah-jahan-mosque-thatta",
+      "name": "Shah Jahan Mosque",
+      "location": "Thatta",
+      "country": "Pakistan",
+      "coordinates": {
+        "lat": 24.7469,
+        "lng": 67.9244
+      },
+      "capacity": 20000,
+      "established": "1659",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A Mughal-era mosque in Thatta renowned for its tilework and acoustics.",
+      "description": "The Shah Jahan Mosque in Thatta is an architecturally important mosque with extensive brick and tile decoration and numerous domes.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Shah_Jahan_Mosque%2C_Thatta.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "tuanku-mizan-zainal-abidin-mosque",
+      "name": "Tuanku Mizan Zainal Abidin Mosque",
+      "location": "Putrajaya",
+      "country": "Malaysia",
+      "coordinates": {
+        "lat": 2.9256,
+        "lng": 101.6517
+      },
+      "capacity": 20000,
+      "established": "2009",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large modern mosque in Malaysia's administrative capital, also known as the Iron Mosque.",
+      "description": "Tuanku Mizan Zainal Abidin Mosque in Putrajaya is a steel-heavy mosque design with open sides and a large prayer hall facing a lakefront.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tuanku_Mizan_Zainal_Abidin_Mosque.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "raja-hamidah-great-mosque-of-batam",
+      "name": "Raja Hamidah Great Mosque of Batam",
+      "location": "Batam",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": 1.05,
+        "lng": 104.0333
+      },
+      "capacity": 18500,
+      "established": "1999",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major mosque in Batam serving local and visiting worshippers.",
+      "description": "Raja Hamidah Great Mosque of Batam is a large mosque complex that accommodates congregations from across the island city and nearby regions.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Raja_Hamidah%2C_Batam.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "hagia-sophia-istanbul",
+      "name": "Hagia Sophia",
+      "arabicName": "جامع السلطان أحمد",
+      "location": "Istanbul",
+      "country": "Turkey",
+      "coordinates": {
+        "lat": 41.0054,
+        "lng": 28.9768
+      },
+      "capacity": 18000,
+      "established": "1616",
+      "area": 4608,
+      "annualVisitors": "3.5 million",
+      "facilities": [
+        "Tourist entrance",
+        "Multilingual guides",
+        "Information panels",
+        "Nearby bazaar and restaurants",
+        "Photography allowed in designated areas"
+      ],
+      "significance": "A historic Byzantine basilica converted several times between church, mosque, museum, and mosque again.",
+      "description": "Hagia Sophia in Istanbul is a monumental domed structure with a complex religious history, currently functioning as a mosque while also attracting many visitors.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Sultan_Ahmed_Mosque_in_Istanbul.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Classical Ottoman",
+      "architectureNotes": "Famous for 20,000+ hand-painted blue Iznik tiles. Central dome 43 m high. Six minarets. Classic Ottoman layout.",
+      "history": "Built 1609–1616 by Sultan Ahmed I. Architect Sedefkar Mehmed Agha drew on Hagia Sophia and Mimar Sinan. Six minarets caused controversy; Sultan funded a seventh at Mecca.",
+      "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet.",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "al-kauthar-mosque",
+      "name": "Al-Kauthar Mosque",
+      "location": "Tawau",
+      "country": "Malaysia",
+      "coordinates": {
+        "lat": 4.2456,
+        "lng": 117.8942
+      },
+      "capacity": 17000,
+      "established": "1997",
+      "area": 5000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A prominent mosque in Tawau, Sabah.",
+      "description": "Al-Kauthar Mosque in Tawau is a large coastal mosque complex serving as a major place of worship in eastern Malaysia.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Kauthar_Mosque%2C_Tawau.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "al-fattah-al-aleem-mosque",
+      "name": "Al-Fattah al-Aleem Mosque",
+      "location": "New Administrative Capital",
+      "country": "Egypt",
+      "coordinates": {
+        "lat": 30.0167,
+        "lng": 31.6833
+      },
+      "capacity": 17000,
+      "established": "2019",
+      "area": 15000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "One of the major new mosques in Egypt's New Administrative Capital.",
+      "description": "Al-Fattah al-Aleem Mosque is a large modern mosque with multiple domes and minarets, built as part of Egypt’s new capital development.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Fattah_al-Aleem_Mosque.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "federal-territory-mosque",
+      "name": "Federal Territory Mosque",
+      "location": "Kuala Lumpur",
+      "country": "Malaysia",
+      "coordinates": {
+        "lat": 3.175,
+        "lng": 101.6917
+      },
+      "capacity": 17000,
+      "established": "2000",
+      "area": 13000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large mosque in Kuala Lumpur inspired by Ottoman and Malay styles.",
+      "description": "Federal Territory Mosque is a major congregational mosque in Kuala Lumpur with multiple domes and landscaped surrounds, serving the capital’s Muslim population.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Federal_Territory_Mosque%2C_Kuala_Lumpur.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "grand-mosque-of-makhachkala",
+      "name": "Grand Mosque of Makhachkala",
+      "location": "Makhachkala",
+      "country": "Russia",
+      "coordinates": {
+        "lat": 42.9833,
+        "lng": 47.5
+      },
+      "capacity": 17000,
+      "established": "1998",
+      "area": 9000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major mosque in the capital of Dagestan, Russia.",
+      "description": "The Grand Mosque of Makhachkala is a large mosque complex serving worshippers in the North Caucasus region of Russia.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Mosque_of_Makhachkala.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "aqsa-mosque-qadian",
+      "name": "Aqsa Mosque",
+      "location": "Qadian",
+      "country": "India",
+      "coordinates": {
+        "lat": 31.8189,
+        "lng": 75.3917
+      },
+      "capacity": 15000,
+      "established": "1876",
+      "area": 1000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A central mosque for the Ahmadiyya community in Qadian.",
+      "description": "The Aqsa Mosque in Qadian is an important mosque for the Ahmadiyya Muslim Community in India, with capacity for large congregations.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Aqsa_Mosque%2C_Qadian.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": false
+    },
+    {
+      "id": "al-azhom-grand-mosque",
+      "name": "Al-Azhom Grand Mosque",
+      "location": "Tangerang",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -6.1781,
+        "lng": 106.6303
+      },
+      "capacity": 15000,
+      "established": "2003",
+      "area": 10000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large mosque in Tangerang on the outskirts of Jakarta.",
+      "description": "Al-Azhom Grand Mosque in Tangerang is a spacious mosque complex with a large dome and facilities for local congregations and events.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Azhom_Grand_Mosque%2C_Tangerang.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "emir-abdelkader-mosque",
+      "name": "Emir Abdelkader Mosque",
+      "location": "Constantine",
+      "country": "Algeria",
+      "coordinates": {
+        "lat": 36.365,
+        "lng": 6.6147
+      },
+      "capacity": 15000,
+      "established": "1994",
+      "area": 11000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major mosque and Islamic university complex in Constantine.",
+      "description": "Emir Abdelkader Mosque in Constantine includes a large prayer hall and educational facilities, forming an important religious center in Algeria.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mosquée_Emir_Abdelkader%2C_Constantine.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "kocatepe-mosque",
+      "name": "Kocatepe Mosque",
+      "location": "Ankara",
+      "country": "Turkey",
+      "coordinates": {
+        "lat": 39.92,
+        "lng": 32.8633
+      },
+      "capacity": 15000,
+      "established": "1987",
+      "area": 4500,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "One of the largest mosques in Ankara, featuring a classical Ottoman-inspired design.",
+      "description": "Kocatepe Mosque in Ankara is a large four-minaret mosque visible across the city, built in the late 20th century.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Kocatepe_Mosque_Ankara.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "great-mosque-of-central-java",
+      "name": "Great Mosque of Central Java",
+      "location": "Semarang",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -6.9667,
+        "lng": 110.4167
+      },
+      "capacity": 15000,
+      "established": "2006",
+      "area": 7500,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A large mosque complex in Semarang combining Javanese and Middle Eastern influences.",
+      "description": "The Great Mosque of Central Java in Semarang features a large courtyard with movable umbrellas and a tall minaret overlooking the city.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Besar_Kauman_Semarang.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "grand-mosque-of-sabilal-muhtadin",
+      "name": "Grand Mosque of Sabilal Muhtadin",
+      "location": "Banjarmasin",
+      "country": "Indonesia",
+      "coordinates": {
+        "lat": -3.3167,
+        "lng": 114.5833
+      },
+      "capacity": 15000,
+      "established": "1974",
+      "area": 5000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "A major mosque in Banjarmasin on the island of Borneo.",
+      "description": "The Grand Mosque of Sabilal Muhtadin is a large congregational mosque built near the Martapura River in Banjarmasin, South Kalimantan.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Raya_Sabilal_Muhtadin.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
+    },
+    {
+      "id": "sultan-haji-hassanal-bolkiah-mosque",
+      "name": "Sultan Haji Hassanal Bolkiah Mosque",
+      "location": "Cotabato City",
+      "country": "Philippines",
+      "coordinates": {
+        "lat": 7.2167,
+        "lng": 124.25
+      },
+      "capacity": 15000,
+      "established": "2011",
+      "area": 5000,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Ablution facilities"
+      ],
+      "significance": "One of the largest mosques in the Philippines, funded partly by the Sultan of Brunei.",
+      "description": "Sultan Haji Hassanal Bolkiah Mosque in Cotabato City is a large mosque with multiple domes and minarets, serving Muslims in Mindanao.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_Haji_Hassanal_Bolkiah_Mosque%2C_Cotabato.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true
     }
   ],
   "timelineEvents": [
-    { "year": "622", "mosque": "Al-Masjid an-Nabawi", "mosqueId": "masjid-an-nabawi", "event": "Built by Prophet Muhammad ﷺ in Medina" },
-    { "year": "638", "mosque": "Masjid al-Haram", "mosqueId": "masjid-al-haram", "event": "First expansion by Caliph Umar" },
-    { "year": "705", "mosque": "Al-Aqsa Mosque", "mosqueId": "al-aqsa", "event": "Umayyad Caliph al-Walid I completes construction" },
-    { "year": "818", "mosque": "Imam Reza Shrine", "mosqueId": "imam-reza-shrine", "event": "Shrine established for Imam Reza" },
-    { "year": "1673", "mosque": "Badshahi Mosque", "mosqueId": "badshahi-mosque", "event": "Built by Emperor Aurangzeb in Lahore" },
-    { "year": "1616", "mosque": "Blue Mosque", "mosqueId": "blue-mosque", "event": "Sultan Ahmed I completes construction in Istanbul" },
-    { "year": "1978", "mosque": "Istiqlal Mosque", "mosqueId": "istiqlal-mosque", "event": "Indonesia's national mosque inaugurated" },
-    { "year": "1986", "mosque": "Faisal Mosque", "mosqueId": "faisal-mosque", "event": "Pakistan's national mosque completed" },
-    { "year": "1993", "mosque": "Hassan II Mosque", "mosqueId": "hassan-ii", "event": "Completed in Casablanca, Morocco" },
-    { "year": "2001", "mosque": "Sultan Qaboos Grand Mosque", "mosqueId": "sultan-qaboos-grand-mosque", "event": "Opened in Muscat, Oman" },
-    { "year": "2007", "mosque": "Sheikh Zayed Grand Mosque", "mosqueId": "sheikh-zayed", "event": "Inaugurated in Abu Dhabi" },
-    { "year": "2023", "mosque": "Grand Jamia Mosque", "mosqueId": "grand-jamia", "event": "Completed in Karachi, Pakistan" },
-    { "year": "1656", "mosque": "Jama Masjid", "mosqueId": "jama-masjid-delhi", "event": "Shah Jahan completes India's largest mosque in Delhi" },
-    { "year": "970", "mosque": "Al-Azhar Mosque", "mosqueId": "al-azhar-mosque", "event": "Founded by Fatimid Caliphate in Cairo" },
-    { "year": "1957", "mosque": "Islamic Center of Washington", "mosqueId": "islamic-center-washington", "event": "Dedicated in Washington D.C., first major mosque in the capital" },
-    { "year": "977", "mosque": "Imam Ali Shrine", "mosqueId": "imam-ali-shrine", "event": "Shrine established in Najaf, Iraq" },
-    { "year": "1965", "mosque": "National Mosque of Malaysia", "mosqueId": "national-mosque-malaysia", "event": "National mosque of Malaysia completed in Kuala Lumpur" },
-    { "year": "1975", "mosque": "Birmingham Central Mosque", "mosqueId": "birmingham-central-mosque", "event": "One of UK's largest mosques opened in Birmingham" },
-    { "year": "2019", "mosque": "Djamaa el Djazaïr", "mosqueId": "djamaa-el-djazair", "event": "Africa's largest mosque completed in Algiers" },
-    { "year": "1557", "mosque": "Süleymaniye Mosque", "mosqueId": "suleymaniye-mosque", "event": "Mimar Sinan completes imperial mosque in Istanbul" },
-    { "year": "1984", "mosque": "National Mosque", "mosqueId": "national-mosque-abuja", "event": "National mosque of Nigeria completed in Abuja" },
-    { "year": "732", "mosque": "Al-Zaytuna Mosque", "mosqueId": "al-zaytuna-mosque", "event": "Oldest mosque in Tunis founded; university of Ez-Zitouna" },
-    { "year": "1530", "mosque": "Gazi Husrev-beg Mosque", "mosqueId": "gazi-husrev-beg-mosque", "event": "Ottoman mosque built in Sarajevo" },
-    { "year": "1901", "mosque": "Great Mosque of Khartoum", "mosqueId": "great-mosque-khartoum", "event": "Great Mosque opened in Sudan's capital" },
-    { "year": "1988", "mosque": "Al-Fateh Grand Mosque", "mosqueId": "al-fateh-grand-mosque", "event": "Bahrain's largest mosque opened in Manama" },
-    { "year": "1989", "mosque": "King Abdullah I Mosque", "mosqueId": "king-abdullah-i-mosque", "event": "Jordan's largest mosque completed in Amman" },
-    { "year": "2011", "mosque": "Imam Muhammad ibn Abd al-Wahhab Mosque", "mosqueId": "imam-abdul-wahhab-mosque", "event": "Qatar State Grand Mosque inaugurated in Doha" },
-    { "year": "2012", "mosque": "Abdul Rahman Mosque", "mosqueId": "abdul-rahman-mosque", "event": "Grand Mosque of Kabul officially inaugurated" },
-    { "year": "2012", "mosque": "Hazrat Sultan Mosque", "mosqueId": "hazrat-sultan-mosque", "event": "Kazakhstan's largest mosque opened in Astana" },
-    { "year": "2014", "mosque": "Heydar Mosque", "mosqueId": "heydar-mosque", "event": "Largest mosque in Caucasus completed in Baku" },
-    { "year": "2019", "mosque": "Massalikoul Djinane Mosque", "mosqueId": "massalikoul-djinane-mosque", "event": "West Africa's largest mosque opened in Dakar" },
-    { "year": "2008", "mosque": "Mohammad Al-Amin Mosque", "mosqueId": "mohammad-al-amin-mosque", "event": "Blue Mosque inaugurated in Beirut" }
+    {
+      "year": "537",
+      "mosque": "Hagia Sophia",
+      "mosqueId": "hagia-sophia-istanbul",
+      "event": "Byzantine basilica completed; later mosque, museum, mosque"
+    },
+    {
+      "year": "622",
+      "mosque": "Al-Masjid an-Nabawi",
+      "mosqueId": "masjid-an-nabawi",
+      "event": "Built by Prophet Muhammad ﷺ in Medina"
+    },
+    {
+      "year": "638",
+      "mosque": "Masjid al-Haram",
+      "mosqueId": "masjid-al-haram",
+      "event": "First expansion by Caliph Umar"
+    },
+    {
+      "year": "705",
+      "mosque": "Al-Aqsa Mosque",
+      "mosqueId": "al-aqsa",
+      "event": "Umayyad Caliph al-Walid I completes construction"
+    },
+    {
+      "year": "715",
+      "mosque": "Umayyad Mosque",
+      "mosqueId": "umayyad-mosque",
+      "event": "Great Mosque of Damascus completed"
+    },
+    {
+      "year": "732",
+      "mosque": "Al-Zaytuna Mosque",
+      "mosqueId": "al-zaytuna-mosque",
+      "event": "Oldest mosque in Tunis founded; university of Ez-Zitouna"
+    },
+    {
+      "year": "818",
+      "mosque": "Imam Reza Shrine",
+      "mosqueId": "imam-reza-shrine",
+      "event": "Shrine established for Imam Reza"
+    },
+    {
+      "year": "970",
+      "mosque": "Al-Azhar Mosque",
+      "mosqueId": "al-azhar-mosque",
+      "event": "Founded by Fatimid Caliphate in Cairo"
+    },
+    {
+      "year": "977",
+      "mosque": "Imam Ali Shrine",
+      "mosqueId": "imam-ali-shrine",
+      "event": "Shrine established in Najaf, Iraq"
+    },
+    {
+      "year": "984",
+      "mosque": "Jamkaran Mosque",
+      "mosqueId": "jamkaran-mosque",
+      "event": "Shia pilgrimage mosque established near Qom"
+    },
+    {
+      "year": "1442",
+      "mosque": "Id Kah Mosque",
+      "mosqueId": "id-kah-mosque",
+      "event": "Historic mosque in Kashgar"
+    },
+    {
+      "year": "1530",
+      "mosque": "Gazi Husrev-beg Mosque",
+      "mosqueId": "gazi-husrev-beg-mosque",
+      "event": "Ottoman mosque built in Sarajevo"
+    },
+    {
+      "year": "1557",
+      "mosque": "Süleymaniye Mosque",
+      "mosqueId": "suleymaniye-mosque",
+      "event": "Mimar Sinan completes imperial mosque in Istanbul"
+    },
+    {
+      "year": "1616",
+      "mosque": "Blue Mosque",
+      "mosqueId": "blue-mosque",
+      "event": "Sultan Ahmed I completes construction in Istanbul"
+    },
+    {
+      "year": "1656",
+      "mosque": "Jama Masjid",
+      "mosqueId": "jama-masjid-delhi",
+      "event": "Shah Jahan completes India's largest mosque in Delhi"
+    },
+    {
+      "year": "1659",
+      "mosque": "Shah Jahan Mosque",
+      "mosqueId": "shah-jahan-mosque-thatta",
+      "event": "Mughal mosque completed in Thatta"
+    },
+    {
+      "year": "1673",
+      "mosque": "Badshahi Mosque",
+      "mosqueId": "badshahi-mosque",
+      "event": "Built by Emperor Aurangzeb in Lahore"
+    },
+    {
+      "year": "1901",
+      "mosque": "Great Mosque of Khartoum",
+      "mosqueId": "great-mosque-khartoum",
+      "event": "Great Mosque opened in Sudan's capital"
+    },
+    {
+      "year": "1957",
+      "mosque": "Islamic Center of Washington",
+      "mosqueId": "islamic-center-washington",
+      "event": "Dedicated in Washington D.C., first major mosque in the capital"
+    },
+    {
+      "year": "1965",
+      "mosque": "National Mosque of Malaysia",
+      "mosqueId": "national-mosque-malaysia",
+      "event": "National mosque of Malaysia completed in Kuala Lumpur"
+    },
+    {
+      "year": "1975",
+      "mosque": "Birmingham Central Mosque",
+      "mosqueId": "birmingham-central-mosque",
+      "event": "One of UK's largest mosques opened in Birmingham"
+    },
+    {
+      "year": "1978",
+      "mosque": "Istiqlal Mosque",
+      "mosqueId": "istiqlal-mosque",
+      "event": "Indonesia's national mosque inaugurated"
+    },
+    {
+      "year": "1982",
+      "mosque": "Grand Mosque of Conakry",
+      "mosqueId": "grand-mosque-of-conakry",
+      "event": "Guinea's main mosque completed"
+    },
+    {
+      "year": "1984",
+      "mosque": "National Mosque",
+      "mosqueId": "national-mosque-abuja",
+      "event": "National mosque of Nigeria completed in Abuja"
+    },
+    {
+      "year": "1986",
+      "mosque": "Faisal Mosque",
+      "mosqueId": "faisal-mosque",
+      "event": "Pakistan's national mosque completed"
+    },
+    {
+      "year": "1987",
+      "mosque": "Kocatepe Mosque",
+      "mosqueId": "kocatepe-mosque",
+      "event": "Ankara's largest mosque completed"
+    },
+    {
+      "year": "1988",
+      "mosque": "Al-Fateh Grand Mosque",
+      "mosqueId": "al-fateh-grand-mosque",
+      "event": "Bahrain's largest mosque opened in Manama"
+    },
+    {
+      "year": "1989",
+      "mosque": "King Abdullah I Mosque",
+      "mosqueId": "king-abdullah-i-mosque",
+      "event": "Jordan's largest mosque completed in Amman"
+    },
+    {
+      "year": "1993",
+      "mosque": "Hassan II Mosque",
+      "mosqueId": "hassan-ii",
+      "event": "Completed in Casablanca, Morocco"
+    },
+    {
+      "year": "2000",
+      "mosque": "Federal Territory Mosque",
+      "mosqueId": "federal-territory-mosque",
+      "event": "Major mosque completed in Kuala Lumpur"
+    },
+    {
+      "year": "2001",
+      "mosque": "Sultan Qaboos Grand Mosque",
+      "mosqueId": "sultan-qaboos-grand-mosque",
+      "event": "Opened in Muscat, Oman"
+    },
+    {
+      "year": "2007",
+      "mosque": "Sheikh Zayed Grand Mosque",
+      "mosqueId": "sheikh-zayed",
+      "event": "Inaugurated in Abu Dhabi"
+    },
+    {
+      "year": "2008",
+      "mosque": "Mohammad Al-Amin Mosque",
+      "mosqueId": "mohammad-al-amin-mosque",
+      "event": "Blue Mosque inaugurated in Beirut"
+    },
+    {
+      "year": "2011",
+      "mosque": "Imam Muhammad ibn Abd al-Wahhab Mosque",
+      "mosqueId": "imam-abdul-wahhab-mosque",
+      "event": "Qatar State Grand Mosque inaugurated in Doha"
+    },
+    {
+      "year": "2012",
+      "mosque": "Abdul Rahman Mosque",
+      "mosqueId": "abdul-rahman-mosque",
+      "event": "Grand Mosque of Kabul officially inaugurated"
+    },
+    {
+      "year": "2012",
+      "mosque": "Hazrat Sultan Mosque",
+      "mosqueId": "hazrat-sultan-mosque",
+      "event": "Kazakhstan's largest mosque opened in Astana"
+    },
+    {
+      "year": "2014",
+      "mosque": "Heydar Mosque",
+      "mosqueId": "heydar-mosque",
+      "event": "Largest mosque in Caucasus completed in Baku"
+    },
+    {
+      "year": "2019",
+      "mosque": "Djamaa el Djazaïr",
+      "mosqueId": "djamaa-el-djazair",
+      "event": "Africa's largest mosque completed in Algiers"
+    },
+    {
+      "year": "2019",
+      "mosque": "Massalikoul Djinane Mosque",
+      "mosqueId": "massalikoul-djinane-mosque",
+      "event": "West Africa's largest mosque opened in Dakar"
+    },
+    {
+      "year": "2019",
+      "mosque": "Çamlıca Mosque",
+      "mosqueId": "camlica-mosque",
+      "event": "Largest mosque in Turkey completed in Istanbul"
+    },
+    {
+      "year": "2022",
+      "mosque": "Astana Grand Mosque",
+      "mosqueId": "astana-grand-mosque",
+      "event": "Kazakhstan's largest mosque completed in Nur-Sultan"
+    },
+    {
+      "year": "2023",
+      "mosque": "Grand Jamia Mosque",
+      "mosqueId": "grand-jamia",
+      "event": "Completed in Karachi, Pakistan"
+    }
   ]
 }
