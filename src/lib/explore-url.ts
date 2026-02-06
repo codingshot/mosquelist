@@ -8,6 +8,7 @@ export type ExploreParams = {
   country?: string;
   region?: string;
   style?: string;
+  denomination?: "sunni" | "shia";
   women?: boolean;
   tourist?: boolean;
 };
@@ -19,6 +20,7 @@ export function getExploreUrl(params: ExploreParams): string {
   if (params.country?.trim()) search.set("country", params.country.trim());
   if (params.region?.trim()) search.set("region", params.region.trim());
   if (params.style?.trim()) search.set("style", params.style.trim());
+  if (params.denomination) search.set("denomination", params.denomination);
   if (params.women) search.set("women", "1");
   if (params.tourist) search.set("tourist", "1");
   const qs = search.toString();

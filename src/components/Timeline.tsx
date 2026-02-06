@@ -72,7 +72,7 @@ export const Timeline = () => {
                             <Link to={`/mosque/${event.mosqueId}`} className="block h-full w-full">
                               <img
                                 src={imageUrl}
-                                alt=""
+                                alt={mosque ? `${mosque.name} - ${event.year}` : ""}
                                 className="h-full w-full object-cover"
                                 loading="lazy"
                                 decoding="async"
@@ -91,7 +91,7 @@ export const Timeline = () => {
                           <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
                             <Link
                               to={`/mosque/${event.mosqueId}`}
-                              className="hover:text-primary hover:underline focus:outline-none focus:underline"
+                              className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
                             >
                               {event.mosque}
                             </Link>

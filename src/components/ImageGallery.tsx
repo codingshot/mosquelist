@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -31,6 +31,7 @@ export function ImageGallery({
   const [index, setIndex] = useState(initialIndex);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const count = images.length;
   const currentUrl = images[index] ? resolveUrl(images[index]) : "";
@@ -69,6 +70,13 @@ export function ImageGallery({
     };
   }, [open]);
 
+  useEffect(() => {
+    if (open) {
+      const t = requestAnimationFrame(() => closeButtonRef.current?.focus());
+      return () => cancelAnimationFrame(t);
+    }
+  }, [open]);
+
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -98,6 +106,7 @@ export function ImageGallery({
     >
       <div className="absolute top-0 right-0 z-10 p-2">
         <Button
+          ref={closeButtonRef}
           variant="ghost"
           size="icon"
           className="h-12 w-12 rounded-full text-white hover:bg-white/20"

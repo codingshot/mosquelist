@@ -258,7 +258,7 @@ export const BucketList = () => {
                     key={f}
                     type="button"
                     onClick={() => setFilter(f)}
-                    className={`px-3 py-2 text-sm font-medium transition-colors ${
+                    className={`min-h-[44px] px-3 py-2 text-sm font-medium transition-colors touch-manipulation ${
                       filter === f
                         ? "bg-primary text-primary-foreground"
                         : "bg-card hover:bg-secondary/50 text-muted-foreground hover:text-foreground"
@@ -275,7 +275,7 @@ export const BucketList = () => {
                 value={sort}
                 onValueChange={(v) => setSort(v as BucketSort)}
               >
-                <SelectTrigger className="w-[180px] gap-2">
+                <SelectTrigger className="w-full min-w-0 sm:w-[180px] gap-2 min-h-[44px] touch-manipulation">
                   <ArrowUpDown className="h-4 w-4 shrink-0" />
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
@@ -365,7 +365,7 @@ export const BucketList = () => {
             <div className="print:hidden px-6 py-4 border-t border-border">
               <Sheet open={addSheetOpen} onOpenChange={setAddSheetOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" className="w-full gap-2">
+                  <Button variant="ghost" className="w-full gap-2 min-h-[44px] touch-manipulation">
                     <Plus className="w-4 h-4" />
                     Add More Mosques
                   </Button>

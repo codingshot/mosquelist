@@ -1,16 +1,20 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
 import { PageSEO } from "@/components/PageSEO";
 import { curatedLists } from "@/data/lists";
-import { List, MapPin, Star, ChevronRight } from "lucide-react";
+import { List, Star, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useBucketList } from "@/hooks/useBucketList";
 
 export default function ListsPage() {
   const { bucketList } = useBucketList();
-  const bucketSet = new Set(bucketList.map((i) => i.mosqueId));
+  const bucketSet = useMemo(
+    () => new Set(bucketList.map((i) => i.mosqueId)),
+    [bucketList]
+  );
 
   return (
     <div className="min-h-screen bg-background">

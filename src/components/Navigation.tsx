@@ -97,6 +97,19 @@ export const Navigation = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to="/bucket-list"
+              className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors min-h-[44px] flex items-center gap-2 touch-manipulation"
+              onClick={() => setIsOpen(false)}
+            >
+              <Heart className="w-4 h-4" />
+              My List
+              {favoriteCount > 0 && (
+                <span className="rounded-full bg-primary px-1.5 py-0 text-xs font-medium text-primary-foreground">
+                  {favoriteCount}
+                </span>
+              )}
+            </Link>
             <Button className="w-full gradient-gold text-primary-foreground" asChild>
               <Link to="/explore" onClick={() => setIsOpen(false)}>
                 Start Your Journey

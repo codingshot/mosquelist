@@ -1,5 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,17 +12,23 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div id="main-content" className="flex min-h-screen items-center justify-center bg-muted px-4">
-      <div className="text-center max-w-md">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <Link
-          to="/"
-          className="text-primary underline hover:text-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
-        >
-          Return to Home
-        </Link>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <main id="main-content" className="flex flex-1 min-h-[calc(100vh-4rem)] items-center justify-center px-4 pt-20 pb-12">
+        <div className="text-center max-w-md">
+          <h1 className="mb-2 text-4xl font-bold text-foreground">404</h1>
+          <p className="mb-6 text-xl text-muted-foreground">Oops! This page doesn&apos;t exist.</p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <Button asChild>
+              <Link to="/">Home</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/explore">Explore</Link>
+            </Button>
+          </div>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };

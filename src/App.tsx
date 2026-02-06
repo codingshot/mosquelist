@@ -8,6 +8,7 @@ import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { BucketListProvider } from "@/contexts/BucketListContext";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { InstallPrompt } from "@/components/InstallPrompt";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
 
 const MosquePage = lazy(() => import("./pages/MosquePage"));
@@ -43,8 +44,9 @@ const App = () => (
         <BrowserRouter>
           <SkipLink />
           <InstallPrompt />
-          <Suspense fallback={<LoadingScreen />}>
-            <Routes>
+          <ErrorBoundary>
+            <Suspense fallback={<LoadingScreen />}>
+              <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/timeline" element={<TimelinePage />} />
@@ -57,8 +59,9 @@ const App = () => (
               <Route path="/map" element={<MapPage />} />
               <Route path="/mosque/:id" element={<MosquePage />} />
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </BrowserRouter>
       </TooltipProvider>
       </FavoritesProvider>

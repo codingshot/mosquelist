@@ -33,7 +33,8 @@
       },
       "history": "The mosque surrounds the Kaaba, the ancient house of worship believed built by Prophet Ibrahim. Expanded through the centuries—under Caliph Umar (638), Ottoman Sultan Selim II (1571), and Saudi expansions (1950s onward)—it is the focal point of Hajj and Umrah.",
       "tourismNotes": "Non-Muslims may not enter. Hajj visa required for pilgrimage. Dress modestly; Ihram for Hajj. Best visited during Ramadan or Hajj season for spiritual atmosphere.",
-      "officialWebsite": "https://www.gph.gov.sa"
+      "officialWebsite": "https://www.gph.gov.sa",
+      "denomination": "sunni"
     },
     {
       "id": "masjid-an-nabawi",
@@ -68,7 +69,8 @@
       },
       "history": "Built by Prophet Muhammad ﷺ in 622 CE after the Hijrah. The green dome marks the Prophet's burial place. Successively expanded by Umayyads, Abbasids, Mamluks, Ottomans, and Saudi rulers.",
       "tourismNotes": "Non-Muslims may not enter. Visitors need valid visa. Women pray in designated areas. The Rawdah (green carpet area) is highly sought—visit early morning for shorter queues.",
-      "officialWebsite": "https://www.gph.gov.sa"
+      "officialWebsite": "https://www.gph.gov.sa",
+      "denomination": "sunni"
     },
     {
       "id": "al-aqsa",
@@ -99,7 +101,8 @@
       },
       "history": "Construction began under Umayyad Caliph Abd al-Malik (685 CE); completed by his son al-Walid I (705 CE). The Dome of the Rock enshrines the Foundation Stone. Al-Aqsa mosque lies south.",
       "architectureNotes": "Early Islamic architecture with Byzantine and Persian influences. Gold dome, blue and turquoise tilework, marble columns.",
-      "tourismNotes": "Check current access and security. Modest dress required. Non-Muslims may visit the compound at designated times."
+      "tourismNotes": "Check current access and security. Modest dress required. Non-Muslims may visit the compound at designated times.",
+      "denomination": "sunni"
     },
     {
       "id": "imam-reza-shrine",
@@ -157,6 +160,11 @@
       "significance": "One of the largest mosques in the world, architectural masterpiece",
       "description": "The Sheikh Zayed Grand Mosque is one of the most beautiful mosques in the world, featuring 82 domes, over 1,000 columns, and the world's largest hand-knotted carpet. It's open to visitors of all faiths.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Sheikh_Zayed_Grand_Mosque_Picture.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/en/5/5b/Sheikh-Zayed-Grand-Mosque-at-Night.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Chandelier_in_Sheikh_Zayed_Mosque,_Abu_Dhabi.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Interior_of_Main_Hall_in_Sheik_Zayed_Mosque.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Moorish, Mughal, Ottoman fusion",
       "womenPrayerArea": true,
@@ -165,10 +173,11 @@
         "lat": 24.4126,
         "lng": 54.4747
       },
-      "history": "Commissioned by Sheikh Zayed bin Sultan Al Nahyan, founder of the UAE. Completed in 2007, it honors Islamic and global cultures.",
+      "history": "Commissioned by Sheikh Zayed bin Sultan Al Nahyan, founder of the UAE. Completed in December 2007 after 11 years of construction. It honors Islamic and global cultures.",
       "architectureNotes": "82 domes, 1,000+ columns, 24-carat gold chandeliers, and the world's largest hand-knotted carpet. White marble and semi-precious stone inlays.",
       "tourismNotes": "Free guided tours for non-Muslims. Modest dress required; abayas provided for women. Best time: morning. Photography allowed. Closed Friday morning.",
-      "officialWebsite": "https://www.szgmc.gov.ae"
+      "officialWebsite": "https://www.szgmc.gov.ae",
+      "denomination": "sunni"
     },
     {
       "id": "hassan-ii",
@@ -203,7 +212,8 @@
       "history": "Built to commemorate King Hassan II's 60th birthday. Construction 1986–1993. Designed by French architect Michel Pinseau. Minaret at 210 m is the world's tallest.",
       "architectureNotes": "Traditional Moroccan zellige tilework, carved wood, and plaster. Retractable roof over the main prayer hall.",
       "tourismNotes": "Guided tours for non-Muslims. Modest dress required. Tours run several times daily.",
-      "officialWebsite": "https://www.fmh2.ma"
+      "officialWebsite": "https://www.fmh2.ma",
+      "denomination": "sunni"
     },
     {
       "id": "blue-mosque",
@@ -236,7 +246,8 @@
       },
       "history": "Built 1609–1616 by Sultan Ahmed I. Architect Sedefkar Mehmed Agha drew on Hagia Sophia and Mimar Sinan. Six minarets caused controversy; Sultan funded a seventh at Mecca.",
       "architectureNotes": "Famous for 20,000+ hand-painted blue Iznik tiles. Central dome 43 m high. Six minarets. Classic Ottoman layout.",
-      "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet."
+      "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet.",
+      "denomination": "sunni"
     },
     {
       "id": "faisal-mosque",
@@ -267,7 +278,8 @@
       "coordinates": {
         "lat": 33.7295,
         "lng": 73.0372
-      }
+      },
+      "denomination": "sunni"
     },
     {
       "id": "istiqlal-mosque",
@@ -689,7 +701,8 @@
         "lng": 44.3147
       },
       "history": "The shrine was established in 977 CE. Rebuilt and expanded many times. The golden dome and minarets were added in Ottoman and Qajar eras. A major center of Shia scholarship.",
-      "tourismNotes": "Non-Muslims may visit. Modest dress required; abayas provided for women. Check travel advisories before visiting."
+      "tourismNotes": "Non-Muslims may visit. Modest dress required; abayas provided for women. Check travel advisories before visiting.",
+      "denomination": "shia"
     },
     {
       "id": "national-mosque-malaysia",
@@ -1227,7 +1240,8 @@
       "isHolySite": false,
       "architecturalStyle": "Persian",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "denomination": "shia"
     },
     {
       "id": "egypts-islamic-cultural-center-masjid-misr-al-kabeer",

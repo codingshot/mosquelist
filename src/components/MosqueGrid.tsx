@@ -49,6 +49,7 @@ const PARAM_AREA_MAX = "areaMax";
 const PARAM_EST_MIN = "estMin";
 const PARAM_EST_MAX = "estMax";
 const PARAM_STYLE = "style";
+const PARAM_DENOMINATION = "denomination";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
 type ViewType = "grid" | "list" | "compact" | "swipe";
@@ -82,15 +83,20 @@ function useMosqueSearchParams() {
   const estMin = searchParams.get(PARAM_EST_MIN) ?? "";
   const estMax = searchParams.get(PARAM_EST_MAX) ?? "";
   const architecturalStyle = searchParams.get(PARAM_STYLE) ?? "";
+  const denominationParam = searchParams.get(PARAM_DENOMINATION) ?? "";
+  const denomination = denominationParam === "sunni" || denominationParam === "shia" ? denominationParam : "";
 
   const setParam = useCallback(
     (key: string, value: string) => {
-      setSearchParams((prev) => {
-        const next = new URLSearchParams(prev);
-        if (value === "" || value === "all") next.delete(key);
-        else next.set(key, value);
-        return next;
-      });
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          if (value === "" || value === "all") next.delete(key);
+          else next.set(key, value);
+          return next;
+        },
+        { replace: true }
+      );
     },
     [setSearchParams]
   );
@@ -110,6 +116,7 @@ function useMosqueSearchParams() {
   const setEstMin = (v: string) => setParam(PARAM_EST_MIN, v);
   const setEstMax = (v: string) => setParam(PARAM_EST_MAX, v);
   const setArchitecturalStyle = (v: string) => setParam(PARAM_STYLE, v);
+  const setDenomination = (v: string) => setParam(PARAM_DENOMINATION, v === "all" ? "" : v);
 
   const clearAllFilters = useCallback(() => {
     setSearchParams(new URLSearchParams(), { replace: true });
@@ -131,6 +138,7 @@ function useMosqueSearchParams() {
     estMin,
     estMax,
     architecturalStyle,
+    denomination,
     setQuery,
     setFilter,
     setView,
@@ -146,6 +154,7 @@ function useMosqueSearchParams() {
     setEstMin,
     setEstMax,
     setArchitecturalStyle,
+    setDenomination,
     clearAllFilters,
   };
 }
@@ -184,6 +193,8 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     setEstMax,
     architecturalStyle,
     setArchitecturalStyle,
+    denomination,
+    setDenomination,
     clearAllFilters: clearAllFiltersFromHook,
   } = useMosqueSearchParams();
 
@@ -239,6 +250,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     filter !== "all" ||
     country !== "" ||
     region !== "" ||
+    denomination !== "" ||
     womenOnly ||
     touristOnly ||
     capMin !== "" ||
@@ -280,6 +292,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     if (filter === "biggest") list = list.filter((m) => m.capacity >= 100_000);
     if (country) list = list.filter((m) => m.country === country);
     if (region) list = list.filter((m) => getRegionForCountry(m.country) === region);
+    if (denomination) list = list.filter((m) => m.denomination === denomination);
     if (womenOnly) list = list.filter((m) => m.womenPrayerArea);
     if (touristOnly) list = list.filter((m) => m.touristFriendly);
     if (architecturalStyle)
@@ -326,7 +339,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
       }
     });
     return sorted;
-  }, [query, filter, country, region, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
+  }, [query, filter, country, region, denomination, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
   const displayedMosques = isPreview ? filteredMosques.slice(0, PREVIEW_LIMIT) : filteredMosques;
 
@@ -529,6 +542,22 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                       </Select>
                     </div>
                     <div className="space-y-2">
+                      <Label>Denomination</Label>
+                      <p className="text-xs text-muted-foreground">
+                        Where clearly associated (fact-checked). Many mosques welcome all Muslims.
+                      </p>
+                      <Select value={denomination || "all"} onValueChange={setDenomination}>
+                        <SelectTrigger className="min-h-[44px] touch-manipulation">
+                          <SelectValue placeholder="Any denomination" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Any denomination</SelectItem>
+                          <SelectItem value="sunni">Sunni</SelectItem>
+                          <SelectItem value="shia">Shia</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
                       <Label>Architectural style</Label>
                       <p className="text-xs text-muted-foreground">
                         Filter by regional/historical style (see About for reference).
@@ -714,6 +743,19 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     onClick={() => setCountry("")}
                     className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
                     aria-label={`Remove country ${country}`}
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </Badge>
+              )}
+              {denomination && (
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
+                  {denomination === "sunni" ? "Sunni" : "Shia"}
+                  <button
+                    type="button"
+                    onClick={() => setDenomination("all")}
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
+                    aria-label={`Remove denomination filter`}
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>

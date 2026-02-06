@@ -41,7 +41,10 @@ export default function ListDetailPage() {
         .map((id) => getMosqueById(id))
         .filter((m): m is NonNullable<typeof m> => m != null)
     : [];
-  const bucketSet = new Set(bucketList.map((i) => i.mosqueId));
+  const bucketSet = useMemo(
+    () => new Set(bucketList.map((i) => i.mosqueId)),
+    [bucketList]
+  );
   const notInList = listMosques.filter((m) => !bucketSet.has(m.id));
   const allInList = notInList.length === 0 && listMosques.length > 0;
 
@@ -286,6 +289,7 @@ export default function ListDetailPage() {
                     key={f}
                     variant={listFilter === f ? "secondary" : "ghost"}
                     size="sm"
+                    className="min-h-[44px] touch-manipulation"
                     onClick={() => setListFilter(f)}
                   >
                     {f === "all" && `All (${listMosques.length})`}
@@ -305,11 +309,11 @@ export default function ListDetailPage() {
                   {selectedIds.size} mosque{selectedIds.size !== 1 ? "s" : ""} selected for My List
                 </span>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" onClick={deselectAll} className="gap-1.5">
+                  <Button variant="outline" size="sm" onClick={deselectAll} className="gap-1.5 min-h-[44px] touch-manipulation">
                     <Square className="h-4 w-4" />
                     Deselect all
                   </Button>
-                  <Button size="sm" onClick={addSelected} className="gap-1.5 gradient-gold text-primary-foreground">
+                  <Button size="sm" onClick={addSelected} className="gap-1.5 min-h-[44px] touch-manipulation gradient-gold text-primary-foreground">
                     <Plus className="h-4 w-4" />
                     Add to My List
                   </Button>
@@ -334,7 +338,7 @@ export default function ListDetailPage() {
                       <button
                         type="button"
                         onClick={() => toggleSelect(mosque.id)}
-                        className={`shrink-0 w-7 h-7 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                        className={`shrink-0 min-w-[44px] min-h-[44px] w-11 h-11 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation ${
                           selected ? "bg-primary border-primary text-primary-foreground" : "border-border hover:border-primary text-muted-foreground"
                         }`}
                         aria-label={selected ? `Deselect ${mosque.name}` : `Select ${mosque.name} to add to My List`}
@@ -347,9 +351,9 @@ export default function ListDetailPage() {
                         )}
                       </button>
                     ) : !inBucket && notInList.length <= 1 ? (
-                      <span className="shrink-0 w-7 h-7" aria-hidden />
+                      <span className="shrink-0 w-11 h-11 min-w-[44px] min-h-[44px]" aria-hidden />
                     ) : inBucket ? (
-                      <span className="shrink-0 w-7 h-7 flex items-center justify-center text-primary" aria-hidden>
+                      <span className="shrink-0 w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-primary" aria-hidden>
                         <CheckSquare className="w-4 h-4" />
                       </span>
                     ) : null}

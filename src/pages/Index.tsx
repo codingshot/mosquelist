@@ -134,6 +134,7 @@ const Index = () => {
                   href="https://ummah.build"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="ummah.build (opens in new tab)"
                   className="text-primary hover:underline"
                 >
                   ummah.build

@@ -30,6 +30,8 @@ export interface Mosque {
   officialWebsite?: string;
   womenPrayerArea: boolean;
   touristFriendly: boolean;
+  /** Predominant tradition when clearly associated (fact-checked). Omitted if mixed or unspecified. */
+  denomination?: "sunni" | "shia";
 }
 
 export interface TimelineEvent {

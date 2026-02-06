@@ -40,6 +40,22 @@ export default function MosquePage() {
   const { isFavorite, toggleFavorite } = useFavorites();
   const { bucketList, addToBucketList } = useBucketList();
 
+  const galleryImages = useMemo(
+    () =>
+      mosque && mosque.imageUrl
+        ? [mosque.imageUrl, ...(mosque.galleryUrls ?? [])]
+        : [],
+    [mosque]
+  );
+  const hasGallery = galleryImages.length > 1;
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const openGallery = useCallback(() => setGalleryOpen(true), []);
+  const closeGallery = useCallback(() => setGalleryOpen(false), []);
+  const relatedMosques = useMemo(
+    () => (mosque ? getRelatedMosques(mosque, 6) : []),
+    [mosque]
+  );
+
   if (!mosque) {
     return (
       <div className="min-h-screen bg-background">
@@ -58,17 +74,6 @@ export default function MosquePage() {
 
   const isLiked = isFavorite(mosque.id);
   const isInBucketList = bucketList.some((item) => item.mosqueId === mosque.id);
-  const galleryImages = useMemo(
-    () =>
-      mosque.imageUrl
-        ? [mosque.imageUrl, ...(mosque.galleryUrls ?? [])]
-        : [],
-    [mosque.imageUrl, mosque.galleryUrls]
-  );
-  const hasGallery = galleryImages.length > 1;
-  const [galleryOpen, setGalleryOpen] = useState(false);
-  const openGallery = useCallback(() => setGalleryOpen(true), []);
-  const closeGallery = useCallback(() => setGalleryOpen(false), []);
 
   const address = mosque.address
     ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
@@ -76,7 +81,6 @@ export default function MosquePage() {
   const googleMapsUrl = getGoogleMapsUrl(mosque.coordinates ?? null, address);
   const appleMapsUrl = getAppleMapsUrl(mosque.coordinates ?? null, address);
   const locationDisplay = getLocationDisplay(mosque);
-  const relatedMosques = useMemo(() => getRelatedMosques(mosque, 6), [mosque]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -239,6 +243,16 @@ export default function MosquePage() {
                     </Link>
                   </Badge>
                 )}
+                {mosque.denomination && (
+                  <Badge variant="secondary" asChild>
+                    <Link
+                      to={getExploreUrl({ denomination: mosque.denomination })}
+                      className="hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
+                    >
+                      {mosque.denomination === "sunni" ? "Sunni" : "Shia"}
+                    </Link>
+                  </Badge>
+                )}
               </div>
             </div>
 
@@ -248,6 +262,19 @@ export default function MosquePage() {
               </h1>
               {mosque.arabicName && (
                 <p className="mt-1 text-lg text-muted-foreground font-arabic">{mosque.arabicName}</p>
+              )}
+              {mosque.denomination && (
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Predominant tradition:{" "}
+                  <Link
+                    to={getExploreUrl({ denomination: mosque.denomination })}
+                    className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                  >
+                    {mosque.denomination === "sunni" ? "Sunni" : "Shia"}
+                  </Link>
+                  {" "}
+                  (fact-checked; many mosques welcome all Muslims).
+                </p>
               )}
               <div className="mt-3 flex flex-wrap items-center gap-4 text-muted-foreground">
                 <span className="flex items-center gap-1">
@@ -331,7 +358,7 @@ export default function MosquePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
-                      aria-label="Official website"
+                      aria-label="Official website (opens in new tab)"
                     >
                       <ExternalLink className="h-4 w-4" />
                       Official site

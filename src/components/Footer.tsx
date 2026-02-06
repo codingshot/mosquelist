@@ -31,6 +31,7 @@ export const Footer = () => {
                 className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="ummah.build (opens in new tab)"
               >
                 ummah.build
               </a>
@@ -44,6 +45,11 @@ export const Footer = () => {
               <li>
                 <Link to="/explore" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Browse Mosques
+                </Link>
+              </li>
+              <li>
+                <Link to="/map" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                  Map
                 </Link>
               </li>
               <li>
@@ -67,6 +73,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded"
+                  aria-label="Prayer Times at Islamic Finder (opens in new tab)"
                 >
                   Prayer Times
                 </a>
@@ -102,6 +109,7 @@ export const Footer = () => {
                 <a
                   href="mailto:hello@mosquelist.com?subject=MosqueList%20feedback%20or%20suggestion"
                   className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded"
+                  aria-label="Suggest a mosque (opens email client)"
                 >
                   Suggest a mosque
                 </a>

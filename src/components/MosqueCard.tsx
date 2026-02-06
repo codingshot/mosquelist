@@ -171,7 +171,7 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
                     e.stopPropagation();
                     toggleFavorite(mosque.id);
                   }}
-                  className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center transition-all hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="min-w-[44px] min-h-[44px] w-11 h-11 shrink-0 rounded-full flex items-center justify-center transition-all hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation"
                   aria-label={isLiked ? "Remove from list" : "Add to list"}
                 >
                   <Heart
