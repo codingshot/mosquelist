@@ -58,6 +58,7 @@ export function MosqueSEO({ mosque }: MosqueSEOProps) {
     description: mosque.description,
     address: {
       "@type": "PostalAddress",
+      ...(mosque.address && { streetAddress: mosque.address }),
       addressLocality: mosque.location,
       addressCountry: mosque.country,
     },

@@ -47,7 +47,9 @@ export default function MosquePage() {
 
   const isLiked = isFavorite(mosque.id);
   const isInBucketList = bucketList.some((item) => item.mosqueId === mosque.id);
-  const address = `${mosque.name}, ${mosque.location}, ${mosque.country}`;
+  const address = mosque.address
+    ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
+    : `${mosque.name}, ${mosque.location}, ${mosque.country}`;
   const googleMapsUrl = getGoogleMapsUrl(mosque.coordinates ?? null, address);
   const appleMapsUrl = getAppleMapsUrl(mosque.coordinates ?? null, address);
 

@@ -1,6 +1,6 @@
 /**
  * Prints a fact-check checklist from mosque data for use when re-verifying
- * capacity, area, established date, and facilities. See docs/skills.md.
+ * capacity, area, established date, address, and facilities. See docs/skills.md.
  *
  * Usage: npm run fact-check
  */
@@ -21,17 +21,24 @@ function formatNum(n) {
   return String(n);
 }
 
+const withAddress = mosques.filter((m) => m.address && m.address.trim()).length;
+const withHistory = mosques.filter((m) => m.history && m.history.trim()).length;
+const withTourismNotes = mosques.filter((m) => m.tourismNotes && m.tourismNotes.trim()).length;
+const withArchNotes = mosques.filter((m) => m.architectureNotes && m.architectureNotes.trim()).length;
+
 console.log("# Mosque fact-check checklist\n");
 console.log("Use this list when re-verifying. Update docs/skills.md with corrections and date.\n");
-console.log("| # | Name | id | Capacity | Area (m²) | Established |");
-console.log("|---|------|-----|----------|-----------|-------------|");
+console.log(`Summary: ${mosques.length} mosques | ${withAddress} with address | ${withHistory} with history | ${withTourismNotes} with tourismNotes | ${withArchNotes} with architectureNotes\n`);
+console.log("| # | Name | id | Capacity | Area (m²) | Established | Address |");
+console.log("|---|------|-----|----------|-----------|-------------|--------|");
 
 mosques.forEach((m, i) => {
-  const name = (m.name || "").replace(/\|/g, " ");
+  const name = (m.name || "").replace(/\|/g, " ").slice(0, 30);
   const cap = formatNum(m.capacity ?? 0);
   const area = (m.area ?? 0).toLocaleString();
   const est = (m.established || "").replace(/\|/g, " ");
-  console.log(`| ${i + 1} | ${name} | ${m.id} | ${cap} | ${area} | ${est} |`);
+  const addr = m.address ? "✓" : "—";
+  console.log(`| ${i + 1} | ${name} | ${m.id} | ${cap} | ${area} | ${est} | ${addr} |`);
 });
 
 console.log(`\nTotal: ${mosques.length} mosques. Source hierarchy: docs/skills.md.`);

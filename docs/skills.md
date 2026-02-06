@@ -64,6 +64,7 @@ Corrections applied: Al-Masjid an-Nabawi 1.5M capacity / 384,000 m²; Imam Reza 
 |------------|--------------------------|--------|
 | 2025-02    | Process added            | Checklist script + this log. Next: quarterly top 10–15 re-audit. |
 | 2025-02    | Country expansion        | Added 11 mosques: Afghanistan (Kabul), Jordan (Amman), Qatar (Doha), Bahrain (Manama), Senegal (Dakar), Azerbaijan (Baku), Lebanon (Beirut), Sudan (Khartoum), Bosnia (Sarajevo), Kazakhstan (Astana), Tunisia (Tunis). |
+| 2025-02    | Address & fact-check     | Added optional `address` field to Mosque type. 10 mosques now have street addresses (Masjid al-Haram, Al-Masjid an-Nabawi, Al-Aqsa, Sheikh Zayed, Hassan II, Blue Mosque, Faisal, Badshahi, Sultan Qaboos, Istiqlal). Fact-check script enhanced with address column and summary. |
 
 ---
 

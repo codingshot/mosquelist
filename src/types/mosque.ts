@@ -4,6 +4,8 @@ export interface Mosque {
   arabicName?: string;
   location: string;
   country: string;
+  /** Street address for maps/display when known (optional) */
+  address?: string;
   /** Lat/lng for map links (Google Maps, Apple Maps) */
   coordinates?: { lat: number; lng: number };
   capacity: number;
