@@ -27,6 +27,7 @@ type BucketListContextValue = {
   toggleVisited: (mosqueId: string) => void;
   addToBucketList: (mosqueId: string) => void;
   removeFromBucketList: (mosqueId: string) => void;
+  reorderBucketList: (fromIndex: number, toIndex: number) => void;
   visitedCount: number;
   mosquesNotInList: typeof mosques;
 };
@@ -104,6 +105,15 @@ export function BucketListProvider({ children }: { children: React.ReactNode }) 
     );
   }, []);
 
+  const reorderBucketList = useCallback((fromIndex: number, toIndex: number) => {
+    setBucketListState((prev) => {
+      const next = [...prev];
+      const [removed] = next.splice(fromIndex, 1);
+      next.splice(toIndex, 0, removed);
+      return next;
+    });
+  }, []);
+
   const visitedCount = bucketList.filter((item) => item.visited).length;
   const bucketListIds = useMemo(
     () => new Set(bucketList.map((i) => i.mosqueId)),
@@ -120,6 +130,7 @@ export function BucketListProvider({ children }: { children: React.ReactNode }) 
       toggleVisited,
       addToBucketList,
       removeFromBucketList,
+      reorderBucketList,
       visitedCount,
       mosquesNotInList,
     }),
@@ -128,6 +139,7 @@ export function BucketListProvider({ children }: { children: React.ReactNode }) 
       toggleVisited,
       addToBucketList,
       removeFromBucketList,
+      reorderBucketList,
       visitedCount,
       mosquesNotInList,
     ]

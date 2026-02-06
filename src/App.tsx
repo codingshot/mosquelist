@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { BucketListProvider } from "@/contexts/BucketListContext";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { InstallPrompt } from "@/components/InstallPrompt";
 import Index from "./pages/Index";
 
 const MosquePage = lazy(() => import("./pages/MosquePage"));
@@ -40,6 +41,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <SkipLink />
+          <InstallPrompt />
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/" element={<Index />} />

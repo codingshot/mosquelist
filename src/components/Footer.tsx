@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -111,20 +111,11 @@ export const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-background/20 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-background/70 text-sm text-center md:text-left">
+        <div className="border-t border-background/20 mt-8 pt-8">
+          <p className="text-background/70 text-sm text-center">
             © 2025 MosqueList. Made with{" "}
             <Heart className="w-4 h-4 inline text-primary" /> for the Ummah.
           </p>
-          <div className="flex items-center gap-4">
-            <a
-              href="mailto:hello@mosquelist.com"
-              className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded inline-flex"
-              aria-label="Email us"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
-          </div>
         </div>
       </div>
     </footer>

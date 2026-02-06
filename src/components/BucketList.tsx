@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { mosques } from "@/data/mosques";
-import { Check, Plus, MapPin, Plane, X } from "lucide-react";
+import { Check, Plus, MapPin, Plane, X, GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -11,6 +11,135 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useBucketList } from "@/hooks/useBucketList";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import type { BucketListItem } from "@/lib/storage";
+
+function BucketListItemRow({
+  item,
+  mosque,
+  toggleVisited,
+  removeFromBucketList,
+}: {
+  item: BucketListItem;
+  mosque: (typeof mosques)[number];
+  toggleVisited: (id: string) => void;
+  removeFromBucketList: (id: string) => void;
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: item.mosqueId });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <li
+      ref={setNodeRef}
+      style={style}
+      className={`px-6 py-4 flex items-center gap-3 transition-colors ${
+        item.visited ? "bg-primary/5" : "hover:bg-secondary/30"
+      } ${isDragging ? "opacity-50 shadow-lg" : ""}`}
+    >
+      <button
+        type="button"
+        className="touch-manipulation p-1 rounded hover:bg-secondary text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        aria-label="Drag to reorder"
+        {...attributes}
+        {...listeners}
+      >
+        <GripVertical className="w-5 h-5" />
+      </button>
+      <button
+        onClick={() => toggleVisited(item.mosqueId)}
+        className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all shrink-0 ${
+          item.visited
+            ? "bg-primary border-primary"
+            : "border-border hover:border-primary"
+        }`}
+        aria-label={item.visited ? "Mark as not visited" : "Mark as visited"}
+      >
+        {item.visited && (
+          <Check className="w-4 h-4 text-primary-foreground" />
+        )}
+      </button>
+      {mosque.imageUrl && (
+        <Link
+          to={`/mosque/${mosque.id}`}
+          className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-border bg-muted"
+        >
+          <img
+            src={mosque.imageUrl}
+            alt=""
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "/placeholder.svg";
+            }}
+          />
+        </Link>
+      )}
+      <div className="flex-1 min-w-0">
+        <h4
+          className={`font-medium transition-all ${
+            item.visited
+              ? "text-muted-foreground line-through"
+              : "text-foreground"
+          }`}
+        >
+          <Link
+            to={`/mosque/${mosque.id}`}
+            className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+          >
+            {mosque.name}
+          </Link>
+        </h4>
+        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+          <MapPin className="w-3 h-3 shrink-0" />
+          <span>
+            {mosque.location}, {mosque.country}
+          </span>
+        </div>
+      </div>
+      <div className="flex gap-2 shrink-0">
+        {item.visited && (
+          <span className="font-handwriting text-primary text-sm">
+            Alhamdulillah! ✓
+          </span>
+        )}
+        <button
+          type="button"
+          onClick={() => removeFromBucketList(item.mosqueId)}
+          className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          aria-label={`Remove ${mosque.name} from list`}
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+    </li>
+  );
+}
 
 export const BucketList = () => {
   const {
@@ -18,10 +147,18 @@ export const BucketList = () => {
     toggleVisited,
     addToBucketList,
     removeFromBucketList,
+    reorderBucketList,
     visitedCount,
     mosquesNotInList,
   } = useBucketList();
   const [addSheetOpen, setAddSheetOpen] = useState(false);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <section id="bucket-list" className="py-16 md:py-24 bg-paper-cream scroll-mt-20">
@@ -85,97 +222,45 @@ export const BucketList = () => {
                 </div>
               </div>
             ) : (
-            <ul className="divide-y divide-dashed divide-border">
-              {bucketList.map((item) => {
-                const mosque = mosques.find((m) => m.id === item.mosqueId);
-                if (!mosque) return null;
-
-                return (
-                  <li
-                    key={item.mosqueId}
-                    className={`px-6 py-4 flex items-center gap-4 transition-colors ${
-                      item.visited ? "bg-primary/5" : "hover:bg-secondary/30"
-                    }`}
-                  >
-                    {/* Checkbox */}
-                    <button
-                      onClick={() => toggleVisited(item.mosqueId)}
-                      className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all shrink-0 ${
-                        item.visited
-                          ? "bg-primary border-primary"
-                          : "border-border hover:border-primary"
-                      }`}
-                      aria-label={
-                        item.visited ? "Mark as not visited" : "Mark as visited"
-                      }
-                    >
-                      {item.visited && (
-                        <Check className="w-4 h-4 text-primary-foreground" />
-                      )}
-                    </button>
-
-                    {/* Mosque image inline */}
-                    {mosque.imageUrl && (
-                      <Link
-                        to={`/mosque/${mosque.id}`}
-                        className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-border bg-muted"
-                      >
-                        <img
-                          src={mosque.imageUrl}
-                          alt=""
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = "/placeholder.svg";
-                          }}
-                        />
-                      </Link>
-                    )}
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <h4
-                        className={`font-medium transition-all ${
-                          item.visited
-                            ? "text-muted-foreground line-through"
-                            : "text-foreground"
-                        }`}
-                      >
-                        <Link
-                          to={`/mosque/${mosque.id}`}
-                          className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
-                        >
-                          {mosque.name}
-                        </Link>
-                      </h4>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <MapPin className="w-3 h-3 shrink-0" />
-                        <span>
-                          {mosque.location}, {mosque.country}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Status / Remove */}
-                    <div className="flex items-center gap-2">
-                      {item.visited && (
-                        <span className="font-handwriting text-primary text-sm">
-                          Alhamdulillah! ✓
-                        </span>
-                      )}
-                      <button
-                        type="button"
-                        onClick={() => removeFromBucketList(item.mosqueId)}
-                        className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                        aria-label={`Remove ${mosque.name} from list`}
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={(event: DragEndEvent) => {
+                const { active, over } = event;
+                if (over && active.id !== over.id) {
+                  const oldIndex = bucketList.findIndex(
+                    (i) => i.mosqueId === active.id
+                  );
+                  const newIndex = bucketList.findIndex(
+                    (i) => i.mosqueId === over.id
+                  );
+                  if (oldIndex !== -1 && newIndex !== -1) {
+                    reorderBucketList(oldIndex, newIndex);
+                  }
+                }
+              }}
+            >
+              <SortableContext
+                items={bucketList.map((i) => i.mosqueId)}
+                strategy={verticalListSortingStrategy}
+              >
+                <ul className="divide-y divide-dashed divide-border">
+                  {bucketList.map((item) => {
+                    const mosque = mosques.find((m) => m.id === item.mosqueId);
+                    if (!mosque) return null;
+                    return (
+                      <BucketListItemRow
+                        key={item.mosqueId}
+                        item={item}
+                        mosque={mosque}
+                        toggleVisited={toggleVisited}
+                        removeFromBucketList={removeFromBucketList}
+                      />
+                    );
+                  })}
+                </ul>
+              </SortableContext>
+            </DndContext>
             )}
 
             {/* Add More */}
