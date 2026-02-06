@@ -11,6 +11,7 @@ import { mosques } from "@/data/mosques";
 import {
   getBucketList,
   setBucketList,
+  getFavorites,
   type BucketListItem,
 } from "@/lib/storage";
 
@@ -21,6 +22,25 @@ const DEFAULT_LIST: BucketListItem[] = mosques
   .map((m) => ({ mosqueId: m.id, visited: false }));
 
 const SAVE_DEBOUNCE_MS = 400;
+
+const VALID_MOSQUE_IDS = new Set(mosques.map((m) => m.id));
+
+/** Merge stored bucket list with any legacy favorites so "favorite" = "in bucket list". */
+function getInitialBucketList(): BucketListItem[] {
+  const stored = getBucketList();
+  const valid = stored.filter((item) => VALID_MOSQUE_IDS.has(item.mosqueId));
+  const bucketIds = new Set(valid.map((i) => i.mosqueId));
+  const legacyFavorites = getFavorites().filter((id) => VALID_MOSQUE_IDS.has(id));
+  const merged = [...valid];
+  for (const id of legacyFavorites) {
+    if (!bucketIds.has(id)) {
+      merged.push({ mosqueId: id, visited: false });
+      bucketIds.add(id);
+    }
+  }
+  if (merged.length > 0) return merged;
+  return DEFAULT_LIST;
+}
 
 type BucketListContextValue = {
   bucketList: BucketListItem[];
@@ -35,14 +55,7 @@ type BucketListContextValue = {
 const BucketListContext = createContext<BucketListContextValue | null>(null);
 
 export function BucketListProvider({ children }: { children: React.ReactNode }) {
-  const [bucketList, setBucketListState] = useState<BucketListItem[]>(() => {
-    const stored = getBucketList();
-    const valid = stored.filter((item) =>
-      mosques.some((m) => m.id === item.mosqueId)
-    );
-    if (valid.length > 0) return valid;
-    return DEFAULT_LIST;
-  });
+  const [bucketList, setBucketListState] = useState<BucketListItem[]>(getInitialBucketList);
 
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 

@@ -8,11 +8,11 @@ import Index from "./Index";
 function renderIndex() {
   return render(
     <MemoryRouter>
-      <FavoritesProvider>
-        <BucketListProvider>
+      <BucketListProvider>
+        <FavoritesProvider>
           <Index />
-        </BucketListProvider>
-      </FavoritesProvider>
+        </FavoritesProvider>
+      </BucketListProvider>
     </MemoryRouter>
   );
 }

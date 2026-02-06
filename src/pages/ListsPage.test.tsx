@@ -8,11 +8,11 @@ import ListsPage from "./ListsPage";
 function renderListsPage() {
   return render(
     <MemoryRouter initialEntries={["/lists"]}>
-      <FavoritesProvider>
-        <BucketListProvider>
+      <BucketListProvider>
+        <FavoritesProvider>
           <ListsPage />
-        </BucketListProvider>
-      </FavoritesProvider>
+        </FavoritesProvider>
+      </BucketListProvider>
     </MemoryRouter>
   );
 }

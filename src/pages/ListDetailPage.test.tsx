@@ -8,13 +8,13 @@ import ListDetailPage from "./ListDetailPage";
 function renderListDetail(route: string) {
   return render(
     <MemoryRouter initialEntries={[route]}>
-      <FavoritesProvider>
-        <BucketListProvider>
+      <BucketListProvider>
+        <FavoritesProvider>
           <Routes>
             <Route path="/lists/:slug" element={<ListDetailPage />} />
           </Routes>
-        </BucketListProvider>
-      </FavoritesProvider>
+        </FavoritesProvider>
+      </BucketListProvider>
     </MemoryRouter>
   );
 }

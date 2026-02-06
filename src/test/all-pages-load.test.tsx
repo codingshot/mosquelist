@@ -18,11 +18,11 @@ import MosquePage from "@/pages/MosquePage";
 import NotFound from "@/pages/NotFound";
 
 const AllProviders = ({ children }: { children: React.ReactNode }) => (
-  <FavoritesProvider>
-    <BucketListProvider>
+  <BucketListProvider>
+    <FavoritesProvider>
       <TooltipProvider>{children}</TooltipProvider>
-    </BucketListProvider>
-  </FavoritesProvider>
+    </FavoritesProvider>
+  </BucketListProvider>
 );
 
 describe("All pages load", () => {

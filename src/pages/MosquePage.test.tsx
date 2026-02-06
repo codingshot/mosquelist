@@ -8,13 +8,13 @@ import MosquePage from "./MosquePage";
 function renderMosquePage(route: string) {
   return render(
     <MemoryRouter initialEntries={[route]}>
-      <FavoritesProvider>
-        <BucketListProvider>
+      <BucketListProvider>
+        <FavoritesProvider>
           <Routes>
             <Route path="/mosque/:id" element={<MosquePage />} />
           </Routes>
-        </BucketListProvider>
-      </FavoritesProvider>
+        </FavoritesProvider>
+      </BucketListProvider>
     </MemoryRouter>
   );
 }

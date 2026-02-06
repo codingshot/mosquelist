@@ -2471,10 +2471,82 @@
       "event": "Indonesia's national mosque inaugurated"
     },
     {
+      "year": "1876",
+      "mosque": "Aqsa Mosque",
+      "mosqueId": "aqsa-mosque-qadian",
+      "event": "Ahmadiyya mosque established in Qadian, India"
+    },
+    {
+      "year": "1907",
+      "mosque": "Great Mosque of Djenné",
+      "mosqueId": "great-mosque-of-djenne",
+      "event": "Current mud-brick mosque rebuilt on historic site in Mali"
+    },
+    {
+      "year": "1958",
+      "mosque": "Sultan Omar Ali Saifuddin Mosque",
+      "mosqueId": "sultan-omar-ali-saifuddin",
+      "event": "Iconic mosque completed in Bandar Seri Begawan, Brunei"
+    },
+    {
+      "year": "1968",
+      "mosque": "Baitul Mukarram",
+      "mosqueId": "baitul-mukarram",
+      "event": "National mosque of Bangladesh completed in Dhaka"
+    },
+    {
+      "year": "1974",
+      "mosque": "Grand Mosque of Sabilal Muhtadin",
+      "mosqueId": "grand-mosque-of-sabilal-muhtadin",
+      "event": "Major mosque completed in Banjarmasin, South Kalimantan"
+    },
+    {
       "year": "1982",
       "mosque": "Grand Mosque of Conakry",
       "mosqueId": "grand-mosque-of-conakry",
       "event": "Guinea's main mosque completed"
+    },
+    {
+      "year": "1985",
+      "mosque": "Taj-ul-Masajid",
+      "mosqueId": "taj-ul-masajid",
+      "event": "Large mosque completed in Bhopal, India"
+    },
+    {
+      "year": "1988",
+      "mosque": "Sultan Salahuddin Abdul Aziz Mosque",
+      "mosqueId": "sultan-salahuddin-abdul-aziz-mosque",
+      "event": "Malaysia's largest mosque by capacity opened in Shah Alam"
+    },
+    {
+      "year": "1994",
+      "mosque": "Emir Abdelkader Mosque",
+      "mosqueId": "emir-abdelkader-mosque",
+      "event": "Grand mosque inaugurated in Constantine, Algeria"
+    },
+    {
+      "year": "1998",
+      "mosque": "Sabancı Central Mosque",
+      "mosqueId": "sabanci-central-mosque",
+      "event": "Six-minaret mosque completed in Adana, Turkey"
+    },
+    {
+      "year": "1999",
+      "mosque": "Putra Mosque",
+      "mosqueId": "putra-mosque",
+      "event": "Pink-domed mosque completed in Putrajaya, Malaysia"
+    },
+    {
+      "year": "2006",
+      "mosque": "Great Mosque of Central Java",
+      "mosqueId": "great-mosque-of-central-java",
+      "event": "Large mosque with movable umbrellas opened in Semarang"
+    },
+    {
+      "year": "2009",
+      "mosque": "Tuanku Mizan Zainal Abidin Mosque",
+      "mosqueId": "tuanku-mizan-zainal-abidin-mosque",
+      "event": "Steel mosque completed in Putrajaya, Malaysia"
     },
     {
       "year": "1984",
@@ -2589,6 +2661,48 @@
       "mosque": "Grand Jamia Mosque",
       "mosqueId": "grand-jamia",
       "event": "Completed in Karachi, Pakistan"
+    },
+    {
+      "year": "1400",
+      "mosque": "Jamia Masjid",
+      "mosqueId": "jamia-masjid-srinagar",
+      "event": "Historic mosque in Srinagar, Kashmir; rebuilt several times"
+    },
+    {
+      "year": "1986",
+      "mosque": "Grand Mosque of Kuwait",
+      "mosqueId": "grand-mosque-kuwait",
+      "event": "Kuwait's main state mosque completed in Kuwait City"
+    },
+    {
+      "year": "2014",
+      "mosque": "Bahria Grand Mosque",
+      "mosqueId": "bahria-grand-mosque",
+      "event": "Large mosque completed in Lahore"
+    },
+    {
+      "year": "2014",
+      "mosque": "Grand Mosque of West Sumatra",
+      "mosqueId": "grand-mosque-of-west-sumatra",
+      "event": "Major mosque with Minangkabau-style roof opened in Padang"
+    },
+    {
+      "year": "1972",
+      "mosque": "Jakarta Islamic Center",
+      "mosqueId": "jakarta-islamic-center",
+      "event": "Islamic center and mosque complex opened in Jakarta"
+    },
+    {
+      "year": "2011",
+      "mosque": "Sultan Haji Hassanal Bolkiah Mosque",
+      "mosqueId": "sultan-haji-hassanal-bolkiah-mosque",
+      "event": "Large mosque completed in Cotabato City, Philippines"
+    },
+    {
+      "year": "2023",
+      "mosque": "Egypt's Islamic Cultural Center",
+      "mosqueId": "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
+      "event": "Masjid Misr Al Kabeer opened in New Administrative Capital"
     }
   ]
 }

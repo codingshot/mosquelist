@@ -35,8 +35,8 @@ const SkipLink = () => (
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <FavoritesProvider>
-      <BucketListProvider>
+    <BucketListProvider>
+      <FavoritesProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -61,8 +61,8 @@ const App = () => (
           </Suspense>
         </BrowserRouter>
       </TooltipProvider>
-      </BucketListProvider>
-    </FavoritesProvider>
+      </FavoritesProvider>
+    </BucketListProvider>
   </QueryClientProvider>
 );
 

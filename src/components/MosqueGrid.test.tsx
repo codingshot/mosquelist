@@ -2,14 +2,17 @@ import { describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { BucketListProvider } from "@/contexts/BucketListContext";
 import { MosqueGrid } from "./MosqueGrid";
 
 function renderGrid(initialEntry = "/") {
   return render(
     <MemoryRouter initialEntries={[initialEntry]}>
-      <FavoritesProvider>
-        <MosqueGrid />
-      </FavoritesProvider>
+      <BucketListProvider>
+        <FavoritesProvider>
+          <MosqueGrid />
+        </FavoritesProvider>
+      </BucketListProvider>
     </MemoryRouter>
   );
 }

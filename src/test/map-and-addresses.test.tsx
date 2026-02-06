@@ -81,11 +81,11 @@ describe("Map route and nav", () => {
   it("Navigation includes a Map link", () => {
     render(
       <MemoryRouter>
-        <FavoritesProvider>
-          <BucketListProvider>
+        <BucketListProvider>
+          <FavoritesProvider>
             <Navigation />
-          </BucketListProvider>
-        </FavoritesProvider>
+          </FavoritesProvider>
+        </BucketListProvider>
       </MemoryRouter>
     );
     const mapLink = screen.getByRole("link", { name: /map/i });

@@ -1,19 +1,5 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  useEffect,
-} from "react";
-import { mosques } from "@/data/mosques";
-import { getFavorites, setFavorites } from "@/lib/storage";
-
-const VALID_MOSQUE_IDS = new Set(mosques.map((m) => m.id));
-
-function getValidFavorites(): string[] {
-  return getFavorites().filter((id) => VALID_MOSQUE_IDS.has(id));
-}
+import { createContext, useCallback, useContext, useMemo } from "react";
+import { useBucketList } from "@/contexts/BucketListContext";
 
 type FavoritesContextValue = {
   favoriteIds: Set<string>;
@@ -22,47 +8,29 @@ type FavoritesContextValue = {
   favoriteCount: number;
 };
 
-const FAVORITES_KEY = "mosquelist_favorites";
 const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 
+/** Favorites are the same as bucket list: a mosque is "favorited" iff it is in the bucket list. */
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
-  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(() => new Set(getValidFavorites()));
+  const { bucketList, addToBucketList, removeFromBucketList } = useBucketList();
 
-  useEffect(() => {
-    setFavorites(Array.from(favoriteIds));
-  }, [favoriteIds]);
-
-  useEffect(() => {
-    const handler = (e: StorageEvent) => {
-      if (e.key === FAVORITES_KEY && e.newValue != null) {
-        try {
-          const parsed = JSON.parse(e.newValue) as unknown;
-          const ids = Array.isArray(parsed)
-            ? (parsed as string[]).filter((id) => VALID_MOSQUE_IDS.has(id))
-            : [];
-          setFavoriteIds(new Set(ids));
-        } catch {
-          // ignore parse errors
-        }
-      }
-    };
-    window.addEventListener("storage", handler);
-    return () => window.removeEventListener("storage", handler);
-  }, []);
+  const favoriteIds = useMemo(
+    () => new Set(bucketList.map((i) => i.mosqueId)),
+    [bucketList]
+  );
 
   const isFavorite = useCallback(
     (id: string) => favoriteIds.has(id),
     [favoriteIds]
   );
 
-  const toggleFavorite = useCallback((id: string) => {
-    setFavoriteIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }, []);
+  const toggleFavorite = useCallback(
+    (id: string) => {
+      if (favoriteIds.has(id)) removeFromBucketList(id);
+      else addToBucketList(id);
+    },
+    [favoriteIds, addToBucketList, removeFromBucketList]
+  );
 
   const value = useMemo<FavoritesContextValue>(
     () => ({
