@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Mosque } from "@/types/mosque";
 import { Link } from "react-router-dom";
-import { Heart, MapPin, Users, Star, ChevronRight, Map } from "lucide-react";
+import { Heart, MapPin, Users, Star, ChevronRight, Map, Copy, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useFavorites } from "@/contexts/FavoritesContext";
@@ -10,7 +10,14 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { getGoogleMapsUrl } from "@/lib/maps";
+import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
+import { toast } from "sonner";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface MosqueCardProps {
   mosque: Mosque;
@@ -72,22 +79,24 @@ export const MosqueCard = ({ mosque, index, view = "grid" }: MosqueCardProps) =>
                   Holy Site
                 </Badge>
               )}
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  toggleFavorite(mosque.id);
-                }}
-                className="absolute top-3 right-3 w-11 h-11 min-w-[44px] min-h-[44px] bg-card/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                aria-label={isLiked ? "Remove from list" : "Add to list"}
-              >
-                <Heart
-                  className={`w-5 h-5 transition-colors ${
-                    isLiked ? "fill-primary text-primary" : "text-foreground"
-                  }`}
-                />
-              </button>
+              {!isListLayout && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleFavorite(mosque.id);
+                  }}
+                  className="absolute top-3 right-3 w-11 h-11 min-w-[44px] min-h-[44px] bg-card/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  aria-label={isLiked ? "Remove from list" : "Add to list"}
+                >
+                  <Heart
+                    className={`w-5 h-5 transition-colors ${
+                      isLiked ? "fill-primary text-primary" : "text-foreground"
+                    }`}
+                  />
+                </button>
+              )}
               <div className="absolute bottom-3 left-3 flex items-center gap-1 text-card">
                 <MapPin className="w-4 h-4 shrink-0" />
                 <span className="text-sm font-medium">
@@ -96,61 +105,81 @@ export const MosqueCard = ({ mosque, index, view = "grid" }: MosqueCardProps) =>
               </div>
             </div>
             <div
-              className={`flex-1 min-w-0 ${
-                isCompact ? "py-1.5 flex flex-col justify-center gap-0" : isListLayout ? "py-2 flex flex-col justify-center space-y-3" : "space-y-3 p-4"
+              className={`flex-1 min-w-0 flex ${
+                isCompact ? "py-1.5 flex-col justify-center gap-0" : isListLayout ? "py-2 flex-row items-start gap-3" : "flex-col space-y-3 p-4"
               }`}
             >
-              <div>
-                <h3
-                  className={`font-serif font-semibold text-foreground line-clamp-1 ${
-                    isCompact ? "text-sm" : isListLayout ? "text-lg" : "text-xl"
-                  }`}
-                >
-                  {mosque.name}
-                </h3>
-                {mosque.arabicName && !isCompact && (
-                  <p className="text-sm text-muted-foreground font-arabic">
-                    {mosque.arabicName}
+              <div className={`min-w-0 ${isListLayout ? "flex-1 flex flex-col justify-center space-y-3" : isCompact ? "" : "space-y-3"}`}>
+                <div>
+                  <h3
+                    className={`font-serif font-semibold text-foreground line-clamp-1 ${
+                      isCompact ? "text-sm" : isListLayout ? "text-lg" : "text-xl"
+                    }`}
+                  >
+                    {mosque.name}
+                  </h3>
+                  {mosque.arabicName && !isCompact && (
+                    <p className="text-sm text-muted-foreground font-arabic">
+                      {mosque.arabicName}
+                    </p>
+                  )}
+                </div>
+                {!isCompact && (
+                  <p className={`text-sm text-muted-foreground ${isListLayout ? "line-clamp-1" : "line-clamp-2"}`}>
+                    {mosque.description}
                   </p>
                 )}
+                <div className={`flex items-center gap-4 text-sm ${isCompact ? "gap-2 text-xs" : ""}`}>
+                  <div className="flex items-center gap-1 text-muted-foreground">
+                    <Users className={isCompact ? "w-3 h-3" : "w-4 h-4"} />
+                    <span>{formatCapacity(mosque.capacity)} capacity</span>
+                  </div>
+                  <div className="text-muted-foreground">
+                    Est. {mosque.established}
+                  </div>
+                </div>
+                {!isCompact && (
+                  <div className="flex flex-wrap gap-2">
+                    {mosque.touristFriendly && (
+                      <Badge variant="secondary" className="text-xs">
+                        Tourist Friendly
+                      </Badge>
+                    )}
+                    {mosque.womenPrayerArea && (
+                      <Badge variant="secondary" className="text-xs">
+                        Women's Area
+                      </Badge>
+                    )}
+                  </div>
+                )}
+                <Button
+                  variant="ghost"
+                  className={`group/btn pointer-events-none ${
+                    isCompact ? "hidden" : isListLayout ? "w-auto mt-1 -ml-2" : "w-full mt-2"
+                  }`}
+                >
+                  <span>View Details</span>
+                  <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                </Button>
               </div>
-              {!isCompact && (
-                <p className={`text-sm text-muted-foreground ${isListLayout ? "line-clamp-1" : "line-clamp-2"}`}>
-                  {mosque.description}
-                </p>
+              {isListLayout && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleFavorite(mosque.id);
+                  }}
+                  className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center transition-all hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  aria-label={isLiked ? "Remove from list" : "Add to list"}
+                >
+                  <Heart
+                    className={`w-5 h-5 transition-colors ${
+                      isLiked ? "fill-primary text-primary" : "text-muted-foreground"
+                    }`}
+                  />
+                </button>
               )}
-              <div className={`flex items-center gap-4 text-sm ${isCompact ? "gap-2 text-xs" : ""}`}>
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Users className={isCompact ? "w-3 h-3" : "w-4 h-4"} />
-                  <span>{formatCapacity(mosque.capacity)} capacity</span>
-                </div>
-                <div className="text-muted-foreground">
-                  Est. {mosque.established}
-                </div>
-              </div>
-              {!isCompact && (
-                <div className="flex flex-wrap gap-2">
-                  {mosque.touristFriendly && (
-                    <Badge variant="secondary" className="text-xs">
-                      Tourist Friendly
-                    </Badge>
-                  )}
-                  {mosque.womenPrayerArea && (
-                    <Badge variant="secondary" className="text-xs">
-                      Women's Area
-                    </Badge>
-                  )}
-                </div>
-              )}
-              <Button
-                variant="ghost"
-                className={`group/btn pointer-events-none ${
-                  isCompact ? "hidden" : isListLayout ? "w-auto mt-1 -ml-2" : "w-full mt-2"
-                }`}
-              >
-                <span>View Details</span>
-                <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
-              </Button>
             </div>
           </article>
         </Link>
@@ -177,19 +206,58 @@ export const MosqueCard = ({ mosque, index, view = "grid" }: MosqueCardProps) =>
             Capacity: {formatCapacity(mosque.capacity)} · Est. {mosque.established}
           </p>
           <p className="text-sm text-foreground line-clamp-2">{mosque.significance}</p>
-          {(mosque.coordinates || mosque.location) && (
-            <a
-              href={getGoogleMapsUrl(mosque.coordinates ?? null, `${mosque.name}, ${mosque.location}, ${mosque.country}`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
-              aria-label="Open in Google Maps"
-            >
-              <Map className="h-3 w-3" />
-              Open in Maps
-            </a>
-          )}
+          {(mosque.coordinates || mosque.address || mosque.location) && (() => {
+            const addressStr = mosque.address
+              ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
+              : `${mosque.name}, ${mosque.location}, ${mosque.country}`;
+            const locationDisplay = mosque.address
+              ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
+              : mosque.coordinates
+                ? `${mosque.coordinates.lat}, ${mosque.coordinates.lng}`
+                : `${mosque.location}, ${mosque.country}`;
+            const googleUrl = getGoogleMapsUrl(mosque.coordinates ?? null, addressStr);
+            const appleUrl = getAppleMapsUrl(mosque.coordinates ?? null, addressStr);
+            return (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    type="button"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 text-xs text-primary hover:underline text-left max-w-full"
+                    aria-label="Address or coordinates – copy or open in maps"
+                  >
+                    <Map className="h-3 w-3 shrink-0" />
+                    <span className="truncate">{locationDisplay}</span>
+                    <ChevronDown className="h-3 w-3 shrink-0 opacity-70" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-52" onClick={(e) => e.stopPropagation()}>
+                  <DropdownMenuItem
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      await navigator.clipboard.writeText(locationDisplay);
+                      toast.success("Copied to clipboard");
+                    }}
+                  >
+                    <Copy className="h-3.5 w-3.5 mr-2" />
+                    {mosque.coordinates && !mosque.address ? "Copy coordinates" : "Copy address"}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <a href={googleUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                      <Map className="h-3.5 w-3.5 mr-2" />
+                      Google Maps
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <a href={appleUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                      <Map className="h-3.5 w-3.5 mr-2" />
+                      Apple Maps
+                    </a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            );
+          })()}
           <p className="text-xs text-primary font-medium">Click to open full page</p>
           </div>
         </div>

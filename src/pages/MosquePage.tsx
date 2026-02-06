@@ -6,12 +6,18 @@ import { getMosqueBySlug } from "@/data/mosques";
 import { MosqueSEO } from "@/components/MosqueSEO";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBucketList } from "@/hooks/useBucketList";
-import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink } from "lucide-react";
+import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
 import { getExploreUrl } from "@/lib/explore-url";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { getRegionForCountry } from "@/data/regions";
 
 function formatCapacity(capacity: number) {
@@ -53,6 +59,11 @@ export default function MosquePage() {
     : `${mosque.name}, ${mosque.location}, ${mosque.country}`;
   const googleMapsUrl = getGoogleMapsUrl(mosque.coordinates ?? null, address);
   const appleMapsUrl = getAppleMapsUrl(mosque.coordinates ?? null, address);
+  const locationDisplay = mosque.address
+    ? address
+    : mosque.coordinates
+      ? `${mosque.coordinates.lat}, ${mosque.coordinates.lng}`
+      : `${mosque.location}, ${mosque.country}`;
 
   return (
     <div className="min-h-screen bg-background">
@@ -224,28 +235,43 @@ export default function MosquePage() {
                   </Link>
                 )}
               </div>
-              <div className="print:hidden mt-3 flex flex-wrap gap-2">
-                <a
-                  href={googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
-                  aria-label="Open in Google Maps"
-                >
-                  <Map className="h-4 w-4" />
-                  Google Maps
-                </a>
-                <span className="text-muted-foreground">·</span>
-                <a
-                  href={appleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
-                  aria-label="Open in Apple Maps"
-                >
-                  <Map className="h-4 w-4" />
-                  Apple Maps
-                </a>
+              <div className="print:hidden mt-3 flex flex-wrap items-center gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded text-left max-w-full"
+                      aria-label="Address or coordinates – copy or open in maps"
+                    >
+                      <Map className="h-4 w-4 shrink-0" />
+                      <span className="truncate">{locationDisplay}</span>
+                      <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-70" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-56">
+                    <DropdownMenuItem
+                      onClick={async () => {
+                        await navigator.clipboard.writeText(locationDisplay);
+                        toast.success("Copied to clipboard");
+                      }}
+                    >
+                      <Copy className="h-4 w-4 mr-2" />
+                      {mosque.coordinates && !mosque.address ? "Copy coordinates" : "Copy address"}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
+                        <Map className="h-4 w-4 mr-2" />
+                        Open in Google Maps
+                      </a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <a href={appleMapsUrl} target="_blank" rel="noopener noreferrer">
+                        <Map className="h-4 w-4 mr-2" />
+                        Open in Apple Maps
+                      </a>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 {mosque.officialWebsite && (
                   <>
                     <span className="text-muted-foreground">·</span>

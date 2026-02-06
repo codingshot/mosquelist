@@ -2,6 +2,7 @@ import { mosques, getUniqueCountries, getUniqueArchitecturalStyles } from "@/dat
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
 import { filterMosquesByQuery } from "@/lib/search";
 import { MosqueCard } from "./MosqueCard";
+import { SwipeDeck } from "./SwipeDeck";
 import {
   Carousel,
   CarouselContent,
@@ -9,7 +10,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useSearchParams } from "react-router-dom";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { Link, useSearchParams } from "react-router-dom";
 import { useMemo, useCallback, useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Filter, LayoutGrid, List, AlignLeft, Smartphone, SlidersHorizontal, Search, X, ArrowUpDown, XCircle } from "lucide-react";
+import { Filter, LayoutGrid, List, AlignLeft, Smartphone, SlidersHorizontal, Search, X, ArrowUpDown, XCircle, MapPin } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -148,7 +150,10 @@ function useMosqueSearchParams() {
   };
 }
 
-export const MosqueGrid = () => {
+const PREVIEW_LIMIT = 20;
+
+export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => {
+  const isPreview = mode === "preview";
   const {
     query,
     filter,
@@ -322,6 +327,8 @@ export const MosqueGrid = () => {
     return sorted;
   }, [query, filter, country, region, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
+  const displayedMosques = isPreview ? filteredMosques.slice(0, PREVIEW_LIMIT) : filteredMosques;
+
   return (
     <section id="mosques" className="py-16 md:py-24 bg-paper-cream islamic-pattern scroll-mt-20">
       <div className="container mx-auto px-4">
@@ -335,21 +342,22 @@ export const MosqueGrid = () => {
           </p>
         </div>
 
-        {/* Search + filters row: mobile stacked, desktop inline */}
+        {/* Search + filters: hidden in preview mode to save space */}
+        {!isPreview && (
         <div className="print:hidden flex flex-col gap-4 mb-6 md:mb-8">
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center">
-            <div className="relative flex-1 w-full min-w-0">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-              <Input
-                ref={searchInputRef}
-                type="search"
-                placeholder="Search by name, city, country, region, style — Press / to focus"
-                value={searchInput}
-                onChange={(e) => setQueryDebounced(e.target.value)}
-                className="pl-9 pr-9 w-full"
-                aria-label="Search mosques by name, location, country, region, or description"
-                autoComplete="off"
-              />
+          {/* Search: full width, 44px min height for touch */}
+          <div className="relative w-full min-w-0">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Input
+              ref={searchInputRef}
+              type="search"
+              placeholder="Search by name, city, country, region, style — Press / to focus"
+              value={searchInput}
+              onChange={(e) => setQueryDebounced(e.target.value)}
+              className="pl-9 pr-9 w-full h-11 min-h-[44px] text-base sm:text-sm"
+              aria-label="Search mosques by name, location, country, region, or description"
+              autoComplete="off"
+            />
               {searchInput && (
                 <button
                   type="button"
@@ -361,53 +369,56 @@ export const MosqueGrid = () => {
                 </button>
               )}
             </div>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              <Filter className="w-5 h-5 text-muted-foreground shrink-0 hidden sm:block" aria-hidden />
-              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 touch-manipulation">
-                <Button
-                  variant={filter === "all" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setFilter("all")}
-                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "all" ? "gradient-gold text-primary-foreground" : ""}`}
-                >
-                  All
-                </Button>
-                <Button
-                  variant={filter === "holy" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setFilter("holy")}
-                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "holy" ? "gradient-gold text-primary-foreground" : ""}`}
-                >
-                  Holy Sites
-                </Button>
-                <Button
-                  variant={filter === "tourist" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setFilter("tourist")}
-                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}`}
-                >
-                  Tourist
-                </Button>
-                <Button
-                  variant={filter === "biggest" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setFilter("biggest")}
-                  className={`min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "biggest" ? "gradient-gold text-primary-foreground" : ""}`}
-                >
-                  Biggest
-                </Button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 w-full">
+              <div className="flex items-center gap-2 min-w-0 sm:flex-wrap">
+                <Filter className="w-5 h-5 text-muted-foreground shrink-0 hidden sm:block" aria-hidden />
+                <div className="flex overflow-x-auto gap-1.5 sm:gap-2 py-1 -mx-1 px-1 sm:overflow-visible sm:mx-0 sm:px-0 sm:flex-wrap touch-manipulation [scrollbar-width:thin]">
+                  <Button
+                    variant={filter === "all" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setFilter("all")}
+                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "all" ? "gradient-gold text-primary-foreground" : ""}`}
+                  >
+                    All
+                  </Button>
+                  <Button
+                    variant={filter === "holy" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setFilter("holy")}
+                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "holy" ? "gradient-gold text-primary-foreground" : ""}`}
+                  >
+                    Holy Sites
+                  </Button>
+                  <Button
+                    variant={filter === "tourist" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setFilter("tourist")}
+                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}`}
+                  >
+                    Tourist
+                  </Button>
+                  <Button
+                    variant={filter === "biggest" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setFilter("biggest")}
+                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "biggest" ? "gradient-gold text-primary-foreground" : ""}`}
+                  >
+                    Biggest
+                  </Button>
+                </div>
                 {hasActiveFilters && (
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="text-sm text-muted-foreground hover:text-foreground underline-offset-4 hover:underline touch-manipulation min-h-[44px] sm:min-h-0 sm:self-center"
+                    className="shrink-0 text-sm text-muted-foreground hover:text-foreground underline-offset-4 hover:underline touch-manipulation min-h-[44px] sm:min-h-0 sm:self-center"
                   >
                     Clear filters
                   </button>
                 )}
               </div>
-              <Select value={sort} onValueChange={(v) => setSort((v || "holyCapacity") as SortType)}>
-                <SelectTrigger className="w-[160px] h-11 min-h-[44px] shrink-0 touch-manipulation" aria-label="Sort by">
+              <div className="flex items-center gap-2 w-full sm:w-auto min-w-0">
+                <Select value={sort} onValueChange={(v) => setSort((v || "holyCapacity") as SortType)}>
+                  <SelectTrigger className="flex-1 min-w-[100px] sm:flex-none sm:w-[160px] h-11 min-h-[44px] touch-manipulation" aria-label="Sort by">
                   <ArrowUpDown className="mr-2 h-4 w-4 shrink-0" />
                   <SelectValue />
                 </SelectTrigger>
@@ -464,9 +475,9 @@ export const MosqueGrid = () => {
               </div>
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" size="sm" className="gap-2 md:shrink-0 relative">
+                  <Button variant="outline" size="sm" className="gap-2 h-11 min-h-[44px] shrink-0 relative">
                     <SlidersHorizontal className="w-4 h-4" />
-                    <span className="hidden sm:inline">Filters</span>
+                    <span>Filters</span>
                     {activeFilterCount > 0 && (
                       <Badge variant="secondary" className="ml-1 h-5 min-w-5 px-1.5 text-xs">
                         {activeFilterCount}
@@ -474,7 +485,7 @@ export const MosqueGrid = () => {
                     )}
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="w-full sm:max-w-sm overflow-y-auto">
+                <SheetContent side="left" className="w-[min(100vw-2rem,24rem)] max-w-[calc(100vw-2rem)] overflow-y-auto">
                   <SheetHeader>
                     <SheetTitle>Advanced filters</SheetTitle>
                   </SheetHeader>
@@ -636,97 +647,97 @@ export const MosqueGrid = () => {
                 </SheetContent>
               </Sheet>
               {hasActiveFilters && (
-                <Button variant="ghost" size="sm" className="gap-1.5 text-muted-foreground" onClick={clearAllFilters}>
+                <Button variant="ghost" size="sm" className="gap-1.5 min-h-[44px] text-muted-foreground" onClick={clearAllFilters}>
                   <XCircle className="w-4 h-4" />
-                  <span className="hidden sm:inline">Clear all</span>
+                  <span>Clear all</span>
                 </Button>
               )}
+              </div>
             </div>
-          </div>
 
-          {/* Active filter chips */}
+          {/* Active filter chips - wrap on mobile, touch-friendly remove */}
           {hasActiveFilters && (
             <div className="flex flex-wrap items-center gap-2 mt-3">
               {query && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
-                  &quot;{query}&quot;
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal max-w-full min-w-0">
+                  <span className="truncate max-w-[200px] sm:max-w-none">&quot;{query}&quot;</span>
                   <button
                     type="button"
                     onClick={clearSearch}
-                    className="rounded-full p-0.5 hover:bg-muted"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation"
                     aria-label="Remove search"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
               {filter !== "all" && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
                   {filter === "holy" ? "Holy Sites" : filter === "tourist" ? "Tourist" : "Biggest"}
                   <button
                     type="button"
                     onClick={() => setFilter("all")}
-                    className="rounded-full p-0.5 hover:bg-muted"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation"
                     aria-label="Remove filter"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
               {region && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
-                  {region}
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
+                  <span className="truncate max-w-[120px] sm:max-w-none">{region}</span>
                   <button
                     type="button"
                     onClick={() => setRegion("")}
-                    className="rounded-full p-0.5 hover:bg-muted"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
                     aria-label={`Remove region ${region}`}
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
               {country && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
-                  {country}
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
+                  <span className="truncate max-w-[120px] sm:max-w-none">{country}</span>
                   <button
                     type="button"
                     onClick={() => setCountry("")}
-                    className="rounded-full p-0.5 hover:bg-muted"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
                     aria-label={`Remove country ${country}`}
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
               {womenOnly && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
                   Women&apos;s area
                   <button
                     type="button"
                     onClick={() => setWomenOnly(false)}
-                    className="rounded-full p-0.5 hover:bg-muted"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
                     aria-label="Remove women's area filter"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
               {touristOnly && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
                   Tourist only
                   <button
                     type="button"
                     onClick={() => setTouristOnly(false)}
-                    className="rounded-full p-0.5 hover:bg-muted"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
                     aria-label="Remove tourist filter"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
               {(capMin || capMax) && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal">
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
                   Capacity {capMin && `≥${Number(capMin).toLocaleString()}`}
                   {capMin && capMax && " "}
                   {capMax && `≤${Number(capMax).toLocaleString()}`}
@@ -736,23 +747,23 @@ export const MosqueGrid = () => {
                       setCapMin("");
                       setCapMax("");
                     }}
-                    className="rounded-full p-0.5 hover:bg-muted"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
                     aria-label="Remove capacity filter"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
               {architecturalStyle && (
-                <Badge variant="secondary" className="pl-2 pr-1 py-1 gap-1 font-normal max-w-[180px]">
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal max-w-[180px] min-w-0">
                   <span className="truncate">{architecturalStyle}</span>
                   <button
                     type="button"
                     onClick={() => setArchitecturalStyle("")}
-                    className="rounded-full p-0.5 hover:bg-muted shrink-0"
+                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted shrink-0 touch-manipulation"
                     aria-label="Remove style filter"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </Badge>
               )}
@@ -760,6 +771,7 @@ export const MosqueGrid = () => {
           )}
 
         </div>
+        )}
 
         <p
           className="sr-only"
@@ -767,42 +779,27 @@ export const MosqueGrid = () => {
           aria-live="polite"
           aria-atomic="true"
         >
-          {filteredMosques.length === 0
+          {displayedMosques.length === 0
             ? "No mosques match your filters. Try adjusting search or filters."
-            : `${filteredMosques.length} mosque${filteredMosques.length === 1 ? "" : "s"} found.`}
+            : isPreview
+              ? `Showing ${displayedMosques.length} of ${filteredMosques.length} mosques.`
+              : `${filteredMosques.length} mosque${filteredMosques.length === 1 ? "" : "s"} found.`}
         </p>
 
-        {filteredMosques.length > 0 && (
+        {displayedMosques.length > 0 && (
           <p className="text-sm text-muted-foreground mb-4" aria-hidden="true">
-            {filteredMosques.length} mosque{filteredMosques.length === 1 ? "" : "s"} found
+            {isPreview
+              ? `Top ${displayedMosques.length} mosques`
+              : `${filteredMosques.length} mosque${filteredMosques.length === 1 ? "" : "s"} found`}
           </p>
         )}
 
         {view === "swipe" ? (
-          <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-                dragFree: false,
-                containScroll: "trimSnaps",
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-2 sm:-ml-4">
-                {filteredMosques.map((mosque, index) => (
-                  <CarouselItem key={mosque.id} className="pl-2 sm:pl-4 basis-full">
-                    <MosqueCard mosque={mosque} index={index} view="swipe" />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-2 sm:-left-4 h-12 w-12 min-h-[44px] min-w-[44px] touch-manipulation" aria-label="Previous mosque" />
-              <CarouselNext className="-right-2 sm:-right-4 h-12 w-12 min-h-[44px] min-w-[44px] touch-manipulation" aria-label="Next mosque" />
-            </Carousel>
-            <p className="text-center text-sm text-muted-foreground mt-3">
-              Swipe or use arrows to browse
-            </p>
-          </div>
+          <SwipeDeck
+            mosques={displayedMosques}
+            onLike={(mosque) => toggleFavorite(mosque.id)}
+            isFavorite={isFavorite}
+          />
         ) : (
           <div
             className={`grid gap-4 sm:gap-6 ${
@@ -813,13 +810,24 @@ export const MosqueGrid = () => {
                   : "grid-cols-1 max-w-3xl mx-auto"
             }`}
           >
-            {filteredMosques.map((mosque, index) => (
+            {displayedMosques.map((mosque, index) => (
               <MosqueCard key={mosque.id} mosque={mosque} index={index} view={view} />
             ))}
           </div>
         )}
 
-        {filteredMosques.length === 0 && (
+        {isPreview && displayedMosques.length > 0 && (
+          <div className="mt-8 text-center">
+            <Button size="lg" className="gap-2" asChild>
+              <Link to="/explore">
+                <MapPin className="w-4 h-4" />
+                See all mosques
+              </Link>
+            </Button>
+          </div>
+        )}
+
+        {displayedMosques.length === 0 && (
           <div className="text-center py-12 space-y-4">
             <p className="text-muted-foreground">
               No mosques match your filters.

@@ -54,7 +54,7 @@ export const HeroSection = () => {
               className="gradient-gold text-primary-foreground text-lg px-8 py-6 rounded-full hover:opacity-90 transition-all hover:scale-105"
               asChild
             >
-              <Link to="/#explore">
+              <Link to="/explore">
                 <MapPin className="w-5 h-5 mr-2" />
                 Explore Mosques
               </Link>
@@ -65,7 +65,7 @@ export const HeroSection = () => {
               className="text-lg px-8 py-6 rounded-full border-2 hover:bg-card"
               asChild
             >
-              <Link to="/#lists">
+              <Link to="/lists">
                 <Users className="w-5 h-5 mr-2" />
                 Start My List
               </Link>

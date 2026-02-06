@@ -44,9 +44,9 @@ const Index = () => {
       <main id="main-content">
         <HeroSection />
 
-        {/* Explore */}
+        {/* Explore - preview: top 20 + See all link */}
         <section id="explore" aria-labelledby="explore-heading" className="scroll-mt-20">
-          <MosqueGrid />
+          <MosqueGrid mode="preview" />
         </section>
 
         {/* Timeline - component has id="timeline" */}
