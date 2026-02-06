@@ -6,7 +6,14 @@ import {
   useState,
   useEffect,
 } from "react";
+import { mosques } from "@/data/mosques";
 import { getFavorites, setFavorites } from "@/lib/storage";
+
+const VALID_MOSQUE_IDS = new Set(mosques.map((m) => m.id));
+
+function getValidFavorites(): string[] {
+  return getFavorites().filter((id) => VALID_MOSQUE_IDS.has(id));
+}
 
 type FavoritesContextValue = {
   favoriteIds: Set<string>;
@@ -15,14 +22,33 @@ type FavoritesContextValue = {
   favoriteCount: number;
 };
 
+const FAVORITES_KEY = "mosquelist_favorites";
 const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
-  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(() => new Set(getFavorites()));
+  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(() => new Set(getValidFavorites()));
 
   useEffect(() => {
     setFavorites(Array.from(favoriteIds));
   }, [favoriteIds]);
+
+  useEffect(() => {
+    const handler = (e: StorageEvent) => {
+      if (e.key === FAVORITES_KEY && e.newValue != null) {
+        try {
+          const parsed = JSON.parse(e.newValue) as unknown;
+          const ids = Array.isArray(parsed)
+            ? (parsed as string[]).filter((id) => VALID_MOSQUE_IDS.has(id))
+            : [];
+          setFavoriteIds(new Set(ids));
+        } catch {
+          // ignore parse errors
+        }
+      }
+    };
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener("storage", handler);
+  }, []);
 
   const isFavorite = useCallback(
     (id: string) => favoriteIds.has(id),

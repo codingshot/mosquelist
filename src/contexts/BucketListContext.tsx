@@ -14,6 +14,8 @@ import {
   type BucketListItem,
 } from "@/lib/storage";
 
+const BUCKET_KEY = "mosquelist_bucket";
+
 const DEFAULT_LIST: BucketListItem[] = mosques
   .slice(0, 5)
   .map((m) => ({ mosqueId: m.id, visited: false }));
@@ -53,6 +55,30 @@ export function BucketListProvider({ children }: { children: React.ReactNode }) 
       if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
     };
   }, [bucketList]);
+
+  useEffect(() => {
+    const handler = (e: StorageEvent) => {
+      if (e.key === BUCKET_KEY && e.newValue != null) {
+        try {
+          const parsed = JSON.parse(e.newValue) as unknown;
+          if (!Array.isArray(parsed)) return;
+          const valid = parsed.filter(
+            (item: unknown): item is BucketListItem =>
+              typeof item === "object" &&
+              item != null &&
+              typeof (item as BucketListItem).mosqueId === "string" &&
+              typeof (item as BucketListItem).visited === "boolean" &&
+              mosques.some((m) => m.id === (item as BucketListItem).mosqueId)
+          );
+          setBucketListState(valid.length > 0 ? valid : DEFAULT_LIST);
+        } catch {
+          // ignore parse errors
+        }
+      }
+    };
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener("storage", handler);
+  }, []);
 
   const toggleVisited = useCallback((mosqueId: string) => {
     setBucketListState((prev) =>
