@@ -45,7 +45,8 @@ function getInitialBucketList(): BucketListItem[] {
 type BucketListContextValue = {
   bucketList: BucketListItem[];
   toggleVisited: (mosqueId: string) => void;
-  addToBucketList: (mosqueId: string) => void;
+  /** Returns true if the mosque was added, false if already in list or invalid id. */
+  addToBucketList: (mosqueId: string) => boolean;
   removeFromBucketList: (mosqueId: string) => void;
   reorderBucketList: (fromIndex: number, toIndex: number) => void;
   visitedCount: number;
@@ -104,12 +105,17 @@ export function BucketListProvider({ children }: { children: React.ReactNode }) 
     );
   }, []);
 
-  const addToBucketList = useCallback((mosqueId: string) => {
-    if (!mosques.some((m) => m.id === mosqueId)) return;
+  const bucketListRef = useRef(bucketList);
+  bucketListRef.current = bucketList;
+
+  const addToBucketList = useCallback((mosqueId: string): boolean => {
+    if (!mosques.some((m) => m.id === mosqueId)) return false;
+    if (bucketListRef.current.some((item) => item.mosqueId === mosqueId)) return false;
     setBucketListState((prev) => {
       if (prev.some((item) => item.mosqueId === mosqueId)) return prev;
       return [...prev, { mosqueId, visited: false }];
     });
+    return true;
   }, []);
 
   const removeFromBucketList = useCallback((mosqueId: string) => {

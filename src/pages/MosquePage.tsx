@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -6,7 +6,7 @@ import { getMosqueBySlug } from "@/data/mosques";
 import { MosqueSEO } from "@/components/MosqueSEO";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBucketList } from "@/hooks/useBucketList";
-import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown } from "lucide-react";
+import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown, Images } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +22,7 @@ import {
 import { getRegionForCountry } from "@/data/regions";
 import { getRelatedMosques } from "@/lib/related-mosques";
 import { getArchitectureStyleDescription } from "@/data/architecture-styles";
+import { ImageGallery } from "@/components/ImageGallery";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -57,6 +58,18 @@ export default function MosquePage() {
 
   const isLiked = isFavorite(mosque.id);
   const isInBucketList = bucketList.some((item) => item.mosqueId === mosque.id);
+  const galleryImages = useMemo(
+    () =>
+      mosque.imageUrl
+        ? [mosque.imageUrl, ...(mosque.galleryUrls ?? [])]
+        : [],
+    [mosque.imageUrl, mosque.galleryUrls]
+  );
+  const hasGallery = galleryImages.length > 1;
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const openGallery = useCallback(() => setGalleryOpen(true), []);
+  const closeGallery = useCallback(() => setGalleryOpen(false), []);
+
   const address = mosque.address
     ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
     : `${mosque.name}, ${mosque.location}, ${mosque.country}`;
@@ -121,8 +134,9 @@ export default function MosquePage() {
               size="sm"
               className="gap-2 min-h-[44px] touch-manipulation"
               onClick={() => {
-                addToBucketList(mosque.id);
-                toast.success(`Added ${mosque.name} to your bucket list`);
+                const added = addToBucketList(mosque.id);
+                if (added) toast.success(`Added ${mosque.name} to your list`);
+                else toast.info("Already in your list");
               }}
               aria-label="Add to bucket list"
             >
@@ -134,19 +148,53 @@ export default function MosquePage() {
 
         <article className="max-w-4xl">
           <div className="relative overflow-hidden rounded-xl border border-border bg-card mosque-card-shadow">
-            <div className="relative h-56 sm:h-72 md:h-80">
+            <div
+              className="relative h-56 sm:h-72 md:h-80 cursor-default"
+              onDoubleClick={hasGallery ? openGallery : undefined}
+              role={hasGallery ? "button" : undefined}
+              tabIndex={hasGallery ? 0 : undefined}
+              onClick={hasGallery ? undefined : undefined}
+              onKeyDown={
+                hasGallery
+                  ? (e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        openGallery();
+                      }
+                    }
+                  : undefined
+              }
+              aria-label={hasGallery ? "Double-click or press Enter to open image gallery" : undefined}
+            >
               <img
                 src={mosque.imageUrl?.trim() || "/placeholder.svg"}
                 alt={mosque.name}
                 loading="eager"
                 decoding="async"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover pointer-events-none select-none"
+                draggable={false}
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = "/placeholder.svg";
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
+              {hasGallery && (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  className="print:hidden absolute top-4 left-4 gap-1.5 bg-card/90 backdrop-blur-sm hover:bg-card min-h-[44px]"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openGallery();
+                  }}
+                  aria-label={`Open gallery (${galleryImages.length} images)`}
+                >
+                  <Images className="h-4 w-4" />
+                  Gallery ({galleryImages.length})
+                </Button>
+              )}
               <Button
                 type="button"
                 variant="secondary"
@@ -421,6 +469,16 @@ export default function MosquePage() {
             </div>
           </div>
         </article>
+
+        {hasGallery && (
+          <ImageGallery
+            images={galleryImages}
+            initialIndex={0}
+            open={galleryOpen}
+            onClose={closeGallery}
+            title={mosque.name}
+          />
+        )}
       </main>
       <Footer />
     </div>

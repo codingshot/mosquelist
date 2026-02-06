@@ -18,7 +18,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBucketList } from "@/hooks/useBucketList";
+import { toast } from "sonner";
 import {
   DndContext,
   closestCenter,
@@ -372,61 +374,120 @@ export const BucketList = () => {
                   <SheetHeader>
                     <SheetTitle>Add a mosque to your list</SheetTitle>
                   </SheetHeader>
-                  <div className="flex-1 overflow-y-auto py-4">
-                    {mosquesNotInList.length === 0 ? (
-                      <p className="text-muted-foreground text-center py-6">
-                        All {mosques.length} mosques are already in your list.{" "}
-                        <Link
-                          to="/explore"
-                          className="text-primary hover:underline"
-                          onClick={() => setAddSheetOpen(false)}
-                        >
-                          Browse the full mosque list
-                        </Link>
-                      </p>
-                    ) : (
-                      <ul className="space-y-2">
-                        {mosquesNotInList.map((mosque) => (
-                          <li key={mosque.id}>
-                            <div className="flex items-center gap-4 rounded-lg border border-border p-3 hover:bg-secondary/50">
-                              {mosque.imageUrl && (
-                                <div className="shrink-0 w-12 h-12 rounded-md overflow-hidden border border-border bg-muted">
-                                  <img
-                                    src={mosque.imageUrl}
-                                    alt=""
-                                    loading="lazy"
-                                    decoding="async"
-                                    className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                      e.currentTarget.onerror = null;
-                                      e.currentTarget.src = "/placeholder.svg";
-                                    }}
-                                  />
+                  <Tabs defaultValue="add" className="flex-1 flex flex-col min-h-0">
+                    <TabsList className="w-full grid grid-cols-2 shrink-0 mx-4 mt-2">
+                      <TabsTrigger value="add">Add from catalog</TabsTrigger>
+                      <TabsTrigger value="lists">Explore lists</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="add" className="flex-1 overflow-y-auto py-4 mt-0 bg-background data-[state=inactive]:hidden">
+                      {mosquesNotInList.length === 0 ? (
+                        <p className="text-muted-foreground text-center py-6 px-4">
+                          All {mosques.length} mosques are already in your list.{" "}
+                          <Link
+                            to="/explore"
+                            className="text-primary hover:underline"
+                            onClick={() => setAddSheetOpen(false)}
+                          >
+                            Browse the full mosque list
+                          </Link>
+                        </p>
+                      ) : (
+                        <ul className="space-y-2 px-4">
+                          {mosquesNotInList.map((mosque) => (
+                            <li key={mosque.id}>
+                              <div className="flex items-center gap-4 rounded-lg border border-border p-3 hover:bg-secondary/50">
+                                {mosque.imageUrl && (
+                                  <div className="shrink-0 w-12 h-12 rounded-md overflow-hidden border border-border bg-muted">
+                                    <img
+                                      src={mosque.imageUrl}
+                                      alt=""
+                                      loading="lazy"
+                                      decoding="async"
+                                      className="w-full h-full object-cover"
+                                      onError={(e) => {
+                                        e.currentTarget.onerror = null;
+                                        e.currentTarget.src = "/placeholder.svg";
+                                      }}
+                                    />
+                                  </div>
+                                )}
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-medium text-foreground truncate">
+                                    {mosque.name}
+                                  </p>
+                                  <p className="text-sm text-muted-foreground flex items-center gap-1">
+                                    <MapPin className="w-3 h-3 shrink-0" />
+                                    {mosque.location}, {mosque.country}
+                                  </p>
                                 </div>
-                              )}
-                              <div className="flex-1 min-w-0">
-                                <p className="font-medium text-foreground truncate">
-                                  {mosque.name}
-                                </p>
-                                <p className="text-sm text-muted-foreground flex items-center gap-1">
-                                  <MapPin className="w-3 h-3 shrink-0" />
-                                  {mosque.location}, {mosque.country}
-                                </p>
+                                <Button
+                                  size="sm"
+                                  className="shrink-0"
+                                  onClick={() => {
+                                    const added = addToBucketList(mosque.id);
+                                    if (added) toast.success("Added to your list");
+                                    else toast.info("Already in your list");
+                                  }}
+                                >
+                                  <Plus className="w-4 h-4 mr-1" />
+                                  Add
+                                </Button>
                               </div>
-                              <Button
-                                size="sm"
-                                className="shrink-0"
-                                onClick={() => addToBucketList(mosque.id)}
-                              >
-                                <Plus className="w-4 h-4 mr-1" />
-                                Add
-                              </Button>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </TabsContent>
+                    <TabsContent value="lists" className="flex-1 overflow-y-auto py-4 mt-0 bg-background data-[state=inactive]:hidden">
+                      <div className="px-4">
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Open a curated list to add mosques by holy sites, region, or theme.
+                        </p>
+                        <div className="rounded-lg border border-border overflow-hidden">
+                          <table className="w-full text-left">
+                            <thead>
+                              <tr className="bg-muted/50 border-b border-border">
+                                <th className="px-4 py-3 font-medium text-foreground">List</th>
+                                <th className="px-4 py-3 font-medium text-foreground hidden sm:table-cell">Description</th>
+                                <th className="px-4 py-3 font-medium text-foreground w-10"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {curatedLists.map((list) => (
+                                <tr
+                                  key={list.slug}
+                                  className="border-b border-border last:border-0 hover:bg-secondary/30"
+                                >
+                                  <td className="px-4 py-3">
+                                    <Link
+                                      to={`/lists/${list.slug}`}
+                                      onClick={() => setAddSheetOpen(false)}
+                                      className="font-medium text-foreground hover:text-primary hover:underline"
+                                    >
+                                      {list.name}
+                                    </Link>
+                                  </td>
+                                  <td className="px-4 py-3 text-sm text-muted-foreground hidden sm:table-cell line-clamp-1">
+                                    {list.description}
+                                  </td>
+                                  <td className="px-4 py-3">
+                                    <Link
+                                      to={`/lists/${list.slug}`}
+                                      onClick={() => setAddSheetOpen(false)}
+                                      className="inline-flex items-center justify-center w-9 h-9 rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                      aria-label={`Open ${list.name}`}
+                                    >
+                                      <ChevronRight className="w-4 h-4" />
+                                    </Link>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
                 </SheetContent>
               </Sheet>
             </div>
@@ -454,9 +515,9 @@ export const BucketList = () => {
               ))}
             </div>
             <Button variant="outline" size="sm" className="mt-4 gap-2 min-h-[44px] touch-manipulation" asChild>
-              <Link to="/lists">
+              <Link to="/bucket-list">
                 <List className="w-4 h-4" />
-                See all lists page
+                View my list
               </Link>
             </Button>
           </div>

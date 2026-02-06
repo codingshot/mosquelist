@@ -24,6 +24,7 @@ const lastmod = new Date().toISOString().slice(0, 10);
 const urls = [
   { loc: baseUrl, changefreq: "weekly", priority: "1.0" },
   { loc: `${baseUrl}/explore`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${baseUrl}/map`, changefreq: "weekly", priority: "0.8" },
   { loc: `${baseUrl}/lists`, changefreq: "weekly", priority: "0.8" },
   { loc: `${baseUrl}/timeline`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/bucket-list`, changefreq: "monthly", priority: "0.8" },

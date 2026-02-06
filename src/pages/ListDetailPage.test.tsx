@@ -29,7 +29,7 @@ describe("ListDetailPage", () => {
 
   it("has Add All and Add buttons when list has mosques not in bucket list", () => {
     renderListDetail("/lists/turkey");
-    expect(screen.getByRole("button", { name: /add all to my list/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /add all \d+ to my list/i })).toBeInTheDocument();
     const addButtons = screen.getAllByRole("button", { name: /^add$/i });
     expect(addButtons.length).toBeGreaterThan(0);
   });
@@ -48,5 +48,12 @@ describe("ListDetailPage", () => {
     const inListLinks = screen.getAllByRole("link", { name: /in list/i });
     expect(inListLinks.length).toBeGreaterThan(0);
     expect(inListLinks[0]).toHaveAttribute("href", "/bucket-list");
+  });
+
+  it("Add All to My List adds every mosque and shows View My List", () => {
+    renderListDetail("/lists/turkey");
+    const addAllBtn = screen.getByRole("button", { name: /add all \d+ to my list/i });
+    fireEvent.click(addAllBtn);
+    expect(screen.getByRole("link", { name: /view my list/i })).toHaveAttribute("href", "/bucket-list");
   });
 });

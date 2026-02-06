@@ -1,0 +1,28 @@
+# MosqueList — AI & Search Indexing
+
+MosqueList (https://mosquelist.com) is a travel and discovery site for the world's most significant and beautiful mosques. It helps users explore, plan, and track spiritual journeys and build a personal "bucket list" of mosques to visit.
+
+## What this site offers
+- **Explore**: Searchable catalog of mosques with details (location, capacity, history, architecture, visitor info).
+- **Curated lists**: Holy Sites (Mecca, Medina, Jerusalem), largest mosques, by country (Turkey, UAE, Malaysia, etc.).
+- **Map**: Interactive map of mosque locations.
+- **Timeline**: Key dates in mosque history and construction.
+- **My List (bucket list)**: Users can add mosques to a personal list and reorder; stored in browser.
+- **Guides**: Travel and visitor tips for mosque visits.
+
+## Key pages
+- Home: https://mosquelist.com
+- Explore (all mosques): https://mosquelist.com/explore
+- Map: https://mosquelist.com/map
+- Lists: https://mosquelist.com/lists
+- Timeline: https://mosquelist.com/timeline
+- Individual mosque pages: https://mosquelist.com/mosque/{id}
+- List detail pages: https://mosquelist.com/lists/{slug}
+
+## Structured data
+- Homepage: WebSite schema with SearchAction.
+- Mosque pages: Place schema (name, address, description, image, amenities).
+- List pages: ItemList schema with ListItem entries linking to Place pages.
+
+## Publisher
+ummah.build

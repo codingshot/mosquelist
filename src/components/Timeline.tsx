@@ -68,7 +68,7 @@ export const Timeline = () => {
                     <div className="bg-card rounded-lg shadow-lg border border-border mosque-card-shadow overflow-hidden">
                       <div className={`flex ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} ${hasImage ? "flex-row" : ""}`}>
                         {hasImage && (
-                          <div className="shrink-0 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-muted">
+                          <div className="shrink-0 w-24 sm:w-28 md:w-32 self-stretch min-h-0 overflow-hidden bg-muted">
                             <Link to={`/mosque/${event.mosqueId}`} className="block h-full w-full">
                               <img
                                 src={imageUrl}

@@ -1,7 +1,10 @@
+const FALLBACK_BG = "hsl(40, 30%, 97%)";
+
 export function LoadingScreen() {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-background"
+      style={{ backgroundColor: FALLBACK_BG }}
       aria-label="Loading"
     >
       <div className="relative h-16 w-16">

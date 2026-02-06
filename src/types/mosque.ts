@@ -16,6 +16,8 @@ export interface Mosque {
   significance: string;
   description: string;
   imageUrl: string;
+  /** Optional extra image URLs for gallery (main image is imageUrl). */
+  galleryUrls?: string[];
   isHolySite: boolean;
   architecturalStyle?: string;
   /** Extended architecture notes */
