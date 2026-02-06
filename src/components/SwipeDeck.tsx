@@ -18,7 +18,6 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
   const [index, setIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
-  const [exitDirection, setExitDirection] = useState<"left" | "right" | null>(null);
   const startXRef = useRef(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,7 +54,6 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
       setTimeout(() => {
         justSwipedRef.current = false;
       }, 400);
-      setExitDirection(direction);
       setIsExiting(true);
       const w = containerRef.current?.offsetWidth ?? 400;
       setDragX(direction === "right" ? w : -w);
@@ -64,7 +62,6 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
         setIndex((i) => (i < mosques.length - 1 ? i + 1 : i));
         setDragX(0);
         setIsExiting(false);
-        setExitDirection(null);
       }, 250);
     },
     [currentMosque, onLike, mosques.length],
@@ -119,6 +116,8 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) return;
       if (!currentMosque) return;
       if (e.key === "ArrowLeft") {
         e.preventDefault();

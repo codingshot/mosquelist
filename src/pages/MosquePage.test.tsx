@@ -24,7 +24,7 @@ describe("MosquePage", () => {
     renderMosquePage("/mosque/blue-mosque");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/Blue Mosque/i);
     expect(screen.getByRole("link", { name: /back to explore/i })).toBeInTheDocument();
-    expect(screen.getByText(/Turkey/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Turkey/).length).toBeGreaterThan(0);
   });
 
   it("shows Add to bucket list or In your bucket list", () => {

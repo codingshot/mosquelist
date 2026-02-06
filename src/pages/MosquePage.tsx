@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
+import { getLocationDisplay } from "@/lib/locationDisplay";
 import { getExploreUrl } from "@/lib/explore-url";
 import {
   DropdownMenu,
@@ -59,11 +60,7 @@ export default function MosquePage() {
     : `${mosque.name}, ${mosque.location}, ${mosque.country}`;
   const googleMapsUrl = getGoogleMapsUrl(mosque.coordinates ?? null, address);
   const appleMapsUrl = getAppleMapsUrl(mosque.coordinates ?? null, address);
-  const locationDisplay = mosque.address
-    ? address
-    : mosque.coordinates
-      ? `${mosque.coordinates.lat}, ${mosque.coordinates.lng}`
-      : `${mosque.location}, ${mosque.country}`;
+  const locationDisplay = getLocationDisplay(mosque);
 
   return (
     <div className="min-h-screen bg-background">

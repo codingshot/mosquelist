@@ -11,6 +11,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
+import { getLocationDisplay } from "@/lib/locationDisplay";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -210,11 +211,7 @@ export const MosqueCard = ({ mosque, index, view = "grid" }: MosqueCardProps) =>
             const addressStr = mosque.address
               ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
               : `${mosque.name}, ${mosque.location}, ${mosque.country}`;
-            const locationDisplay = mosque.address
-              ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
-              : mosque.coordinates
-                ? `${mosque.coordinates.lat}, ${mosque.coordinates.lng}`
-                : `${mosque.location}, ${mosque.country}`;
+            const locationDisplay = getLocationDisplay(mosque);
             const googleUrl = getGoogleMapsUrl(mosque.coordinates ?? null, addressStr);
             const appleUrl = getAppleMapsUrl(mosque.coordinates ?? null, addressStr);
             return (

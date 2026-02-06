@@ -190,6 +190,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
   const countries = useMemo(() => getUniqueCountries(), []);
   const regions = useMemo(() => getUniqueRegions(countries), [countries]);
   const styles = useMemo(() => getUniqueArchitecturalStyles(), []);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const [searchInput, setSearchInput] = useState(query);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -471,6 +472,11 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   aria-pressed={view === "swipe"}
                 >
                   <Smartphone className="w-5 h-5" />
+                </Button>
+                <Button variant="outline" size="icon" className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation" asChild aria-label="View on map">
+                  <Link to="/map">
+                    <MapPin className="w-5 h-5" />
+                  </Link>
                 </Button>
               </div>
               <Sheet>
