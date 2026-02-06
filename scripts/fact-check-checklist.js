@@ -25,12 +25,14 @@ const withAddress = mosques.filter((m) => m.address && m.address.trim()).length;
 const withHistory = mosques.filter((m) => m.history && m.history.trim()).length;
 const withTourismNotes = mosques.filter((m) => m.tourismNotes && m.tourismNotes.trim()).length;
 const withArchNotes = mosques.filter((m) => m.architectureNotes && m.architectureNotes.trim()).length;
+const withImage = mosques.filter((m) => m.imageUrl && m.imageUrl.trim()).length;
+const withStyle = mosques.filter((m) => m.architecturalStyle && m.architecturalStyle.trim()).length;
 
 console.log("# Mosque fact-check checklist\n");
-console.log("Use this list when re-verifying. Update docs/skills.md with corrections and date.\n");
-console.log(`Summary: ${mosques.length} mosques | ${withAddress} with address | ${withHistory} with history | ${withTourismNotes} with tourismNotes | ${withArchNotes} with architectureNotes\n`);
-console.log("| # | Name | id | Capacity | Area (m²) | Established | Address |");
-console.log("|---|------|-----|----------|-----------|-------------|--------|");
+console.log("Use this list when re-verifying. Architecture reference: docs/architecture-patterns.md.\n");
+console.log(`Summary: ${mosques.length} mosques | ${withAddress} address | ${withHistory} history | ${withTourismNotes} tourismNotes | ${withArchNotes} architectureNotes | ${withImage} imageUrl | ${withStyle} architecturalStyle\n`);
+console.log("| # | Name | id | Capacity | Area (m²) | Established | Address | Image | Style |");
+console.log("|---|------|-----|----------|-----------|-------------|--------|-------|-------|");
 
 mosques.forEach((m, i) => {
   const name = (m.name || "").replace(/\|/g, " ").slice(0, 30);
@@ -38,7 +40,21 @@ mosques.forEach((m, i) => {
   const area = (m.area ?? 0).toLocaleString();
   const est = (m.established || "").replace(/\|/g, " ");
   const addr = m.address ? "✓" : "—";
-  console.log(`| ${i + 1} | ${name} | ${m.id} | ${cap} | ${area} | ${est} | ${addr} |`);
+  const img = m.imageUrl && m.imageUrl.trim() ? "✓" : "—";
+  const style = (m.architecturalStyle || "").replace(/\|/g, " ").slice(0, 12);
+  console.log(`| ${i + 1} | ${name} | ${m.id} | ${cap} | ${area} | ${est} | ${addr} | ${img} | ${style} |`);
 });
 
-console.log(`\nTotal: ${mosques.length} mosques. Source hierarchy: docs/skills.md.`);
+console.log(`\nTotal: ${mosques.length} mosques. Source hierarchy: docs/mosque-data-prompt.md.`);
+
+// Gaps: mosques missing key fields (prioritize for fact-check)
+const missingAddress = mosques.filter((m) => !m.address || !m.address.trim()).map((m) => m.id);
+const missingHistory = mosques.filter((m) => !m.history || !m.history.trim()).map((m) => m.id);
+const missingTourism = mosques.filter((m) => !m.tourismNotes || !m.tourismNotes.trim()).map((m) => m.id);
+const missingArchNotes = mosques.filter((m) => !m.architectureNotes || !m.architectureNotes.trim()).map((m) => m.id);
+
+console.log("\n## Gaps (missing fields)\n");
+console.log(`- **Address** (${missingAddress.length}): ${missingAddress.slice(0, 15).join(", ")}${missingAddress.length > 15 ? "…" : ""}`);
+console.log(`- **History** (${missingHistory.length}): ${missingHistory.slice(0, 15).join(", ")}${missingHistory.length > 15 ? "…" : ""}`);
+console.log(`- **Tourism notes** (${missingTourism.length}): ${missingTourism.slice(0, 15).join(", ")}${missingTourism.length > 15 ? "…" : ""}`);
+console.log(`- **Architecture notes** (${missingArchNotes.length}): ${missingArchNotes.slice(0, 15).join(", ")}${missingArchNotes.length > 15 ? "…" : ""}`);

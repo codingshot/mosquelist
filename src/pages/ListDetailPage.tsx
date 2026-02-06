@@ -98,7 +98,7 @@ export default function ListDetailPage() {
         <Navigation />
         <main
           id="main-content"
-          className="container mx-auto px-4 py-24 text-center"
+          className="container mx-auto px-4 pt-16 pb-24 text-center"
         >
           <h1 className="font-serif text-2xl font-bold text-foreground">
             List not found
@@ -123,7 +123,7 @@ export default function ListDetailPage() {
         path={`/lists/${list.slug}`}
       />
       <Navigation />
-      <main id="main-content">
+      <main id="main-content" className="pt-16">
         <section className="py-16 md:py-24 bg-paper-cream islamic-pattern">
           <div className="container mx-auto px-4">
             <Button variant="ghost" asChild className="-ml-2 mb-6 gap-2">
@@ -265,6 +265,8 @@ export default function ListDetailPage() {
                         <img
                           src={mosque.imageUrl}
                           alt=""
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             e.currentTarget.onerror = null;

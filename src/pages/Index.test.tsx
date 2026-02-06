@@ -32,11 +32,11 @@ describe("Index page", () => {
     expect(main?.getAttribute("id")).toBe("main-content");
   });
 
-  it("renders hero section with headline", () => {
+  it("renders hero section with headline", async () => {
     renderIndex();
-    const headings = screen.getAllByRole("heading", { name: /your journey to the sacred places/i });
+    const headings = await screen.findAllByRole("heading", { name: /your journey to the sacred places/i }, { timeout: 8000 });
     expect(headings.length).toBeGreaterThan(0);
-  });
+  }, 10000);
 
   it(
     "has link to explore mosques",

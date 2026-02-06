@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { BucketListProvider } from "@/contexts/BucketListContext";
@@ -38,5 +38,15 @@ describe("ListDetailPage", () => {
     renderListDetail("/lists/invalid-slug-xyz");
     expect(screen.getByRole("heading", { level: 1, name: /not found/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /browse lists/i })).toHaveAttribute("href", "/lists");
+  });
+
+  it("add to list: clicking Add adds mosque and shows In List", () => {
+    renderListDetail("/lists/turkey");
+    const addButtons = screen.getAllByRole("button", { name: /^add$/i });
+    expect(addButtons.length).toBeGreaterThan(0);
+    fireEvent.click(addButtons[0]);
+    const inListLinks = screen.getAllByRole("link", { name: /in list/i });
+    expect(inListLinks.length).toBeGreaterThan(0);
+    expect(inListLinks[0]).toHaveAttribute("href", "/bucket-list");
   });
 });

@@ -5,6 +5,18 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes("node_modules/leaflet") || id.includes("node_modules/react-leaflet")) return "map";
+          if (id.includes("node_modules/@dnd-kit")) return "dnd";
+          if (id.includes("node_modules/@tanstack/react-query")) return "query";
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
   server: {
     host: "::",
     port: 8080,

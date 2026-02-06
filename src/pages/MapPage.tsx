@@ -6,8 +6,8 @@ import { BackToTop } from "@/components/BackToTop";
 import { PageSEO } from "@/components/PageSEO";
 import { mosques } from "@/data/mosques";
 import { getUniqueCountries } from "@/data/mosques";
-import { getUniqueRegions, getRegionForCountry, REGIONS } from "@/data/regions";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { getRegionForCountry, REGIONS } from "@/data/regions";
+import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from "react-leaflet";
 import type { LatLngBoundsExpression } from "leaflet";
 import L from "leaflet";
 import { Button } from "@/components/ui/button";
@@ -18,9 +18,68 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { MapPin, ArrowLeft } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { MapPin, ArrowLeft, Users, Star } from "lucide-react";
+import type { Mosque } from "@/types/mosque";
 
 import "leaflet/dist/leaflet.css";
+
+function formatCapacity(capacity: number) {
+  if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
+  if (capacity >= 1_000) return `${(capacity / 1_000).toFixed(0)}K`;
+  return String(capacity);
+}
+
+/** Hover card content for a mosque (used in map tooltip and list cards) */
+function MosqueMapCardContent({ mosque, compact = false }: { mosque: Mosque; compact?: boolean }) {
+  const imgSrc = mosque.imageUrl?.trim() || "/placeholder.svg";
+  return (
+    <div className={compact ? "flex gap-3" : "space-y-2"}>
+      {!compact && (
+        <div className="relative h-28 w-full overflow-hidden rounded-md bg-muted">
+          <img
+            src={imgSrc}
+            alt=""
+            className="h-full w-full object-cover"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "/placeholder.svg";
+            }}
+          />
+        </div>
+      )}
+      <div className={compact ? "min-w-0 flex-1" : ""}>
+        <p className="font-semibold text-foreground leading-tight">{mosque.name}</p>
+        <p className="text-xs text-muted-foreground mt-0.5">
+          {mosque.location}, {mosque.country}
+        </p>
+        <p className="text-xs text-muted-foreground mt-1">
+          <Users className="h-3 w-3 inline mr-0.5" />
+          {formatCapacity(mosque.capacity)} · {mosque.established}
+        </p>
+        {mosque.isHolySite && (
+          <span className="inline-flex items-center gap-0.5 text-xs text-primary mt-1">
+            <Star className="h-3 w-3" />
+            Holy site
+          </span>
+        )}
+      </div>
+      {compact && (
+        <div className="shrink-0 w-14 h-14 rounded-md overflow-hidden bg-muted">
+          <img
+            src={imgSrc}
+            alt=""
+            className="h-full w-full object-cover"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "/placeholder.svg";
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 const DEFAULT_CENTER: [number, number] = [20, 40];
 const DEFAULT_ZOOM = 2;
@@ -114,19 +173,19 @@ export default function MapPage() {
               </Link>
             </Button>
             <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between mb-6">
-              <div>
-                <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
+              <div className="min-w-0">
+                <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
                   Mosque Map
                 </h1>
-                <p className="mt-1 text-muted-foreground">
+                <p className="mt-1 text-sm sm:text-base text-muted-foreground">
                   {filteredMosques.length} mosque{filteredMosques.length !== 1 ? "s" : ""} with locations
                   {mosquesWithCoords.length < mosques.length &&
                     ` (${mosques.length - mosquesWithCoords.length} without coordinates)`}
                 </p>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 w-full sm:w-auto">
                 <Select value={region || "all"} onValueChange={(v) => setRegion(v === "all" ? "" : v)}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full sm:w-[180px] min-h-[44px] touch-manipulation">
                     <SelectValue placeholder="Region" />
                   </SelectTrigger>
                   <SelectContent>
@@ -139,7 +198,7 @@ export default function MapPage() {
                   </SelectContent>
                 </Select>
                 <Select value={country || "all"} onValueChange={(v) => setCountry(v === "all" ? "" : v)}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full sm:w-[180px] min-h-[44px] touch-manipulation">
                     <SelectValue placeholder="Country" />
                   </SelectTrigger>
                   <SelectContent>
@@ -154,7 +213,7 @@ export default function MapPage() {
               </div>
             </div>
 
-            <div className="rounded-xl overflow-hidden border border-border bg-card shadow-lg min-h-[500px] h-[60vh] max-h-[800px]">
+            <div className="rounded-xl overflow-hidden border border-border bg-card shadow-lg min-h-[400px] sm:min-h-[500px] h-[50vh] sm:h-[60vh] max-h-[800px] touch-none sm:touch-auto">
               <MapContainer
                 center={DEFAULT_CENTER}
                 zoom={DEFAULT_ZOOM}
@@ -175,6 +234,17 @@ export default function MapPage() {
                     key={mosque.id}
                     position={[mosque.coordinates.lat, mosque.coordinates.lng]}
                   >
+                    <Tooltip
+                      permanent={false}
+                      direction="top"
+                      offset={[0, -8]}
+                      opacity={0.98}
+                      className="map-marker-tooltip !border-border !bg-card !text-card-foreground !shadow-lg !rounded-lg !p-0 !max-w-[240px]"
+                    >
+                      <div className="p-2" style={{ width: 220 }}>
+                        <MosqueMapCardContent mosque={mosque} />
+                      </div>
+                    </Tooltip>
                     <Popup>
                       <div className="min-w-[200px]">
                         <p className="font-semibold text-foreground">{mosque.name}</p>
@@ -193,6 +263,68 @@ export default function MapPage() {
                 ))}
               </MapContainer>
             </div>
+
+            {/* Cards for all mosques currently shown on the map */}
+            {filteredMosques.length > 0 && (
+              <div className="mt-10">
+                <h2 className="font-serif text-xl font-semibold text-foreground mb-4">
+                  Mosques on this map ({filteredMosques.length})
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {filteredMosques.map((mosque) => (
+                    <Link
+                      key={mosque.id}
+                      to={`/mosque/${mosque.id}`}
+                      className="group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-xl"
+                    >
+                      <Card className="h-full overflow-hidden transition-shadow hover:shadow-lg group-hover:border-primary/30">
+                        <CardContent className="p-0">
+                          <div className="relative h-36 overflow-hidden bg-muted">
+                            <img
+                              src={mosque.imageUrl?.trim() || "/placeholder.svg"}
+                              alt=""
+                              className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                              loading="lazy"
+                              decoding="async"
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/placeholder.svg";
+                              }}
+                            />
+                            <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
+                              {mosque.isHolySite && (
+                                <span className="inline-flex items-center gap-0.5 rounded bg-primary px-1.5 py-0.5 text-xs font-medium text-primary-foreground">
+                                  <Star className="h-3 w-3" />
+                                  Holy site
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="p-3">
+                            <p className="font-semibold text-foreground truncate group-hover:text-primary">
+                              {mosque.name}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              {mosque.location}, {mosque.country}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              <Users className="h-3 w-3 inline mr-0.5" />
+                              {formatCapacity(mosque.capacity)} · {mosque.established}
+                            </p>
+                          </div>
+                        </CardContent>
+                        <CardFooter className="py-2 px-3 border-t border-border">
+                          <span className="text-xs font-medium text-primary flex items-center gap-1">
+                            <MapPin className="h-3 w-3" />
+                            View mosque
+                          </span>
+                        </CardFooter>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
       </main>

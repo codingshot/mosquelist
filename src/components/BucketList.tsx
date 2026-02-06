@@ -1,7 +1,8 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { mosques } from "@/data/mosques";
-import { Check, Plus, MapPin, Plane, X, GripVertical, ArrowUpDown } from "lucide-react";
+import { curatedLists } from "@/data/lists";
+import { Check, Plus, MapPin, Plane, X, GripVertical, ArrowUpDown, List, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -393,6 +394,8 @@ export const BucketList = () => {
                                   <img
                                     src={mosque.imageUrl}
                                     alt=""
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover"
                                     onError={(e) => {
                                       e.currentTarget.onerror = null;
@@ -427,6 +430,35 @@ export const BucketList = () => {
                 </SheetContent>
               </Sheet>
             </div>
+          </div>
+
+          {/* Other lists */}
+          <div className="mt-8 rounded-xl border border-border bg-card p-6 mosque-card-shadow">
+            <h3 className="font-semibold text-foreground mb-1 flex items-center gap-2">
+              <List className="w-4 h-4 text-primary" />
+              Browse other lists
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Add mosques from curated lists by holy sites, region, or theme.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {curatedLists.map((list) => (
+                <Link
+                  key={list.slug}
+                  to={`/lists/${list.slug}`}
+                  className="inline-flex items-center gap-1 rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium text-foreground hover:border-primary/50 hover:bg-secondary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[44px] touch-manipulation"
+                >
+                  {list.name}
+                  <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
+                </Link>
+              ))}
+            </div>
+            <Button variant="outline" size="sm" className="mt-4 gap-2 min-h-[44px] touch-manipulation" asChild>
+              <Link to="/lists">
+                <List className="w-4 h-4" />
+                See all lists page
+              </Link>
+            </Button>
           </div>
 
           {/* Note */}

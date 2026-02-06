@@ -202,6 +202,24 @@
       "name": "Philippines",
       "description": "Major mosques in the Philippines.",
       "mosqueIds": ["sultan-haji-hassanal-bolkiah-mosque"]
+    },
+    {
+      "slug": "uzbekistan",
+      "name": "Uzbekistan",
+      "description": "Historic Silk Road mosques in Uzbekistan.",
+      "mosqueIds": ["kalon-mosque-bukhara"]
+    },
+    {
+      "slug": "kosovo",
+      "name": "Kosovo",
+      "description": "Ottoman and Islamic heritage in Kosovo.",
+      "mosqueIds": ["imperial-mosque-pristina"]
+    },
+    {
+      "slug": "albania",
+      "name": "Albania",
+      "description": "Historic mosques in Albania.",
+      "mosqueIds": ["ethem-bey-mosque"]
     }
   ]
 }

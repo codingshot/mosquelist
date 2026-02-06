@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -20,6 +20,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getRegionForCountry } from "@/data/regions";
+import { getRelatedMosques } from "@/lib/related-mosques";
+import { getArchitectureStyleDescription } from "@/data/architecture-styles";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -61,6 +63,7 @@ export default function MosquePage() {
   const googleMapsUrl = getGoogleMapsUrl(mosque.coordinates ?? null, address);
   const appleMapsUrl = getAppleMapsUrl(mosque.coordinates ?? null, address);
   const locationDisplay = getLocationDisplay(mosque);
+  const relatedMosques = useMemo(() => getRelatedMosques(mosque, 6), [mosque]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -68,7 +71,7 @@ export default function MosquePage() {
       <Navigation />
       <main id="main-content" className="container mx-auto px-4 pb-16 pt-24">
         <div className="print:hidden mb-6 flex flex-wrap items-center gap-2">
-          <Button variant="ghost" asChild className="-ml-2 gap-2">
+          <Button variant="ghost" asChild className="-ml-2 gap-2 min-h-[44px] touch-manipulation">
             <Link to="/explore">
               <ArrowLeft className="h-4 w-4" />
               Back to Explore
@@ -78,7 +81,7 @@ export default function MosquePage() {
             type="button"
             variant="outline"
             size="sm"
-            className="gap-2"
+            className="gap-2 min-h-[44px] touch-manipulation"
             onClick={async () => {
               const url = window.location.origin + "/mosque/" + mosque.id;
               const title = `${mosque.name} – MosqueList`;
@@ -108,7 +111,7 @@ export default function MosquePage() {
             Share
           </Button>
           {isInBucketList ? (
-            <Button variant="secondary" size="sm" className="gap-2" asChild>
+            <Button variant="secondary" size="sm" className="gap-2 min-h-[44px] touch-manipulation" asChild>
               <Link to="/bucket-list">In your bucket list</Link>
             </Button>
           ) : (
@@ -116,7 +119,7 @@ export default function MosquePage() {
               type="button"
               variant="secondary"
               size="sm"
-              className="gap-2"
+              className="gap-2 min-h-[44px] touch-manipulation"
               onClick={() => {
                 addToBucketList(mosque.id);
                 toast.success(`Added ${mosque.name} to your bucket list`);
@@ -133,8 +136,10 @@ export default function MosquePage() {
           <div className="relative overflow-hidden rounded-xl border border-border bg-card mosque-card-shadow">
             <div className="relative h-56 sm:h-72 md:h-80">
               <img
-                src={mosque.imageUrl}
+                src={mosque.imageUrl?.trim() || "/placeholder.svg"}
                 alt={mosque.name}
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
@@ -146,7 +151,7 @@ export default function MosquePage() {
                 type="button"
                 variant="secondary"
                 size="icon"
-                className="print:hidden absolute top-4 right-4 h-10 w-10 rounded-full bg-card/90 backdrop-blur-sm hover:bg-card"
+                className="print:hidden absolute top-4 right-4 h-11 w-11 min-h-[44px] min-w-[44px] rounded-full bg-card/90 backdrop-blur-sm hover:bg-card touch-manipulation"
                 onClick={() => toggleFavorite(mosque.id)}
                 aria-label={isLiked ? "Remove from favorites" : "Add to favorites"}
               >
@@ -225,7 +230,8 @@ export default function MosquePage() {
                 {mosque.architecturalStyle && (
                   <Link
                     to={getExploreUrl({ style: mosque.architecturalStyle })}
-                    className="flex items-center gap-1 text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                    title={getArchitectureStyleDescription(mosque.architecturalStyle) ?? undefined}
+                    className="inline-flex items-center gap-1 text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded min-h-[44px] touch-manipulation"
                   >
                     <Building2 className="h-4 w-4 shrink-0" />
                     {mosque.architecturalStyle}
@@ -237,7 +243,7 @@ export default function MosquePage() {
                   <DropdownMenuTrigger asChild>
                     <button
                       type="button"
-                      className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded text-left max-w-full"
+                      className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded text-left max-w-full min-h-[44px] touch-manipulation"
                       aria-label="Address or coordinates – copy or open in maps"
                     >
                       <Map className="h-4 w-4 shrink-0" />
@@ -356,6 +362,57 @@ export default function MosquePage() {
                             {f}
                           </Link>
                         </Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {relatedMosques.length > 0 && (
+                <div className="mt-10 pt-8 border-t border-border">
+                  <h2 className="font-serif text-xl font-semibold text-foreground">
+                    Related mosques
+                  </h2>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Similar by location, style, or size
+                  </p>
+                  <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {relatedMosques.map((related) => (
+                      <li key={related.id}>
+                        <Link
+                          to={`/mosque/${related.id}`}
+                          className="group flex gap-3 rounded-xl border border-border bg-card p-3 transition-colors hover:border-primary/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-xl"
+                        >
+                          {related.imageUrl && (
+                            <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
+                              <img
+                                src={related.imageUrl}
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                                className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                                onError={(e) => {
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = "/placeholder.svg";
+                                }}
+                              />
+                            </div>
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <p className="font-medium text-foreground truncate group-hover:text-primary">
+                              {related.name}
+                            </p>
+                            <p className="text-xs text-muted-foreground truncate">
+                              {related.location}, {related.country}
+                            </p>
+                            {related.isHolySite && (
+                              <span className="mt-1 inline-flex items-center gap-0.5 text-xs text-primary">
+                                <Star className="h-3 w-3" />
+                                Holy site
+                              </span>
+                            )}
+                          </div>
+                        </Link>
                       </li>
                     ))}
                   </ul>

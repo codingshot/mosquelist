@@ -499,7 +499,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     <div className="space-y-2">
                       <Label>Region</Label>
                       <Select value={region || "all"} onValueChange={(v) => setRegion(v === "all" ? "" : v)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="min-h-[44px] touch-manipulation">
                           <SelectValue placeholder="Any region" />
                         </SelectTrigger>
                         <SelectContent>
@@ -515,7 +515,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     <div className="space-y-2">
                       <Label>Country</Label>
                       <Select value={country || "all"} onValueChange={(v) => setCountry(v === "all" ? "" : v)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="min-h-[44px] touch-manipulation">
                           <SelectValue placeholder="Any country" />
                         </SelectTrigger>
                         <SelectContent>
@@ -530,11 +530,14 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     </div>
                     <div className="space-y-2">
                       <Label>Architectural style</Label>
+                      <p className="text-xs text-muted-foreground">
+                        Filter by regional/historical style (see About for reference).
+                      </p>
                       <Select
                         value={architecturalStyle || "all"}
                         onValueChange={(v) => setArchitecturalStyle(v === "all" ? "" : v)}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="min-h-[44px] touch-manipulation">
                           <SelectValue placeholder="Any style" />
                         </SelectTrigger>
                         <SelectContent>

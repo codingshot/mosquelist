@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import type { Mosque } from "@/types/mosque";
 import { Link } from "react-router-dom";
 import { Heart, MapPin, Users, Star, ChevronRight, Map, Copy, ChevronDown } from "lucide-react";
@@ -32,7 +32,7 @@ function formatCapacity(capacity: number) {
   return `${(capacity / 1000).toFixed(0)}K`;
 }
 
-export const MosqueCard = ({ mosque, index, view = "grid" }: MosqueCardProps) => {
+export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid" }: MosqueCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const isLiked = isFavorite(mosque.id);
   const [popupImageError, setPopupImageError] = useState(false);
@@ -261,4 +261,4 @@ export const MosqueCard = ({ mosque, index, view = "grid" }: MosqueCardProps) =>
       </HoverCardContent>
     </HoverCard>
   );
-};
+});

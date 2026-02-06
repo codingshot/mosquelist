@@ -1223,7 +1223,7 @@
       "description": "Jamkaran Mosque is a large mosque complex on the outskirts of Qom, frequently visited by pilgrims and known for its spacious courtyards and prayer halls.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jamkaran_Mosque-3855.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Persian",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1275,7 +1275,7 @@
       "description": "The Umayyad Mosque in Damascus is a major early Islamic monument known for its large courtyard, prayer hall, and rich historical associations.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Umayyad_Mosque%2C_Damascus%2C_Syria.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Umayyad",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1327,7 +1327,7 @@
       "description": "Çamlıca Mosque is a large hilltop mosque in Istanbul that combines traditional Ottoman-inspired elements with modern amenities and extensive public spaces.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Çamlıca_Mosque.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Ottoman",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1405,7 +1405,7 @@
       "description": "Al-Akbar Mosque in Surabaya is a prominent mosque with a large dome and minaret, serving as a key religious center in East Java.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Al_Akbar_Surabaya.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1457,7 +1457,7 @@
       "description": "Jamia Masjid in Srinagar is a timber-rich mosque with a large courtyard and characteristic Kashmiri architecture, central to religious life in the old city.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jamia_Masjid_Srinagar.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1535,7 +1535,7 @@
       "description": "The 1st November of 1954 Great Mosque in Batna is a sizeable modern mosque built to commemorate a key date in Algerian history.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mosquée_du_1er_novembre_1954%2C_Batna.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Moorish",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1561,7 +1561,7 @@
       "description": "Sabancı Central Mosque stands by the Seyhan River in Adana and features a large central dome and six slender minarets inspired by classical Ottoman mosque design.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sabanci_Merkez_Camii.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Ottoman",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1587,7 +1587,7 @@
       "description": "At-Tin Mosque is a spacious mosque complex in Jakarta with a distinctive dome and landscaped grounds used for religious and community activities.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_At-Tin%2C_Jakarta.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1639,7 +1639,7 @@
       "description": "Selahaddin Eyyubi Mosque is a spacious contemporary mosque complex in Diyarbakır built to host large congregations and religious events.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Selahaddin_Eyyubi_Camii%2C_Diyarbakır.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Ottoman",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1696,7 +1696,7 @@
       "description": "Jakarta Islamic Center is a multi-purpose complex incorporating a large mosque and facilities for Islamic education and community development.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jakarta_Islamic_Center.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1748,7 +1748,7 @@
       "description": "Dian Al-Mahri Mosque is a popular mosque complex near Jakarta featuring golden domes and landscaped grounds that attract worshippers and visitors.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Dian_Al-Mahri.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1774,7 +1774,7 @@
       "description": "The Grand Mosque of Conakry is a major national mosque complex in Guinea built to host large congregations for Friday and Eid prayers.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Grande_Mosquée_de_Conakry.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Sudano-Sahelian",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1800,7 +1800,7 @@
       "description": "The Grand Mosque of West Sumatra in Padang combines modern construction with traditional Minangkabau roof forms in a large coastal mosque complex.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Raya_Sumatera_Barat.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1826,7 +1826,7 @@
       "description": "Id Kah Mosque in Kashgar is a historic mosque complex with a large courtyard and prayer hall, traditionally used for major congregations in Xinjiang.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Id_Kah_Mosque%2C_Kashgar.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Persian",
       "womenPrayerArea": true,
       "touristFriendly": false
     },
@@ -1852,7 +1852,7 @@
       "description": "The Shah Jahan Mosque in Thatta is an architecturally important mosque with extensive brick and tile decoration and numerous domes.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Shah_Jahan_Mosque%2C_Thatta.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1878,7 +1878,7 @@
       "description": "Tuanku Mizan Zainal Abidin Mosque in Putrajaya is a steel-heavy mosque design with open sides and a large prayer hall facing a lakefront.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Tuanku_Mizan_Zainal_Abidin_Mosque.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1904,39 +1904,38 @@
       "description": "Raja Hamidah Great Mosque of Batam is a large mosque complex that accommodates congregations from across the island city and nearby regions.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Raja_Hamidah%2C_Batam.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
     {
       "id": "hagia-sophia-istanbul",
       "name": "Hagia Sophia",
-      "arabicName": "جامع السلطان أحمد",
+      "arabicName": "آيا صوفيا",
       "location": "Istanbul",
       "country": "Turkey",
       "coordinates": {
-        "lat": 41.0054,
-        "lng": 28.9768
+        "lat": 41.0086,
+        "lng": 28.9802
       },
-      "capacity": 18000,
-      "established": "1616",
-      "area": 4608,
+      "capacity": 15000,
+      "established": "537 CE",
+      "area": 7420,
       "annualVisitors": "3.5 million",
       "facilities": [
         "Tourist entrance",
         "Multilingual guides",
         "Information panels",
-        "Nearby bazaar and restaurants",
         "Photography allowed in designated areas"
       ],
-      "significance": "A historic Byzantine basilica converted several times between church, mosque, museum, and mosque again.",
-      "description": "Hagia Sophia in Istanbul is a monumental domed structure with a complex religious history, currently functioning as a mosque while also attracting many visitors.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Sultan_Ahmed_Mosque_in_Istanbul.jpg",
+      "significance": "Historic Byzantine basilica completed 537 CE; converted to mosque 1453, museum 1935, mosque again 2020.",
+      "description": "Hagia Sophia in Istanbul was built as a Byzantine cathedral in 537 CE. After the Ottoman conquest it became a mosque; it was a museum from 1935 until 2020, when it was reconsecrated as a mosque. The building is famed for its massive dome and Byzantine mosaics.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Hagia_Sophia_Mars_2013.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Classical Ottoman",
-      "architectureNotes": "Famous for 20,000+ hand-painted blue Iznik tiles. Central dome 43 m high. Six minarets. Classic Ottoman layout.",
-      "history": "Built 1609–1616 by Sultan Ahmed I. Architect Sedefkar Mehmed Agha drew on Hagia Sophia and Mimar Sinan. Six minarets caused controversy; Sultan funded a seventh at Mecca.",
-      "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet.",
+      "architecturalStyle": "Byzantine",
+      "architectureNotes": "Pendentive dome (31 m diameter, ~56 m high). Byzantine masonry; Ottoman minarets and calligraphy added after 1453. Mosaics partially preserved.",
+      "history": "Built 532–537 under Emperor Justinian I; designed by Isidore of Miletus and Anthemius of Tralles. Converted to mosque after Ottoman conquest (1453); minarets and Islamic elements added. Secularized as museum 1935; redesignated as mosque 2020.",
+      "tourismNotes": "Free entry. Closed during prayer times. Modest dress; head coverings provided. Visit early to avoid crowds.",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -1962,7 +1961,7 @@
       "description": "Al-Kauthar Mosque in Tawau is a large coastal mosque complex serving as a major place of worship in eastern Malaysia.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Kauthar_Mosque%2C_Tawau.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2014,7 +2013,7 @@
       "description": "Federal Territory Mosque is a major congregational mosque in Kuala Lumpur with multiple domes and landscaped surrounds, serving the capital’s Muslim population.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Federal_Territory_Mosque%2C_Kuala_Lumpur.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2092,7 +2091,7 @@
       "description": "Al-Azhom Grand Mosque in Tangerang is a spacious mosque complex with a large dome and facilities for local congregations and events.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Azhom_Grand_Mosque%2C_Tangerang.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2118,7 +2117,7 @@
       "description": "Emir Abdelkader Mosque in Constantine includes a large prayer hall and educational facilities, forming an important religious center in Algeria.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mosquée_Emir_Abdelkader%2C_Constantine.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Moorish",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2144,7 +2143,7 @@
       "description": "Kocatepe Mosque in Ankara is a large four-minaret mosque visible across the city, built in the late 20th century.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Kocatepe_Mosque_Ankara.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Ottoman",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2170,7 +2169,7 @@
       "description": "The Great Mosque of Central Java in Semarang features a large courtyard with movable umbrellas and a tall minaret overlooking the city.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Besar_Kauman_Semarang.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2196,7 +2195,7 @@
       "description": "The Grand Mosque of Sabilal Muhtadin is a large congregational mosque built near the Martapura River in Banjarmasin, South Kalimantan.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Raya_Sabilal_Muhtadin.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2222,9 +2221,102 @@
       "description": "Sultan Haji Hassanal Bolkiah Mosque in Cotabato City is a large mosque with multiple domes and minarets, serving Muslims in Mindanao.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_Haji_Hassanal_Bolkiah_Mosque%2C_Cotabato.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Malay",
       "womenPrayerArea": true,
       "touristFriendly": true
+    },
+    {
+      "id": "imperial-mosque-pristina",
+      "name": "Imperial Mosque",
+      "arabicName": "جامع السلطان محمد الفاتح",
+      "location": "Pristina",
+      "country": "Kosovo",
+      "address": "Old Town, Pristina",
+      "capacity": 5000,
+      "established": "1461 CE",
+      "area": 2500,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Historic monument"
+      ],
+      "significance": "Ottoman-era mosque built by Sultan Mehmed the Conqueror, a cultural heritage monument of Kosovo.",
+      "description": "The Imperial Mosque, also known as the King's Mosque or Fatih Mosque, is a 15th-century Ottoman mosque in the heart of Pristina. Built in 1461, it is one of the oldest and most significant Islamic monuments in Kosovo.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/Mezquita_Fatih%2C_Pristina%2C_Kosovo%2C_2014-04-15%2C_DD_07.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Ottoman",
+      "architectureNotes": "Stone and brick construction, single dome, characteristic Ottoman minaret.",
+      "history": "Built in 1461 under Sultan Mehmed II (the Conqueror). Designated a cultural heritage monument of Kosovo.",
+      "tourismNotes": "Modest dress required. Non-Muslims may visit outside prayer times.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 42.666992,
+        "lng": 21.167006
+      }
+    },
+    {
+      "id": "kalon-mosque-bukhara",
+      "name": "Kalon Mosque",
+      "arabicName": "مسجد كالان",
+      "location": "Bukhara",
+      "country": "Uzbekistan",
+      "address": "Po-i Kalyan complex, Bukhara",
+      "capacity": 12000,
+      "established": "1514 CE",
+      "area": 3970,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Courtyards",
+        "Historic site"
+      ],
+      "significance": "One of Central Asia's most iconic mosques, part of the Po-i Kalyan ensemble beside the Kalon Minaret.",
+      "description": "The Kalon Mosque in Bukhara is a monumental 16th-century mosque facing the famous Kalon Minaret. It forms the heart of the historic Po-i Kalyan complex and is a masterpiece of Central Asian Islamic architecture.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Kalon_mosque_and_Kalon_Minaret_2023.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Persian-Timurid",
+      "architectureNotes": "Large courtyard, blue-tiled iwan, multiple domes. Adjacent to the 47 m Kalon Minaret (1127).",
+      "history": "Built in 1514 under the Shaybanids, replacing an earlier mosque destroyed by Genghis Khan. Part of UNESCO World Heritage site Historic Centre of Bukhara.",
+      "tourismNotes": "Modest dress required. Part of Bukhara's historic center; combined visits with Kalon Minaret and Mir-i Arab Madrasah.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 39.7756,
+        "lng": 64.4146
+      }
+    },
+    {
+      "id": "ethem-bey-mosque",
+      "name": "Et'hem Bey Mosque",
+      "arabicName": "مسجد إيثيم باي",
+      "location": "Tirana",
+      "country": "Albania",
+      "address": "Skanderbeg Square, Tirana",
+      "capacity": 2000,
+      "established": "1821 CE",
+      "area": 800,
+      "annualVisitors": "—",
+      "facilities": [
+        "Prayer halls",
+        "Frescoes",
+        "Historic monument"
+      ],
+      "significance": "Historic Ottoman mosque on Tirana's main square, famed for its exterior frescoes of trees and landscapes.",
+      "description": "The Et'hem Bey Mosque is an 18th–19th century Ottoman mosque in the center of Tirana. It is renowned for its detailed frescoes and was reopened for worship in 1991 after the fall of communism.",
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Ethem_Bey_mosque_in_Tirana.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Ottoman",
+      "architectureNotes": "Stone and brick, single dome, minaret. Exterior frescoes depicting trees, waterfalls, and bridges.",
+      "history": "Construction began under Molla Bey (1789) and completed by his son Et'hem Bey in 1821. Survived communist era; reopened 1991.",
+      "tourismNotes": "Modest dress required. Non-Muslims may visit outside prayer times. On Skanderbeg Square.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 41.3275,
+        "lng": 19.8186
+      }
     }
   ],
   "timelineEvents": [
@@ -2295,6 +2387,18 @@
       "event": "Historic mosque in Kashgar"
     },
     {
+      "year": "1461",
+      "mosque": "Imperial Mosque",
+      "mosqueId": "imperial-mosque-pristina",
+      "event": "Ottoman mosque built in Pristina under Sultan Mehmed II"
+    },
+    {
+      "year": "1514",
+      "mosque": "Kalon Mosque",
+      "mosqueId": "kalon-mosque-bukhara",
+      "event": "Kalon Mosque completed in Bukhara"
+    },
+    {
       "year": "1530",
       "mosque": "Gazi Husrev-beg Mosque",
       "mosqueId": "gazi-husrev-beg-mosque",
@@ -2329,6 +2433,12 @@
       "mosque": "Badshahi Mosque",
       "mosqueId": "badshahi-mosque",
       "event": "Built by Emperor Aurangzeb in Lahore"
+    },
+    {
+      "year": "1821",
+      "mosque": "Et'hem Bey Mosque",
+      "mosqueId": "ethem-bey-mosque",
+      "event": "Et'hem Bey Mosque completed in Tirana"
     },
     {
       "year": "1901",

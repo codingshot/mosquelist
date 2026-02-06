@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "fact-check": "node scripts/fact-check-checklist.js",
+    "enrich-mosques": "node scripts/enrich-mosques-from-source.js",
     "populate-mosquedata1": "node scripts/populate-mosquedata1.js",
     "merge-mosques": "node scripts/merge-mosques.js"
   },

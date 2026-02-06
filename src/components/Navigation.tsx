@@ -91,7 +91,7 @@ export const Navigation = () => {
               <Link
                 key={link.name}
                 to={link.to}
-                className="block text-lg font-medium text-foreground hover:text-primary transition-colors"
+                className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors min-h-[44px] flex items-center touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
