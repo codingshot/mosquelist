@@ -24,7 +24,7 @@ export const BucketList = () => {
   const [addSheetOpen, setAddSheetOpen] = useState(false);
 
   return (
-    <section id="bucket-list" className="py-16 md:py-24 bg-paper-cream">
+    <section id="bucket-list" className="py-16 md:py-24 bg-paper-cream scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           {/* Section Header */}

@@ -3,18 +3,21 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { favoriteCount } = useFavorites();
   const location = useLocation();
+  const isHome = location.pathname === "/";
+  const activeSection = useScrollSpy(isHome);
 
   const navLinks = [
-    { name: "Explore", to: "/#explore" },
-    { name: "Lists", to: "/#lists" },
-    { name: "Timeline", to: "/#timeline" },
-    { name: "My List", to: "/#bucket-list" },
-    { name: "About", to: "/#about" },
+    { name: "Explore", to: "/#explore", hash: "#explore" },
+    { name: "Lists", to: "/#lists", hash: "#lists" },
+    { name: "Timeline", to: "/#timeline", hash: "#timeline" },
+    { name: "My List", to: "/#bucket-list", hash: "#bucket-list" },
+    { name: "About", to: "/#about", hash: "#about" },
   ];
 
   return (
@@ -42,7 +45,7 @@ export const Navigation = () => {
                 key={link.name}
                 to={link.to}
                 className={`text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded ${
-                  location.pathname === "/" && (window.location.hash || "#explore") === link.to.slice(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  isHome && activeSection === link.hash.slice(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {link.name}

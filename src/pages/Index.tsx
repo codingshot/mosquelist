@@ -33,7 +33,8 @@ const Index = () => {
   useEffect(() => {
     if (hash) {
       const el = document.querySelector(hash);
-      el?.scrollIntoView({ behavior: "smooth" });
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
     }
   }, [hash]);
 
@@ -44,7 +45,7 @@ const Index = () => {
         <HeroSection />
 
         {/* Explore */}
-        <section id="explore" aria-labelledby="explore-heading">
+        <section id="explore" aria-labelledby="explore-heading" className="scroll-mt-20">
           <MosqueGrid />
         </section>
 
@@ -55,7 +56,7 @@ const Index = () => {
         <BucketList />
 
         {/* Lists */}
-        <section id="lists" className="py-16 md:py-24 bg-paper-cream islamic-pattern">
+        <section id="lists" className="py-16 md:py-24 bg-paper-cream islamic-pattern scroll-mt-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-card px-4 py-2 rounded-full mb-4 border border-border">
@@ -111,7 +112,7 @@ const Index = () => {
         </section>
 
         {/* About */}
-        <section id="about" className="py-16 md:py-24 bg-background">
+        <section id="about" className="py-16 md:py-24 bg-background scroll-mt-20">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-card px-4 py-2 rounded-full mb-8 border border-border">
@@ -157,7 +158,7 @@ const Index = () => {
         </section>
 
         {/* Travel Guide */}
-        <section id="travel-guide" className="py-16 md:py-24 bg-paper-cream islamic-pattern">
+        <section id="travel-guide" className="py-16 md:py-24 bg-paper-cream islamic-pattern scroll-mt-20">
           <div className="container mx-auto px-4">
             <article className="max-w-3xl mx-auto">
               <header className="mb-12">
@@ -256,7 +257,7 @@ const Index = () => {
         </section>
 
         {/* Visitor Tips */}
-        <section id="visitor-tips" className="py-16 md:py-24 bg-background">
+        <section id="visitor-tips" className="py-16 md:py-24 bg-background scroll-mt-20">
           <div className="container mx-auto px-4">
             <article className="max-w-3xl mx-auto">
               <header className="mb-12">

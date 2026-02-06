@@ -312,7 +312,7 @@ export const MosqueGrid = () => {
   }, [query, filter, country, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
   return (
-    <section id="mosques" className="py-16 md:py-24 bg-paper-cream islamic-pattern">
+    <section id="mosques" className="py-16 md:py-24 bg-paper-cream islamic-pattern scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 md:mb-12">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
