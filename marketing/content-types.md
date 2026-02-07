@@ -85,7 +85,23 @@ What to create and where to use it. Align with [customer-personas.md](./customer
 
 ---
 
-## 6. Community & UGC (future)
+## 6. Comparison & listicles
+
+**Purpose:** SEO and shareability; “best,” “top,” “largest” angles.
+
+**Examples:**
+- “10 largest mosques in the world by capacity”
+- “Best tourist-friendly mosques in Istanbul / UAE / Malaysia”
+- “5 mosques to add to your bucket list this year”
+- “Holy sites vs. architectural wonders: explore both on MosqueList”
+
+**Formats:** Blog post, carousel (one per slide), infographic, Short/Reel.
+
+**Post where:** Blog, Instagram carousel, Pinterest, YouTube Shorts.
+
+---
+
+## 7. Community & UGC (future)
 
 **Purpose:** Build trust and relatability (when you have permission).
 
