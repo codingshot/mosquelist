@@ -40,43 +40,45 @@ Last updated: 2026-02-07
 
 ### ⚠️ Mosques with Placeholder/Wikimedia FilePath URLs (Need Verification)
 
-These mosques use `commons.wikimedia.org/wiki/Special:FilePath/` URLs which may not resolve properly in all browsers:
+These mosques use `commons.wikimedia.org/wiki/Special:FilePath/` URLs which may not resolve properly in all browsers. **✅ = updated to direct `upload.wikimedia.org` URL from user-provided image list (2026-02-07).**
 
-| Mosque | ID | Current Image | Recommended Fix |
-|--------|-----|---------------|-----------------|
-| Bahria Grand Mosque | `bahria-grand-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Al Jabbar Grand Mosque | `al-jabbar-grand-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Jameh Mosque of Makki | `jameh-mosque-of-makki` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Al-Akbar Mosque | `al-akbar-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Al Saleh Mosque | `al-saleh-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Baitul Mukarram | `baitul-mukarram` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Massalikoul Djinane | `massalikoul-djinane-mosque` | ✅ upload URL | Good |
-| Pride of Muslims Mosque | `pride-of-muslims-mosque-shali` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| 1st November 1954 Mosque | `1st-november-1954-great-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| At-Tin Mosque | `at-tin-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Jamia Masjid Srinagar | `jamia-masjid-srinagar` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Jamiul Futuh | `jamiul-futuh-indian-grand-masjid` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| CMH Masjid Jhelum | `cmh-masjid-jhelum` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Selahaddin Eyyubi Mosque | `selahaddin-eyyubi-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Jakarta Islamic Center | `jakarta-islamic-center` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Aqsa Mosque Rabwah | `aqsa-mosque-rabwah` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Dian Al-Mahri Mosque | `dian-al-mahri-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Grand Mosque of Conakry | `grand-mosque-of-conakry` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Grand Mosque of West Sumatra | `grand-mosque-of-west-sumatra` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Id Kah Mosque | `id-kah-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Raja Hamidah Mosque Batam | `raja-hamidah-great-mosque-of-batam` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Al-Kauthar Mosque | `al-kauthar-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Al-Fattah al-Aleem Mosque | `al-fattah-al-aleem-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Federal Territory Mosque | `federal-territory-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Grand Mosque of Makhachkala | `grand-mosque-of-makhachkala` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Aqsa Mosque Qadian | `aqsa-mosque-qadian` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Al-Azhom Grand Mosque | `al-azhom-grand-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Sultan Haji Hassanal Bolkiah | `sultan-haji-hassanal-bolkiah-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Çamlıca Mosque | `camlica-mosque` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Grand Mosque of Kuwait | `grand-mosque-kuwait` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Kalon Mosque | `kalon-mosque-bukhara` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Great Mosque of Khartoum | `great-mosque-khartoum` | FilePath URL | Use `upload.wikimedia.org` direct URL |
-| Jama Masjid Delhi | `jama-masjid-delhi` | FilePath URL | Use `upload.wikimedia.org` direct URL |
+| Mosque | ID | Current Image | Status |
+|--------|-----|---------------|--------|
+| Bahria Grand Mosque | `bahria-grand-mosque` | — | Still FilePath or external (mosqpedia); consider upload URL |
+| Al Jabbar Grand Mosque | `al-jabbar-grand-mosque` | ✅ upload/Unsplash | Fixed |
+| Jameh Mosque of Makki | `jameh-mosque-of-makki` | ✅ upload | Fixed |
+| Al-Akbar Mosque | `al-akbar-mosque` | ✅ upload | Fixed |
+| Al Saleh Mosque | `al-saleh-mosque` | ✅ upload | Fixed |
+| Baitul Mukarram | `baitul-mukarram` | FilePath | User list had Commons; verify direct URL |
+| Massalikoul Djinane | `massalikoul-djinane-mosque` | ✅ upload | Good |
+| Pride of Muslims Mosque | `pride-of-muslims-mosque-shali` | FilePath | **No image in user list** (`image_url: null`) |
+| 1st November 1954 Mosque | `1st-november-1954-great-mosque` | ✅ upload | Fixed |
+| At-Tin Mosque | `at-tin-mosque` | FilePath | **Mismatch:** user list "Al-Tin" = Amman, Jordan; our entry = At-Tin, **Jakarta** — do not swap |
+| Jamia Masjid Srinagar | `jamia-masjid-srinagar` | FilePath | Still needs direct URL |
+| Jamiul Futuh | `jamiul-futuh-indian-grand-masjid` | ✅ upload (Baitul Futuh London) | Fixed |
+| CMH Masjid Jhelum | `cmh-masjid-jhelum` | ✅ upload | Fixed |
+| Selahaddin Eyyubi Mosque | `selahaddin-eyyubi-mosque` | FilePath | **Mismatch:** user list = Erbil, Iraq; our entry = **Diyarbakır**, Turkey — do not swap |
+| Jakarta Islamic Center | `jakarta-islamic-center` | ✅ upload | Fixed |
+| Aqsa Mosque Rabwah | `aqsa-mosque-rabwah` | ✅ upload | Fixed |
+| Dian Al-Mahri Mosque | `dian-al-mahri-mosque` | ✅ upload | Fixed |
+| Grand Mosque of Conakry | `grand-mosque-of-conakry` | ✅ upload | Fixed |
+| Grand Mosque of West Sumatra | `grand-mosque-of-west-sumatra` | ✅ upload | Fixed |
+| Id Kah Mosque | `id-kah-mosque` | FilePath | Still needs direct URL |
+| Raja Hamidah Mosque Batam | `raja-hamidah-great-mosque-of-batam` | FilePath | User list had "Raja Haji Fisabilillah" (different mosque); verify |
+| Al-Kauthar Mosque | `al-kauthar-mosque` | ✅ upload | Fixed |
+| Al-Fattah al-Aleem Mosque | `al-fattah-al-aleem-mosque` | ✅ upload | Fixed |
+| Federal Territory Mosque | `federal-territory-mosque` | ✅ upload | Fixed |
+| Grand Mosque of Makhachkala | `grand-mosque-of-makhachkala` | ✅ upload | Fixed |
+| Aqsa Mosque Qadian | `aqsa-mosque-qadian` | ✅ upload | Fixed |
+| Al-Azhom Grand Mosque | `al-azhom-grand-mosque` | ✅ upload | Fixed |
+| Sultan Haji Hassanal Bolkiah | `sultan-haji-hassanal-bolkiah-mosque` | ✅ upload | Fixed |
+| Çamlıca Mosque | `camlica-mosque` | FilePath | Still needs direct URL |
+| Grand Mosque of Kuwait | `grand-mosque-kuwait` | User list had upload URL | Verify applied or apply |
+| Kalon Mosque | `kalon-mosque-bukhara` | ✅ already upload URL | Had direct URL; user list alternate available |
+| Great Mosque of Khartoum | `great-mosque-khartoum` | ✅ upload | Fixed |
+| Jama Masjid Delhi | `jama-masjid-delhi` | Unsplash/other | User list had Unsplash; verify |
+| Gazi Husrev-beg Mosque | `gazi-husrev-beg-mosque` | ✅ upload | Fixed |
+| Hazrat Sultan Mosque | `hazrat-sultan-mosque` | ✅ upload | Fixed |
 
 ---
 
@@ -111,6 +113,49 @@ Replace `commons.wikimedia.org/wiki/Special:FilePath/` with `upload.wikimedia.or
   "al-azhar-mosque": "https://upload.wikimedia.org/wikipedia/commons/8/87/Al_Azhar_Mosque.jpg"
 }
 ```
+
+---
+
+## Image source list (user-provided, 2026-02-07)
+
+The following list was used to double-check or add images. **Source:** user-provided JSON with `name`, `location`, `image_url`, `source_page`. Many list entries had incorrect "gettyimages" links in the text; the actual `image_url` values in the JSON are the ones used.
+
+### Applied to `mosques.json` (direct upload or stable URLs)
+
+| Mosque | Location | Source |
+|--------|----------|--------|
+| Djamaa el Djazair | Algiers, Algeria | Commons upload |
+| Al Jabbar Grand Mosque | Bandung, Indonesia | Unsplash |
+| Jameh Mosque of Makki | Zahedan, Iran | Commons upload |
+| Al-Akbar Mosque | Surabaya, Indonesia | Commons upload |
+| Al Saleh Mosque | Sana'a, Yemen | Commons upload |
+| CMH Masjid Jhelum | Jhelum, Pakistan | Commons upload |
+| Jakarta Islamic Centre | Jakarta, Indonesia | Commons upload |
+| Aqsa Mosque Rabwah | Rabwah, Pakistan | Commons upload |
+| Grand Mosque of Conakry | Conakry, Guinea | Commons upload |
+| Grand Mosque of West Sumatra | Padang, Indonesia | Commons upload |
+| Dian Al-Mahri Mosque | Depok, Indonesia | Commons upload |
+| 1st November 1954 Great Mosque | Oran, Algeria | Commons upload |
+| Jamiul Futuh (Baitul Futuh) | London, UK | Commons upload |
+| Al-Kauthar Mosque | Tawau, Malaysia | Commons upload |
+| Al-Fattah Al-Aleem Mosque | New Administrative Capital, Egypt | Commons upload |
+| Federal Territory Mosque | Kuala Lumpur, Malaysia | Commons upload |
+| Grand Mosque of Makhachkala | Makhachkala, Russia | Commons upload |
+| Aqsa Mosque Qadian | Qadian, India | Commons upload |
+| Al-Azhom Grand Mosque | Tangerang, Indonesia | Commons upload |
+| Sultan Haji Hassanal Bolkiah Mosque | Cotabato City, Philippines | Commons upload |
+| Great Mosque of Khartoum | Khartoum, Sudan | Commons upload |
+| Hazrat Sultan Mosque | Astana, Kazakhstan | Commons upload |
+| Gazi Husrev-beg Mosque | Sarajevo, Bosnia and Herzegovina | Commons upload |
+
+### Not applied / notes
+
+- **Pride of Muslims Mosque** — user list had `image_url: null`; no image to add. Our entry is Pride of Muslims, Shali (FilePath still).
+- **Al-Tin Mosque** — user list "Al-Tin Mosque, Amman, Jordan" is a **different mosque**. Our DB has **At-Tin Mosque, Jakarta**. Do not swap.
+- **Salahaddin Eyyubi** — user list "Salahaddin Eyyubi Mosque, Erbil, Iraq" is **different**. Our DB has **Selahaddin Eyyubi, Diyarbakır, Turkey**. Do not swap.
+- **Raja Haji Fisabilillah** (user list) vs **Raja Hamidah** (Batam) — different mosques; verify which image fits our Batam entry.
+- **Kalon Mosque** — already had a direct upload URL in DB; user list had alternate `Kalon_Mosque_Bukhara.jpg`.
+- **Grand Mosque of Kuwait**, **Jama Masjid Delhi**, **Baitul Mukarram**, **Bahria Grand Mosque**, **Hassan II**, **Sheikh Zayed**, **Sultan Qaboos**, **Süleymaniye**, **Mohammad Al-Amin**, **Sultan Omar Ali Saifuddin** — user list had Commons/Unsplash URLs; some already set or left as-is; verify if any still use FilePath.
 
 ---
 
