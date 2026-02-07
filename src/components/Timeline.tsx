@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { timelineEvents, mosques, getUniqueCountries } from "@/data/mosques";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
-import { Calendar, ArrowUpDown, MapPin } from "lucide-react";
+import { Calendar, ArrowUpDown, MapPin, ChevronRight } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 /** Parse numeric year from established string (e.g. "537 CE" -> 537, "2019" -> 2019). */
 function parseYear(yearStr: string): number {
@@ -20,7 +21,15 @@ function parseYear(yearStr: string): number {
 
 type SortOrder = "oldest" | "newest";
 
-export const Timeline = () => {
+interface TimelineProps {
+  /** Limit displayed events (for homepage preview) */
+  limit?: number;
+  /** Show header filters (false for preview mode) */
+  showFilters?: boolean;
+}
+
+export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
+  const isPreview = typeof limit === "number" && limit > 0;
   const [sortOrder, setSortOrder] = useState<SortOrder>("oldest");
   const [region, setRegion] = useState<string>("");
   const [country, setCountry] = useState<string>("");
@@ -33,17 +42,26 @@ export const Timeline = () => {
     let list = timelineEvents.filter((event) => {
       const mosque = mosqueById.get(event.mosqueId);
       if (!mosque) return false;
-      if (country && mosque.country !== country) return false;
-      if (region) {
-        const mosqueRegion = getRegionForCountry(mosque.country);
-        if (mosqueRegion !== region) return false;
+      // In preview mode, skip filters
+      if (!isPreview) {
+        if (country && mosque.country !== country) return false;
+        if (region) {
+          const mosqueRegion = getRegionForCountry(mosque.country);
+          if (mosqueRegion !== region) return false;
+        }
       }
       return true;
     });
     const order = sortOrder === "newest" ? -1 : 1;
     list = [...list].sort((a, b) => order * (parseYear(a.year) - parseYear(b.year)));
     return list;
-  }, [timelineEvents, mosqueById, country, region, sortOrder]);
+  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview]);
+
+  // Apply limit for preview mode
+  const displayedEvents = isPreview
+    ? filteredAndSortedEvents.slice(0, limit)
+    : filteredAndSortedEvents;
+  const hasMore = isPreview && filteredAndSortedEvents.length > limit;
 
   return (
     <section id="timeline" className="py-16 md:py-24 bg-background scroll-mt-20">
@@ -65,7 +83,8 @@ export const Timeline = () => {
           </p>
         </div>
 
-        {/* Sort & Filters — mobile responsive */}
+        {/* Sort & Filters — hidden in preview mode */}
+        {showFilters && (
         <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end mb-8 md:mb-10 max-w-4xl mx-auto">
           <div className="space-y-2 w-full sm:w-auto sm:min-w-[160px]">
             <Label className="text-sm text-muted-foreground">Sort</Label>
@@ -117,6 +136,7 @@ export const Timeline = () => {
             {filteredAndSortedEvents.length} mosque{filteredAndSortedEvents.length !== 1 ? "s" : ""} shown
           </p>
         </div>
+        )}
 
         {/* Timeline */}
         <div className="relative max-w-4xl mx-auto">
@@ -125,12 +145,12 @@ export const Timeline = () => {
 
           {/* Events (filtered & sorted) */}
           <div className="space-y-6 md:space-y-8">
-            {filteredAndSortedEvents.length === 0 ? (
+            {displayedEvents.length === 0 ? (
               <p className="text-center text-muted-foreground py-12">
                 No mosques match the selected filters. Try a different region or country.
               </p>
             ) : (
-            filteredAndSortedEvents.map((event, index) => {
+            displayedEvents.map((event, index) => {
               const mosque = mosqueById.get(event.mosqueId);
               const imageUrl = mosque?.imageUrl?.trim();
               const hasImage = !!imageUrl;
@@ -200,6 +220,18 @@ export const Timeline = () => {
             })
             )}
           </div>
+
+          {/* See All link for preview mode */}
+          {hasMore && (
+            <div className="text-center mt-10">
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/timeline" className="gap-2">
+                  See All {filteredAndSortedEvents.length} Events
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </section>

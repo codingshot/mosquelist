@@ -184,6 +184,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     setView,
     setSort,
     setCountry,
+    setRegion,
     setWomenOnly,
     setTouristOnly,
     setCapMin,
