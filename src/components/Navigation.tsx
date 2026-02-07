@@ -14,7 +14,6 @@ export const Navigation = () => {
     { name: "Map", to: "/map" },
     { name: "Lists", to: "/lists" },
     { name: "Timeline", to: "/timeline" },
-    { name: "About", to: "/about" },
   ];
 
   return (
