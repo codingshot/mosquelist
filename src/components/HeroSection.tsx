@@ -14,9 +14,10 @@ export const HeroSection = () => {
         <img
           src={heroImage}
           alt="Masjid al-Haram at sunset"
+          // @ts-expect-error: fetchpriority is valid HTML but React types want fetchPriority
           fetchpriority="high"
           width={1920}
-          height={1080}
+          height={1920}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/95" />

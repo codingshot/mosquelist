@@ -49,8 +49,8 @@ const Index = () => {
           <MosqueGrid mode="preview" />
         </section>
 
-        {/* Timeline - component has id="timeline" */}
-        <Timeline />
+        {/* Timeline - limited preview with "See All" link */}
+        <Timeline limit={10} showFilters={false} />
 
         {/* Bucket List - component has id="bucket-list" */}
         <BucketList />
