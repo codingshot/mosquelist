@@ -2,7 +2,7 @@
 
 This document lists every country represented in MosqueList’s mosque data, the **biggest mosque per country** (by capacity in our dataset), and classifies countries as **Muslim-majority** or **other**. It also outlines **Muslim-majority countries** and **countries with large mosques that are not Muslim-majority**, with fact-check notes and prompts for finding and maintaining this data.
 
-**Data source:** `src/data/mosques.json` (93 mosques). “Biggest” = mosque with highest `capacity` in that country in our data.
+**Data source:** `src/data/mosques.json` (103 mosques). “Biggest” = mosque with highest `capacity` in that country in our data.
 
 ---
 
@@ -70,7 +70,7 @@ This document lists every country represented in MosqueList’s mosque data, the
 | Turkmenistan | Türkmenbaşy Ruhy Mosque | `turkmenbasy-ruhy-mosque` | 10,000 | Gypjak (near Ashgabat) |
 | UAE | Sheikh Zayed Grand Mosque | `sheikh-zayed` | 41,000 | Abu Dhabi |
 | United Kingdom | Birmingham Central Mosque | `birmingham-central-mosque` | 5,000 | Birmingham |
-| USA | Islamic Center of Washington | `islamic-center-washington` | 6,000 | Washington, D.C. |
+| USA | Islamic Center of America | `islamic-center-of-america` | 10,000 | Dearborn, Michigan |
 | Uzbekistan | Kalon Mosque | `kalon-mosque-bukhara` | 12,000 | Bukhara |
 | Yemen | Al Saleh Mosque | `al-saleh-mosque` | 45,000 | Sana'a |
 
@@ -109,7 +109,7 @@ These countries are in the app and have at least one mosque with substantial cap
 | **Singapore** | Sultan Mosque, Kampong Glam | 5,000 | Significant Muslim minority; national monument |
 | **Sri Lanka** | Jami Ul-Alfar Mosque, Colombo | 5,000 | Significant Muslim community in Pettah |
 | **United Kingdom** | Birmingham Central Mosque | 5,000 | Significant Muslim minority |
-| **USA** | Islamic Center of Washington | 6,000 | Significant Muslim minority |
+| **USA** | Islamic Center of America, Dearborn | 10,000 | Significant Muslim minority; multiple major mosques in app |
 | **Philippines** | Sultan Haji Hassanal Bolkiah Mosque, Cotabato City | 15,000 | Large Muslim population in Mindanao |
 
 ---

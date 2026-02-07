@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 /**
  * Map is now a view mode of Explore. Redirect to /explore?view=map
@@ -15,5 +16,5 @@ export default function MapPage() {
     navigate(`/explore?${next.toString()}`, { replace: true });
   }, [navigate, searchParams]);
 
-  return null;
+  return <LoadingScreen />;
 }

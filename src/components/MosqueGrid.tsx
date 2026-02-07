@@ -344,7 +344,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
   }, [query, filter, country, region, denomination, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
   const displayedMosques = isPreview
-    ? filteredMosques.filter((m) => !!m.imageUrl?.trim()).slice(0, PREVIEW_LIMIT)
+    ? filteredMosques.slice(0, PREVIEW_LIMIT)
     : filteredMosques;
 
   const filteredMosquesWithCoords = useMemo(
@@ -363,8 +363,8 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
             Explore Magnificent Mosques
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            From the three holiest sites in Islam to architectural masterpieces
-            around the world, discover mosques that have inspired millions.
+            From the three holiest sites in Islam to historic and modern
+            masterpieces across 50+ countries. Search, filter, and add to your list.
           </p>
         </div>
 

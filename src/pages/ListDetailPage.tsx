@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -64,7 +65,10 @@ export default function ListDetailPage() {
   const deselectAll = () => setSelectedIds(new Set());
 
   const addSelected = () => {
-    if (selectedIds.size === 0) return;
+    if (selectedIds.size === 0) {
+      toast.info("Select one or more mosques above first.");
+      return;
+    }
     let addedCount = 0;
     selectedIds.forEach((id) => {
       if (addToBucketList(id)) addedCount++;
@@ -242,7 +246,7 @@ export default function ListDetailPage() {
                       <p className="text-sm text-muted-foreground mb-3">
                         Or choose which to add: tick the boxes next to mosques below, then click &quot;Add selected to My List&quot;.
                       </p>
-                      <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex flex-col min-[400px]:flex-row flex-wrap items-stretch min-[400px]:items-center gap-2">
                         <Button
                           variant="outline"
                           size="sm"
@@ -254,29 +258,36 @@ export default function ListDetailPage() {
                           Select all ({notInList.length})
                         </Button>
                         {selectedIds.size > 0 && (
-                          <>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={deselectAll}
-                              className="gap-2 min-h-[44px] touch-manipulation"
-                              aria-label="Clear selection"
-                            >
-                              <Square className="h-4 w-4" />
-                              Deselect all
-                            </Button>
-                            <Button
-                              size="sm"
-                              onClick={addSelected}
-                              className="gap-2 min-h-[44px] touch-manipulation gradient-gold text-primary-foreground"
-                              aria-label={`Add ${selectedIds.size} selected mosques to your list`}
-                            >
-                              <Plus className="h-4 w-4" />
-                              Add {selectedIds.size} selected to My List
-                            </Button>
-                          </>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={deselectAll}
+                            className="gap-2 min-h-[44px] touch-manipulation"
+                            aria-label="Clear selection"
+                          >
+                            <Square className="h-4 w-4" />
+                            Deselect all
+                          </Button>
                         )}
+                        <Button
+                          size="sm"
+                          onClick={addSelected}
+                          disabled={selectedIds.size === 0}
+                          className="gap-2 min-h-[44px] touch-manipulation gradient-gold text-primary-foreground disabled:opacity-60 disabled:pointer-events-none"
+                          aria-label={selectedIds.size > 0 ? `Add ${selectedIds.size} selected mosques to your list` : "Select one or more mosques above first"}
+                          title={selectedIds.size === 0 ? "Select one or more mosques above first" : undefined}
+                        >
+                          <Plus className="h-4 w-4" />
+                          {selectedIds.size > 0
+                            ? `Add ${selectedIds.size} selected to My List`
+                            : "Add selected to My List"}
+                        </Button>
                       </div>
+                      {selectedIds.size === 0 && (
+                        <p className="text-xs text-muted-foreground mt-2">
+                          Select one or more mosques below, then add them here.
+                        </p>
+                      )}
                     </div>
                   )}
                 </>
@@ -311,18 +322,29 @@ export default function ListDetailPage() {
               </div>
             )}
 
-            {/* Sticky bar when mosques are selected */}
-            {selectedIds.size > 0 && (
+            {/* Sticky bar when there are mosques to add — show even with 0 selected so "Add" is visible but disabled until selection */}
+            {notInList.length > 1 && (
               <div className="sticky top-16 z-10 mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between rounded-xl border border-primary/30 bg-card px-4 py-3 shadow-md">
                 <span className="text-sm font-medium text-foreground">
-                  {selectedIds.size} mosque{selectedIds.size !== 1 ? "s" : ""} selected for My List
+                  {selectedIds.size > 0
+                    ? `${selectedIds.size} mosque${selectedIds.size !== 1 ? "s" : ""} selected for My List`
+                    : "Select mosques below to add to My List"}
                 </span>
                 <div className="flex flex-wrap items-center justify-end sm:justify-start gap-2">
-                  <Button variant="outline" size="sm" onClick={deselectAll} className="gap-1.5 min-h-[44px] touch-manipulation">
-                    <Square className="h-4 w-4" />
-                    Deselect all
-                  </Button>
-                  <Button size="sm" onClick={addSelected} className="gap-1.5 min-h-[44px] touch-manipulation gradient-gold text-primary-foreground">
+                  {selectedIds.size > 0 && (
+                    <Button variant="outline" size="sm" onClick={deselectAll} className="gap-1.5 min-h-[44px] touch-manipulation">
+                      <Square className="h-4 w-4" />
+                      Deselect all
+                    </Button>
+                  )}
+                  <Button
+                    size="sm"
+                    onClick={addSelected}
+                    disabled={selectedIds.size === 0}
+                    className="gap-1.5 min-h-[44px] touch-manipulation gradient-gold text-primary-foreground disabled:opacity-60 disabled:pointer-events-none"
+                    aria-label={selectedIds.size > 0 ? `Add ${selectedIds.size} selected to My List` : "Select mosques below first"}
+                    title={selectedIds.size === 0 ? "Select one or more mosques below first" : undefined}
+                  >
                     <Plus className="h-4 w-4" />
                     Add to My List
                   </Button>
@@ -347,43 +369,40 @@ export default function ListDetailPage() {
                       <button
                         type="button"
                         onClick={() => toggleSelect(mosque.id)}
-                        className={`shrink-0 min-w-[44px] min-h-[44px] w-11 h-11 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation ${
+                        className={`shrink-0 w-9 h-9 min-w-9 min-h-9 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation ${
                           selected ? "bg-primary border-primary text-primary-foreground" : "border-border hover:border-primary text-muted-foreground"
                         }`}
                         aria-label={selected ? `Deselect ${mosque.name}` : `Select ${mosque.name} to add to My List`}
                         aria-pressed={selected}
                       >
                         {selected ? (
-                          <CheckSquare className="w-4 h-4" />
+                          <CheckSquare className="w-3.5 h-3.5" />
                         ) : (
-                          <Square className="w-4 h-4" />
+                          <Square className="w-3.5 h-3.5" />
                         )}
                       </button>
                     ) : !inBucket && notInList.length <= 1 ? (
-                      <span className="shrink-0 w-11 h-11 min-w-[44px] min-h-[44px]" aria-hidden />
+                      <span className="shrink-0 w-9 h-9 min-w-9 min-h-9" aria-hidden />
                     ) : inBucket ? (
-                      <span className="shrink-0 w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-primary" aria-hidden>
-                        <CheckSquare className="w-4 h-4" />
+                      <span className="shrink-0 w-9 h-9 min-w-9 min-h-9 flex items-center justify-center text-primary" aria-hidden>
+                        <CheckSquare className="w-3.5 h-3.5" />
                       </span>
                     ) : null}
-                    {mosque.imageUrl && (
-                      <Link
-                        to={`/mosque/${mosque.id}`}
-                        className="shrink-0 w-16 h-16 rounded-lg overflow-hidden border border-border bg-muted"
-                      >
-                        <img
-                          src={mosque.imageUrl}
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = "/placeholder.svg";
-                          }}
-                        />
-                      </Link>
-                    )}
+                    <Link
+                      to={`/mosque/${mosque.id}`}
+                      className="shrink-0 w-16 h-16 rounded-lg overflow-hidden border border-border bg-muted"
+                    >
+                      <img
+                        src={getMosqueImageSrc(mosque).src}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          setMosqueImageFallback(e.currentTarget, getMosqueImageSrc(mosque).fallbackUrl);
+                        }}
+                      />
+                    </Link>
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 gap-y-1">
                         <Link

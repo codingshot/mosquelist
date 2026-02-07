@@ -2,6 +2,8 @@
 
 This document outlines skills, processes, and tools to verify and maintain accuracy of mosque data, Islamic scripture references (Quran), and hadith citations used across MosqueList and any future content.
 
+**Before changing data or content**, use the guiding questions in [socratic-prompts.md](./socratic-prompts.md) (e.g. source, citation, neutrality) so updates stay appropriate and verifiable.
+
 ---
 
 ## 1. Mosque information accuracy

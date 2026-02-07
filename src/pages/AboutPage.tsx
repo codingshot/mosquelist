@@ -10,7 +10,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-background">
       <PageSEO
         title="About MosqueList - Discover & Plan Your Spiritual Journey"
-        description="MosqueList helps Muslims discover, explore, and plan visits to the world's most magnificent mosques. A project by ummah.build."
+        description="MosqueList helps you discover 100+ mosques in 50+ countries and plan your spiritual journey. From the three holiest sites to architectural masterpieces. A project by ummah.build."
         path="/about"
       />
       <Navigation />
@@ -24,10 +24,10 @@ export default function AboutPage() {
             Your Journey to the Sacred Places
           </h1>
           <p className="text-lg text-muted-foreground mb-6">
-            MosqueList helps Muslims discover, explore, and plan visits to the world's most
-            magnificent mosques. From the three holiest sites in Islam to architectural
-            masterpieces across the globe, we make it easy to create your personal prayer
-            bucket list.
+            MosqueList helps you discover, explore, and plan visits to 100+ of the world's
+            most magnificent mosques in 50+ countries. From the three holiest sites in Islam
+            to architectural masterpieces, create your personal prayer bucket list and track
+            your journey.
           </p>
           <p className="text-muted-foreground mb-8">
             A project by{" "}

@@ -10,7 +10,7 @@ export default function TravelGuidePage() {
     <div className="min-h-screen bg-background">
       <PageSEO
         title="Mosque Travel Guide - Plan Your Spiritual Journey | MosqueList"
-        description="Plan your mosque visits with our travel guide. Best times to visit, popular routes, what to pack, and tips for visiting mosques around the world."
+        description="Plan your mosque visits with our travel guide. 100+ mosques in 50+ countries. Best times to visit, popular routes, what to pack, and tips for spiritual journeys."
         path="/guides/travel"
       />
       <Navigation />
@@ -25,9 +25,9 @@ export default function TravelGuidePage() {
               Mosque Travel Guide
             </h1>
             <p className="text-lg text-muted-foreground">
-              Plan your spiritual journey to the world's most magnificent mosques.
-              From the three holiest sites to architectural masterpieces, here's
-              how to make the most of your visits.
+              Plan your spiritual journey across 100+ mosques in 50+ countries.
+              From the three holiest sites to historic and modern masterpieces,
+              here's how to make the most of your visits.
             </p>
           </header>
 
@@ -52,11 +52,12 @@ export default function TravelGuidePage() {
                 Popular Routes
               </h2>
               <p className="text-muted-foreground mt-3">
-                Classic Islamic heritage routes include Turkey (Istanbul's Blue
-                Mosque, Süleymaniye), Morocco (Hassan II in Casablanca), Egypt
-                (Al-Azhar in Cairo), and the UAE (Sheikh Zayed in Abu Dhabi).
-                Southeast Asia offers Istiqlal in Jakarta and Malaysia's Putra
-                Mosque. Pakistan's Faisal and Badshahi mosques are must-sees.
+                Classic routes include Turkey (Blue Mosque, Süleymaniye, Hagia Sophia),
+                Morocco (Hassan II), Egypt (Al-Azhar, Islamic Cultural Center), and the
+                UAE (Sheikh Zayed). Southeast Asia: Istiqlal in Jakarta, Putra Mosque,
+                Sultan Mosque in Singapore. Pakistan's Faisal and Badshahi; West Africa's
+                Great Mosque of Djenné and Massalikoul Djinane in Senegal. Use our map
+                and country filters to explore 100+ mosques.
               </p>
               <Button asChild variant="outline" className="mt-4 gap-2">
                 <Link to="/explore">
@@ -87,10 +88,10 @@ export default function TravelGuidePage() {
                 Planning Your List
               </h2>
               <p className="text-muted-foreground mt-3">
-                Use MosqueList to create your personal bucket list. Filter by
-                holy sites, country, or capacity. Add mosques you want to visit
-                and track your progress. Our curated lists by country and size
-                help you discover new destinations.
+                Use MosqueList to create your personal bucket list from 100+ mosques.
+                Filter by holy sites, country, region, or capacity. Add places and
+                track your progress. Curated lists—Holy Sites, Biggest Mosques, and
+                by country—help you discover new destinations.
               </p>
               <Button asChild className="mt-4 gap-2">
                 <Link to="/lists">Browse Curated Lists</Link>

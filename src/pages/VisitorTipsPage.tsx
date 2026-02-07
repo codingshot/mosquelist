@@ -97,11 +97,11 @@ export default function VisitorTipsPage() {
               <Link to="/guides/travel" className="text-primary hover:underline">
                 Travel Guide
               </Link>
-              . Explore our{" "}
-              <Link to="/explore" className="text-primary hover:underline">
-                mosque list
-              </Link>{" "}
-              to find visitor-friendly mosques.
+                  . Explore our{" "}
+                  <Link to="/explore" className="text-primary hover:underline">
+                    100+ mosques in 50+ countries
+                  </Link>{" "}
+                  to find visitor-friendly mosques.
             </p>
             <Button asChild variant="outline" className="gap-2">
               <Link to="/explore">Browse Mosques</Link>

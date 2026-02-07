@@ -5,6 +5,14 @@ description: Test MosqueList map view (OpenStreetMap), country/region filters, a
 
 # Testing MosqueList Map and Addresses
 
+## Before using this skill (Socratic prompts)
+
+- **Is the request about the map, filters, or location display?** Use this skill for map page, region/country filters, and address-vs-coordinates—not for general performance or mosque data content.
+- **What would “working” look like?** Run the automated tests and the manual checklist below so we know when we’re done.
+- **Did we touch mosque location data?** If `address` or `coordinates` changed in `mosques.json`, re-check address vs coordinates display per this skill.
+
+See `docs/socratic-prompts.md` for more guiding questions.
+
 ## When to Use
 
 - After changing map page, region/country filters, or Leaflet/OSM integration.

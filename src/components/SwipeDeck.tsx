@@ -23,6 +23,7 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const justSwipedRef = useRef(false);
   const hasCommittedThisGestureRef = useRef(false);
+  const hasDraggedRef = useRef(false);
 
   const currentMosque = mosques[index];
   const hasPrev = index > 0;
@@ -73,14 +74,17 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     if (isExiting) return;
     hasCommittedThisGestureRef.current = false;
+    hasDraggedRef.current = false;
     startXRef.current = e.clientX;
-    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+    e.preventDefault();
+    cardRef.current?.setPointerCapture(e.pointerId);
   }, [isExiting]);
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
       if (isExiting) return;
       const dx = e.clientX - startXRef.current;
+      if (Math.abs(dx) > 5) hasDraggedRef.current = true;
       setDragX(dx);
     },
     [isExiting],
@@ -88,7 +92,7 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
 
   const handlePointerUp = useCallback(
     (e: React.PointerEvent) => {
-      (e.target as HTMLElement).releasePointerCapture?.(e.pointerId);
+      cardRef.current?.releasePointerCapture?.(e.pointerId);
       if (isExiting || hasCommittedThisGestureRef.current) return;
       const dx = e.clientX - startXRef.current;
       if (dx > SWIPE_THRESHOLD) {
@@ -96,6 +100,10 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
       } else if (dx < -SWIPE_THRESHOLD) {
         triggerSwipe("left");
       } else {
+        if (hasDraggedRef.current) {
+          justSwipedRef.current = true;
+          setTimeout(() => { justSwipedRef.current = false; }, 400);
+        }
         setDragX(0);
       }
     },
@@ -153,6 +161,7 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
           style={{
             transform: `translateX(${dragX}px) rotate(${rotation}deg)`,
             transition: isExiting ? "transform 0.28s ease-out" : "none",
+            touchAction: "none",
           }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -162,7 +171,7 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
             setDragX(0);
             hasCommittedThisGestureRef.current = false;
           }}
-          onClick={(e) => {
+          onClickCapture={(e) => {
             if (justSwipedRef.current) {
               e.preventDefault();
               e.stopPropagation();

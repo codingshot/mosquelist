@@ -21,8 +21,8 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-background/70 max-w-md">
-              Helping Muslims discover, explore, and plan visits to the world's
-              most magnificent mosques. Start your spiritual journey today.
+              Discover 100+ mosques in 50+ countries—from the three holiest sites
+              to architectural masterpieces. Plan visits and build your bucket list.
             </p>
             <p className="text-background/70 text-sm mt-4">
               A project by{" "}
@@ -98,6 +98,11 @@ export const Footer = () => {
               <li>
                 <Link to="/timeline" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Islamic Heritage
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                  Blog
                 </Link>
               </li>
               <li>

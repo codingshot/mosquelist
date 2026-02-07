@@ -58,6 +58,8 @@ const VisitorTipsPage = lazyWithChunkErrorLogging(
   "VisitorTipsPage"
 );
 const MapPage = lazyWithChunkErrorLogging(() => import("./pages/MapPage"), "MapPage");
+const BlogPage = lazyWithChunkErrorLogging(() => import("./pages/BlogPage"), "BlogPage");
+const BlogPostPage = lazyWithChunkErrorLogging(() => import("./pages/BlogPostPage"), "BlogPostPage");
 const NotFound = lazyWithChunkErrorLogging(() => import("./pages/NotFound"), "NotFound");
 
 const queryClient = new QueryClient();
@@ -94,6 +96,8 @@ const App = () => (
               <Route path="/guides/travel" element={<TravelGuidePage />} />
               <Route path="/guides/visitor-tips" element={<VisitorTipsPage />} />
               <Route path="/map" element={<MapPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path="/mosque/:id" element={<MosquePage />} />
               <Route path="*" element={<NotFound />} />
               </Routes>

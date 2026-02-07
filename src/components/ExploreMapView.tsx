@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getGoogleMapsUrl } from "@/lib/maps";
 import { Users, Star, MapPin, ExternalLink, Focus } from "lucide-react";
 import type { Mosque } from "@/types/mosque";
+import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 
 import "leaflet/dist/leaflet.css";
 
@@ -22,7 +23,8 @@ function formatCapacity(capacity: number) {
 }
 
 function MosqueMapCardContent({ mosque, compact = false }: { mosque: MosqueWithCoords; compact?: boolean }) {
-  const imgSrc = mosque.imageUrl?.trim() || "/placeholder.svg";
+  const { src: imgSrc, fallbackUrl: imgFallback } = getMosqueImageSrc(mosque);
+  const effectiveSrc = imgSrc || "/placeholder.svg";
   if (compact) {
     return (
       <div className="flex gap-3">
@@ -44,12 +46,11 @@ function MosqueMapCardContent({ mosque, compact = false }: { mosque: MosqueWithC
         </div>
         <div className="shrink-0 w-14 h-14 rounded-md overflow-hidden bg-muted">
           <img
-            src={imgSrc}
+            src={effectiveSrc}
             alt=""
             className="h-full w-full object-cover"
             onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = "/placeholder.svg";
+              setMosqueImageFallback(e.currentTarget, imgFallback);
             }}
           />
         </div>
@@ -60,12 +61,11 @@ function MosqueMapCardContent({ mosque, compact = false }: { mosque: MosqueWithC
     <div className="w-[220px] overflow-hidden rounded-lg bg-card border border-border shadow-lg">
       <div className="relative h-24 w-full flex-none overflow-hidden bg-muted">
         <img
-          src={imgSrc}
+          src={effectiveSrc}
           alt=""
           className="h-full w-full object-cover"
           onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "/placeholder.svg";
+            setMosqueImageFallback(e.currentTarget, imgFallback);
           }}
         />
         {mosque.isHolySite && (
@@ -133,6 +133,63 @@ function createMarkerIcon(isHoly: boolean): L.DivIcon {
     iconAnchor: [size / 2, size / 2],
     popupAnchor: [0, -size / 2],
   });
+}
+
+function PopupContentWithImage({ mosque }: { mosque: MosqueWithCoords }) {
+  const { src, fallbackUrl } = getMosqueImageSrc(mosque);
+  return (
+    <div className="w-[280px] overflow-hidden rounded-lg bg-card border border-border shadow-xl">
+      <div className="relative h-[130px] w-full flex-none overflow-hidden bg-muted">
+        <img
+          src={src || "/placeholder.svg"}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover"
+          onError={(e) => {
+            setMosqueImageFallback(e.currentTarget, fallbackUrl);
+          }}
+        />
+        {mosque.isHolySite && (
+          <span className="absolute top-2 left-2 inline-flex items-center gap-0.5 rounded bg-primary px-2 py-1 text-xs font-medium text-primary-foreground shadow">
+            <Star className="h-3 w-3" />
+            Holy site
+          </span>
+        )}
+      </div>
+      <div className="p-3 space-y-2">
+        <div>
+          <h3 className="font-semibold text-foreground leading-tight text-base">
+            {mosque.name}
+          </h3>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            {mosque.location}, {mosque.country}
+          </p>
+          <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+            <Users className="h-3 w-3 shrink-0" />
+            {formatCapacity(mosque.capacity)} · {mosque.established}
+          </p>
+        </div>
+        <div className="flex flex-col gap-2 pt-1">
+          <Button size="sm" className="w-full gap-1.5" asChild>
+            <Link to={`/mosque/${mosque.id}`}>
+              <MapPin className="w-3.5 h-3.5" />
+              View mosque
+            </Link>
+          </Button>
+          <a
+            href={getGoogleMapsUrl(mosque.coordinates, mosque.address)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-medium hover:bg-secondary/80 transition-colors"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export interface ExploreMapViewProps {
@@ -218,56 +275,7 @@ export function ExploreMapView({ mosques, onFitToMarkers }: ExploreMapViewProps)
                 <MosqueMapCardContent mosque={mosque} />
               </Tooltip>
               <Popup className="map-popup" maxWidth={320}>
-                <div className="w-[280px] overflow-hidden rounded-lg bg-card border border-border shadow-xl">
-                  <div className="relative h-[130px] w-full flex-none overflow-hidden bg-muted">
-                    <img
-                      src={mosque.imageUrl?.trim() || "/placeholder.svg"}
-                      alt=""
-                      className="h-full w-full object-cover"
-                      onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = "/placeholder.svg";
-                      }}
-                    />
-                    {mosque.isHolySite && (
-                      <span className="absolute top-2 left-2 inline-flex items-center gap-0.5 rounded bg-primary px-2 py-1 text-xs font-medium text-primary-foreground shadow">
-                        <Star className="h-3 w-3" />
-                        Holy site
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-3 space-y-2">
-                    <div>
-                      <h3 className="font-semibold text-foreground leading-tight text-base">
-                        {mosque.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mt-0.5">
-                        {mosque.location}, {mosque.country}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-                        <Users className="h-3 w-3 shrink-0" />
-                        {formatCapacity(mosque.capacity)} · {mosque.established}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-2 pt-1">
-                      <Button size="sm" className="w-full gap-1.5" asChild>
-                        <Link to={`/mosque/${mosque.id}`}>
-                          <MapPin className="w-3.5 h-3.5" />
-                          View mosque
-                        </Link>
-                      </Button>
-                      <a
-                        href={getGoogleMapsUrl(mosque.coordinates, mosque.address)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-medium hover:bg-secondary/80 transition-colors"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        Open in Google Maps
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <PopupContentWithImage mosque={mosque} />
               </Popup>
             </Marker>
           ))}

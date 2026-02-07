@@ -5,6 +5,14 @@ description: Performance patterns and page-by-page guide for MosqueList. Use whe
 
 # MosqueList Performance & Pages
 
+## Before using this skill (Socratic prompts)
+
+- **What is actually slow?** (First load, route change, scroll, filter?) Use this skill when the request is about performance or page structure—not for data accuracy, copy, or map behavior.
+- **Which page or route is affected?** Check the "Every Page" table below so changes match existing patterns (lazy load, chunks, images).
+- **Is the change above or below the fold?** That determines eager vs lazy images and whether a new chunk is needed.
+
+See `docs/socratic-prompts.md` for more guiding questions.
+
 ## Performance Rules
 
 ### Build (Vite)

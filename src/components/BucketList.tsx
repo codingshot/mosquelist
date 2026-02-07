@@ -21,6 +21,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBucketList } from "@/hooks/useBucketList";
 import { toast } from "sonner";
+import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import {
   DndContext,
   closestCenter,
@@ -44,11 +45,13 @@ function BucketListItemRow({
   mosque,
   toggleVisited,
   removeFromBucketList,
+  onRemoveToast,
 }: {
   item: BucketListItem;
   mosque: (typeof mosques)[number];
   toggleVisited: (id: string) => void;
   removeFromBucketList: (id: string) => void;
+  onRemoveToast?: (name: string) => void;
 }) {
   const {
     attributes,
@@ -64,13 +67,35 @@ function BucketListItemRow({
     transition,
   };
 
+  const handleRowClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (
+      target.closest("a") ||
+      target.closest("button") ||
+      target.closest('[aria-label="Drag to reorder"]')
+    ) return;
+    removeFromBucketList(item.mosqueId);
+    onRemoveToast?.(mosque.name);
+  };
+
   return (
     <li
       ref={setNodeRef}
       style={style}
-      className={`px-4 sm:px-6 py-4 flex items-center gap-2 sm:gap-3 transition-colors ${
+      role="button"
+      tabIndex={0}
+      onClick={handleRowClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          removeFromBucketList(item.mosqueId);
+          onRemoveToast?.(mosque.name);
+        }
+      }}
+      className={`px-4 sm:px-6 py-4 flex items-center gap-2 sm:gap-3 transition-colors cursor-pointer ${
         item.visited ? "bg-primary/5" : "hover:bg-secondary/30"
       } ${isDragging ? "opacity-50 shadow-lg" : ""}`}
+      aria-label={`${mosque.name}, ${mosque.location}. Click to remove from list.`}
     >
       <button
         type="button"
@@ -83,7 +108,7 @@ function BucketListItemRow({
       </button>
       <button
         onClick={() => toggleVisited(item.mosqueId)}
-        className={`min-h-[44px] min-w-[44px] rounded border-2 flex items-center justify-center transition-all shrink-0 touch-manipulation ${
+        className={`w-9 h-9 min-w-9 min-h-9 rounded border-2 flex items-center justify-center transition-all shrink-0 touch-manipulation ${
           item.visited
             ? "bg-primary border-primary"
             : "border-border hover:border-primary"
@@ -91,25 +116,24 @@ function BucketListItemRow({
         aria-label={item.visited ? "Mark as not visited" : "Mark as visited"}
       >
         {item.visited && (
-          <Check className="w-4 h-4 text-primary-foreground" />
+          <Check className="w-3.5 h-3.5 text-primary-foreground" />
         )}
       </button>
-      {mosque.imageUrl && (
-        <Link
-          to={`/mosque/${mosque.id}`}
-          className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-border bg-muted"
-        >
-          <img
-            src={mosque.imageUrl}
-            alt=""
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = "/placeholder.svg";
-            }}
-          />
-        </Link>
-      )}
+      <Link
+        to={`/mosque/${mosque.id}`}
+        className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-border bg-muted"
+      >
+        <img
+          src={getMosqueImageSrc(mosque).src}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            setMosqueImageFallback(e.currentTarget, getMosqueImageSrc(mosque).fallbackUrl);
+          }}
+        />
+      </Link>
       <div className="flex-1 min-w-0">
         <h4
           className={`font-medium transition-all ${
@@ -140,7 +164,11 @@ function BucketListItemRow({
         )}
         <button
           type="button"
-          onClick={() => removeFromBucketList(item.mosqueId)}
+          onClick={(e) => {
+            e.stopPropagation();
+            removeFromBucketList(item.mosqueId);
+            onRemoveToast?.(mosque.name);
+          }}
           className="min-h-[44px] min-w-[44px] p-2 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive flex items-center justify-center touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label={`Remove ${mosque.name} from list`}
         >
@@ -303,7 +331,7 @@ export const BucketList = () => {
             {bucketList.length === 0 ? (
               <div className="px-6 py-8 text-center text-muted-foreground">
                 <p className="font-medium text-foreground mb-1">Your list is empty</p>
-                <p className="text-sm mb-4">Browse curated lists or the full mosque list and add places to track your spiritual journey.</p>
+                <p className="text-sm mb-4">Browse 100+ mosques in 50+ countries or our curated lists (Holy Sites, Biggest Mosques, by country) and add places to track your spiritual journey.</p>
                 <div className="flex flex-wrap gap-2">
                   <Button variant="outline" size="sm" asChild>
                     <Link to="/lists">Curated Lists</Link>
@@ -353,6 +381,7 @@ export const BucketList = () => {
                         mosque={mosque}
                         toggleVisited={toggleVisited}
                         removeFromBucketList={removeFromBucketList}
+                        onRemoveToast={(name) => toast.success(`Removed ${name} from your list`)}
                       />
                     ))
                   )}
@@ -396,21 +425,18 @@ export const BucketList = () => {
                           {mosquesNotInList.map((mosque) => (
                             <li key={mosque.id}>
                               <div className="flex items-center gap-4 rounded-lg border border-border p-3 hover:bg-secondary/50">
-                                {mosque.imageUrl && (
-                                  <div className="shrink-0 w-12 h-12 rounded-md overflow-hidden border border-border bg-muted">
-                                    <img
-                                      src={mosque.imageUrl}
-                                      alt=""
-                                      loading="lazy"
-                                      decoding="async"
-                                      className="w-full h-full object-cover"
-                                      onError={(e) => {
-                                        e.currentTarget.onerror = null;
-                                        e.currentTarget.src = "/placeholder.svg";
-                                      }}
-                                    />
-                                  </div>
-                                )}
+                                <div className="shrink-0 w-12 h-12 rounded-md overflow-hidden border border-border bg-muted">
+                                  <img
+                                    src={getMosqueImageSrc(mosque).src}
+                                    alt=""
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                      setMosqueImageFallback(e.currentTarget, getMosqueImageSrc(mosque).fallbackUrl);
+                                    }}
+                                  />
+                                </div>
                                 <div className="flex-1 min-w-0">
                                   <p className="font-medium text-foreground truncate">
                                     {mosque.name}
@@ -494,27 +520,27 @@ export const BucketList = () => {
           </div>
 
           {/* Other lists */}
-          <div className="mt-8 rounded-xl border border-border bg-card p-6 mosque-card-shadow">
+          <div className="mt-8 rounded-xl border border-border bg-card p-4 sm:p-6 mosque-card-shadow">
             <h3 className="font-semibold text-foreground mb-1 flex items-center gap-2">
-              <List className="w-4 h-4 text-primary" />
+              <List className="w-4 h-4 text-primary shrink-0" />
               Browse other lists
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Add mosques from curated lists by holy sites, region, or theme.
+              Add from 100+ mosques or curated lists: Holy Sites, Biggest Mosques, Turkey, Pakistan, Indonesia, and more.
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {curatedLists.map((list) => (
                 <Link
                   key={list.slug}
                   to={`/lists/${list.slug}`}
-                  className="inline-flex items-center gap-1 rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium text-foreground hover:border-primary/50 hover:bg-secondary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[44px] touch-manipulation"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-medium text-foreground hover:border-primary/50 hover:bg-secondary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[44px] touch-manipulation"
                 >
-                  {list.name}
-                  <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
+                  <span className="min-w-0 truncate">{list.name}</span>
+                  <ChevronRight className="w-3.5 h-3.5 shrink-0 text-muted-foreground" />
                 </Link>
               ))}
             </div>
-            <Button variant="outline" size="sm" className="mt-4 gap-2 min-h-[44px] touch-manipulation" asChild>
+            <Button variant="outline" size="sm" className="mt-4 gap-2 min-h-[44px] touch-manipulation w-full sm:w-auto" asChild>
               <Link to="/bucket-list">
                 <List className="w-4 h-4" />
                 View my list

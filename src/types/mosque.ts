@@ -16,6 +16,8 @@ export interface Mosque {
   significance: string;
   description: string;
   imageUrl: string;
+  /** Optional local image path (e.g. /images/mosques/id.jpg). When set, used first with imageUrl as fallback on error. */
+  imageLocal?: string;
   /** Optional extra image URLs for gallery (main image is imageUrl). */
   galleryUrls?: string[];
   isHolySite: boolean;

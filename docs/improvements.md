@@ -2,6 +2,8 @@
 
 Actionable skills and improvements to make the app more useful, accurate, and maintainable. Use this with [skills.md](./skills.md) (data accuracy) and [content-strategy.md](./content-strategy.md) (SEO).
 
+**When deciding what to build or prioritize**, use the Socratic prompts in [socratic-prompts.md](./socratic-prompts.md) to scope and choose the right doc or skill.
+
 ---
 
 ## 1. Data & content

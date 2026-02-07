@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 
 /** Parse numeric year from established string (e.g. "537 CE" -> 537, "2019" -> 2019). */
 function parseYear(yearStr: string): number {
@@ -78,8 +79,8 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
             Timeline of Major Mosques
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Journey through history and discover when the world's most
-            significant mosques were built.
+            Journey through history—from 622 CE to today—and discover when
+            the world's most significant mosques and holy sites were built.
           </p>
         </div>
 
@@ -152,8 +153,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
             ) : (
             displayedEvents.map((event, index) => {
               const mosque = mosqueById.get(event.mosqueId);
-              const imageUrl = mosque?.imageUrl?.trim();
-              const hasImage = !!imageUrl;
+              const { src: imageSrc, fallbackUrl: imageFallback } = mosque ? getMosqueImageSrc(mosque) : { src: "/placeholder.svg", fallbackUrl: null };
 
               return (
                 <div
@@ -172,24 +172,21 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                     }`}
                   >
                     <div className="bg-card rounded-lg shadow-lg border border-border mosque-card-shadow overflow-hidden min-w-0">
-                      <div className={`flex ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} ${hasImage ? "flex-row" : ""}`}>
-                        {hasImage && (
-                          <div className="shrink-0 w-24 sm:w-28 md:w-32 self-stretch min-h-0 overflow-hidden bg-muted">
-                            <Link to={`/mosque/${event.mosqueId}`} className="block h-full w-full">
-                              <img
-                                src={imageUrl}
-                                alt={mosque ? `${mosque.name} - ${event.year}` : ""}
-                                className="h-full w-full object-cover"
-                                loading="lazy"
-                                decoding="async"
-                                onError={(e) => {
-                                  e.currentTarget.onerror = null;
-                                  e.currentTarget.src = "/placeholder.svg";
-                                }}
-                              />
-                            </Link>
-                          </div>
-                        )}
+                      <div className={`flex ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}>
+                        <div className="shrink-0 w-24 sm:w-28 md:w-32 self-stretch min-h-0 overflow-hidden bg-muted">
+                          <Link to={`/mosque/${event.mosqueId}`} className="block h-full w-full">
+                            <img
+                              src={imageSrc}
+                              alt={mosque ? `${mosque.name} - ${event.year}` : ""}
+                              className="h-full w-full object-cover"
+                              loading="lazy"
+                              decoding="async"
+                              onError={(e) => {
+                                setMosqueImageFallback(e.currentTarget, imageFallback);
+                              }}
+                            />
+                          </Link>
+                        </div>
                         <div className="p-4 sm:p-5 min-w-0 flex-1">
                           <span className="font-handwriting text-xl sm:text-2xl text-primary font-semibold">
                             {event.year}{event.year.match(/^\d+$/) ? " CE" : ""}

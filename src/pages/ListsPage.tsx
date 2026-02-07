@@ -19,8 +19,8 @@ export default function ListsPage() {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Curated Lists - MosqueList | Inspiration for Your Spiritual Journey"
-        description="Browse curated mosque lists by holy sites, size, and country. Find inspiration for your bucket list."
+        title="Curated Lists - MosqueList | Holy Sites, Biggest Mosques & More"
+        description="Browse curated mosque lists: Holy Sites (Mecca, Medina, Jerusalem), Biggest Mosques, and by country. 100+ mosques. Add to your bucket list."
         path="/lists"
       />
       <Navigation />
@@ -38,8 +38,9 @@ export default function ListsPage() {
                 Inspiration for Your List
               </h1>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-                Browse lists by holy sites, size, and country. Add entire lists
-                or pick the mosques that call to you.
+                Holy Sites, Biggest Mosques, and lists by country—from Saudi Arabia
+                and Turkey to Indonesia and Pakistan. Add entire lists or pick the
+                mosques that call to you.
               </p>
             </div>
 

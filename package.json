@@ -14,7 +14,9 @@
     "fact-check": "node scripts/fact-check-checklist.js",
     "enrich-mosques": "node scripts/enrich-mosques-from-source.js",
     "populate-mosquedata1": "node scripts/populate-mosquedata1.js",
-    "merge-mosques": "node scripts/merge-mosques.js"
+    "merge-mosques": "node scripts/merge-mosques.js",
+    "download-mosque-images": "node scripts/download-mosque-images.js",
+    "sync-mosque-images": "node scripts/sync-mosque-images-from-disk.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

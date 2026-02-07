@@ -38,7 +38,8 @@
       "history": "The mosque surrounds the Kaaba, the ancient house of worship believed built by Prophet Ibrahim. Expanded through the centuries—under Caliph Umar (638), Ottoman Sultan Selim II (1571), and Saudi expansions (1950s onward)—it is the focal point of Hajj and Umrah.",
       "tourismNotes": "Non-Muslims may not enter. Hajj visa required for pilgrimage. Dress modestly; Ihram for Hajj. Best visited during Ramadan or Hajj season for spiritual atmosphere.",
       "officialWebsite": "https://www.gph.gov.sa",
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "imageLocal": "/images/mosques/masjid-al-haram.jpg"
     },
     {
       "id": "masjid-an-nabawi",
@@ -271,7 +272,8 @@
       "history": "Built 1609–1616 by Sultan Ahmed I. Architect Sedefkar Mehmed Agha drew on Hagia Sophia and Mimar Sinan. Six minarets caused controversy; Sultan funded a seventh at Mecca.",
       "architectureNotes": "Famous for 20,000+ hand-painted blue Iznik tiles. Central dome 43 m high. Six minarets. Classic Ottoman layout.",
       "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet.",
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "imageLocal": "/images/mosques/blue-mosque.jpg"
     },
     {
       "id": "faisal-mosque",
@@ -307,7 +309,8 @@
         "lat": 33.7295,
         "lng": 73.0372
       },
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "imageLocal": "/images/mosques/faisal-mosque.jpg"
     },
     {
       "id": "istiqlal-mosque",
@@ -370,7 +373,8 @@
       "coordinates": {
         "lat": 24.8128,
         "lng": 67.0693
-      }
+      },
+      "imageLocal": "/images/mosques/grand-jamia.jpg"
     },
     {
       "id": "badshahi-mosque",
@@ -391,7 +395,7 @@
       ],
       "significance": "Iconic Mughal-era mosque, one of Pakistan's most visited landmarks",
       "description": "The Badshahi Mosque was built by Emperor Aurangzeb in 1673. It is a masterpiece of Mughal architecture and was the largest mosque in the world for over 300 years. Its red sandstone and marble make it one of Lahore's most iconic sights. Courtyard 161.5 × 160.6 m.",
-      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_%2C_Lahore.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Badshahi_Mosque_%2C_Lahore.jpg",
       "galleryUrls": [
         "https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_courtyard.jpg",
         "https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_Interior.jpg"
@@ -406,7 +410,8 @@
       },
       "history": "Built by Emperor Aurangzeb in 1673. The largest mosque in the world for over 300 years until Faisal Mosque (1986).",
       "architectureNotes": "Red sandstone and marble. Symmetrical courtyard, octagonal minarets, Persian calligraphy.",
-      "tourismNotes": "Open to visitors. Modest dress required. Located near Lahore Fort. Best in morning light."
+      "tourismNotes": "Open to visitors. Modest dress required. Located near Lahore Fort. Best in morning light.",
+      "imageLocal": "/images/mosques/badshahi-mosque.jpg"
     },
     {
       "id": "sultan-qaboos-grand-mosque",
@@ -470,7 +475,8 @@
         "lat": 2.927,
         "lng": 101.6869
       },
-      "tourismNotes": "Visitor access. Rose-tinted granite. Waterfront location on Putrajaya Lake. Photography allowed."
+      "tourismNotes": "Visitor access. Rose-tinted granite. Waterfront location on Putrajaya Lake. Photography allowed.",
+      "imageLocal": "/images/mosques/putra-mosque.jpg"
     },
     {
       "id": "sultan-omar-ali-saifuddin",
@@ -574,7 +580,7 @@
       ],
       "significance": "Largest adobe building in the world, UNESCO World Heritage Site",
       "description": "The Great Mosque of Djenné is the largest mud-brick (adobe) building in the world. Rebuilt in 1907, it is a pinnacle of Sudano-Sahelian architecture and is replastered annually by the community. UNESCO World Heritage since 1988.",
-      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Great_Mosque_of_Djenn%C3%A9_1.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Great_Mosque_of_Djenn%C3%A9_1.jpg",
       "isHolySite": false,
       "architecturalStyle": "Sudano-Sahelian",
       "womenPrayerArea": true,
@@ -585,7 +591,8 @@
       },
       "history": "Rebuilt in 1907. UNESCO World Heritage since 1988. Largest adobe building in the world. Replastered annually by the community during the Crepissage festival.",
       "architectureNotes": "Sudano-Sahelian style. Mud bricks, wooden beams (toron) protruding from walls. Three minarets.",
-      "tourismNotes": "Interior access for non-Muslims is limited. Best viewed from outside during the annual replastering festival."
+      "tourismNotes": "Interior access for non-Muslims is limited. Best viewed from outside during the annual replastering festival.",
+      "imageLocal": "/images/mosques/great-mosque-of-djenne.jpg"
     },
     {
       "id": "grand-mosque-kuwait",
@@ -697,7 +704,7 @@
       ],
       "significance": "First major mosque in Washington D.C., diplomatic and cultural landmark",
       "description": "The Islamic Center of Washington was dedicated in 1957. Designed by Italian architect Mario Rossi, it blends traditional Islamic architecture with modern elements. Serves the diplomatic community and visitors from around the world.",
-      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Islamic_Center_of_Washington.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Islamic_Center_of_Washington.jpg",
       "isHolySite": false,
       "architecturalStyle": "Mamluk Revival",
       "womenPrayerArea": true,
@@ -709,7 +716,8 @@
       "history": "Founded by Muslim diplomats. Dedicated 1957. President Eisenhower attended. Designed by Mario Rossi in Mamluk style.",
       "architectureNotes": "Mamluk-inspired. Minaret 50 m. Persian carpets, Turkish tiles, Egyptian woodwork. Stained glass.",
       "tourismNotes": "Non-Muslims welcome. Modest dress required; abayas provided. Near Embassy Row. Free tours.",
-      "officialWebsite": "https://www.islamiccenterdc.org"
+      "officialWebsite": "https://www.islamiccenterdc.org",
+      "imageLocal": "/images/mosques/islamic-center-washington.jpg"
     },
     {
       "id": "imam-ali-shrine",
@@ -773,7 +781,8 @@
       },
       "history": "Built to commemorate Malaysian independence (1957). Completed 1965. Named Masjid Negara.",
       "architectureNotes": "Folded plate concrete roof instead of traditional dome. 73 m minaret. Capacity 15,000.",
-      "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; robes provided. Near Lake Gardens and KL Bird Park."
+      "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; robes provided. Near Lake Gardens and KL Bird Park.",
+      "imageLocal": "/images/mosques/national-mosque-malaysia.jpg"
     },
     {
       "id": "djamaa-el-djazair",
@@ -835,7 +844,8 @@
         "lat": 52.4944,
         "lng": -1.8739
       },
-      "tourismNotes": "Visitors welcome. Modest dress required. Contact for tour arrangements."
+      "tourismNotes": "Visitors welcome. Modest dress required. Contact for tour arrangements.",
+      "imageLocal": "/images/mosques/birmingham-central-mosque.jpg"
     },
     {
       "id": "suleymaniye-mosque",
@@ -957,7 +967,8 @@
       },
       "history": "Built 1982–1989 by King Hussein as a memorial to his grandfather King Abdullah I. Octagonal prayer hall with no interior pillars.",
       "architectureNotes": "Blue mosaic dome 35 m diameter, 31 m high. Main hall holds 3,000; courtyard 3,000; women's section 500.",
-      "tourismNotes": "Non-Muslims welcome. Modest dress required; abayas and headscarves provided free. Islamic Museum inside."
+      "tourismNotes": "Non-Muslims welcome. Modest dress required; abayas and headscarves provided free. Islamic Museum inside.",
+      "imageLocal": "/images/mosques/king-abdullah-i-mosque.jpg"
     },
     {
       "id": "imam-abdul-wahhab-mosque",
@@ -1620,7 +1631,8 @@
       "isHolySite": false,
       "architecturalStyle": "Ottoman",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "imageLocal": "/images/mosques/sabanci-central-mosque.jpg"
     },
     {
       "id": "at-tin-mosque",
@@ -1729,7 +1741,8 @@
       "history": "Built to commemorate Malaysian independence (1957). Completed 1965. Named Masjid Negara.",
       "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; robes provided. Near Lake Gardens and KL Bird Park.",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "imageLocal": "/images/mosques/sultan-salahuddin-abdul-aziz-mosque.jpg"
     },
     {
       "id": "jakarta-islamic-center",
@@ -1941,7 +1954,8 @@
       "isHolySite": false,
       "architecturalStyle": "Malay",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "imageLocal": "/images/mosques/tuanku-mizan-zainal-abidin-mosque.jpg"
     },
     {
       "id": "raja-hamidah-great-mosque-of-batam",
@@ -1991,14 +2005,15 @@
       ],
       "significance": "Historic Byzantine basilica completed 537 CE; converted to mosque 1453, museum 1935, mosque again 2020.",
       "description": "Hagia Sophia in Istanbul was built as a Byzantine cathedral in 537 CE. After the Ottoman conquest it became a mosque; it was a museum from 1935 until 2020, when it was reconsecrated as a mosque. The building is famed for its massive dome and Byzantine mosaics.",
-      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Hagia_Sophia_Mars_2013.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Hagia_Sophia_Mars_2013.jpg",
       "isHolySite": false,
       "architecturalStyle": "Byzantine",
       "architectureNotes": "Pendentive dome (31 m diameter, ~56 m high). Byzantine masonry; Ottoman minarets and calligraphy added after 1453. Mosaics partially preserved.",
       "history": "Built 532–537 under Emperor Justinian I; designed by Isidore of Miletus and Anthemius of Tralles. Converted to mosque after Ottoman conquest (1453); minarets and Islamic elements added. Secularized as museum 1935; redesignated as mosque 2020.",
       "tourismNotes": "Free entry. Closed during prayer times. Modest dress; head coverings provided. Visit early to avoid crowds.",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "imageLocal": "/images/mosques/hagia-sophia-istanbul.jpg"
     },
     {
       "id": "al-kauthar-mosque",
@@ -2823,6 +2838,370 @@
       "tourismNotes": "Entry for non-Muslims may be restricted and usually requires permission from staff or a local guide; respectful dress is essential. Visitors often combine it with a stop at the nearby Islamic Centre and Grand Friday Mosque.",
       "officialWebsite": null,
       "denomination": "sunni"
+    },
+    {
+      "id": "islamic-center-of-america",
+      "name": "Islamic Center of America",
+      "arabicName": "المركز الإسلامي في أمريكا",
+      "location": "Dearborn, Michigan",
+      "country": "USA",
+      "address": "19500 Ford Road, Dearborn, MI 48128, USA",
+      "capacity": 10000,
+      "established": "1963 (current building 2005)",
+      "area": 120000,
+      "annualVisitors": "Tens of thousands annually; thousands weekly for prayers and programs",
+      "facilities": [
+        "Main prayer hall",
+        "Banquet hall",
+        "Classrooms and education wing",
+        "Library",
+        "Offices and meeting rooms",
+        "Parking"
+      ],
+      "significance": "One of the largest mosques in North America and a major Shia Islamic center serving the Lebanese-American community and wider Muslim population.",
+      "description": "The Islamic Center of America in Dearborn is a 120,000-square-foot complex that serves as a religious, educational and cultural hub for Muslims in the Detroit area. Its modern building, opened in 2005, features a grand prayer hall, large dome and multiple community spaces, hosting major events, interfaith programs and large Friday and Ramadan congregations.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Islamic_Center_of_America_Dearborn_Michigan.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b2/Islamic_Center_of_America_exterior.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/8/8b/Islamic_Center_of_America_prayer_hall.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic with Middle Eastern influences",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 42.3353,
+        "lng": -83.2352
+      },
+      "history": "The institution was founded in 1949, with an early mosque built in 1963 to serve the growing Lebanese Shia community in Dearborn. In response to continued growth, a new 120,000-square-foot facility opened in 2005, becoming the largest mosque complex in North America and a focal point for Shia religious life and interfaith outreach.",
+      "tourismNotes": "Open and welcoming to visitors; guided tours and interfaith visits are common, and modest dress is recommended.",
+      "officialWebsite": "https://www.icofa.org",
+      "denomination": "shia"
+    },
+    {
+      "id": "islamic-cultural-center-of-new-york",
+      "name": "Islamic Cultural Center of New York",
+      "arabicName": "المركز الثقافي الإسلامي في نيويورك",
+      "location": "New York City, New York",
+      "country": "USA",
+      "address": "1711 3rd Avenue, New York, NY 10029, USA",
+      "capacity": 4000,
+      "established": "1991",
+      "area": 0,
+      "annualVisitors": "Thousands weekly for prayers; significant numbers of visitors and tourists",
+      "facilities": [
+        "Main prayer hall",
+        "Classrooms",
+        "Library",
+        "Multipurpose halls"
+      ],
+      "significance": "The first purpose-built mosque in New York City and a major Islamic center serving a diverse international community.",
+      "description": "The Islamic Cultural Center of New York, located on Manhattan's Upper East Side, is a prominent mosque with a striking modern design, featuring a tall minaret and a cubical prayer hall capped by a dome. It serves Muslims from many countries and hosts large Friday and Eid congregations, educational programs and interfaith activities.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Islamic_Cultural_Center_of_New_York.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/2/2e/Islamic_Cultural_Center_of_New_York_minaret.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/4/42/Islamic_Cultural_Center_of_New_York_interior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modernist Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 40.7853,
+        "lng": -73.9479
+      },
+      "history": "Plans for the mosque date to the 1960s, but construction took place in the 1980s with funding from several Muslim-majority countries, and the building opened in 1991 as New York's first purpose-built mosque. It quickly became a landmark institution for Muslims in the city, known for its architecture and role in interfaith dialogue.",
+      "tourismNotes": "Visitors are welcome outside prayer times; modest dress is expected and tours may be arranged through the center.",
+      "officialWebsite": "https://icc-ny.us",
+      "denomination": "sunni"
+    },
+    {
+      "id": "masjid-muhammad-washington-dc",
+      "name": "Masjid Muhammad (The Nation's Mosque)",
+      "arabicName": "مسجد محمد",
+      "location": "Washington, D.C.",
+      "country": "USA",
+      "address": "1519 4th Street NW, Washington, DC 20001, USA",
+      "capacity": 2000,
+      "established": "Mid-20th century (current Sunni congregation from 1975)",
+      "area": 0,
+      "annualVisitors": "Thousands annually; frequent delegations and interfaith visitors",
+      "facilities": [
+        "Prayer hall",
+        "Classrooms",
+        "Offices and community spaces"
+      ],
+      "significance": "Historic center of African-American Muslim life and one of the most influential mosques in the United States.",
+      "description": "Masjid Muhammad in Washington, D.C., known as 'The Nation's Mosque', has played a pioneering role in the development of African-American Sunni Islam in the U.S., evolving from a Nation of Islam temple to a mainstream Sunni congregation. It is active in civic engagement, interfaith work and social justice initiatives.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Masjid_Muhammad_Washington_DC.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/9/96/Masjid_Muhammad_The_Nations_Mosque.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern American mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 38.9108,
+        "lng": -77.0164
+      },
+      "history": "Originating as a Nation of Islam temple, the community transitioned under Imam W. D. Mohammed in the 1970s to orthodox Sunni Islam, becoming Masjid Muhammad. It has hosted political leaders, civil-rights figures and international visitors, symbolizing the intersection of Islam and American civic life.",
+      "tourismNotes": "Known for its openness to visitors and interfaith groups; contact is recommended to arrange educational visits.",
+      "officialWebsite": "https://www.thenationsmosque.org",
+      "denomination": "sunni"
+    },
+    {
+      "id": "islamic-society-of-boston-cultural-center",
+      "name": "Islamic Society of Boston Cultural Center",
+      "arabicName": "المركز الثقافي للمجتمع الإسلامي في بوسطن",
+      "location": "Boston, Massachusetts",
+      "country": "USA",
+      "address": "100 Malcolm X Blvd, Roxbury, MA 02120, USA",
+      "capacity": 1500,
+      "established": "2009",
+      "area": 0,
+      "annualVisitors": "Thousands annually; large Friday and Eid gatherings",
+      "facilities": [
+        "Prayer hall",
+        "Classrooms",
+        "Library",
+        "Multipurpose spaces",
+        "Cafeteria"
+      ],
+      "significance": "One of New England's largest mosques and an important cultural and educational center for Muslims in the Boston area.",
+      "description": "The Islamic Society of Boston Cultural Center (ISBCC) is a large mosque and community complex in Roxbury that serves a diverse Muslim population and hosts educational, cultural and interfaith programs. Its contemporary design includes a prominent minaret and dome overlooking Malcolm X Boulevard.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Islamic_Society_of_Boston_Cultural_Center.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/1b/ISBCC_Boston_exterior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Contemporary Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 42.3325,
+        "lng": -71.0925
+      },
+      "history": "The ISBCC project began in the 1990s, with the mosque and cultural center opening fully around 2009 as Boston's largest purpose-built mosque. It was established to provide both worship space and a broader cultural hub integrating religious education and civic engagement.",
+      "tourismNotes": "Visitors are welcomed for tours and educational events; modest clothing is required and tours can be arranged via the center.",
+      "officialWebsite": "https://isbcc.org",
+      "denomination": "sunni"
+    },
+    {
+      "id": "king-fahad-mosque-culver-city",
+      "name": "King Fahad Mosque",
+      "arabicName": "مسجد الملك فهد",
+      "location": "Culver City, California (Los Angeles area)",
+      "country": "USA",
+      "address": "10980 Washington Blvd, Culver City, CA 90232, USA",
+      "capacity": 2500,
+      "established": "1998",
+      "area": 0,
+      "annualVisitors": "Thousands annually; major Eid and Friday congregations",
+      "facilities": [
+        "Prayer hall",
+        "Classrooms",
+        "Offices",
+        "Ablution facilities"
+      ],
+      "significance": "Architecturally prominent mosque serving a large and diverse Muslim community in the Los Angeles area.",
+      "description": "The King Fahad Mosque in Culver City is known for its white marble façade, Ottoman-inspired dome and a 72-foot minaret, making it one of the most visually distinctive mosques in the United States. It serves Muslims from many ethnic backgrounds and provides religious, educational and community services.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/King_Fahd_Mosque_Culver_City.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/3/3e/King_Fahd_Mosque_Los_Angeles.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Ottoman-inspired modern mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 34.0177,
+        "lng": -118.4042
+      },
+      "history": "Completed in the late 1990s with support from Saudi Arabia, King Fahad Mosque quickly became a central West Coast Islamic institution and a symbol of Muslim presence in Los Angeles. It frequently hosts large Eid prayers and educational programs for the broader community.",
+      "tourismNotes": "Visitors are welcome outside prayer times; modest dress is expected and tours or visits can sometimes be arranged.",
+      "officialWebsite": "https://kingfahadmosque.org",
+      "denomination": "sunni"
+    },
+    {
+      "id": "dar-al-hijrah-islamic-center",
+      "name": "Dar Al-Hijrah Islamic Center",
+      "arabicName": "مركز دار الهجرة الإسلامي",
+      "location": "Falls Church, Virginia",
+      "country": "USA",
+      "address": "3159 Row Street, Falls Church, VA 22044, USA",
+      "capacity": 3000,
+      "established": "1980s",
+      "area": 0,
+      "annualVisitors": "Large weekly attendance; major regional center in the D.C. area",
+      "facilities": [
+        "Prayer halls",
+        "Classrooms",
+        "Social services offices",
+        "Community hall"
+      ],
+      "significance": "One of the most active and influential mosques in the Washington, D.C. metropolitan region.",
+      "description": "Dar Al-Hijrah Islamic Center in Falls Church is a large mosque and community center known for its extensive social services, multilingual religious programming and civic engagement. It serves a wide range of communities including Arab, African and South Asian Muslims in Northern Virginia.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Dar_Al-Hijrah_Islamic_Center.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/5f/Dar_Al-Hijrah_exterior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern community mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 38.8575,
+        "lng": -77.153
+      },
+      "history": "Established in the 1980s, Dar Al-Hijrah grew from a small congregation into one of the largest mosques in the region, recognized for its role in refugee assistance, food distribution and civic participation. It has been a focal point of Muslim political and community organizing in the greater Washington area.",
+      "tourismNotes": "Visits and group tours can often be arranged; the center participates in open-house programs and interfaith initiatives.",
+      "officialWebsite": "https://hijrah.org",
+      "denomination": "sunni"
+    },
+    {
+      "id": "islamic-center-of-greater-cincinnati",
+      "name": "Islamic Center of Greater Cincinnati",
+      "arabicName": "المركز الإسلامي لمنطقة سينسيناتي الكبرى",
+      "location": "West Chester, Ohio (Cincinnati area)",
+      "country": "USA",
+      "address": "8092 Plantation Drive, West Chester, OH 45069, USA",
+      "capacity": 2000,
+      "established": "1995",
+      "area": 0,
+      "annualVisitors": "Thousands annually; large regional events",
+      "facilities": [
+        "Mosque prayer hall",
+        "School",
+        "Community center",
+        "Library",
+        "Event spaces"
+      ],
+      "significance": "Major Islamic complex in the Midwest serving Muslims in the Cincinnati region and beyond.",
+      "description": "The Islamic Center of Greater Cincinnati (ICGC) combines a purpose-built mosque with a full community campus that includes educational and social facilities, making it one of the most prominent Islamic institutions in the Midwest. The complex hosts worship services, classes and public outreach events.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Islamic_Center_of_Greater_Cincinnati.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/6/6a/ICGC_Cincinnati_exterior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic campus",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 39.3366,
+        "lng": -84.3843
+      },
+      "history": "ICGC opened in the mid-1990s to provide a central mosque and community center for Muslims in the Cincinnati metropolitan area. It has since grown into a regional hub for Islamic education, interfaith dialogue and cultural programming.",
+      "tourismNotes": "Regular open houses and tours are offered; visitors are encouraged to dress modestly and check the center's schedule for public events.",
+      "officialWebsite": "https://www.icgc.us",
+      "denomination": "sunni"
+    },
+    {
+      "id": "east-plano-islamic-center",
+      "name": "East Plano Islamic Center (EPIC Masjid)",
+      "arabicName": "مركز إسلامي شرق بلانو",
+      "location": "Plano, Texas",
+      "country": "USA",
+      "address": "1360 Star Court, Plano, TX 75074, USA",
+      "capacity": 2500,
+      "established": "2015",
+      "area": 0,
+      "annualVisitors": "Thousands weekly; major North Texas congregation",
+      "facilities": [
+        "Prayer halls",
+        "Gym and multipurpose areas",
+        "Classrooms",
+        "Youth center"
+      ],
+      "significance": "One of the fastest-growing and most well-known mosques in Texas, noted for its large congregation and programming.",
+      "description": "The East Plano Islamic Center (EPIC Masjid) is a large suburban mosque and community center that has become widely known through its programs, scholars and strong online presence. It serves a rapidly growing Muslim population in the Dallas-Fort Worth metroplex.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/East_Plano_Islamic_Center_EPIC.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/6/6d/EPIC_Masjid_Texas.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern suburban mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 33.008,
+        "lng": -96.6816
+      },
+      "history": "EPIC began as a smaller community effort and expanded into a large purpose-built facility inaugurated around 2015 to serve the growing Muslim community in East Plano. It has since become a notable Islamic center in Texas with extensive youth and educational programs.",
+      "tourismNotes": "Welcomes visitors and often appears in media and tour content about mosques in America; modest dress is requested.",
+      "officialWebsite": "https://epicmasjid.org",
+      "denomination": "sunni"
+    },
+    {
+      "id": "islamic-center-of-irvine",
+      "name": "Islamic Center of Irvine",
+      "arabicName": "المركز الإسلامي في إرفاين",
+      "location": "Irvine, California",
+      "country": "USA",
+      "address": "2 Truman Street, Irvine, CA 92620, USA",
+      "capacity": 1500,
+      "established": "1990s",
+      "area": 0,
+      "annualVisitors": "Thousands weekly; large Southern California congregation",
+      "facilities": [
+        "Prayer halls",
+        "Classrooms",
+        "Community spaces"
+      ],
+      "significance": "Major mosque in Orange County serving a diverse and growing Muslim community.",
+      "description": "The Islamic Center of Irvine (ICOI) is a large suburban mosque that serves Muslims in Irvine and surrounding areas, with extensive religious programs and youth activities. It is recognized among the largest and most active mosques in Southern California.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Islamic_Center_of_Irvine.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/3/39/ICOI_Irvine_exterior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern community mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 33.707,
+        "lng": -117.7591
+      },
+      "history": "Founded in the 1990s, ICOI grew alongside the rapid expansion of Irvine and now provides prayer services, educational classes and community events for thousands of congregants. It has been highlighted in lists of major mosques in the United States.",
+      "tourismNotes": "Open to visitors and schools for tours by arrangement; modest dress is expected.",
+      "officialWebsite": "https://www.icoi.net",
+      "denomination": "sunni"
+    },
+    {
+      "id": "masjid-al-farooq-atlanta",
+      "name": "Masjid Al-Farooq",
+      "arabicName": "مسجد الفاروق",
+      "location": "Atlanta, Georgia",
+      "country": "USA",
+      "address": "442 14th Street NW, Atlanta, GA 30318, USA",
+      "capacity": 2000,
+      "established": "1980s (current complex expanded later)",
+      "area": 0,
+      "annualVisitors": "Thousands weekly; one of the main mosques in Atlanta",
+      "facilities": [
+        "Prayer halls",
+        "Schools",
+        "Cemetery (associated)",
+        "Community facilities"
+      ],
+      "significance": "A prominent Atlanta mosque known for its large campus, schools and community services.",
+      "description": "Masjid Al-Farooq in Atlanta is recognized for its sizeable complex, including schools and a variety of services, and is a key Islamic institution in the southeastern United States. Its design features multiple domes and minarets and serves a large, diverse congregation.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Masjid_Al-Farooq_Atlanta.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/1f/Masjid_Al-Farooq_Atlanta_exterior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Traditional-style American mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 33.787,
+        "lng": -84.41
+      },
+      "history": "Developed over several decades, Masjid Al-Farooq expanded from a smaller congregation into a large complex with educational institutions and burial grounds for the local Muslim community. It is frequently cited among notable mosques in North America for its size and services.",
+      "tourismNotes": "Visitors can often tour the mosque and its grounds; modest clothing is required and arranging visits in advance is recommended.",
+      "officialWebsite": "https://alfarooqmasjid.org",
+      "denomination": "sunni"
     }
   ],
   "timelineEvents": [
@@ -3281,6 +3660,66 @@
       "mosque": "Grand Mosque of Bobo-Dioulasso",
       "mosqueId": "grand-mosque-of-bobo-dioulasso",
       "event": "Sudano-Sahelian earthen mosque expanded in Bobo-Dioulasso"
+    },
+    {
+      "year": "1975",
+      "mosque": "Masjid Muhammad (The Nation's Mosque)",
+      "mosqueId": "masjid-muhammad-washington-dc",
+      "event": "Historic African-American Sunni mosque in Washington, D.C."
+    },
+    {
+      "year": "1985",
+      "mosque": "Dar Al-Hijrah Islamic Center",
+      "mosqueId": "dar-al-hijrah-islamic-center",
+      "event": "Major mosque and community center established in Falls Church, Virginia"
+    },
+    {
+      "year": "1985",
+      "mosque": "Masjid Al-Farooq",
+      "mosqueId": "masjid-al-farooq-atlanta",
+      "event": "Prominent Atlanta mosque complex expanded"
+    },
+    {
+      "year": "1991",
+      "mosque": "Islamic Cultural Center of New York",
+      "mosqueId": "islamic-cultural-center-of-new-york",
+      "event": "First purpose-built mosque in New York City opened"
+    },
+    {
+      "year": "1995",
+      "mosque": "Islamic Center of Greater Cincinnati",
+      "mosqueId": "islamic-center-of-greater-cincinnati",
+      "event": "Major Islamic complex opened in Cincinnati area"
+    },
+    {
+      "year": "1995",
+      "mosque": "Islamic Center of Irvine",
+      "mosqueId": "islamic-center-of-irvine",
+      "event": "Major mosque established in Irvine, Orange County"
+    },
+    {
+      "year": "1998",
+      "mosque": "King Fahad Mosque",
+      "mosqueId": "king-fahad-mosque-culver-city",
+      "event": "Ottoman-style mosque completed in Culver City, Los Angeles"
+    },
+    {
+      "year": "2005",
+      "mosque": "Islamic Center of America",
+      "mosqueId": "islamic-center-of-america",
+      "event": "Largest mosque complex in North America opened in Dearborn"
+    },
+    {
+      "year": "2009",
+      "mosque": "Islamic Society of Boston Cultural Center",
+      "mosqueId": "islamic-society-of-boston-cultural-center",
+      "event": "Boston's largest purpose-built mosque opened in Roxbury"
+    },
+    {
+      "year": "2015",
+      "mosque": "East Plano Islamic Center (EPIC Masjid)",
+      "mosqueId": "east-plano-islamic-center",
+      "event": "EPIC Masjid facility inaugurated in Plano, Texas"
     }
   ]
 }

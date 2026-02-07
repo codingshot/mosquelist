@@ -8,7 +8,7 @@ interface MosqueSEOProps {
 }
 
 const DEFAULT_TITLE = "MosqueList - Discover the World's Most Magnificent Mosques";
-const DEFAULT_DESC = "Explore, plan, and track your spiritual journey to the world's most beautiful and significant mosques. From Mecca to Istanbul, create your personal prayer bucket list.";
+const DEFAULT_DESC = "Explore 100+ mosques in 50+ countries—from the three holiest sites in Islam to architectural masterpieces. Plan visits and build your personal prayer bucket list.";
 const DEFAULT_URL = SITE_URL;
 const DEFAULT_IMAGE = `${SITE_URL}/web-app-manifest-512x512.png`;
 
@@ -20,10 +20,16 @@ function setMeta(selector: string, attr: string, value: string) {
 export function MosqueSEO({ mosque }: MosqueSEOProps) {
   useEffect(() => {
     const title = `${mosque.name} - ${mosque.location}, ${mosque.country} | MosqueList`;
-    const description =
-      mosque.description.slice(0, 155) + (mosque.description.length > 155 ? "…" : "");
+    const desc = mosque.description ?? "";
+    const description = desc.slice(0, 155) + (desc.length > 155 ? "…" : "");
     const url = `${SITE_URL}/mosque/${mosque.id}`;
-    const image = mosque.imageUrl.startsWith("http") ? mosque.imageUrl : `${SITE_URL}${mosque.imageUrl}`;
+    const localPath = mosque.imageLocal?.trim();
+    const remoteUrl = mosque.imageUrl?.trim();
+    const image = localPath
+      ? `${SITE_URL}${localPath}`
+      : remoteUrl
+        ? (remoteUrl.startsWith("http") ? remoteUrl : `${SITE_URL}${remoteUrl}`)
+        : DEFAULT_IMAGE;
 
     document.title = title;
     setMeta('meta[name="description"]', "content", description);
@@ -51,20 +57,21 @@ export function MosqueSEO({ mosque }: MosqueSEOProps) {
     };
   }, [mosque]);
 
+  const imgForLd = mosque.imageLocal?.trim()
+    ? `${SITE_URL}${mosque.imageLocal}`
+    : mosque.imageUrl?.trim();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Place",
     name: mosque.name,
-    description: mosque.description,
+    description: mosque.description ?? "",
     address: {
       "@type": "PostalAddress",
       ...(mosque.address && { streetAddress: mosque.address }),
       addressLocality: mosque.location,
       addressCountry: mosque.country,
     },
-    ...(mosque.imageUrl && {
-      image: mosque.imageUrl.startsWith("http") ? mosque.imageUrl : `${SITE_URL}${mosque.imageUrl}`,
-    }),
+    ...(imgForLd && { image: imgForLd.startsWith("http") ? imgForLd : `${SITE_URL}${imgForLd}` }),
     amenityFeature: mosque.facilities?.map((f) => ({ "@type": "LocationFeatureSpecification", name: f })),
   };
 

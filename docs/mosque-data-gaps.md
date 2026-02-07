@@ -2,7 +2,22 @@
 
 Last updated: 2026-02-07
 
-**Status: Images verified and fixed for user-requested mosques**
+**Status: Images verified and fixed for user-requested mosques. Direct upload URLs applied where found.**
+
+---
+
+## Mosques with missing or FilePath images (main imageUrl)
+
+**Fixed in this pass (replaced FilePath with direct `upload.wikimedia.org` URL):**
+- **Badshahi Mosque** (`badshahi-mosque`) — now `upload.wikimedia.org/.../b/b1/Badshahi_Mosque_%2C_Lahore.jpg`
+- **Great Mosque of Djenné** (`great-mosque-of-djenne`) — now `upload.wikimedia.org/.../c/ce/Great_Mosque_of_Djenné_1.jpg`
+- **Islamic Center of Washington** (`islamic-center-washington`) — now `upload.wikimedia.org/.../0/0c/Islamic_Center_of_Washington.jpg`
+- **Hagia Sophia** (`hagia-sophia-istanbul`) — now `upload.wikimedia.org/.../2/22/Hagia_Sophia_Mars_2013.jpg`
+
+**Still using `Special:FilePath` for main imageUrl (look up direct URL on Commons and replace):**
+Sultan Qaboos Grand Mosque, Putra Mosque, Taj-ul-Masajid, Imam Ali Shrine (Najaf), National Mosque of Malaysia, Birmingham Central Mosque, National Mosque Abuja, King Abdullah I Mosque, Imam Muhammad ibn Abd al-Wahhab (Doha), Al-Fateh Grand Mosque, Mohammad Al-Amin (Beirut), Al-Zaytuna (Tunis), Astana Grand Mosque, Jamkaran Mosque, Islamic Compound NAC, Umayyad Mosque (Damascus), Jamia Masjid Srinagar, Pride of Muslims (Shali), Sabancı Central Mosque, At-Tin (Jakarta), Selahaddin Eyyubi (Diyarbakır), Sultan Salahuddin Abdul Aziz (Shah Alam), Id Kah (Kashgar), Shah Jahan (Thatta), Tuanku Mizan Zainal Abidin, Raja Hamidah (Batam), Emir Abdelkader (Constantine), Kocatepe (Ankara), Grand Mosque of Sabilal Muhtadin, Et'hem Bey (Tirana).
+
+To find a direct URL: open `https://commons.wikimedia.org/wiki/File:FILENAME` and use the "Original file" link (e.g. `https://upload.wikimedia.org/wikipedia/commons/XX/YY/Filename.jpg`).
 
 ---
 

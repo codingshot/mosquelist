@@ -46,6 +46,11 @@ export function getUniqueCountries(): string[] {
   return [...new Set(mosques.map((m) => m.country))].sort();
 }
 
+/** Number of holy sites in the list (Mecca, Medina, Al-Aqsa, etc.). */
+export function getHolySiteCount(): number {
+  return mosques.filter((m) => m.isHolySite).length;
+}
+
 /** Unique architectural styles for filter (sorted). */
 export function getUniqueArchitecturalStyles(): string[] {
   const set = new Set<string>();

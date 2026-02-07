@@ -23,6 +23,7 @@ import { getRegionForCountry } from "@/data/regions";
 import { getRelatedMosques } from "@/lib/related-mosques";
 import { getArchitectureStyleDescription } from "@/data/architecture-styles";
 import { ImageGallery } from "@/components/ImageGallery";
+import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -41,9 +42,10 @@ export default function MosquePage() {
   const { bucketList, addToBucketList } = useBucketList();
 
   const galleryImages = useMemo(() => {
-    if (!mosque?.imageUrl?.trim()) return [];
-    const main = mosque.imageUrl.trim();
-    const extras = (mosque.galleryUrls ?? []).filter((u) => typeof u === "string" && u.trim().length > 0);
+    const mainSrc = mosque?.imageLocal?.trim() || mosque?.imageUrl?.trim();
+    if (!mainSrc) return [];
+    const main = mainSrc;
+    const extras = (mosque?.galleryUrls ?? []).filter((u) => typeof u === "string" && u.trim().length > 0);
     const seen = new Set<string>();
     const out: string[] = [];
     for (const u of [main, ...extras]) {
@@ -82,6 +84,7 @@ export default function MosquePage() {
 
   const isLiked = isFavorite(mosque.id);
   const isInBucketList = bucketList.some((item) => item.mosqueId === mosque.id);
+  const heroImageSrc = getMosqueImageSrc(mosque);
 
   const address = mosque.address
     ? `${mosque.address}, ${mosque.location}, ${mosque.country}`
@@ -179,15 +182,16 @@ export default function MosquePage() {
               aria-label={hasGallery ? "Double-click or press Enter to open image gallery" : undefined}
             >
               <img
-                src={mosque.imageUrl?.trim() || "/placeholder.svg"}
+                src={heroImageSrc.src}
                 alt={mosque.name}
                 loading="eager"
                 decoding="async"
+                // @ts-expect-error fetchpriority is valid HTML; React types use fetchPriority
+                fetchpriority="high"
                 className="h-full w-full object-cover pointer-events-none select-none"
                 draggable={false}
                 onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = "/placeholder.svg";
+                  setMosqueImageFallback(e.currentTarget, heroImageSrc.fallbackUrl);
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
@@ -466,21 +470,23 @@ export default function MosquePage() {
                           to={`/mosque/${related.id}`}
                           className="group flex gap-3 rounded-xl border border-border bg-card p-3 transition-colors hover:border-primary/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-xl"
                         >
-                          {related.imageUrl && (
-                            <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
-                              <img
-                                src={related.imageUrl}
-                                alt=""
-                                loading="lazy"
-                                decoding="async"
-                                className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                                onError={(e) => {
-                                  e.currentTarget.onerror = null;
-                                  e.currentTarget.src = "/placeholder.svg";
-                                }}
-                              />
-                            </div>
-                          )}
+                          {(() => {
+                            const img = getMosqueImageSrc(related);
+                            return (
+                              <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
+                                <img
+                                  src={img.src}
+                                  alt=""
+                                  loading="lazy"
+                                  decoding="async"
+                                  className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                                  onError={(e) => {
+                                    setMosqueImageFallback(e.currentTarget, img.fallbackUrl);
+                                  }}
+                                />
+                              </div>
+                            );
+                          })()}
                           <div className="min-w-0 flex-1">
                             <p className="font-medium text-foreground truncate group-hover:text-primary">
                               {related.name}

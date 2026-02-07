@@ -2,11 +2,12 @@ import heroImage from "@/assets/hero-mosque.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Compass } from "lucide-react";
-import { mosques, getUniqueCountries } from "@/data/mosques";
+import { mosques, getUniqueCountries, getHolySiteCount } from "@/data/mosques";
 
 export const HeroSection = () => {
   const mosqueCount = mosques.length;
   const countryCount = getUniqueCountries().length;
+  const holySiteCount = getHolySiteCount();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -16,6 +17,7 @@ export const HeroSection = () => {
           alt="Masjid al-Haram at sunset"
           // @ts-expect-error: fetchpriority is valid HTML but React types want fetchPriority
           fetchpriority="high"
+          decoding="async"
           width={1920}
           height={1920}
           className="w-full h-full object-cover"
@@ -43,9 +45,9 @@ export const HeroSection = () => {
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-foreground/95 max-w-2xl mx-auto [text-shadow:_0_1px_3px_rgba(0,0,0,0.2)]">
-            Explore, plan, and track your spiritual journey to the world's most
-            beautiful and significant mosques. From Mecca to Istanbul, create
-            your personal prayer bucket list.
+            Explore {mosqueCount}+ mosques in {countryCount}+ countries—from the three
+            holiest sites in Islam to architectural masterpieces. Plan visits and
+            build your personal prayer bucket list.
           </p>
 
           {/* CTA Buttons */}
@@ -79,13 +81,13 @@ export const HeroSection = () => {
               <p className="font-serif text-3xl md:text-4xl font-bold text-foreground">
                 {mosqueCount}+
               </p>
-              <p className="text-sm text-muted-foreground">Mosques Listed</p>
+              <p className="text-sm text-muted-foreground">Mosques</p>
             </div>
             <div className="text-center">
               <p className="font-serif text-3xl md:text-4xl font-bold text-foreground">
-                50M+
+                {holySiteCount}
               </p>
-              <p className="text-sm text-muted-foreground">Annual Visitors</p>
+              <p className="text-sm text-muted-foreground">Holy Sites</p>
             </div>
             <div className="text-center">
               <p className="font-serif text-3xl md:text-4xl font-bold text-foreground">
