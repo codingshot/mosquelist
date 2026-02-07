@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer id="footer" className="print:hidden bg-foreground text-background py-12">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
@@ -41,9 +41,9 @@ export const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="font-serif text-lg font-semibold mb-4">Explore</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1 sm:space-y-2">
               <li>
-                <Link to="/explore" className="text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                <Link to="/explore" className="inline-block py-2 touch-manipulation text-background/70 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Browse Mosques
                 </Link>
               </li>

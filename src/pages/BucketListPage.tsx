@@ -13,7 +13,7 @@ export default function BucketListPage() {
         path="/bucket-list"
       />
       <Navigation />
-      <main id="main-content" className="pt-16">
+      <main id="main-content" className="pt-16 pb-8 md:pb-0">
         <BucketList />
       </main>
       <Footer />

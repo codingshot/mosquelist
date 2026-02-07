@@ -14,7 +14,7 @@ export default function TravelGuidePage() {
         path="/guides/travel"
       />
       <Navigation />
-      <main id="main-content" className="container mx-auto px-4 py-16 md:py-24">
+      <main id="main-content" className="container mx-auto px-4 pt-20 pb-12 md:py-24">
         <article className="max-w-3xl mx-auto">
           <header className="mb-12">
             <div className="inline-flex items-center gap-2 bg-card px-4 py-2 rounded-full mb-6 border border-border">
@@ -31,7 +31,7 @@ export default function TravelGuidePage() {
             </p>
           </header>
 
-          <div className="prose prose-lg max-w-none space-y-10">
+          <div className="prose prose-lg max-w-none space-y-10 break-words">
             <section>
               <h2 className="font-serif text-2xl font-semibold text-foreground flex items-center gap-2">
                 <Calendar className="w-6 h-6 text-primary" />

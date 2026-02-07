@@ -86,8 +86,8 @@ export default function MosquePage() {
     <div className="min-h-screen bg-background">
       <MosqueSEO mosque={mosque} />
       <Navigation />
-      <main id="main-content" className="container mx-auto px-4 pb-16 pt-24">
-        <div className="print:hidden mb-6 flex flex-wrap items-center gap-2">
+      <main id="main-content" className="container mx-auto px-4 pb-12 md:pb-16 pt-20 md:pt-24">
+        <div className="print:hidden mb-6 flex flex-wrap items-center gap-2 min-w-0">
           <Button variant="ghost" asChild className="-ml-2 gap-2 min-h-[44px] touch-manipulation">
             <Link to="/explore">
               <ArrowLeft className="h-4 w-4" />

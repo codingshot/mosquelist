@@ -177,7 +177,7 @@ const Index = () => {
                 </p>
               </header>
 
-              <div className="prose prose-lg max-w-none space-y-10">
+              <div className="prose prose-lg max-w-none space-y-10 break-words">
                 <div>
                   <h3 className="font-serif text-2xl font-semibold text-foreground flex items-center gap-2">
                     <Calendar className="w-6 h-6 text-primary" />
@@ -276,7 +276,7 @@ const Index = () => {
                 </p>
               </header>
 
-              <div className="prose prose-lg max-w-none space-y-10">
+              <div className="prose prose-lg max-w-none space-y-10 break-words">
                 <div>
                   <h3 className="font-serif text-2xl font-semibold text-foreground flex items-center gap-2">
                     <User className="w-6 h-6 text-primary" />

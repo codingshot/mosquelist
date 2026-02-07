@@ -14,13 +14,13 @@ export default function AboutPage() {
         path="/about"
       />
       <Navigation />
-      <main id="main-content" className="container mx-auto px-4 py-24">
+      <main id="main-content" className="container mx-auto px-4 pt-20 pb-12 md:py-24">
         <div className="max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-card px-4 py-2 rounded-full mb-8 border border-border">
             <Compass className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-foreground">About MosqueList</span>
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
             Your Journey to the Sacred Places
           </h1>
           <p className="text-lg text-muted-foreground mb-6">
@@ -41,7 +41,7 @@ export default function AboutPage() {
               ummah.build
             </a>
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3 sm:gap-4">
             <Button asChild className="gap-2">
               <Link to="/explore">
                 <MapPin className="w-4 h-4" />

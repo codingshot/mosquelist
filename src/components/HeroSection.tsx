@@ -23,7 +23,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 pt-20 pb-16 text-center">
+      <div className="relative z-10 container mx-auto px-4 pt-24 sm:pt-20 pb-12 sm:pb-16 text-center">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-card/80 backdrop-blur-sm px-4 py-2 rounded-full border border-border">
@@ -34,7 +34,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight [text-shadow:_0_1px_3px_rgba(0,0,0,0.12)]">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight [text-shadow:_0_1px_3px_rgba(0,0,0,0.12)]">
             Your Journey to the{" "}
             <span className="hero-text-gold">Sacred Places</span>{" "}
             Begins Here

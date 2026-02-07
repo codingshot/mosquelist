@@ -189,6 +189,15 @@ export default function ListDetailPage() {
               <p className="mt-2 text-sm text-muted-foreground">
                 {listMosques.length} mosque
                 {listMosques.length !== 1 ? "s" : ""} in this list
+                {listMosques.length > 0 && (() => {
+                  const inCount = listMosques.filter((m) => bucketSet.has(m.id)).length;
+                  if (inCount === 0) return null;
+                  return (
+                    <span className="ml-2 text-primary font-medium">
+                      · {inCount} already in your list
+                    </span>
+                  );
+                })()}
               </p>
             </div>
 
@@ -209,10 +218,10 @@ export default function ListDetailPage() {
                     {notInList.length} mosque{notInList.length !== 1 ? "s" : ""} not yet in your list.
                     Add all at once, or pick specific ones below.
                   </p>
-                  <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
                     <Button
                       size="sm"
-                      className="gradient-gold text-primary-foreground gap-2"
+                      className="gradient-gold text-primary-foreground gap-2 min-h-[44px] touch-manipulation"
                       onClick={addAll}
                     >
                       <PlusCircle className="h-4 w-4" />
@@ -221,7 +230,7 @@ export default function ListDetailPage() {
                     <Button
                       size="sm"
                       variant="secondary"
-                      className="gap-2"
+                      className="gap-2 min-h-[44px] touch-manipulation"
                       onClick={addAllAndGoToList}
                     >
                       <PlusCircle className="h-4 w-4" />
@@ -230,15 +239,15 @@ export default function ListDetailPage() {
                   </div>
                   {notInList.length > 1 && (
                     <div className="mt-4 pt-4 border-t border-border">
-                      <p className="text-sm text-muted-foreground mb-2">
-                        Or choose which to add: tick the boxes next to mosques below, then click the button.
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Or choose which to add: tick the boxes next to mosques below, then click &quot;Add selected to My List&quot;.
                       </p>
                       <div className="flex flex-wrap items-center gap-2">
                         <Button
                           variant="outline"
                           size="sm"
                           onClick={selectAll}
-                          className="gap-2"
+                          className="gap-2 min-h-[44px] touch-manipulation"
                           aria-label={`Select all ${notInList.length} mosques not yet in your list`}
                         >
                           <CheckSquare className="h-4 w-4" />
@@ -250,7 +259,7 @@ export default function ListDetailPage() {
                               variant="outline"
                               size="sm"
                               onClick={deselectAll}
-                              className="gap-2"
+                              className="gap-2 min-h-[44px] touch-manipulation"
                               aria-label="Clear selection"
                             >
                               <Square className="h-4 w-4" />
@@ -259,7 +268,7 @@ export default function ListDetailPage() {
                             <Button
                               size="sm"
                               onClick={addSelected}
-                              className="gap-2 gradient-gold text-primary-foreground"
+                              className="gap-2 min-h-[44px] touch-manipulation gradient-gold text-primary-foreground"
                               aria-label={`Add ${selectedIds.size} selected mosques to your list`}
                             >
                               <Plus className="h-4 w-4" />
@@ -280,8 +289,8 @@ export default function ListDetailPage() {
               )}
             </div>
 
-            {/* Filter */}
-            {(notInList.length > 0 && listMosques.some((m) => bucketSet.has(m.id))) && (
+            {/* Filter — always show when list has mosques so users see how many are in/not in their list */}
+            {listMosques.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 <span className="sr-only">Filter mosques:</span>
                 {(["all", "in-list", "not-in-list"] as const).map((f) => (
@@ -304,11 +313,11 @@ export default function ListDetailPage() {
 
             {/* Sticky bar when mosques are selected */}
             {selectedIds.size > 0 && (
-              <div className="sticky top-16 z-10 mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/30 bg-card px-4 py-3 shadow-md">
+              <div className="sticky top-16 z-10 mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between rounded-xl border border-primary/30 bg-card px-4 py-3 shadow-md">
                 <span className="text-sm font-medium text-foreground">
                   {selectedIds.size} mosque{selectedIds.size !== 1 ? "s" : ""} selected for My List
                 </span>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center justify-end sm:justify-start gap-2">
                   <Button variant="outline" size="sm" onClick={deselectAll} className="gap-1.5 min-h-[44px] touch-manipulation">
                     <Square className="h-4 w-4" />
                     Deselect all
@@ -330,9 +339,9 @@ export default function ListDetailPage() {
                 return (
                   <li
                     key={mosque.id}
-                    className={`flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors ${
+                    className={`flex items-center gap-3 sm:gap-4 rounded-xl border bg-card p-4 transition-colors ${
                       selected ? "border-primary/50 ring-1 ring-primary/20" : "border-border hover:border-primary/30"
-                    }`}
+                    } ${inBucket ? "bg-primary/5 border-primary/20" : ""}`}
                   >
                     {canSelect ? (
                       <button
@@ -376,19 +385,27 @@ export default function ListDetailPage() {
                       </Link>
                     )}
                     <div className="flex-1 min-w-0">
-                      <Link
-                        to={`/mosque/${mosque.id}`}
-                        className="font-serif text-lg font-semibold text-foreground hover:text-primary hover:underline"
-                      >
-                        {mosque.name}
-                      </Link>
-                      <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
+                      <div className="flex flex-wrap items-center gap-2 gap-y-1">
+                        <Link
+                          to={`/mosque/${mosque.id}`}
+                          className="font-serif text-lg font-semibold text-foreground hover:text-primary hover:underline"
+                        >
+                          {mosque.name}
+                        </Link>
+                        {inBucket && (
+                          <span className="inline-flex items-center gap-1 rounded-md bg-primary/15 px-2 py-0.5 text-xs font-medium text-primary">
+                            <CheckSquare className="h-3 w-3" />
+                            In your list
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
-                          <MapPin className="h-3.5 w-3" />
-                          {mosque.location}, {mosque.country}
+                          <MapPin className="h-3.5 w-3 shrink-0" />
+                          <span className="truncate">{mosque.location}, {mosque.country}</span>
                         </span>
                         <span className="flex items-center gap-1">
-                          <Users className="h-3.5 w-3" />
+                          <Users className="h-3.5 w-3 shrink-0" />
                           {formatCapacity(mosque.capacity)} capacity
                         </span>
                         {mosque.isHolySite && (
@@ -407,14 +424,14 @@ export default function ListDetailPage() {
                           if (added) toast.success(`Added ${mosque.name} to your list`);
                           else toast.info("Already in your list");
                         }}
-                        className="shrink-0 gap-1"
+                        className="shrink-0 gap-1 min-h-[44px] touch-manipulation"
                       >
                         <Plus className="h-4 w-4" />
                         Add
                       </Button>
                     )}
                     {inBucket && (
-                      <Button variant="secondary" size="sm" asChild className="gap-1.5">
+                      <Button variant="secondary" size="sm" asChild className="gap-1.5 min-h-[44px] touch-manipulation">
                         <Link to="/bucket-list">
                           <CheckSquare className="h-4 w-4 shrink-0" />
                           In your list

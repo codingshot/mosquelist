@@ -68,13 +68,13 @@ function BucketListItemRow({
     <li
       ref={setNodeRef}
       style={style}
-      className={`px-6 py-4 flex items-center gap-3 transition-colors ${
+      className={`px-4 sm:px-6 py-4 flex items-center gap-2 sm:gap-3 transition-colors ${
         item.visited ? "bg-primary/5" : "hover:bg-secondary/30"
       } ${isDragging ? "opacity-50 shadow-lg" : ""}`}
     >
       <button
         type="button"
-        className="touch-manipulation p-1 rounded hover:bg-secondary text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="touch-manipulation min-h-[44px] min-w-[44px] p-2 rounded hover:bg-secondary text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         aria-label="Drag to reorder"
         {...attributes}
         {...listeners}
@@ -83,7 +83,7 @@ function BucketListItemRow({
       </button>
       <button
         onClick={() => toggleVisited(item.mosqueId)}
-        className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all shrink-0 ${
+        className={`min-h-[44px] min-w-[44px] rounded border-2 flex items-center justify-center transition-all shrink-0 touch-manipulation ${
           item.visited
             ? "bg-primary border-primary"
             : "border-border hover:border-primary"
@@ -141,7 +141,7 @@ function BucketListItemRow({
         <button
           type="button"
           onClick={() => removeFromBucketList(item.mosqueId)}
-          className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="min-h-[44px] min-w-[44px] p-2 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive flex items-center justify-center touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label={`Remove ${mosque.name} from list`}
         >
           <X className="w-4 h-4" />

@@ -18,7 +18,7 @@ const NotFound = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <main id="main-content" className="flex flex-1 min-h-[calc(100vh-4rem)] items-center justify-center px-4 pt-20 pb-12">
+      <main id="main-content" className="flex flex-1 min-h-[calc(100vh-4rem)] items-center justify-center px-4 pt-20 pb-16">
         <div className="text-center max-w-md">
           <h1 className="mb-2 text-4xl font-bold text-foreground">404</h1>
           <p className="mb-6 text-xl text-muted-foreground">Oops! This page doesn&apos;t exist.</p>

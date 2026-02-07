@@ -13,7 +13,7 @@ export default function TimelinePage() {
         path="/timeline"
       />
       <Navigation />
-      <main id="main-content">
+      <main id="main-content" className="pt-16 pb-8 md:pb-0">
         <Timeline />
       </main>
       <Footer />
