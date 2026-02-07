@@ -40,14 +40,13 @@ describe("ListDetailPage", () => {
     expect(screen.getByRole("link", { name: /browse lists/i })).toHaveAttribute("href", "/lists");
   });
 
-  it("add to list: clicking Add adds mosque and shows In List", () => {
+  it("add to list: clicking Add adds mosque and shows In List", async () => {
     renderListDetail("/lists/turkey");
     const addButtons = screen.getAllByRole("button", { name: /^add$/i });
     expect(addButtons.length).toBeGreaterThan(0);
     fireEvent.click(addButtons[0]);
-    const inListLinks = screen.getAllByRole("link", { name: /in list/i });
-    expect(inListLinks.length).toBeGreaterThan(0);
-    expect(inListLinks[0]).toHaveAttribute("href", "/bucket-list");
+    const inListLink = await screen.findByRole("link", { name: /in your list/i }, { timeout: 3000 });
+    expect(inListLink).toHaveAttribute("href", "/bucket-list");
   });
 
   it("Add All to My List adds every mosque and shows View My List", () => {

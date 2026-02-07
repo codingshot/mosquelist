@@ -2,9 +2,10 @@ import type { Mosque } from "@/types/mosque";
 import { getRegionForCountry } from "@/data/regions";
 import { filterMosquesByQuery } from "./search";
 
-/** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007) */
-export function establishedYear(established: string): number {
-  const match = established.match(/\d{1,4}/);
+/** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007). Returns 0 for empty/invalid. */
+export function establishedYear(established: string | undefined | null): number {
+  if (established == null || typeof established !== "string") return 0;
+  const match = established.trim().match(/\d{1,4}/);
   return match ? parseInt(match[0], 10) : 0;
 }
 

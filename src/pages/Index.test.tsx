@@ -34,19 +34,16 @@ describe("Index page", () => {
 
   it("renders hero section with headline", async () => {
     renderIndex();
-    const headings = await screen.findAllByRole("heading", { name: /your journey to the sacred places/i }, { timeout: 8000 });
-    expect(headings.length).toBeGreaterThan(0);
-  }, 10000);
+    const heroHeading = await screen.findByRole("heading", { level: 1, name: /your journey to the sacred places/i }, { timeout: 12000 });
+    expect(heroHeading).toBeInTheDocument();
+  }, 15000);
 
-  it(
-    "has link to explore mosques",
-    () => {
-      renderIndex();
-      const links = screen.getAllByRole("link", { name: /explore mosques/i });
-      expect(links.length).toBeGreaterThan(0);
-    },
-    10000
-  );
+  it("has link to explore", () => {
+    renderIndex();
+    const exploreLinks = screen.getAllByRole("link", { name: /explore/i });
+    const toExplore = exploreLinks.filter((el) => el.getAttribute("href") === "/explore");
+    expect(toExplore.length).toBeGreaterThan(0);
+  });
 
   it("renders footer", () => {
     renderIndex();

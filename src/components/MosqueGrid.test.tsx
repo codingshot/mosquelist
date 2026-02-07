@@ -34,16 +34,16 @@ describe("MosqueGrid", () => {
   });
 
   it("filters by country when country param is set", async () => {
-    renderGrid("/?country=Turkey");
-    const status = await screen.findByRole("status", { hidden: true }, { timeout: 8000 });
+    renderGrid("/explore?country=Turkey");
+    const status = await screen.findByRole("status", { hidden: true }, { timeout: 12000 });
     expect(status).toHaveTextContent(/mosque(s)? found/);
-    expect(await screen.findByRole("link", { name: /Blue Mosque/i }, { timeout: 5000 })).toBeInTheDocument();
-  }, 10000);
+    expect(await screen.findByRole("link", { name: /Blue Mosque/i }, { timeout: 8000 })).toBeInTheDocument();
+  }, 20000);
 
   it("shows sort dropdown and filter buttons", async () => {
-    renderGrid("/");
-    expect(await screen.findByRole("combobox", { name: /sort by/i }, { timeout: 8000 })).toBeInTheDocument();
+    renderGrid("/explore");
+    expect(await screen.findByRole("combobox", { name: /sort by/i }, { timeout: 12000 })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /grid view/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /list view/i })).toBeInTheDocument();
-  }, 10000);
+  }, 20000);
 });

@@ -183,12 +183,14 @@ describe("All pages load", () => {
   it("NotFound (*) loads for unknown path", async () => {
     render(
       <MemoryRouter initialEntries={["/unknown-page-xyz"]}>
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AllProviders>
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AllProviders>
       </MemoryRouter>
     );
     expect(screen.getByRole("heading", { name: /404/i })).toBeInTheDocument();
-    expect(screen.getByText(/page not found/i)).toBeInTheDocument();
+    expect(screen.getByText(/doesn't exist|page not found/i)).toBeInTheDocument();
   });
 });
