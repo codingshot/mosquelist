@@ -2380,6 +2380,449 @@
         "lat": 41.3275,
         "lng": 19.8186
       }
+    },
+    {
+      "id": "turkmenbasy-ruhy-mosque",
+      "name": "Türkmenbaşy Ruhy Mosque",
+      "arabicName": "مسجد ترکمنباشی روحي",
+      "location": "Gypjak (near Ashgabat)",
+      "country": "Turkmenistan",
+      "address": "Gypjak village, outskirts of Ashgabat, Turkmenistan",
+      "capacity": 10000,
+      "established": "2004",
+      "area": 0,
+      "annualVisitors": "—",
+      "facilities": [
+        "Main prayer hall",
+        "Mausoleum of Saparmurat Niyazov",
+        "Courtyard",
+        "Parking area"
+      ],
+      "significance": "One of the largest mosques in Central Asia and a national symbol of Turkmenistan, combining religious and political symbolism.",
+      "description": "Türkmenbaşy Ruhy Mosque, located in the village of Gypjak near Ashgabat, was commissioned by former president Saparmurat Niyazov and completed in 2004 as a monumental national mosque. The complex features a large central dome, four minarets, extensive marble cladding, and inscriptions that include both Quranic verses and references to Niyazov's book Ruhnama, reflecting its dual role as a religious and state monument.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/69/T%C3%BCrkmenba%C5%9Fy_Ruhy_Mosque_Gypjak.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/2/2d/Turkmenbashi_Ruhy_Mosque_exterior.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/1/1d/Turkmenbashi_Ruhy_Mosque_interior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic with Turkmen national motifs",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 37.95,
+        "lng": 58.2
+      },
+      "history": "Built between 2001 and 2004 under the direction of President Saparmurat Niyazov, the mosque was dedicated as both a place of worship and a memorial to the 'Turkmenbashi' era. Its construction used extensive white marble and gold, and the complex includes Niyazov's mausoleum, making it unusual among modern mosques. Since its opening, it has served as a prominent symbol on the outskirts of Ashgabat and is often featured in representations of Turkmen national identity.",
+      "tourismNotes": "Non-Muslim visitors are generally allowed in the courtyard and sometimes in the interior outside of prayer times; modest dress required. The site is a short drive from Ashgabat and often included in local city tours.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "sultan-mosque-singapore",
+      "name": "Sultan Mosque",
+      "arabicName": "مسجد سلطان",
+      "location": "Singapore",
+      "country": "Singapore",
+      "address": "3 Muscat Street, Kampong Glam, Singapore 198833",
+      "capacity": 5000,
+      "established": "1824 (current building 1932)",
+      "area": 0,
+      "annualVisitors": "Hundreds of thousands of worshippers and tourists annually",
+      "facilities": [
+        "Main prayer hall",
+        "Visitor centre",
+        "Guided tours",
+        "Women's prayer gallery",
+        "Ablution areas"
+      ],
+      "significance": "National monument of Singapore and one of the most important mosques for the Malay-Muslim community in Kampong Glam.",
+      "description": "Sultan Mosque, or Masjid Sultan, is an iconic mosque in Singapore's Kampong Glam district, originally built in 1824 for Sultan Hussein Shah and completely rebuilt in 1932. With its large golden domes and black-rimmed onion-shaped finials, it is a focal point of Muslim religious life and Malay heritage, and was gazetted as a national monument in 1975.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Sultan_Mosque_Singapore_2018.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/8e/Sultan_Mosque_Singapore_exterior.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/0/0d/Sultan_Mosque_Singapore_interior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Indo-Saracenic with Islamic and European influences",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 1.3022,
+        "lng": 103.859
+      },
+      "history": "The first mosque on the site was built in 1824 with funds from the East India Company for Sultan Hussein Shah, marking the establishment of Kampong Glam as a Malay-Muslim enclave. Due to structural deterioration and growing demand, it was rebuilt between 1924 and 1932 in its present form. In 1975, the mosque was designated a national monument in recognition of its religious and cultural importance, and it continues to serve as a key religious hub and a stopover for pilgrims traveling to Mecca.",
+      "tourismNotes": "Open to non-Muslim visitors during set visiting hours outside prayer times; modest dress required and robes are provided. Located in a popular heritage and tourism district with many halal eateries and cultural shops nearby.",
+      "officialWebsite": "https://www.sultanmosque.sg",
+      "denomination": "sunni"
+    },
+    {
+      "id": "jami-ul-alfar-mosque",
+      "name": "Jami Ul-Alfar Mosque",
+      "arabicName": "جامع الأحمر (المسجد الأحمر)",
+      "location": "Colombo",
+      "country": "Sri Lanka",
+      "address": "Second Cross Street, Pettah, Colombo, Sri Lanka",
+      "capacity": 5000,
+      "established": "1909",
+      "area": 0,
+      "annualVisitors": "Thousands of worshippers weekly; popular city landmark for tourists",
+      "facilities": [
+        "Main prayer halls",
+        "Separate women's prayer areas (designated times/sections)",
+        "Ablution facilities"
+      ],
+      "significance": "One of Colombo's most recognizable religious landmarks, known as the 'Red Mosque' for its red-and-white striped façade.",
+      "description": "Jami Ul-Alfar Mosque, often called the Red Mosque, is a striking two-storey mosque in the Pettah district of Colombo, famous for its red-and-white candy-striped brickwork and Indo-Saracenic architecture. Built in the early 20th century to serve the local Muslim trading community, it remains a vibrant centre of worship and an iconic part of Colombo's skyline.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Jami_Ul-Alfar_Mosque_Colombo_Sri_Lanka.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/6/6a/Red_Mosque_Pettah_Colombo.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/9/9b/Jami_ul_Alfar_Mosque_street_view.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Indo-Saracenic with Gothic and Neo-classical elements",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 6.9375,
+        "lng": 79.853
+      },
+      "history": "Commissioned by the local Bohra Muslim trading community in Pettah, construction of the mosque began in 1908 and was completed in 1909 to accommodate daily and Friday prayers. Its distinctive red-and-white brick façade and pomegranate-shaped domes soon made it a navigational landmark for sailors approaching the port of Colombo. Over the years, expansions increased capacity to around several thousand worshippers for Friday prayers and Eid, while preserving the original Indo-Saracenic design.",
+      "tourismNotes": "Visitors are welcome outside prayer times but should respect ongoing worship, dress modestly, and ask permission before photographing interior spaces. The mosque is easily accessible on foot within the busy Pettah market area and is often included in city walking tours.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "mustafa-pasha-mosque",
+      "name": "Mustafa Pasha Mosque",
+      "arabicName": "جامع مصطفى باشا",
+      "location": "Skopje",
+      "country": "North Macedonia",
+      "address": "Old Bazaar, Skopje, North Macedonia",
+      "capacity": 500,
+      "established": "1492",
+      "area": 0,
+      "annualVisitors": "Thousands of worshippers and heritage tourists annually",
+      "facilities": [
+        "Prayer hall",
+        "Courtyard with rose garden",
+        "Mausoleum (türbe) of Mustafa Pasha"
+      ],
+      "significance": "A well-preserved Ottoman-era mosque overlooking Skopje's Old Bazaar and an important monument of Islamic architecture in the Balkans.",
+      "description": "Mustafa Pasha Mosque is an Ottoman imperial-style mosque built in 1492 on a hill above Skopje's Old Bazaar by Çoban Mustafa Pasha, later a vizier in the court of Sultan Selim I. The complex features a single large dome over the prayer hall, a slender minaret, and a courtyard with a türbe where Mustafa Pasha's daughter is buried, making it both a religious and historic landmark.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Mustafa_Pasha_Mosque_Skopje.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/4/4c/Mustafa_Pasha_Mosque_courtyard.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/1/1c/Mustafa_Pasha_Mosque_interior_Skopje.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Classical Ottoman",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 41.999,
+        "lng": 21.438
+      },
+      "history": "Constructed in 1492 during the height of Ottoman rule in the Balkans, the mosque was endowed by Çoban Mustafa Pasha, who later became a vizier to Sultan Selim I. Remarkably, the building has remained largely unchanged since its completion, preserving its original dome, minaret, and interior decoration. A restoration funded by the Turkish government in the early 21st century helped conserve the structure and its surrounding rose garden, reinforcing its status as a key monument in Skopje's historic landscape.",
+      "tourismNotes": "Visitors can access the mosque courtyard and, outside prayer times, the interior; modest clothing is required. Its hilltop position offers views over the Old Bazaar and central Skopje, making it a common stop on walking tours of the historic district.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "grand-mosque-of-niamey",
+      "name": "Grand Mosque of Niamey",
+      "arabicName": "الجامع الكبير في نيامي",
+      "location": "Niamey",
+      "country": "Niger",
+      "address": "Avenue de l'Islam, Niamey, Niger",
+      "capacity": 10000,
+      "established": "1970s (completed c. 1977)",
+      "area": 0,
+      "annualVisitors": "Thousands of worshippers weekly; major gathering place for Eid and Friday prayers",
+      "facilities": [
+        "Main prayer hall",
+        "Separate women's prayer hall",
+        "Courtyard",
+        "Minaret with viewing platform"
+      ],
+      "significance": "Largest mosque in Niamey and one of the city's most important religious and architectural landmarks.",
+      "description": "The Grand Mosque of Niamey is a prominent Sunni mosque on Avenue de l'Islam, built in the 1970s with financial support from Libya. Recognisable by its pale façade, green-topped dome and tall minaret with 171 steps, it serves as the main venue for Friday and Eid prayers and a key symbol of Islam in Niger's capital.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/11/Grande_mosqu%C3%A9e_de_Niamey.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/2/25/Grand_Mosque_of_Niamey_minaret.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/3/3c/Grand_Mosque_of_Niamey_courtyard.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern Sahelian-Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 13.5222,
+        "lng": 2.1328
+      },
+      "history": "Constructed in the 1970s, the Grand Mosque of Niamey was funded largely by Libya and completed around 1977, shortly after Niger's independence. It features a large prayer hall and separate sections for men and women, each accommodating several thousand worshippers, and a minaret with 171 steps that offers views over the city. Over time it has become a central site for national religious ceremonies and community gatherings in Niamey.",
+      "tourismNotes": "Generally open to visitors outside Friday prayer; modest dress required and local guides often offer tours for a small donation. Non-Muslim visitors may be allowed inside when accompanied by a guide, and the minaret climb provides panoramic views over Niamey.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "king-fahad-mosque-banjul",
+      "name": "King Fahad Mosque",
+      "arabicName": "مسجد الملك فهد",
+      "location": "Banjul",
+      "country": "Gambia",
+      "address": "Box Bar Road (Wallace Cole Road), Banjul, Gambia",
+      "capacity": 6000,
+      "established": "1988",
+      "area": 0,
+      "annualVisitors": "Thousands of worshippers weekly; major mosque for national events",
+      "facilities": [
+        "Main prayer halls",
+        "Courtyard",
+        "Ablution facilities"
+      ],
+      "significance": "Largest mosque in Banjul and one of the most prominent Islamic landmarks in The Gambia.",
+      "description": "King Fahad Mosque, also known as the Great Mosque of Banjul, is the principal mosque of Gambia's capital, located on Box Bar Road near Arch 22. Built with financial assistance from Saudi Arabia and inaugurated in 1988, it can host around 6,000 worshippers and is noted for its twin octagonal minarets, open-arched entrance and modern Islamic architectural style.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/King_Fahad_Mosque_Banjul.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/82/King_Fahad_Mosque_Banjul_front_view.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/0/0a/King_Fahad_Mosque_Banjul_minarets.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic with local influences",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 13.455,
+        "lng": -16.581
+      },
+      "history": "The mosque was constructed with Saudi funding and opened in February 1988, replacing the earlier Independence Drive mosque as Banjul's main congregational mosque. Its design combines functional modern architecture with traditional Islamic elements, including a spacious prayer hall and two octagonal minarets that dominate Banjul's skyline. Since its inauguration it has served as the focal point for Friday prayers, Eid celebrations and national religious gatherings in the capital.",
+      "tourismNotes": "Open to visitors outside prayer times; modest clothing is required and non-Muslim visitors are usually welcome to view the interior with respect. The mosque is centrally located and often included in city sightseeing itineraries around Banjul.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "grand-friday-mosque-male",
+      "name": "Grand Friday Mosque",
+      "arabicName": "مسجد الجمعة الكبير (مسجد السلطان محمد ثاكرفانو الأعظم)",
+      "location": "Malé",
+      "country": "Maldives",
+      "address": "Jumhooree Maidhaan area, Malé, Maldives",
+      "capacity": 5000,
+      "established": "1984",
+      "area": 0,
+      "annualVisitors": "Thousands of worshippers weekly; major attraction for visitors to Malé",
+      "facilities": [
+        "Main prayer hall",
+        "Islamic Centre complex",
+        "Conference and meeting halls",
+        "Library",
+        "Ablution facilities"
+      ],
+      "significance": "Largest mosque in the Maldives and the main national mosque, forming part of the Islamic Centre in Malé.",
+      "description": "The Grand Friday Mosque, officially Masjid-al Sultan Mohamed Thakurufaanu Al Auzam, is the principal congregational mosque in Malé and the largest in the Maldives, accommodating over 5,000 worshippers. Its striking golden dome and tall minaret dominate the capital's skyline, and the adjoining Islamic Centre hosts religious, cultural and official events.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Grand_Friday_Mosque_Male_Maldives.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/6/6c/Grand_Friday_Mosque_and_Islamic_Centre_Male.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/4/4a/Interior_Grand_Friday_Mosque_Male.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic with Maldivian elements",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 4.175,
+        "lng": 73.509
+      },
+      "history": "Completed in 1984 as part of the Islamic Centre complex, the Grand Friday Mosque was built to serve as the main national mosque and venue for large Friday and Eid congregations. It replaced older mosques as the primary focus of Islamic life in the capital, with a design that integrates a large marble-clad prayer hall, a prominent gold dome and a freestanding minaret visible from the sea. Over time it has become both a religious centre and a key symbol of Maldivian Islamic identity for residents and visitors alike.",
+      "tourismNotes": "Visitors are welcome outside prayer times; modest dress is required, and non-Muslims may tour the main hall when accompanied by local staff or guides. The mosque's central location near Republic Square makes it an easy stop on walking tours of Malé.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "grand-anwar-mosque-addis-ababa",
+      "name": "Grand Anwar Mosque",
+      "arabicName": "مسجد الأنوار الكبير",
+      "location": "Addis Ababa",
+      "country": "Ethiopia",
+      "address": "Merkato area, Arada district, Addis Ababa, Ethiopia",
+      "capacity": 10000,
+      "established": "c. 1922",
+      "area": 0,
+      "annualVisitors": "Thousands of worshippers weekly; especially crowded on Fridays and Ramadan",
+      "facilities": [
+        "Main prayer hall",
+        "Attached women's prayer hall",
+        "Ablution areas",
+        "Nearby Islamic bookshops and stalls",
+        "Parking area"
+      ],
+      "significance": "Oldest and largest mosque in Addis Ababa and a key religious centre for Muslims in the Ethiopian capital.",
+      "description": "Grand Anwar Mosque, located near Merkato in the Arada district, is Addis Ababa's oldest and largest mosque, completed around 1922. Built initially by the Italian administration and later finished with funds from the Muslim community, it is easily recognised by its white and green façade, multiple domes and prominent minarets, and serves as a focal point for Friday and Ramadan congregations.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Grand_Anwar_Mosque_Addis_Ababa.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/7/79/Grand_Anwar_Mosque_Merkato_exterior.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/5/5a/Grand_Anwar_Mosque_interior_Addis_Ababa.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Early 20th-century Islamic with Italian influences",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 9.027,
+        "lng": 38.744
+      },
+      "history": "Construction of the Grand Anwar Mosque began under the Italian administration around 1922, but a funding shortfall left 16,000 birr unpaid to the contractor until the local Muslim community raised the remainder. After a brief closure due to legal disputes, the mosque reopened and gradually became the main congregational mosque in Addis Ababa, hosting large gatherings during Ramadan and Eid. Its distinctive white and green color scheme and tall minarets have made it a landmark of the Merkato area and a symbol of Ethiopia's Islamic heritage.",
+      "tourismNotes": "Visitors should dress modestly and avoid busy Friday prayer times; the surrounding Merkato area can be very crowded. Non-Muslims may access the courtyard and sometimes the interior if they coordinate with local guides or mosque officials.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "jamia-mosque-nairobi",
+      "name": "Jamia Mosque Nairobi",
+      "arabicName": "مسجد جامعة نيروبي",
+      "location": "Nairobi",
+      "country": "Kenya",
+      "address": "Banda Street, Central Business District, Nairobi, Kenya",
+      "capacity": 8000,
+      "established": "1933 (founded 1902)",
+      "area": 0,
+      "annualVisitors": "Tens of thousands of worshippers weekly; main centre for major Islamic events in Nairobi",
+      "facilities": [
+        "Main men's prayer hall",
+        "Women's prayer hall (first floor)",
+        "Library and Islamic centre",
+        "Training institute (Arabic, vocational courses)",
+        "Shops along the side of the complex"
+      ],
+      "significance": "Largest and most important mosque in Kenya, serving as the central mosque (Jama Masjid) of Nairobi and a major Islamic centre for East and Central Africa.",
+      "description": "Jamia Mosque is a landmark mosque in Nairobi's CBD, located between Banda Street and Kigali Road, known for its three silver domes and twin minarets. Founded by Syed Maulana Abdullah Shah in 1902 and completed in its present form in 1933, it is built in a traditional Arabic-Islamic style with white façades, arched windows and marble and ceramic finishes, and functions as both a place of worship and a hub for Islamic education and outreach.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Jamia_Mosque_Nairobi_Kenya.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/3/3d/Jamia_Mosque_Nairobi_front_view.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/8/8a/Jamia_Mosque_Nairobi_courtyard.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Traditional Arabic-Islamic with Indo-Islamic elements",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": -1.2835,
+        "lng": 36.8227
+      },
+      "history": "Jamia Mosque was founded by Syed Maulana Abdullah Shah in 1902, but legal restrictions on land ownership delayed construction of a permanent structure until 1925. The main building, inspired by Mughal mosques such as Delhi's Jama Masjid and Lahore's Badshahi Mosque, was completed in 1933 and soon became the principal congregational mosque for Nairobi and a centre for Muslim organization during the colonial and post-independence periods. Over time it has been expanded with added floors, a women's gallery, library and training facilities, while retaining its iconic three silver domes and minarets.",
+      "tourismNotes": "Non-Muslims are generally welcome to visit outside prayer times; shoes must be removed and women should cover their heads. The mosque is in a busy downtown area, so visits are best planned outside Friday midday prayers.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "abdulhamid-han-ii-mosque-djibouti",
+      "name": "Abdülhamid Han II Mosque",
+      "arabicName": "جامع عبد الحميد خان الثاني",
+      "location": "Djibouti City",
+      "country": "Djibouti",
+      "address": "Salines Ouest district, Djibouti City, Djibouti",
+      "capacity": 6000,
+      "established": "2019",
+      "area": 13000,
+      "annualVisitors": "Thousands of worshippers weekly; major new landmark for visitors to Djibouti City",
+      "facilities": [
+        "Main prayer hall",
+        "Courtyard",
+        "Ablution facilities",
+        "Educational and social spaces within the complex"
+      ],
+      "significance": "Largest mosque in Djibouti and a prominent Ottoman-style landmark built as a symbol of Turkey–Djibouti cooperation.",
+      "description": "Abdülhamid Han II Mosque is a large Ottoman-style mosque built on reclaimed land in the Salines Ouest district of Djibouti City, near the presidential palace. Covering more than 13,000 square metres, it features a central dome about 27 metres high, two 46-metre minarets and interior decoration inspired by classic Turkish mosques, making it the biggest symbolic religious structure in the country.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Abdulhamid_Han_II_Mosque_Djibouti_City.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/0/0f/Abdulhamid_Han_II_Mosque_Djibouti_exterior.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/7/7d/Abdulhamid_Han_II_Mosque_interior.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Ottoman-inspired modern Islamic",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 11.596,
+        "lng": 43.146
+      },
+      "history": "Construction of the Abdülhamid Han II Mosque and complex began around 2015 under the auspices of Türkiye Diyanet Foundation, using materials and artisans from Turkey. The mosque was inaugurated in November 2019 in a ceremony attended by senior Djiboutian officials and Turkish representatives and has since become the largest and most visible Islamic architectural work in the capital. Its Ottoman-style design and strategic waterfront location underscore Djibouti's growing cultural and diplomatic ties with Turkey.",
+      "tourismNotes": "Open to visitors outside prayer times; modest clothing required, and guided visits may be available as it is promoted as a city landmark. Its coastal position makes it easily combined with waterfront walks and visits to nearby civic buildings.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "grand-mosque-of-bobo-dioulasso",
+      "name": "Grand Mosque of Bobo-Dioulasso",
+      "arabicName": "الجامع الكبير في بوبو ديولاسو",
+      "location": "Bobo-Dioulasso",
+      "country": "Burkina Faso",
+      "address": "Old town of Bobo-Dioulasso, Burkina Faso",
+      "capacity": 1000,
+      "established": "Late 19th–early 20th century (expanded over time)",
+      "area": 0,
+      "annualVisitors": "Thousands of worshippers and heritage tourists annually",
+      "facilities": [
+        "Prayer hall",
+        "Courtyard",
+        "Roof-accessible terraces (with guide)"
+      ],
+      "significance": "One of the best-known examples of Sudano-Sahelian earthen mosque architecture and a major religious site in western Burkina Faso.",
+      "description": "The Grand Mosque of Bobo-Dioulasso is a large adobe mosque in the old quarter of Bobo-Dioulasso, characterized by thick mud-brick walls, wooden toron beams and tapering minaret towers typical of Sudano-Sahelian architecture. It remains a functioning place of worship while also attracting visitors who come to explore its narrow interior spaces and rooftop views over the old town.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Grande_mosqu%C3%A9e_de_Bobo-Dioulasso_Burkina_Faso.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/5/5d/Grand_Mosque_Bobo-Dioulasso_side_view.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/7/7e/Grand_Mosque_Bobo-Dioulasso_minarets.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Sudano-Sahelian earthen mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 11.178,
+        "lng": -4.298
+      },
+      "history": "The mosque's earliest sections date from the late 19th century and were expanded in the early 20th century as Bobo-Dioulasso grew as a trade centre, resulting in the current large, multi-chambered prayer space. Its earthen construction requires periodic replastering by local masons, a process that has helped preserve traditional building techniques and community involvement in mosque upkeep. Over time it has become both a key religious institution and one of Burkina Faso's most photographed architectural landmarks.",
+      "tourismNotes": "Visitors are typically required to hire a local guide; modest dress and removal of shoes are mandatory. Photography is usually permitted from the outside and rooftops, but interior images may require permission from mosque authorities.",
+      "officialWebsite": null,
+      "denomination": "sunni"
+    },
+    {
+      "id": "hukru-miskiy-male",
+      "name": "Hukuru Miskiy (Old Friday Mosque)",
+      "arabicName": "مسجد الجمعة القديم",
+      "location": "Malé",
+      "country": "Maldives",
+      "address": "Kaafu Atoll, Malé, Maldives (near Medhu Ziyaaraiy)",
+      "capacity": 500,
+      "established": "1658",
+      "area": 0,
+      "annualVisitors": "Significant numbers of worshippers and heritage tourists annually",
+      "facilities": [
+        "Prayer hall",
+        "Ancient coral-stone cemetery",
+        "Minaret"
+      ],
+      "significance": "One of the oldest mosques in the Maldives, famous for its coral-stone walls and intricate traditional calligraphy and woodcarving.",
+      "description": "Hukuru Miskiy, also known as the Old Friday Mosque, is a 17th-century coral-stone mosque in Malé, recognised for its finely carved Quranic inscriptions and lacquered woodwork. Surrounded by a historic cemetery with elaborately carved tombstones, it is an important example of Maldivian Islamic architecture and a key heritage site alongside the newer Grand Friday Mosque.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Hukuru_Miskiiy_Old_Friday_Mosque_Male.jpg",
+      "galleryUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/8/8d/Hukuru_Miskiy_cemetery_Male.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/5/50/Hukuru_Miskiy_interior_woodcarvings.jpg"
+      ],
+      "isHolySite": false,
+      "architecturalStyle": "Traditional Maldivian coral-stone mosque",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "coordinates": {
+        "lat": 4.176,
+        "lng": 73.51
+      },
+      "history": "The mosque was commissioned by Sultan Ibrahim Iskandar I and completed in 1658 on the site of an earlier mosque built soon after the Maldives' conversion to Islam. Its coral-stone walls are carved with Quranic text and geometric patterns, while the interior features elaborately lacquered wood panels and ceiling beams. Conservation efforts in recent decades have focused on protecting the delicate coral fabric from weathering and urban development pressures.",
+      "tourismNotes": "Entry for non-Muslims may be restricted and usually requires permission from staff or a local guide; respectful dress is essential. Visitors often combine it with a stop at the nearby Islamic Centre and Grand Friday Mosque.",
+      "officialWebsite": null,
+      "denomination": "sunni"
     }
   ],
   "timelineEvents": [
@@ -2766,6 +3209,78 @@
       "mosque": "Egypt's Islamic Cultural Center",
       "mosqueId": "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
       "event": "Masjid Misr Al Kabeer opened in New Administrative Capital"
+    },
+    {
+      "year": "1492",
+      "mosque": "Mustafa Pasha Mosque",
+      "mosqueId": "mustafa-pasha-mosque",
+      "event": "Ottoman mosque built in Skopje Old Bazaar"
+    },
+    {
+      "year": "1658",
+      "mosque": "Hukuru Miskiy (Old Friday Mosque)",
+      "mosqueId": "hukru-miskiy-male",
+      "event": "Coral-stone mosque completed in Malé, Maldives"
+    },
+    {
+      "year": "1909",
+      "mosque": "Jami Ul-Alfar Mosque",
+      "mosqueId": "jami-ul-alfar-mosque",
+      "event": "Red Mosque completed in Pettah, Colombo"
+    },
+    {
+      "year": "1922",
+      "mosque": "Grand Anwar Mosque",
+      "mosqueId": "grand-anwar-mosque-addis-ababa",
+      "event": "Addis Ababa's oldest and largest mosque completed"
+    },
+    {
+      "year": "1932",
+      "mosque": "Sultan Mosque",
+      "mosqueId": "sultan-mosque-singapore",
+      "event": "Sultan Mosque rebuilt in present form in Kampong Glam"
+    },
+    {
+      "year": "1933",
+      "mosque": "Jamia Mosque Nairobi",
+      "mosqueId": "jamia-mosque-nairobi",
+      "event": "Central mosque of Nairobi completed"
+    },
+    {
+      "year": "1977",
+      "mosque": "Grand Mosque of Niamey",
+      "mosqueId": "grand-mosque-of-niamey",
+      "event": "Grand Mosque of Niamey completed with Libyan funding"
+    },
+    {
+      "year": "1984",
+      "mosque": "Grand Friday Mosque",
+      "mosqueId": "grand-friday-mosque-male",
+      "event": "Grand Friday Mosque and Islamic Centre completed in Malé"
+    },
+    {
+      "year": "1988",
+      "mosque": "King Fahad Mosque",
+      "mosqueId": "king-fahad-mosque-banjul",
+      "event": "King Fahad Mosque inaugurated in Banjul, Gambia"
+    },
+    {
+      "year": "2004",
+      "mosque": "Türkmenbaşy Ruhy Mosque",
+      "mosqueId": "turkmenbasy-ruhy-mosque",
+      "event": "Türkmenbaşy Ruhy Mosque completed in Gypjak, Turkmenistan"
+    },
+    {
+      "year": "2019",
+      "mosque": "Abdülhamid Han II Mosque",
+      "mosqueId": "abdulhamid-han-ii-mosque-djibouti",
+      "event": "Largest mosque in Djibouti inaugurated in Djibouti City"
+    },
+    {
+      "year": "1900",
+      "mosque": "Grand Mosque of Bobo-Dioulasso",
+      "mosqueId": "grand-mosque-of-bobo-dioulasso",
+      "event": "Sudano-Sahelian earthen mosque expanded in Bobo-Dioulasso"
     }
   ]
 }

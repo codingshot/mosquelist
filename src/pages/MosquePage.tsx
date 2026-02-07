@@ -40,13 +40,21 @@ export default function MosquePage() {
   const { isFavorite, toggleFavorite } = useFavorites();
   const { bucketList, addToBucketList } = useBucketList();
 
-  const galleryImages = useMemo(
-    () =>
-      mosque && mosque.imageUrl
-        ? [mosque.imageUrl, ...(mosque.galleryUrls ?? [])]
-        : [],
-    [mosque]
-  );
+  const galleryImages = useMemo(() => {
+    if (!mosque?.imageUrl?.trim()) return [];
+    const main = mosque.imageUrl.trim();
+    const extras = (mosque.galleryUrls ?? []).filter((u) => typeof u === "string" && u.trim().length > 0);
+    const seen = new Set<string>();
+    const out: string[] = [];
+    for (const u of [main, ...extras]) {
+      const url = u.trim();
+      if (!seen.has(url)) {
+        seen.add(url);
+        out.push(url);
+      }
+    }
+    return out;
+  }, [mosque]);
   const hasGallery = galleryImages.length > 1;
   const [galleryOpen, setGalleryOpen] = useState(false);
   const openGallery = useCallback(() => setGalleryOpen(true), []);

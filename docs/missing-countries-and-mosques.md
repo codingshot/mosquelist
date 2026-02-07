@@ -2,7 +2,7 @@
 
 Outline of **major countries not yet represented** in the mosque list and **suggested mosques to add** for each. Use this for prioritising new entries in `src/data/mosques.json`.
 
-**Current coverage:** 39 countries (see `docs/countries-and-mosques.md`).
+**Current coverage:** 52 countries, 93 mosques (see `docs/countries-and-mosques.md`).
 
 **Last updated:** 2026-02-07
 
@@ -12,22 +12,21 @@ Outline of **major countries not yet represented** in the mosque list and **sugg
 
 | Region | Missing countries (examples) | Priority |
 |--------|--------------------------------|----------|
-| Central Asia | Turkmenistan, Kyrgyzstan, Tajikistan | High |
-| Africa | Libya, Somalia, Niger, Mauritania, Chad, Gambia, Sierra Leone, Burkina Faso, Djibouti, Tanzania, Kenya, Ethiopia, Mozambique | High–medium |
-| Asia | Maldives, Singapore, Sri Lanka, Thailand, Myanmar | Medium |
-| Europe | North Macedonia, Montenegro | Low–medium |
+| Central Asia | Kyrgyzstan, Tajikistan | High |
+| Africa | Libya, Somalia, Mauritania, Chad, Sierra Leone, Tanzania, Mozambique | High–medium |
+| Asia | Thailand, Myanmar | Medium |
+| Europe | Montenegro | Low–medium |
 | Other | Comoros, Gabon (OIC) | Lower |
+
+**Recently added (now in app):** Turkmenistan, Singapore, Sri Lanka, North Macedonia, Niger, Gambia, Maldives, Ethiopia, Kenya, Djibouti, Burkina Faso.
 
 ---
 
 ## Central Asia
 
 ### Turkmenistan
-- **Status:** Muslim-majority; no mosque in list.
-- **Mosques to add:**
-  - **Türkmenbaşy Ruhy Mosque** (Gypjak, near Ashgabat) — one of the largest in Central Asia, distinctive gold dome; capacity ~10,000+.
-  - **Ertuğrul Gazi Mosque** (Ashgabat) — Ottoman-style, prominent landmark.
-  - **Azadi Mosque** (Ashgabat) — modern grand mosque.
+- **Status:** ✅ **In app.** Türkmenbaşy Ruhy Mosque (Gypjak) added.
+- **Optional further adds:** Ertuğrul Gazi Mosque (Ashgabat), Azadi Mosque (Ashgabat).
 
 ### Kyrgyzstan
 - **Status:** Muslim-majority; no mosque in list.
@@ -60,10 +59,8 @@ Outline of **major countries not yet represented** in the mosque list and **sugg
   - **Fakr ad-Din Mosque** (Mogadishu) — 13th century.
 
 ### Niger
-- **Status:** Muslim-majority; no mosque in list.
-- **Mosques to add:**
-  - **Grand Mosque of Niamey** — main national mosque.
-  - **Grand Mosque of Agadez** — historic, adobe; UNESCO area.
+- **Status:** ✅ **In app.** Grand Mosque of Niamey added.
+- **Optional further adds:** Grand Mosque of Agadez (historic, adobe; UNESCO area).
 
 ### Mauritania
 - **Status:** Muslim-majority; no mosque in list.
@@ -78,10 +75,7 @@ Outline of **major countries not yet represented** in the mosque list and **sugg
   - **N’Djamena Grand Mosque** (N'Djamena) — main national mosque.
 
 ### Gambia
-- **Status:** Muslim-majority; no mosque in list.
-- **Mosques to add:**
-  - **King Fahad Mosque** (Banjul) — prominent, often cited.
-  - **State House Mosque** or main Banjul mosque — verify name.
+- **Status:** ✅ **In app.** King Fahad Mosque (Banjul) added.
 
 ### Sierra Leone
 - **Status:** Muslim-majority; no mosque in list.
@@ -89,15 +83,16 @@ Outline of **major countries not yet represented** in the mosque list and **sugg
   - **Freetown Central Mosque** (or main national mosque — verify name).
 
 ### Burkina Faso
-- **Status:** Muslim-majority; no mosque in list.
-- **Mosques to add:**
-  - **Grand Mosque of Ouagadougou** — main national mosque.
-  - **Grand Mosque of Bobo-Dioulasso** — historic, Sudano-Sahelian.
+- **Status:** ✅ **In app.** Grand Mosque of Bobo-Dioulasso added.
+- **Optional further adds:** Grand Mosque of Ouagadougou.
 
 ### Djibouti
-- **Status:** Muslim-majority; no mosque in list.
-- **Mosques to add:**
-  - **Grand Mosque of Djibouti** (Djibouti City) — main national mosque.
+- **Status:** ✅ **In app.** Abdülhamid Han II Mosque (Djibouti City) added.
+
+### Maldives
+- **Status:** ✅ **In app.** Grand Friday Mosque (Malé) and Hukuru Miskiy (Old Friday Mosque) added.
+
+---
 
 ### Tanzania
 - **Status:** Significant Muslim population; no mosque in list.
@@ -106,16 +101,11 @@ Outline of **major countries not yet represented** in the mosque list and **sugg
   - **Memorial Mosque** (Dar es Salaam) or main national mosque — verify.
 
 ### Kenya
-- **Status:** Significant Muslim population (coast); no mosque in list.
-- **Mosques to add:**
-  - **Jamia Mosque** (Nairobi) — major landmark.
-  - **Fort Jesus / Old Town mosques** (Mombasa) — historic.
+- **Status:** ✅ **In app.** Jamia Mosque Nairobi added.
+- **Optional further adds:** Fort Jesus / Old Town mosques (Mombasa).
 
 ### Ethiopia
-- **Status:** Large Muslim population; no mosque in list.
-- **Mosques to add:**
-  - **Anwar Mosque** (Addis Ababa) — one of the largest.
-  - **Grand Mosque of Addis Ababa** (or main national mosque — verify name).
+- **Status:** ✅ **In app.** Grand Anwar Mosque (Addis Ababa) added.
 
 ### Mozambique
 - **Status:** Significant Muslim population (north); no mosque in list.
@@ -142,24 +132,14 @@ Outline of **major countries not yet represented** in the mosque list and **sugg
 
 ## Asia
 
-### Maldives
-- **Status:** Muslim-majority; no mosque in list.
-- **Mosques to add:**
-  - **Grand Friday Mosque (Masjid al-Sultan Muhammad Thakurufaanu)** (Malé) — main national mosque; distinctive gold dome.
-  - **Hukuru Miskiy** (Malé) — historic coral stone mosque; UNESCO.
 
 ### Singapore
-- **Status:** Significant Muslim minority; no mosque in list.
-- **Mosques to add:**
-  - **Sultan Mosque** (Kampong Glam) — iconic, golden dome.
-  - **Masjid Jamae (Chulia)** — historic.
-  - **Hajjah Fatimah Mosque** — historic, distinctive.
+- **Status:** ✅ **In app.** Sultan Mosque (Kampong Glam) added.
+- **Optional further adds:** Masjid Jamae (Chulia), Hajjah Fatimah Mosque.
 
 ### Sri Lanka
-- **Status:** Significant Muslim population; no mosque in list.
-- **Mosques to add:**
-  - **Jami Ul-Alfar Mosque** (Colombo) — red-and-white striped, iconic.
-  - **Grand Mosque of Colombo** or main mosque — verify.
+- **Status:** ✅ **In app.** Jami Ul-Alfar Mosque (Colombo) added.
+- **Optional further adds:** Grand Mosque of Colombo (verify name).
 
 ### Thailand
 - **Status:** Significant Muslim population (south); no mosque in list.
@@ -178,10 +158,8 @@ Outline of **major countries not yet represented** in the mosque list and **sugg
 ## Europe (Muslim-minority with notable mosques)
 
 ### North Macedonia
-- **Status:** Significant Muslim population; no mosque in list.
-- **Mosques to add:**
-  - **Mustafa Pasha Mosque** (Skopje) — Ottoman, historic.
-  - **Yeni Mosque** (Bitola) or **Skopje Central Mosque** — verify largest/most notable.
+- **Status:** ✅ **In app.** Mustafa Pasha Mosque (Skopje) added.
+- **Optional further adds:** Yeni Mosque (Bitola), Skopje Central Mosque.
 
 ### Montenegro
 - **Status:** Muslim minority; no mosque in list.

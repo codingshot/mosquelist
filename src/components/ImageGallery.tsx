@@ -49,7 +49,8 @@ export function ImageGallery({
 
   useEffect(() => {
     if (!open) return;
-    setIndex(Math.min(initialIndex, count - 1));
+    const safeIndex = count > 0 ? Math.min(Math.max(0, initialIndex), count - 1) : 0;
+    setIndex(safeIndex);
   }, [open, initialIndex, count]);
 
   useEffect(() => {
@@ -149,8 +150,8 @@ export function ImageGallery({
           }}
         >
           <img
-            src={currentUrl}
-            alt=""
+            src={currentUrl || "/placeholder.svg"}
+            alt={count > 0 ? `Gallery image ${index + 1} of ${count}` : "Gallery image"}
             className="max-h-full max-w-full w-auto h-auto object-contain select-none"
             draggable={false}
             onError={(e) => {

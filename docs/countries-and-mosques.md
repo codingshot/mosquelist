@@ -2,7 +2,7 @@
 
 This document lists every country represented in MosqueList’s mosque data, the **biggest mosque per country** (by capacity in our dataset), and classifies countries as **Muslim-majority** or **other**. It also outlines **Muslim-majority countries** and **countries with large mosques that are not Muslim-majority**, with fact-check notes and prompts for finding and maintaining this data.
 
-**Data source:** `src/data/mosques.json` (81 mosques). “Biggest” = mosque with highest `capacity` in that country in our data.
+**Data source:** `src/data/mosques.json` (93 mosques). “Biggest” = mosque with highest `capacity` in that country in our data.
 
 ---
 
@@ -10,9 +10,9 @@ This document lists every country represented in MosqueList’s mosque data, the
 
 | Metric | Count |
 |--------|--------|
-| **Countries in app** | 39 |
-| **Muslim-majority countries in app** (outlined below) | 33 |
-| **Countries with large mosques, not Muslim-majority** (outlined below) | 6 |
+| **Countries in app** | 52 |
+| **Muslim-majority countries in app** (outlined below) | 44 |
+| **Countries with large mosques, not Muslim-majority** (outlined below) | 8 |
 | **Muslim-majority countries not yet in app** (priority gaps) | Many (see list) |
 
 ---
@@ -29,8 +29,12 @@ This document lists every country represented in MosqueList’s mosque data, the
 | Bangladesh | Baitul Mukarram | `baitul-mukarram` | 40,000 | Dhaka |
 | Bosnia and Herzegovina | Gazi Husrev-beg Mosque | `gazi-husrev-beg-mosque` | 1,500 | Sarajevo |
 | Brunei | Sultan Omar Ali Saifuddin Mosque | `sultan-omar-ali-saifuddin` | 3,000 | Bandar Seri Begawan |
+| Burkina Faso | Grand Mosque of Bobo-Dioulasso | `grand-mosque-of-bobo-dioulasso` | 1,000 | Bobo-Dioulasso |
 | China | Id Kah Mosque | `id-kah-mosque` | 20,000 | Kashgar |
+| Djibouti | Abdülhamid Han II Mosque | `abdulhamid-han-ii-mosque-djibouti` | 6,000 | Djibouti City |
 | Egypt | Egypt's Islamic Cultural Center (Masjid Misr Al Kabeer) | `egypts-islamic-cultural-center-masjid-misr-al-kabeer` | 130,000 | New Administrative Capital |
+| Ethiopia | Grand Anwar Mosque | `grand-anwar-mosque-addis-ababa` | 10,000 | Addis Ababa |
+| Gambia | King Fahad Mosque | `king-fahad-mosque-banjul` | 6,000 | Banjul |
 | Guinea | Grand Mosque of Conakry | `grand-mosque-of-conakry` | 20,000 | Conakry |
 | India | Taj-ul-Masajid | `taj-ul-masajid` | 175,000 | Bhopal |
 | Indonesia | Istiqlal Mosque | `istiqlal-mosque` | 200,000 | Jakarta |
@@ -38,13 +42,17 @@ This document lists every country represented in MosqueList’s mosque data, the
 | Iraq | Imam Ali Shrine | `imam-ali-shrine` | 800,000 | Najaf |
 | Jordan | King Abdullah I Mosque | `king-abdullah-i-mosque` | 7,000 | Amman |
 | Kazakhstan | Astana Grand Mosque | `astana-grand-mosque` | 230,000 | Astana |
+| Kenya | Jamia Mosque Nairobi | `jamia-mosque-nairobi` | 8,000 | Nairobi |
 | Kosovo | Imperial Mosque | `imperial-mosque-pristina` | 5,000 | Pristina |
 | Kuwait | Grand Mosque of Kuwait | `grand-mosque-kuwait` | 11,000 | Kuwait City |
 | Lebanon | Mohammad Al-Amin Mosque | `mohammad-al-amin-mosque` | 6,400 | Beirut |
 | Malaysia | Sultan Salahuddin Abdul Aziz Mosque | `sultan-salahuddin-abdul-aziz-mosque` | 24,000 | Shah Alam |
+| Maldives | Grand Friday Mosque | `grand-friday-mosque-male` | 5,000 | Malé |
 | Mali | Great Mosque of Djenné | `great-mosque-of-djenne` | 1,000 | Djenné |
 | Morocco | Hassan II Mosque | `hassan-ii` | 105,000 | Casablanca |
+| Niger | Grand Mosque of Niamey | `grand-mosque-of-niamey` | 10,000 | Niamey |
 | Nigeria | National Mosque | `national-mosque-abuja` | 7,000 | Abuja |
+| North Macedonia | Mustafa Pasha Mosque | `mustafa-pasha-mosque` | 500 | Skopje |
 | Oman | Sultan Qaboos Grand Mosque | `sultan-qaboos-grand-mosque` | 20,000 | Muscat |
 | Pakistan | Grand Jamia Mosque | `grand-jamia` | 800,000 | Karachi |
 | Palestine | Al-Aqsa Mosque | `al-aqsa` | 400,000 | Jerusalem |
@@ -53,10 +61,13 @@ This document lists every country represented in MosqueList’s mosque data, the
 | Russia | Pride of Muslims Mosque | `pride-of-muslims-mosque-shali` | 30,000 | Shali |
 | Saudi Arabia | Masjid al-Haram | `masjid-al-haram` | 4,000,000 | Mecca |
 | Senegal | Massalikoul Djinane Mosque | `massalikoul-djinane-mosque` | 30,000 | Dakar |
+| Singapore | Sultan Mosque | `sultan-mosque-singapore` | 5,000 | Singapore |
+| Sri Lanka | Jami Ul-Alfar Mosque | `jami-ul-alfar-mosque` | 5,000 | Colombo |
 | Sudan | Great Mosque of Khartoum | `great-mosque-khartoum` | 10,000 | Khartoum |
 | Syria | Umayyad Mosque | `umayyad-mosque` | 100,000 | Damascus |
 | Tunisia | Al-Zaytuna Mosque | `al-zaytuna-mosque` | 3,000 | Tunis |
 | Turkey | Çamlıca Mosque | `camlica-mosque` | 63,000 | Istanbul |
+| Turkmenistan | Türkmenbaşy Ruhy Mosque | `turkmenbasy-ruhy-mosque` | 10,000 | Gypjak (near Ashgabat) |
 | UAE | Sheikh Zayed Grand Mosque | `sheikh-zayed` | 41,000 | Abu Dhabi |
 | United Kingdom | Birmingham Central Mosque | `birmingham-central-mosque` | 5,000 | Birmingham |
 | USA | Islamic Center of Washington | `islamic-center-washington` | 6,000 | Washington, D.C. |
@@ -69,9 +80,9 @@ This document lists every country represented in MosqueList’s mosque data, the
 
 These are countries where Islam is the majority religion (by population). Those **in the app** are marked.
 
-### In the app (33)
+### In the app (44)
 
-Afghanistan, Albania, Algeria, Azerbaijan, Bahrain, Bangladesh, Bosnia and Herzegovina, Brunei, Egypt, Guinea, Indonesia, Iran, Iraq, Jordan, Kazakhstan, Kosovo, Kuwait, Lebanon, Malaysia, Mali, Morocco, Nigeria, Oman, Pakistan, Palestine, Qatar, Saudi Arabia, Senegal, Sudan, Syria, Tunisia, Turkey, UAE, Uzbekistan, Yemen.
+Afghanistan, Albania, Algeria, Azerbaijan, Bahrain, Bangladesh, Bosnia and Herzegovina, Brunei, Burkina Faso, Djibouti, Egypt, Ethiopia, Gambia, Guinea, Indonesia, Iran, Iraq, Jordan, Kazakhstan, Kenya, Kosovo, Kuwait, Lebanon, Malaysia, Maldives, Mali, Morocco, Niger, Nigeria, North Macedonia, Oman, Pakistan, Palestine, Qatar, Saudi Arabia, Senegal, Sudan, Syria, Tunisia, Turkey, Turkmenistan, UAE, Uzbekistan, Yemen.
 
 (Philippines is in the app with a large mosque but is **not** Muslim-majority; see “Countries with large mosques that are NOT Muslim-majority” below.)
 
@@ -79,9 +90,9 @@ Afghanistan, Albania, Algeria, Azerbaijan, Bahrain, Bangladesh, Bosnia and Herze
 
 Muslim-majority countries with no mosque in our data yet (candidates for adding):
 
-- **Central Asia:** Turkmenistan, Kyrgyzstan, Tajikistan  
-- **Africa:** Libya, Somalia, Chad, Niger, Mauritania, Gambia, Sierra Leone, Burkina Faso, Djibouti  
-- **Asia:** Maldives, Comoros  
+- **Central Asia:** Kyrgyzstan, Tajikistan  
+- **Africa:** Libya, Somalia, Chad, Mauritania, Sierra Leone  
+- **Asia:** Comoros  
 - **Others:** Gabon, Cameroon (some OIC members are not Muslim-majority; verify per country)
 
 ---
@@ -95,6 +106,8 @@ These countries are in the app and have at least one mosque with substantial cap
 | **China** | Id Kah Mosque, Kashgar | 20,000 | Xinjiang; large Muslim minority |
 | **India** | Taj-ul-Masajid, Bhopal | 175,000 | One of world’s largest Muslim populations, not majority |
 | **Russia** | Pride of Muslims Mosque, Shali | 30,000 | Large Muslim populations in regions |
+| **Singapore** | Sultan Mosque, Kampong Glam | 5,000 | Significant Muslim minority; national monument |
+| **Sri Lanka** | Jami Ul-Alfar Mosque, Colombo | 5,000 | Significant Muslim community in Pettah |
 | **United Kingdom** | Birmingham Central Mosque | 5,000 | Significant Muslim minority |
 | **USA** | Islamic Center of Washington | 6,000 | Significant Muslim minority |
 | **Philippines** | Sultan Haji Hassanal Bolkiah Mosque, Cotabato City | 15,000 | Large Muslim population in Mindanao |
