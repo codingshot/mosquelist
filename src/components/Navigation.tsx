@@ -69,6 +69,20 @@ export const Navigation = () => {
             </Button>
           </div>
 
+          {/* Mobile: heart link to My List (bucket list) with count */}
+          <Link
+            to="/bucket-list"
+            className="md:hidden relative min-h-[44px] min-w-[44px] p-3 flex items-center justify-center rounded-md hover:bg-secondary text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label={`My list${favoriteCount > 0 ? `, ${favoriteCount} saved` : ""}`}
+          >
+            <Heart className="w-6 h-6" />
+            {favoriteCount > 0 && (
+              <span className="absolute top-1.5 right-1.5 min-w-[18px] h-[18px] rounded-full bg-primary px-1 flex items-center justify-center text-[10px] font-semibold text-primary-foreground">
+                {favoriteCount > 99 ? "99+" : favoriteCount}
+              </span>
+            )}
+          </Link>
+
           {/* Mobile Menu Button - min 44px touch target */}
           <button
             type="button"
@@ -83,11 +97,11 @@ export const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - My List is accessed via heart icon in navbar, not in dropdown */}
       {isOpen && (
         <div id="mobile-nav" className="md:hidden bg-background border-b border-border animate-fade-up" role="dialog" aria-label="Mobile menu">
           <div className="container mx-auto px-4 py-4 space-y-4">
-            {navLinks.map((link) => (
+            {navLinks.filter((link) => link.to !== "/bucket-list").map((link) => (
               <Link
                 key={link.name}
                 to={link.to}
@@ -97,19 +111,6 @@ export const Navigation = () => {
                 {link.name}
               </Link>
             ))}
-            <Link
-              to="/bucket-list"
-              className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors min-h-[44px] flex items-center gap-2 touch-manipulation"
-              onClick={() => setIsOpen(false)}
-            >
-              <Heart className="w-4 h-4" />
-              My List
-              {favoriteCount > 0 && (
-                <span className="rounded-full bg-primary px-1.5 py-0 text-xs font-medium text-primary-foreground">
-                  {favoriteCount}
-                </span>
-              )}
-            </Link>
             <Button className="w-full gradient-gold text-primary-foreground" asChild>
               <Link to="/explore" onClick={() => setIsOpen(false)}>
                 Start Your Journey

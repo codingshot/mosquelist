@@ -317,3 +317,16 @@
     transform: none;
   }
 }
+
+/* Map popup: no default padding so card image can be full-bleed top half */
+.map-popup.leaflet-popup-content-wrapper .leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+/* Map tooltip: no padding so card controls its own layout */
+.map-marker-tooltip .leaflet-tooltip-inner {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}

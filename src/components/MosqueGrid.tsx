@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Filter, LayoutGrid, List, AlignLeft, Smartphone, SlidersHorizontal, Search, X, ArrowUpDown, XCircle, MapPin } from "lucide-react";
+import { ExploreMapView } from "@/components/ExploreMapView";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -52,7 +53,7 @@ const PARAM_STYLE = "style";
 const PARAM_DENOMINATION = "denomination";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
-type ViewType = "grid" | "list" | "compact" | "swipe";
+type ViewType = "grid" | "list" | "compact" | "swipe" | "map";
 type SortType = "holyCapacity" | "name" | "capacity" | "area" | "established" | "country";
 
 /** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007) */
@@ -68,7 +69,7 @@ function useMosqueSearchParams() {
   const filter = (searchParams.get(PARAM_FILTER) as FilterType) ?? "all";
   const viewParam = searchParams.get(PARAM_VIEW);
   const view: ViewType =
-    viewParam === "grid" || viewParam === "list" || viewParam === "compact" || viewParam === "swipe"
+    viewParam === "grid" || viewParam === "list" || viewParam === "compact" || viewParam === "swipe" || viewParam === "map"
       ? viewParam
       : "grid";
   const sort = (searchParams.get(PARAM_SORT) as SortType) || "holyCapacity";
@@ -159,7 +160,7 @@ function useMosqueSearchParams() {
   };
 }
 
-const PREVIEW_LIMIT = 20;
+const PREVIEW_LIMIT = 10;
 
 export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => {
   const isPreview = mode === "preview";
@@ -341,7 +342,17 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     return sorted;
   }, [query, filter, country, region, denomination, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
-  const displayedMosques = isPreview ? filteredMosques.slice(0, PREVIEW_LIMIT) : filteredMosques;
+  const displayedMosques = isPreview
+    ? filteredMosques.filter((m) => !!m.imageUrl?.trim()).slice(0, PREVIEW_LIMIT)
+    : filteredMosques;
+
+  const filteredMosquesWithCoords = useMemo(
+    () =>
+      filteredMosques.filter(
+        (m): m is typeof m & { coordinates: { lat: number; lng: number } } => !!m.coordinates
+      ),
+    [filteredMosques]
+  );
 
   return (
     <section id="mosques" className="py-16 md:py-24 bg-paper-cream islamic-pattern scroll-mt-20">
@@ -359,16 +370,16 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
         {/* Search + filters: hidden in preview mode to save space */}
         {!isPreview && (
         <div className="print:hidden flex flex-col gap-4 mb-6 md:mb-8">
-          {/* Search: full width, 44px min height for touch */}
+          {/* Search: full width, 44px min height for touch, 16px font to avoid iOS zoom */}
           <div className="relative w-full min-w-0">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
             <Input
               ref={searchInputRef}
               type="search"
-              placeholder="Search by name, city, country, region, style — Press / to focus"
+              placeholder="Search by name, city, country, style"
               value={searchInput}
               onChange={(e) => setQueryDebounced(e.target.value)}
-              className="pl-9 pr-9 w-full h-11 min-h-[44px] text-base sm:text-sm"
+              className="pl-9 pr-10 w-full h-11 min-h-[44px] text-base touch-manipulation rounded-lg border-border"
               aria-label="Search mosques by name, location, country, region, or description"
               autoComplete="off"
             />
@@ -376,17 +387,17 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                 <button
                   type="button"
                   onClick={clearSearch}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded hover:bg-secondary text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation"
                   aria-label="Clear search"
                 >
                   <X className="h-4 w-4" />
                 </button>
               )}
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 w-full">
-              <div className="flex items-center gap-2 min-w-0 sm:flex-wrap">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 w-full min-w-0">
+              <div className="flex items-center gap-2 min-w-0 w-full sm:w-auto sm:flex-wrap">
                 <Filter className="w-5 h-5 text-muted-foreground shrink-0 hidden sm:block" aria-hidden />
-                <div className="flex overflow-x-auto gap-1.5 sm:gap-2 py-1 -mx-1 px-1 sm:overflow-visible sm:mx-0 sm:px-0 sm:flex-wrap touch-manipulation [scrollbar-width:thin]">
+                <div className="flex overflow-x-auto gap-1.5 sm:gap-2 py-1 -mx-1 px-1 sm:overflow-visible sm:mx-0 sm:px-0 sm:flex-wrap touch-manipulation [scrollbar-width:thin] overflow-y-hidden">
                   <Button
                     variant={filter === "all" ? "default" : "outline"}
                     size="sm"
@@ -424,87 +435,42 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="shrink-0 text-sm text-muted-foreground hover:text-foreground underline-offset-4 hover:underline touch-manipulation min-h-[44px] sm:min-h-0 sm:self-center"
+                    className="shrink-0 text-sm text-muted-foreground hover:text-foreground underline-offset-4 hover:underline touch-manipulation min-h-[44px] sm:min-h-0 sm:self-center py-2 sm:py-0"
                   >
                     Clear filters
                   </button>
                 )}
               </div>
-              <div className="flex items-center gap-2 w-full sm:w-auto min-w-0">
-                <Select value={sort} onValueChange={(v) => setSort((v || "holyCapacity") as SortType)}>
-                  <SelectTrigger className="flex-1 min-w-[100px] sm:flex-none sm:w-[160px] h-11 min-h-[44px] touch-manipulation" aria-label="Sort by">
-                  <ArrowUpDown className="mr-2 h-4 w-4 shrink-0" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="holyCapacity">Holy first, then biggest</SelectItem>
-                  <SelectItem value="name">Name</SelectItem>
-                  <SelectItem value="capacity">Capacity</SelectItem>
-                  <SelectItem value="area">Area</SelectItem>
-                  <SelectItem value="established">Date</SelectItem>
-                  <SelectItem value="country">Country</SelectItem>
-                </SelectContent>
-              </Select>
-              <div className="flex gap-1" role="group" aria-label="View mode">
-                <Button
-                  variant={view === "grid" ? "secondary" : "ghost"}
-                  size="icon"
-                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
-                  onClick={() => setView("grid")}
-                  aria-label="Grid view"
-                  aria-pressed={view === "grid"}
-                >
-                  <LayoutGrid className="w-5 h-5" />
-                </Button>
-                <Button
-                  variant={view === "list" ? "secondary" : "ghost"}
-                  size="icon"
-                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
-                  onClick={() => setView("list")}
-                  aria-label="List view"
-                  aria-pressed={view === "list"}
-                >
-                  <List className="w-5 h-5" />
-                </Button>
-                <Button
-                  variant={view === "compact" ? "secondary" : "ghost"}
-                  size="icon"
-                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
-                  onClick={() => setView("compact")}
-                  aria-label="Compact view"
-                  aria-pressed={view === "compact"}
-                >
-                  <AlignLeft className="w-5 h-5" />
-                </Button>
-                <Button
-                  variant={view === "swipe" ? "secondary" : "ghost"}
-                  size="icon"
-                  className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
-                  onClick={() => setView("swipe")}
-                  aria-label="Swipe mode"
-                  aria-pressed={view === "swipe"}
-                >
-                  <Smartphone className="w-5 h-5" />
-                </Button>
-                <Button variant="outline" size="icon" className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation" asChild aria-label="View on map">
-                  <Link to="/map">
-                    <MapPin className="w-5 h-5" />
-                  </Link>
-                </Button>
-              </div>
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" size="sm" className="gap-2 h-11 min-h-[44px] shrink-0 relative">
-                    <SlidersHorizontal className="w-4 h-4" />
-                    <span>Filters</span>
-                    {activeFilterCount > 0 && (
-                      <Badge variant="secondary" className="ml-1 h-5 min-w-5 px-1.5 text-xs">
-                        {activeFilterCount}
-                      </Badge>
-                    )}
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[min(100vw-2rem,24rem)] max-w-[calc(100vw-2rem)] overflow-y-auto">
+              {/* Sort + Filters row on mobile; same row as view on sm+ */}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-2 w-full sm:w-auto min-w-0">
+                <div className="flex items-center gap-2 w-full min-w-0 sm:w-auto">
+                  <Select value={sort} onValueChange={(v) => setSort((v || "holyCapacity") as SortType)}>
+                    <SelectTrigger className="flex-1 min-w-0 sm:flex-none sm:w-[160px] h-11 min-h-[44px] touch-manipulation text-base" aria-label="Sort by">
+                      <ArrowUpDown className="mr-2 h-4 w-4 shrink-0" />
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="holyCapacity">Holy first, then biggest</SelectItem>
+                      <SelectItem value="name">Name</SelectItem>
+                      <SelectItem value="capacity">Capacity</SelectItem>
+                      <SelectItem value="area">Area</SelectItem>
+                      <SelectItem value="established">Date</SelectItem>
+                      <SelectItem value="country">Country</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <Button variant="outline" size="sm" className="gap-2 h-11 min-h-[44px] min-w-[44px] sm:min-w-0 shrink-0 relative touch-manipulation">
+                        <SlidersHorizontal className="w-4 h-4 shrink-0" />
+                        <span className="hidden sm:inline">Filters</span>
+                        {activeFilterCount > 0 && (
+                          <Badge variant="secondary" className="h-5 min-w-5 px-1.5 text-xs flex items-center justify-center">
+                            {activeFilterCount}
+                          </Badge>
+                        )}
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="w-[min(100vw-1rem,24rem)] max-w-[calc(100vw-1rem)] overflow-y-auto pb-8">
                   <SheetHeader>
                     <SheetTitle>Advanced filters</SheetTitle>
                   </SheetHeader>
@@ -512,7 +478,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     <div className="space-y-2">
                       <Label>Region</Label>
                       <Select value={region || "all"} onValueChange={(v) => setRegion(v === "all" ? "" : v)}>
-                        <SelectTrigger className="min-h-[44px] touch-manipulation">
+                        <SelectTrigger className="min-h-[44px] touch-manipulation text-base">
                           <SelectValue placeholder="Any region" />
                         </SelectTrigger>
                         <SelectContent>
@@ -528,7 +494,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     <div className="space-y-2">
                       <Label>Country</Label>
                       <Select value={country || "all"} onValueChange={(v) => setCountry(v === "all" ? "" : v)}>
-                        <SelectTrigger className="min-h-[44px] touch-manipulation">
+                        <SelectTrigger className="min-h-[44px] touch-manipulation text-base">
                           <SelectValue placeholder="Any country" />
                         </SelectTrigger>
                         <SelectContent>
@@ -547,7 +513,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                         Where clearly associated (fact-checked). Many mosques welcome all Muslims.
                       </p>
                       <Select value={denomination || "all"} onValueChange={setDenomination}>
-                        <SelectTrigger className="min-h-[44px] touch-manipulation">
+                        <SelectTrigger className="min-h-[44px] touch-manipulation text-base">
                           <SelectValue placeholder="Any denomination" />
                         </SelectTrigger>
                         <SelectContent>
@@ -566,7 +532,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                         value={architecturalStyle || "all"}
                         onValueChange={(v) => setArchitecturalStyle(v === "all" ? "" : v)}
                       >
-                        <SelectTrigger className="min-h-[44px] touch-manipulation">
+                        <SelectTrigger className="min-h-[44px] touch-manipulation text-base">
                           <SelectValue placeholder="Any style" />
                         </SelectTrigger>
                         <SelectContent>
@@ -579,27 +545,29 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                         </SelectContent>
                       </Select>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-3 min-h-[44px]">
                       <Checkbox
                         id="women"
                         checked={womenOnly}
                         onCheckedChange={(c) => setWomenOnly(!!c)}
+                        className="touch-manipulation size-5"
                       />
-                      <Label htmlFor="women" className="font-normal cursor-pointer">
+                      <Label htmlFor="women" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
                         Women&apos;s prayer area only
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-3 min-h-[44px]">
                       <Checkbox
                         id="tourist-adv"
                         checked={touristOnly}
                         onCheckedChange={(c) => setTouristOnly(!!c)}
+                        className="touch-manipulation size-5"
                       />
-                      <Label htmlFor="tourist-adv" className="font-normal cursor-pointer">
+                      <Label htmlFor="tourist-adv" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
                         Tourist friendly only
                       </Label>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
                         <Label htmlFor="capMin">Min capacity</Label>
                         <Input
@@ -609,6 +577,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                           placeholder="e.g. 10000"
                           value={capMin}
                           onChange={(e) => setCapMin(e.target.value)}
+                          className="min-h-[44px] text-base touch-manipulation"
                         />
                       </div>
                       <div className="space-y-2">
@@ -620,10 +589,11 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                           placeholder="e.g. 500000"
                           value={capMax}
                           onChange={(e) => setCapMax(e.target.value)}
+                          className="min-h-[44px] text-base touch-manipulation"
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
                         <Label htmlFor="areaMin">Min area (m²)</Label>
                         <Input
@@ -633,6 +603,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                           placeholder="e.g. 10000"
                           value={areaMin}
                           onChange={(e) => setAreaMin(e.target.value)}
+                          className="min-h-[44px] text-base touch-manipulation"
                         />
                       </div>
                       <div className="space-y-2">
@@ -644,10 +615,11 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                           placeholder="e.g. 100000"
                           value={areaMax}
                           onChange={(e) => setAreaMax(e.target.value)}
+                          className="min-h-[44px] text-base touch-manipulation"
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
                         <Label htmlFor="estMin">Established after (year)</Label>
                         <Input
@@ -658,6 +630,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                           placeholder="e.g. 1900"
                           value={estMin}
                           onChange={(e) => setEstMin(e.target.value)}
+                          className="min-h-[44px] text-base touch-manipulation"
                         />
                       </div>
                       <div className="space-y-2">
@@ -670,13 +643,14 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                           placeholder="e.g. 2000"
                           value={estMax}
                           onChange={(e) => setEstMax(e.target.value)}
+                          className="min-h-[44px] text-base touch-manipulation"
                         />
                       </div>
                     </div>
                   </div>
                   {activeFilterCount > 0 && (
                     <div className="mt-6 pt-4 border-t border-border">
-                      <Button variant="ghost" size="sm" className="w-full" onClick={clearAllFilters}>
+                      <Button variant="ghost" size="sm" className="w-full min-h-[44px] touch-manipulation" onClick={clearAllFilters}>
                         <XCircle className="w-4 h-4 mr-2" />
                         Clear all filters
                       </Button>
@@ -684,12 +658,65 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   )}
                 </SheetContent>
               </Sheet>
-              {hasActiveFilters && (
-                <Button variant="ghost" size="sm" className="gap-1.5 min-h-[44px] text-muted-foreground" onClick={clearAllFilters}>
-                  <XCircle className="w-4 h-4" />
-                  <span>Clear all</span>
-                </Button>
-              )}
+                </div>
+                <div className="flex items-center gap-2 min-w-0 overflow-x-auto py-1 -mx-1 px-1 sm:overflow-visible sm:mx-0 sm:px-0 [scrollbar-width:thin]" role="group" aria-label="View mode">
+                  <Button
+                    variant={view === "grid" ? "secondary" : "ghost"}
+                    size="icon"
+                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    onClick={() => setView("grid")}
+                    aria-label="Grid view"
+                    aria-pressed={view === "grid"}
+                  >
+                    <LayoutGrid className="w-5 h-5" />
+                  </Button>
+                  <Button
+                    variant={view === "list" ? "secondary" : "ghost"}
+                    size="icon"
+                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    onClick={() => setView("list")}
+                    aria-label="List view"
+                    aria-pressed={view === "list"}
+                  >
+                    <List className="w-5 h-5" />
+                  </Button>
+                  <Button
+                    variant={view === "compact" ? "secondary" : "ghost"}
+                    size="icon"
+                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    onClick={() => setView("compact")}
+                    aria-label="Compact view"
+                    aria-pressed={view === "compact"}
+                  >
+                    <AlignLeft className="w-5 h-5" />
+                  </Button>
+                  <Button
+                    variant={view === "swipe" ? "secondary" : "ghost"}
+                    size="icon"
+                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    onClick={() => setView("swipe")}
+                    aria-label="Swipe mode"
+                    aria-pressed={view === "swipe"}
+                  >
+                    <Smartphone className="w-5 h-5" />
+                  </Button>
+                  <Button
+                    variant={view === "map" ? "secondary" : "ghost"}
+                    size="icon"
+                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    onClick={() => setView("map")}
+                    aria-label="Map view"
+                    aria-pressed={view === "map"}
+                  >
+                    <MapPin className="w-5 h-5" />
+                  </Button>
+                  {hasActiveFilters && (
+                    <Button variant="ghost" size="sm" className="gap-1.5 min-h-[44px] shrink-0 text-muted-foreground touch-manipulation" onClick={clearAllFilters}>
+                      <XCircle className="w-4 h-4" />
+                      <span className="hidden sm:inline">Clear all</span>
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -702,7 +729,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={clearSearch}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation -m-1 sm:m-0"
                     aria-label="Remove search"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -715,7 +742,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={() => setFilter("all")}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation -m-1 sm:m-0"
                     aria-label="Remove filter"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -728,7 +755,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={() => setRegion("")}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
                     aria-label={`Remove region ${region}`}
                   >
                     <X className="w-3.5 h-3.5" />
@@ -741,7 +768,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={() => setCountry("")}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
                     aria-label={`Remove country ${country}`}
                   >
                     <X className="w-3.5 h-3.5" />
@@ -754,7 +781,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={() => setDenomination("all")}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
                     aria-label={`Remove denomination filter`}
                   >
                     <X className="w-3.5 h-3.5" />
@@ -767,7 +794,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={() => setWomenOnly(false)}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
                     aria-label="Remove women's area filter"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -780,7 +807,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={() => setTouristOnly(false)}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
                     aria-label="Remove tourist filter"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -798,7 +825,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                       setCapMin("");
                       setCapMax("");
                     }}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
                     aria-label="Remove capacity filter"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -811,7 +838,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                   <button
                     type="button"
                     onClick={() => setArchitecturalStyle("")}
-                    className="rounded-full p-1 min-h-[28px] min-w-[28px] flex items-center justify-center hover:bg-muted shrink-0 touch-manipulation"
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted shrink-0 touch-manipulation -m-1 sm:m-0"
                     aria-label="Remove style filter"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -845,7 +872,9 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
           </p>
         )}
 
-        {view === "swipe" ? (
+        {view === "map" ? (
+          <ExploreMapView mosques={filteredMosquesWithCoords} />
+        ) : view === "swipe" ? (
           <SwipeDeck
             mosques={displayedMosques}
             onLike={(mosque) => toggleFavorite(mosque.id)}

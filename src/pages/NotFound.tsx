@@ -8,7 +8,11 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    console.warn(
+      "[MosqueList] 404 – Page not found. Path:",
+      location.pathname,
+      "| This route does not exist. User will see the 404 screen."
+    );
   }, [location.pathname]);
 
   return (

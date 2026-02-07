@@ -23,6 +23,10 @@
       "significance": "The holiest site in Islam, home to the Kaaba",
       "description": "Masjid al-Haram, also known as the Grand Mosque, is the largest mosque in the world and surrounds Islam's holiest place, the Kaaba, in the city of Mecca. Muslims around the world face the Kaaba during their five daily prayers.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/Mosqu%C3%A9e_Masjid_el_Haram_%C3%A0_la_Mecque.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Kaaba_at_night.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_al-Haram_at_night.jpg"
+      ],
       "isHolySite": true,
       "architecturalStyle": "Islamic Architecture with Modern Expansions",
       "womenPrayerArea": true,
@@ -59,6 +63,10 @@
       "significance": "Second holiest site in Islam, burial place of Prophet Muhammad ﷺ",
       "description": "The Prophet's Mosque is the second-holiest site in Islam, built by Prophet Muhammad himself in 622 CE. It houses the tomb of the Prophet and is one of the largest mosques in the world with its iconic green dome.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Al-Masjid_al-Nabawi_01.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Green_Dome_of_Prophet_Muhammad_Mosque_in_Medina.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Masjid_al-Nabawi_at_night.jpg"
+      ],
       "isHolySite": true,
       "architecturalStyle": "Classical Islamic with Ottoman and Modern elements",
       "womenPrayerArea": true,
@@ -89,8 +97,12 @@
         "Limited tourist facilities"
       ],
       "significance": "Third holiest site in Islam, destination of the Prophet's night journey",
-      "description": "Al-Aqsa Mosque, meaning 'The Farthest Mosque', is located in the Old City of Jerusalem. It is the third-holiest site in Islam and was the original qibla (direction of prayer) before Mecca.",
+      "description": "Al-Aqsa Mosque, meaning 'The Farthest Mosque', is located in the Old City of Jerusalem. It is the third-holiest site in Islam and was the original qibla (direction of prayer) before Mecca. The compound includes both the silver-domed Al-Aqsa mosque and the Dome of the Rock.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Dome_of_the_Rock_photo.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Aqsa_Mosque,_Haram_al-Sharif,_Jerusalem.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Haram_al-Sharif_compound.jpg"
+      ],
       "isHolySite": true,
       "architecturalStyle": "Umayyad Architecture",
       "womenPrayerArea": true,
@@ -125,6 +137,10 @@
       "significance": "One of the largest mosque complexes by area, shrine of Imam Reza",
       "description": "The Imam Reza Shrine is a complex containing the mausoleum of Imam Reza, the eighth Imam of Twelver Shia. It is the largest mosque in the world by dimension and the second most visited religious site in the world.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Holy_Shrine_Imam_Reza_-_Mashhad_-_Iran.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Imam_Reza_Shrine_at_night.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Interior_Imam_Reza_Shrine.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Persian Islamic Architecture",
       "womenPrayerArea": true,
@@ -201,6 +217,10 @@
       "significance": "Largest mosque in Africa, built on the Atlantic Ocean",
       "description": "Hassan II Mosque stands partially over the Atlantic Ocean, with a retractable roof and the world's tallest minaret at 210 meters. It's a masterpiece of Moroccan craftsmanship and one of the few mosques open to non-Muslims.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Hassan_II_mosque%2C_Casablanca2.JPG",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Hassan_II_Mosque_minaret.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Interior_Hassan_II_Mosque.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Moorish Architecture",
       "womenPrayerArea": true,
@@ -236,6 +256,10 @@
       "significance": "Iconic Ottoman mosque, known for its blue tiles",
       "description": "The Sultan Ahmed Mosque, popularly known as the Blue Mosque, is famous for its hand-painted blue tiles adorning its interior. With six minarets and a magnificent dome, it's one of Istanbul's most iconic landmarks.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Sultan_Ahmed_Mosque_in_Istanbul.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Interior_of_the_Blue_Mosque,_Istanbul.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Blue_Mosque_Istanbul_at_night.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Classical Ottoman",
       "womenPrayerArea": true,
@@ -271,6 +295,10 @@
       "significance": "National mosque of Pakistan, unique tent-like design",
       "description": "Faisal Mosque is the national mosque of Pakistan, located at the foot of Margalla Hills. Its unique design resembles a desert Bedouin tent, blending contemporary architecture with traditional Islamic elements.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Faisal_Mosque_Islamabad%2C_Pakistan.JPG",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Faisal_Mosque_Islamabad_Interior.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Faisal_Mosque_at_night.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Contemporary Turkish-Arab",
       "womenPrayerArea": true,
@@ -302,6 +330,10 @@
       "significance": "Largest mosque in Southeast Asia, symbol of Indonesian independence",
       "description": "Istiqlal Mosque is the national mosque of Indonesia and the largest mosque in Southeast Asia. Its name means 'Independence' in Arabic, commemorating Indonesian independence. It features interfaith dialogue, standing across from Jakarta Cathedral.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Istiqlal_Mosque.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Istiqlal_Mosque_Jakarta_prayer_hall_interior_view_06.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Istiqlal_dari_M_Taman_Mini.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Modern Functionalist with Islamic elements",
       "womenPrayerArea": true,
@@ -349,7 +381,7 @@
       "address": "Walled City, near Alamgiri Gate of Lahore Fort",
       "capacity": 100000,
       "established": "1673",
-      "area": 27600,
+      "area": 29867,
       "annualVisitors": "~1 million",
       "facilities": [
         "Museum",
@@ -358,8 +390,12 @@
         "Visitor information"
       ],
       "significance": "Iconic Mughal-era mosque, one of Pakistan's most visited landmarks",
-      "description": "The Badshahi Mosque was built by Emperor Aurangzeb in 1673. It is a masterpiece of Mughal architecture and was the largest mosque in the world for over 300 years. Its red sandstone and marble make it one of Lahore's most iconic sights.",
+      "description": "The Badshahi Mosque was built by Emperor Aurangzeb in 1673. It is a masterpiece of Mughal architecture and was the largest mosque in the world for over 300 years. Its red sandstone and marble make it one of Lahore's most iconic sights. Courtyard 161.5 × 160.6 m.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_%2C_Lahore.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_courtyard.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_Interior.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Mughal",
       "womenPrayerArea": true,
@@ -392,6 +428,10 @@
       "significance": "Largest mosque in Oman, open to non-Muslim visitors",
       "description": "The Sultan Qaboos Grand Mosque was completed in 2001 and can hold 20,000 worshippers. It features one of the world's largest hand-loomed carpets and a massive Swarovski crystal chandelier. Non-Muslims are welcome outside prayer times.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_Qaboos_Grand_Mosque_%28Muscat%2C_Oman%29.jpg",
+      "galleryUrls": [
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_Qaboos_Grand_Mosque_Interior.jpg",
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_Qaboos_Grand_Mosque_chandelier.jpg"
+      ],
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic with Omani influence",
       "womenPrayerArea": true,
@@ -1279,7 +1319,7 @@
         "lng": 36.3064
       },
       "capacity": 100000,
-      "established": "715",
+      "established": "705–715 CE",
       "area": 15700,
       "annualVisitors": "—",
       "facilities": [
@@ -1480,15 +1520,15 @@
     {
       "id": "jamiul-futuh-indian-grand-masjid",
       "name": "Jamiul Futuh, The Indian Grand Masjid",
-      "location": "Kerala",
+      "location": "Markaz Knowledge City, Kozhikode",
       "country": "India",
       "coordinates": {
-        "lat": 10.8,
-        "lng": 76.5
+        "lat": 11.0235,
+        "lng": 75.9008
       },
-      "capacity": 30000,
+      "capacity": 25000,
       "established": "2022",
-      "area": 1000,
+      "area": 40400,
       "annualVisitors": "—",
       "facilities": [
         "Prayer halls",
@@ -1831,18 +1871,20 @@
       },
       "capacity": 20000,
       "established": "1442",
-      "area": 1000,
+      "area": 16800,
       "annualVisitors": "—",
       "facilities": [
         "Prayer halls",
         "Courtyards",
         "Ablution facilities"
       ],
-      "significance": "One of the largest mosques in China and a historic center of Uyghur religious life.",
-      "description": "Id Kah Mosque in Kashgar is a historic mosque complex with a large courtyard and prayer hall, traditionally used for major congregations in Xinjiang.",
+      "significance": "Largest mosque in China and a historic center of Uyghur religious life in Kashgar.",
+      "description": "Id Kah Mosque in Kashgar covers 16,800 m² and can hold up to 20,000 worshippers. Built by Saqsiz Mirza c. 1442 CE (incorporating older structures from 996 CE), it is the largest mosque in China.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Id_Kah_Mosque%2C_Kashgar.jpg",
       "isHolySite": false,
       "architecturalStyle": "Persian",
+      "architectureNotes": "Large courtyard, yellow façade, gate and minarets. Central to Kashgar's old city.",
+      "history": "Built c. 1442 by Saqsiz Mirza; incorporates earlier structures from 996 CE. Expanded and restored over the centuries.",
       "womenPrayerArea": true,
       "touristFriendly": false
     },
@@ -1856,19 +1898,21 @@
         "lng": 67.9244
       },
       "capacity": 20000,
-      "established": "1659",
-      "area": 1000,
+      "established": "1647",
+      "area": 4840,
       "annualVisitors": "—",
       "facilities": [
         "Prayer halls",
         "Courtyards",
         "Ablution facilities"
       ],
-      "significance": "A Mughal-era mosque in Thatta renowned for its tilework and acoustics.",
-      "description": "The Shah Jahan Mosque in Thatta is an architecturally important mosque with extensive brick and tile decoration and numerous domes.",
+      "significance": "UNESCO World Heritage Site; Mughal-era mosque in Thatta renowned for tilework and acoustics.",
+      "description": "The Shah Jahan Mosque in Thatta (93 × 52 m) was built 1644–1647. It has 93 domes and exceptional brick and tile decoration; the acoustics allow the imam's voice to carry throughout.",
       "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Shah_Jahan_Mosque%2C_Thatta.jpg",
       "isHolySite": false,
       "architecturalStyle": "Mughal",
+      "architectureNotes": "93 domes, elaborate tilework (kashi), central courtyard 42 × 32 m. Influential Sindhi Mughal design.",
+      "history": "Built 1644–1647 under Mughal emperor Shah Jahan. Named after the emperor; key example of Sindh mosque architecture.",
       "womenPrayerArea": true,
       "touristFriendly": true
     },
@@ -2182,12 +2226,14 @@
         "Ablution facilities"
       ],
       "significance": "A large mosque complex in Semarang combining Javanese and Middle Eastern influences.",
-      "description": "The Great Mosque of Central Java in Semarang features a large courtyard with movable umbrellas and a tall minaret overlooking the city.",
-      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Besar_Kauman_Semarang.jpg",
+      "description": "The Great Mosque of Central Java (Masjid Agung Jawa Tengah) in Semarang features six hydraulic umbrellas inspired by Medina, a pyramid-style roof, and a 99 m Asmaul Husna Tower. Prayer hall 7,669 m².",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/b4/Great_Mosque_of_Central_Java%2C_aerial_view.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Malay",
+      "architecturalStyle": "Javanese, Arabic and Greco-Roman fusion",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "officialWebsite": "https://majt.or.id",
+      "architectureNotes": "Pyramid-style joglo roof, six hydraulic umbrellas (inspired by Medina), 99 m Asmaul Husna Tower, 25 pillars with calligraphy."
     },
     {
       "id": "grand-mosque-of-sabilal-muhtadin",
@@ -2439,10 +2485,10 @@
       "event": "Shah Jahan completes India's largest mosque in Delhi"
     },
     {
-      "year": "1659",
+      "year": "1647",
       "mosque": "Shah Jahan Mosque",
       "mosqueId": "shah-jahan-mosque-thatta",
-      "event": "Mughal mosque completed in Thatta"
+      "event": "Mughal mosque completed in Thatta (1644–1647)"
     },
     {
       "year": "1673",

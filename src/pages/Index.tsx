@@ -44,7 +44,7 @@ const Index = () => {
       <main id="main-content">
         <HeroSection />
 
-        {/* Explore - preview: top 20 + See all link */}
+        {/* Explore - preview: top 10 with image + See all link */}
         <section id="explore" aria-labelledby="explore-heading" className="scroll-mt-20">
           <MosqueGrid mode="preview" />
         </section>

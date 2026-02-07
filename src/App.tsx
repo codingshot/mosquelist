@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ComponentType } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,18 +10,55 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
+import ListsPage from "./pages/ListsPage";
+import ListDetailPage from "./pages/ListDetailPage";
 
-const MosquePage = lazy(() => import("./pages/MosquePage"));
-const ExplorePage = lazy(() => import("./pages/ExplorePage"));
-const TimelinePage = lazy(() => import("./pages/TimelinePage"));
-const BucketListPage = lazy(() => import("./pages/BucketListPage"));
-const ListsPage = lazy(() => import("./pages/ListsPage"));
-const ListDetailPage = lazy(() => import("./pages/ListDetailPage"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
-const TravelGuidePage = lazy(() => import("./pages/TravelGuidePage"));
-const VisitorTipsPage = lazy(() => import("./pages/VisitorTipsPage"));
-const MapPage = lazy(() => import("./pages/MapPage"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+/** Lazy-load a page and log a clear console message if the chunk fails to load. */
+function lazyWithChunkErrorLogging(
+  importFn: () => Promise<{ default: ComponentType<unknown> }>,
+  pageName: string
+) {
+  return lazy(async () => {
+    try {
+      return await importFn();
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
+      const pathHint =
+        pageName === "NotFound" ? " (unknown route)" : ` (route that uses "${pageName}")`;
+      console.error(
+        "[MosqueList] Page chunk failed to load" +
+          pathHint +
+          "\n  Page: " +
+          pageName +
+          "\n  Error: " +
+          (error.name || "Error") +
+          ": " +
+          (error.message || String(error)) +
+          "\n  Possible causes: network error, ad-blocker blocking the chunk, or outdated cache. Try: hard refresh (Ctrl+Shift+R / Cmd+Shift+R) or check network tab."
+      );
+      throw error;
+    }
+  });
+}
+
+const MosquePage = lazyWithChunkErrorLogging(() => import("./pages/MosquePage"), "MosquePage");
+const ExplorePage = lazyWithChunkErrorLogging(() => import("./pages/ExplorePage"), "ExplorePage");
+const TimelinePage = lazyWithChunkErrorLogging(() => import("./pages/TimelinePage"), "TimelinePage");
+const BucketListPage = lazyWithChunkErrorLogging(
+  () => import("./pages/BucketListPage"),
+  "BucketListPage"
+);
+const AboutPage = lazyWithChunkErrorLogging(() => import("./pages/AboutPage"), "AboutPage");
+const TravelGuidePage = lazyWithChunkErrorLogging(
+  () => import("./pages/TravelGuidePage"),
+  "TravelGuidePage"
+);
+const VisitorTipsPage = lazyWithChunkErrorLogging(
+  () => import("./pages/VisitorTipsPage"),
+  "VisitorTipsPage"
+);
+const MapPage = lazyWithChunkErrorLogging(() => import("./pages/MapPage"), "MapPage");
+const NotFound = lazyWithChunkErrorLogging(() => import("./pages/NotFound"), "NotFound");
 
 const queryClient = new QueryClient();
 

@@ -152,18 +152,19 @@ describe("All pages load", () => {
     expect(screen.getByRole("heading", { name: /mosque visitor tips/i })).toBeInTheDocument();
   });
 
-  it("Map (/map) loads", async () => {
+  it("Map (/map) redirects to Explore with view=map and loads", async () => {
     render(
       <MemoryRouter initialEntries={["/map"]}>
         <AllProviders>
           <Routes>
             <Route path="/map" element={<MapPage />} />
+            <Route path="/explore" element={<ExplorePage />} />
           </Routes>
         </AllProviders>
       </MemoryRouter>
     );
     await screen.findByRole("main");
-    expect(screen.getByRole("heading", { name: /mosque map/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /explore magnificent mosques/i })).toBeInTheDocument();
   });
 
   it("Mosque detail (/mosque/blue-mosque) loads", async () => {
