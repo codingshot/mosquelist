@@ -160,7 +160,8 @@ function useMosqueSearchParams() {
   };
 }
 
-const PREVIEW_LIMIT = 10;
+/** Preview shows this many to fill grid rows (multiple of 12 = full rows for 2, 3, or 4 columns). */
+const PREVIEW_GRID_SIZE = 12;
 
 export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => {
   const isPreview = mode === "preview";
@@ -344,7 +345,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
   }, [query, filter, country, region, denomination, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
   const displayedMosques = isPreview
-    ? filteredMosques.slice(0, PREVIEW_LIMIT)
+    ? filteredMosques.slice(0, PREVIEW_GRID_SIZE)
     : filteredMosques;
 
   const filteredMosquesWithCoords = useMemo(
@@ -861,15 +862,13 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
           {displayedMosques.length === 0
             ? "No mosques match your filters. Try adjusting search or filters."
             : isPreview
-              ? `Showing ${displayedMosques.length} of ${filteredMosques.length} mosques.`
+              ? "Explore preview. Link to see all mosques below."
               : `${filteredMosques.length} mosque${filteredMosques.length === 1 ? "" : "s"} found.`}
         </p>
 
-        {displayedMosques.length > 0 && (
+        {displayedMosques.length > 0 && !isPreview && (
           <p className="text-sm text-muted-foreground mb-4" aria-hidden="true">
-            {isPreview
-              ? `Top ${displayedMosques.length} mosques`
-              : `${filteredMosques.length} mosque${filteredMosques.length === 1 ? "" : "s"} found`}
+            {filteredMosques.length} mosque{filteredMosques.length === 1 ? "" : "s"} found
           </p>
         )}
 
