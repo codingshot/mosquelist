@@ -6026,6 +6026,240 @@
       "mosque": "Al-Aqmar Mosque",
       "mosqueId": "al-aqmar-mosque",
       "event": "Fatimid mosque built with first decorated facade in Cairo"
+    },
+    {
+      "year": "1947",
+      "mosque": "Independence of Pakistan",
+      "mosqueId": "",
+      "event": "Pakistan established as independent Muslim-majority nation; largest Muslim migration in history",
+      "isContextEvent": true,
+      "category": "migration",
+      "source": "https://en.wikipedia.org/wiki/Partition_of_India"
+    },
+    {
+      "year": "1945",
+      "mosque": "Independence of Indonesia",
+      "mosqueId": "",
+      "event": "Indonesia declares independence; world's largest Muslim-majority nation emerges",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Indonesian_National_Revolution"
+    },
+    {
+      "year": "1971",
+      "mosque": "Independence of Bangladesh",
+      "mosqueId": "",
+      "event": "Bangladesh gains independence; third-largest Muslim population",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Bangladesh_Liberation_War"
+    },
+    {
+      "year": "1962",
+      "mosque": "Independence of Algeria",
+      "mosqueId": "",
+      "event": "Algeria gains independence after 132 years of French rule",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Algerian_War"
+    },
+    {
+      "year": "1956",
+      "mosque": "Independence of Morocco",
+      "mosqueId": "",
+      "event": "Morocco regains independence from French and Spanish protectorates",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Morocco"
+    },
+    {
+      "year": "1956",
+      "mosque": "Independence of Tunisia",
+      "mosqueId": "",
+      "event": "Tunisia gains independence from France; birthplace of Arab Spring",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Tunisia"
+    },
+    {
+      "year": "1960",
+      "mosque": "Independence of Senegal",
+      "mosqueId": "",
+      "event": "Senegal gains independence; major West African Muslim nation",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Senegal"
+    },
+    {
+      "year": "1960",
+      "mosque": "Independence of Mali",
+      "mosqueId": "",
+      "event": "Mali gains independence; home of Timbuktu and Djenné Islamic heritage",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Mali"
+    },
+    {
+      "year": "1960",
+      "mosque": "Independence of Niger",
+      "mosqueId": "",
+      "event": "Niger gains independence; Saharan Islamic traditions preserved",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Niger"
+    },
+    {
+      "year": "1961",
+      "mosque": "Independence of Kuwait",
+      "mosqueId": "",
+      "event": "Kuwait gains independence from British protectorate",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Kuwait"
+    },
+    {
+      "year": "1971",
+      "mosque": "Independence of UAE",
+      "mosqueId": "",
+      "event": "United Arab Emirates formed from seven emirates",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_the_United_Arab_Emirates"
+    },
+    {
+      "year": "1971",
+      "mosque": "Independence of Bahrain",
+      "mosqueId": "",
+      "event": "Bahrain gains independence from British protectorate",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Bahrain"
+    },
+    {
+      "year": "1971",
+      "mosque": "Independence of Qatar",
+      "mosqueId": "",
+      "event": "Qatar gains independence from British protectorate",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Qatar"
+    },
+    {
+      "year": "1951",
+      "mosque": "Independence of Libya",
+      "mosqueId": "",
+      "event": "Libya gains independence; first African country freed by UN resolution",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Libya"
+    },
+    {
+      "year": "1946",
+      "mosque": "Independence of Jordan",
+      "mosqueId": "",
+      "event": "Hashemite Kingdom of Jordan established",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Jordan"
+    },
+    {
+      "year": "1946",
+      "mosque": "Independence of Syria",
+      "mosqueId": "",
+      "event": "Syria gains independence from French mandate",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Syria"
+    },
+    {
+      "year": "1932",
+      "mosque": "Kingdom of Saudi Arabia Founded",
+      "mosqueId": "",
+      "event": "Ibn Saud unifies Arabian Peninsula; Kingdom of Saudi Arabia proclaimed",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Unification_of_Saudi_Arabia"
+    },
+    {
+      "year": "1923",
+      "mosque": "Republic of Turkey Founded",
+      "mosqueId": "",
+      "event": "Mustafa Kemal Atatürk establishes Turkish Republic from Ottoman remnants",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Turkish_War_of_Independence"
+    },
+    {
+      "year": "1922",
+      "mosque": "Independence of Egypt",
+      "mosqueId": "",
+      "event": "Egypt gains nominal independence from British rule",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Egyptian_Revolution_of_1919"
+    },
+    {
+      "year": "1991",
+      "mosque": "Central Asian Independence",
+      "mosqueId": "",
+      "event": "Kazakhstan, Uzbekistan, Turkmenistan, Kyrgyzstan, Tajikistan gain independence after Soviet collapse",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Dissolution_of_the_Soviet_Union"
+    },
+    {
+      "year": "1992",
+      "mosque": "Independence of Bosnia",
+      "mosqueId": "",
+      "event": "Bosnia and Herzegovina declares independence; European Muslim-plurality nation",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Bosnian_War"
+    },
+    {
+      "year": "1957",
+      "mosque": "Independence of Malaysia",
+      "mosqueId": "",
+      "event": "Federation of Malaya gains independence; later forms Malaysia (1963)",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Malaysia"
+    },
+    {
+      "year": "1960",
+      "mosque": "Independence of Somalia",
+      "mosqueId": "",
+      "event": "British and Italian Somaliland unite as independent Somalia",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Somalia"
+    },
+    {
+      "year": "1956",
+      "mosque": "Independence of Sudan",
+      "mosqueId": "",
+      "event": "Sudan gains independence from Anglo-Egyptian rule",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Sudan"
+    },
+    {
+      "year": "1979",
+      "mosque": "Iranian Revolution",
+      "mosqueId": "",
+      "event": "Islamic Republic of Iran established after revolution",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Iranian_Revolution"
+    },
+    {
+      "year": "1919",
+      "mosque": "Independence of Afghanistan",
+      "mosqueId": "",
+      "event": "Afghanistan gains full independence from British influence after Third Anglo-Afghan War",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Third_Anglo-Afghan_War"
     }
   ]
 }
