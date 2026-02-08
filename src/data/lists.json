@@ -467,6 +467,101 @@
         "mustafa-pasha-mosque",
         "husein-pasha-mosque-pljevlja"
       ]
+    },
+    {
+      "slug": "early-islamic",
+      "name": "Early Islamic Mosques",
+      "description": "The first mosques built in Islam—Rashidun and Umayyad era foundations (622–750 CE).",
+      "mosqueIds": [
+        "quba-mosque",
+        "masjid-an-nabawi",
+        "masjid-al-haram",
+        "amr-ibn-al-as-mosque",
+        "great-mosque-of-kufa",
+        "great-mosque-of-basra",
+        "al-aqsa",
+        "umayyad-mosque",
+        "great-mosque-of-kairouan"
+      ]
+    },
+    {
+      "slug": "persian-islamic",
+      "name": "Persian Islamic Architecture",
+      "description": "Mosques featuring Persian Islamic design—turquoise domes, intricate tilework, and iwans.",
+      "mosqueIds": [
+        "imam-reza-shrine",
+        "imam-ali-shrine",
+        "jamkaran-mosque",
+        "heydar-mosque",
+        "jameh-mosque-of-makki"
+      ]
+    },
+    {
+      "slug": "moorish-andalusian",
+      "name": "Moorish & Andalusian",
+      "description": "Mosques inspired by the golden age of Al-Andalus—horseshoe arches, intricate geometric patterns.",
+      "mosqueIds": [
+        "great-mosque-of-cordoba",
+        "hassan-ii"
+      ]
+    },
+    {
+      "slug": "sudano-sahelian",
+      "name": "Sudano-Sahelian Architecture",
+      "description": "Unique mud-brick mosques of West Africa—adobe construction with wooden toron beams.",
+      "mosqueIds": [
+        "great-mosque-of-djenne",
+        "grand-mosque-of-bobo-dioulasso"
+      ]
+    },
+    {
+      "slug": "abbasid-era",
+      "name": "Abbasid Era Mosques",
+      "description": "Mosques from the Islamic Golden Age (750–1258 CE)—spiral minarets and early universities.",
+      "mosqueIds": [
+        "great-mosque-of-samarra",
+        "al-azhar-mosque",
+        "great-mosque-of-kairouan"
+      ]
+    },
+    {
+      "slug": "modern-islamic",
+      "name": "Modern Islamic Architecture",
+      "description": "Contemporary mosques blending traditional elements with modern design and technology.",
+      "mosqueIds": [
+        "sheikh-zayed",
+        "faisal-mosque",
+        "djamaa-el-djazair",
+        "camlica-mosque",
+        "istiqlal-mosque",
+        "grand-jamia",
+        "heydar-mosque",
+        "al-jabbar-grand-mosque",
+        "imam-abu-hanifa-mosque-dushanbe",
+        "bishkek-central-mosque",
+        "baitul-mukarram"
+      ]
+    },
+    {
+      "slug": "fatimid-mamluk",
+      "name": "Fatimid & Mamluk Architecture",
+      "description": "Egyptian Islamic architecture—Fatimid foundations and Mamluk refinements.",
+      "mosqueIds": [
+        "al-azhar-mosque",
+        "amr-ibn-al-as-mosque",
+        "al-aqsa"
+      ]
+    },
+    {
+      "slug": "shia-shrines",
+      "name": "Shia Shrines & Holy Sites",
+      "description": "Major Shia pilgrimage destinations—shrines of Imams and holy figures.",
+      "mosqueIds": [
+        "imam-reza-shrine",
+        "imam-ali-shrine",
+        "great-mosque-of-kufa",
+        "jamkaran-mosque"
+      ]
     }
   ]
 }

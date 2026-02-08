@@ -27,6 +27,7 @@ const urls = [
   { loc: `${baseUrl}/map`, changefreq: "weekly", priority: "0.8" },
   { loc: `${baseUrl}/lists`, changefreq: "weekly", priority: "0.8" },
   { loc: `${baseUrl}/timeline`, changefreq: "monthly", priority: "0.8" },
+  { loc: `${baseUrl}/islamic-history`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/bucket-list`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/about`, changefreq: "monthly", priority: "0.7" },
   { loc: `${baseUrl}/guides/travel`, changefreq: "monthly", priority: "0.8" },
