@@ -111,6 +111,11 @@
       "name": "20th Century (1900s CE)",
       "description": "Modern national mosques from independence-era nations worldwide.",
       "mosqueIds": [
+        "grand-mosque-of-paris",
+        "lakemba-mosque-sydney",
+        "london-central-mosque",
+        "east-london-mosque",
+        "rome-grand-mosque",
         "istiqlal-mosque",
         "faisal-mosque",
         "hassan-ii",
@@ -148,7 +153,11 @@
         "imam-abu-hanifa-mosque-dushanbe",
         "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
         "mohammed-vi-mosque-dar-es-salaam",
-        "bishkek-central-mosque"
+        "bishkek-central-mosque",
+        "king-fahd-islamic-center-buenos-aires",
+        "cologne-central-mosque",
+        "cambridge-central-mosque",
+        "melbourne-grand-mosque"
       ]
     },
     {
@@ -595,6 +604,35 @@
         "selimiye-mosque",
         "rustem-pasha-mosque",
         "mihrimah-sultan-mosque-uskudar"
+      ]
+    },
+    {
+      "slug": "european-mosques",
+      "name": "European Mosques",
+      "description": "Major mosques across Europe—from historic Paris to modern London, Rome, and Cologne.",
+      "mosqueIds": [
+        "grand-mosque-of-paris",
+        "rome-grand-mosque",
+        "london-central-mosque",
+        "east-london-mosque",
+        "cambridge-central-mosque",
+        "cologne-central-mosque",
+        "birmingham-central-mosque",
+        "gazi-husrev-beg-mosque",
+        "ethem-bey-mosque",
+        "mustafa-pasha-mosque",
+        "husein-pasha-mosque-pljevlja",
+        "imperial-mosque-pristina"
+      ]
+    },
+    {
+      "slug": "southern-hemisphere",
+      "name": "Southern Hemisphere Mosques",
+      "description": "Mosques in Australia, Latin America, and the southern regions of the world.",
+      "mosqueIds": [
+        "lakemba-mosque-sydney",
+        "melbourne-grand-mosque",
+        "king-fahd-islamic-center-buenos-aires"
       ]
     }
   ]
