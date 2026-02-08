@@ -2,9 +2,9 @@
 
 Outline of **major countries not yet represented** in the mosque list, **major states/regions and cities** to target for large, city-center, and historic mosques, and **suggested mosques to add** for each. Use this for prioritising new entries in `src/data/mosques.json`.
 
-**Current coverage:** 52 countries, 103 mosques (see `docs/countries-and-mosques.md`).
+**Current coverage:** 57 countries, 103+ mosques (see `docs/countries-and-mosques.md`).
 
-**Last updated:** 2026-02-07
+**Last updated:** 2026-02-08
 
 ---
 
@@ -12,15 +12,11 @@ Outline of **major countries not yet represented** in the mosque list, **major s
 
 | Region | Missing countries (examples) | Priority |
 |--------|--------------------------------|----------|
-| Central Asia | Kyrgyzstan, Tajikistan | High |
-| Africa | Libya, Somalia, Mauritania, Chad, Sierra Leone, Tanzania, Mozambique, Eritrea, Ivory Coast, Cameroon | High–medium |
-| Asia | Thailand, Myanmar | Medium |
-| Europe | Montenegro | Low–medium |
-| Indian Ocean / OIC | Comoros, Gabon | Lower |
+| Indian Ocean / OIC | Gabon | Lower |
 
 **Focus when adding:** Prefer **large mosques** (high capacity), **city-center / national mosques**, and **historic mosques** (UNESCO, medieval, or iconic) — especially in Muslim-majority countries.
 
-**Recently added (now in app):** Turkmenistan, Singapore, Sri Lanka, North Macedonia, Niger, Gambia, Maldives, Ethiopia, Kenya, Djibouti, Burkina Faso.
+**Recently added (now in app):** Turkmenistan, Singapore, Sri Lanka, North Macedonia, Niger, Gambia, Maldives, Ethiopia, Kenya, Djibouti, Burkina Faso, Kyrgyzstan, Tajikistan, Somalia, Chad, Libya, Sierra Leone, Tanzania, Eritrea, Thailand, Montenegro, Comoros, Tunisia, Mauritania, Cameroon, Ivory Coast, Myanmar, Mozambique.
 
 ---
 

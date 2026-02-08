@@ -2,7 +2,7 @@
 
 Last updated: 2026-02-08
 
-**Status: 95+ mosques in database. 14 new mosques added from previously missing countries. Sources now tracked in JSON.**
+**Status: 103+ mosques in database. 20 new mosques added from previously missing countries. Sources now tracked in JSON.**
 
 ---
 
@@ -10,14 +10,14 @@ Last updated: 2026-02-08
 
 | Field | Total Mosques | With Data | Missing |
 |-------|---------------|-----------|---------|
-| Image URL | 95+ | 95+ | 0 |
-| Local Images | 95+ | 15 | ~80 |
-| Official Website | 95+ | ~20 | ~75 |
-| Address | 95+ | ~40 | ~55 |
-| History | 95+ | ~55 | ~40 |
-| Tourism Notes | 95+ | ~50 | ~45 |
-| Architecture Notes | 95+ | ~55 | ~40 |
-| Sources | 95+ | 14 (new) | ~80 |
+| Image URL | 103+ | 103+ | 0 |
+| Local Images | 103+ | 15 | ~88 |
+| Official Website | 103+ | ~25 | ~78 |
+| Address | 103+ | ~50 | ~53 |
+| History | 103+ | ~65 | ~38 |
+| Tourism Notes | 103+ | ~60 | ~43 |
+| Architecture Notes | 103+ | ~65 | ~38 |
+| Sources | 103+ | ~30 | ~73 |
 
 ---
 
@@ -25,12 +25,17 @@ Last updated: 2026-02-08
 
 | Country | Mosque | ID | Sources |
 |---------|--------|-----|---------|
+| **Mauritania** | Saudi Mosque | `saudi-mosque-nouakchott` | Wikipedia |
+| **Cameroon** | Lamido Grand Mosque | `lamido-grand-mosque-ngaoundere` | Wikipedia |
+| **Ivory Coast** | Plateau Salam Mosque | `plateau-salam-mosque-abidjan` | Wikipedia, Review of Religions |
+| **Myanmar** | Surti Sunni Jamah Mosque | `surti-sunni-jamah-mosque-yangon` | Yangon Guide, Lonely Planet |
+| **Mozambique** | Maputo Central Mosque | `maputo-central-mosque` | State.gov |
 | **Kyrgyzstan** | Bishkek Central Mosque | `bishkek-central-mosque` | Wikipedia, Mosqpedia |
 | **Kyrgyzstan** | Dungan Mosque | `dungan-mosque-karakol` | Wikipedia, VisitKarakol |
-| **Tajikistan** | Imam Abu Hanifa Mosque | `imam-abu-hanifa-mosque-dushanbe` | Wikipedia, Mosqpedia, GlobalVoices |
+| **Tajikistan** | Imam Abu Hanifa Mosque | `imam-abu-hanifa-mosque-dushanbe` | Wikipedia, Mosqpedia |
 | **Somalia** | Mosque of Islamic Solidarity | `mosque-of-islamic-solidarity` | Wikipedia |
 | **Chad** | N'Djamena Grand Mosque | `ndjamena-grand-mosque` | Wikipedia |
-| **Libya** | Al-Naqah Mosque | `al-naqah-mosque-tripoli` | Wikipedia, Nabataea.net |
+| **Libya** | Al-Naqah Mosque | `al-naqah-mosque-tripoli` | Wikipedia |
 | **Libya** | Gurgi Mosque | `gurgi-mosque-tripoli` | Wikipedia |
 | **Sierra Leone** | Freetown Central Mosque | `freetown-central-mosque` | Wikipedia |
 | **Tanzania** | Mohammed VI Mosque | `mohammed-vi-mosque-dar-es-salaam` | Wikipedia |
@@ -48,9 +53,7 @@ Priority countries not yet in database:
 
 | Region | Countries | Priority |
 |--------|-----------|----------|
-| Africa | Mauritania, Cameroon, Ivory Coast, Mozambique | High |
-| Asia | Myanmar | Medium |
-| Indian Ocean | Gabon | Low |
+| Africa | Gabon | Low |
 
 ---
 
