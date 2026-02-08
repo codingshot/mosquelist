@@ -7,6 +7,7 @@ import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
 import { filterMosquesByQuery } from "@/lib/search";
 import { MosqueCard } from "./MosqueCard";
 import { SwipeDeck } from "./SwipeDeck";
+import { VirtualizedMosqueGrid } from "./VirtualizedMosqueGrid";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { Link, useSearchParams } from "react-router-dom";
 import { useMemo, useCallback, useState, useEffect, useRef } from "react";
@@ -41,6 +42,9 @@ import { ExploreMapView } from "@/components/ExploreMapView";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
+
+/** Threshold for using virtualization (number of items) */
+const VIRTUALIZATION_THRESHOLD = 50;
 
 const PARAM_QUERY = "q";
 const PARAM_FILTER = "filter";
@@ -1154,6 +1158,9 @@ export const MosqueGrid = ({
             onLike={(mosque) => toggleFavorite(mosque.id)}
             isFavorite={isFavorite}
           />
+        ) : displayedMosques.length > VIRTUALIZATION_THRESHOLD && !isPreview ? (
+          // Use virtualization for large lists
+          <VirtualizedMosqueGrid mosques={displayedMosques} />
         ) : (
           <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {displayedMosques.map((mosque, index) => (
