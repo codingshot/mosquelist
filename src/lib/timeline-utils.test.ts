@@ -95,9 +95,9 @@ describe("ISLAMIC_HISTORY_PERIODS", () => {
     expect(labels).toContain("Fall of Constantinople");
   });
 
-  it("periods are in chronological order", () => {
+  it("periods are in chronological order (or same year)", () => {
     for (let i = 1; i < ISLAMIC_HISTORY_PERIODS.length; i++) {
-      expect(ISLAMIC_HISTORY_PERIODS[i].year).toBeGreaterThan(ISLAMIC_HISTORY_PERIODS[i - 1].year);
+      expect(ISLAMIC_HISTORY_PERIODS[i].year).toBeGreaterThanOrEqual(ISLAMIC_HISTORY_PERIODS[i - 1].year);
     }
   });
 

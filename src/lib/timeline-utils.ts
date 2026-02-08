@@ -113,31 +113,69 @@ export function validateMosqueDate(
  * These are non-mosque events that provide historical context.
  */
 export const ISLAMIC_HISTORY_PERIODS = [
+  // Early Islam
   { year: 610, label: "First Revelation", description: "Prophet Muhammad ﷺ receives first revelation at Cave Hira", source: "https://en.wikipedia.org/wiki/Muhammad%27s_first_revelation", category: "era" as const },
   { year: 622, label: "The Hijrah", description: "Migration from Mecca to Medina; start of Islamic calendar (1 AH)", source: "https://en.wikipedia.org/wiki/Hegira", category: "migration" as const },
   { year: 624, label: "Quba Mosque Founded", description: "First mosque built in Islam, constructed by Prophet Muhammad ﷺ upon arrival in Medina", source: "https://en.wikipedia.org/wiki/Quba_Mosque", category: "architecture" as const },
   { year: 632, label: "Rashidun Caliphate Begins", description: "Prophet Muhammad ﷺ passes away; Abu Bakr becomes first Caliph", source: "https://en.wikipedia.org/wiki/Rashidun_Caliphate", category: "caliphate" as const },
+  
+  // Early Expansion - Major Cities
+  { year: 635, label: "Conquest of Damascus", description: "Muslim armies capture Damascus, first major city of the Byzantine Empire to fall", source: "https://en.wikipedia.org/wiki/Siege_of_Damascus_(634)", category: "expansion" as const },
   { year: 637, label: "Conquest of Jerusalem", description: "Caliph Umar ibn al-Khattab enters Jerusalem; orders construction of Al-Aqsa prayer site", source: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(636%E2%80%93637)", category: "expansion" as const },
-  { year: 642, label: "Conquest of Egypt", description: "Amr ibn al-As conquers Egypt; builds first mosque in Africa at Fustat (Cairo)", source: "https://en.wikipedia.org/wiki/Muslim_conquest_of_Egypt", category: "expansion" as const },
+  { year: 637, label: "Conquest of Ctesiphon", description: "Persian capital falls to Arab forces; end of Sassanid Empire begins", source: "https://en.wikipedia.org/wiki/Muslim_conquest_of_Persia", category: "expansion" as const },
+  { year: 641, label: "Islam Reaches Alexandria", description: "Amr ibn al-As conquers Alexandria, gateway to North Africa", source: "https://en.wikipedia.org/wiki/Muslim_conquest_of_Egypt", category: "expansion" as const },
+  { year: 642, label: "Conquest of Egypt", description: "Amr ibn al-As completes conquest of Egypt; builds first mosque in Africa at Fustat (Cairo)", source: "https://en.wikipedia.org/wiki/Muslim_conquest_of_Egypt", category: "expansion" as const },
+  { year: 651, label: "End of Sassanid Persia", description: "Last Sassanid emperor Yazdegerd III killed; Persia becomes Muslim", source: "https://en.wikipedia.org/wiki/Muslim_conquest_of_Persia", category: "expansion" as const },
   { year: 661, label: "Umayyad Caliphate Begins", description: "Capital moves to Damascus; Islamic empire expands across three continents", source: "https://en.wikipedia.org/wiki/Umayyad_Caliphate", category: "caliphate" as const },
+  { year: 670, label: "Islam Reaches Kairouan", description: "Uqba ibn Nafi founds Kairouan (Tunisia); first major Islamic city in the Maghreb", source: "https://en.wikipedia.org/wiki/Great_Mosque_of_Kairouan", category: "expansion" as const },
   { year: 711, label: "Conquest of Iberia", description: "Tariq ibn Ziyad crosses into Spain; beginning of Al-Andalus (Islamic Iberia)", source: "https://en.wikipedia.org/wiki/Umayyad_conquest_of_Hispania", category: "expansion" as const },
+  { year: 711, label: "Islam Reaches Sindh (Pakistan)", description: "Muhammad bin Qasim conquers Sindh; first permanent Muslim presence in South Asia", source: "https://en.wikipedia.org/wiki/Arab_conquest_of_Sindh", category: "expansion" as const },
+  
+  // Abbasid Era
   { year: 750, label: "Abbasid Caliphate Begins", description: "Islamic Golden Age; capital moves to Baghdad; flourishing of science, arts, and scholarship", source: "https://en.wikipedia.org/wiki/Abbasid_Caliphate", category: "caliphate" as const },
+  { year: 750, label: "Islam Reaches West Africa", description: "Trans-Saharan trade routes bring Islam to Ghana Empire and the Sahel", source: "https://en.wikipedia.org/wiki/Spread_of_Islam_in_West_Africa", category: "expansion" as const },
   { year: 762, label: "Baghdad Founded", description: "Abbasid Caliph al-Mansur founds the Round City of Baghdad as new capital", source: "https://en.wikipedia.org/wiki/Baghdad", category: "expansion" as const },
   { year: 836, label: "Samarra Capital", description: "Abbasid capital moves to Samarra; Great Mosque with spiral Malwiya minaret built", source: "https://en.wikipedia.org/wiki/Samarra", category: "architecture" as const },
+  
+  // Regional Expansion
   { year: 970, label: "Al-Azhar Founded", description: "Fatimid Caliphate establishes Al-Azhar in Cairo; world's oldest degree-granting university", source: "https://en.wikipedia.org/wiki/Al-Azhar_University", category: "education" as const },
+  { year: 1000, label: "Islam Reaches Indonesia", description: "Muslim traders establish communities in Sumatra; peaceful spread through maritime trade", source: "https://en.unesco.org/silkroad/content/did-you-know-spread-islam-southeast-asia-through-trade-routes", category: "expansion" as const },
   { year: 1099, label: "Crusader Capture of Jerusalem", description: "First Crusade captures Jerusalem; Al-Aqsa converted to palace", source: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(1099)", category: "era" as const },
   { year: 1187, label: "Saladin Recaptures Jerusalem", description: "Salah ad-Din liberates Jerusalem; restores Al-Aqsa to Muslim worship", source: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(1187)", category: "era" as const },
+  { year: 1206, label: "Delhi Sultanate Founded", description: "Qutb al-Din Aibak establishes Muslim rule in India; Qutb Minar and Quwwat-ul-Islam Mosque built", source: "https://en.wikipedia.org/wiki/Delhi_Sultanate", category: "expansion" as const },
   { year: 1258, label: "Fall of Baghdad", description: "Mongol invasion ends Abbasid Caliphate; destruction of House of Wisdom", source: "https://en.wikipedia.org/wiki/Siege_of_Baghdad_(1258)", category: "era" as const },
+  { year: 1290, label: "Islam Established in Sumatra", description: "Muslim merchants establish permanent foothold in northern Sumatra", source: "https://en.wikipedia.org/wiki/Spread_of_Islam_in_Indonesia", category: "expansion" as const },
   { year: 1299, label: "Ottoman Empire Founded", description: "Osman I establishes the Ottoman dynasty in Anatolia", source: "https://en.wikipedia.org/wiki/Ottoman_Empire", category: "caliphate" as const },
+  { year: 1324, label: "Mansa Musa's Pilgrimage", description: "Mali Emperor Mansa Musa's famous Hajj; Islam becomes state religion of Mali Empire", source: "https://en.wikipedia.org/wiki/Mansa_Musa", category: "expansion" as const },
+  { year: 1325, label: "Timbuktu Flourishes", description: "Timbuktu becomes major center of Islamic learning; population reaches 10,000", source: "https://spice.fsi.stanford.edu/docs/the_spread_of_islam_in_west_africa_containment_mixing_and_reform_from_the_eighth_to_the_twentieth_century", category: "education" as const },
+  { year: 1400, label: "Islam Reaches Malacca", description: "Parameswara converts to Islam; Malacca becomes regional center for Islamic propagation", source: "https://www.britannica.com/place/Malaysia/The-advent-of-Islam", category: "expansion" as const },
   { year: 1453, label: "Fall of Constantinople", description: "Ottoman conquest; Hagia Sophia becomes a mosque after 916 years as cathedral", source: "https://en.wikipedia.org/wiki/Fall_of_Constantinople", category: "expansion" as const },
   { year: 1517, label: "Ottoman Caliphate", description: "Ottomans assume Caliphate after conquering Egypt; golden age of Ottoman mosque architecture begins", source: "https://en.wikipedia.org/wiki/Ottoman_Caliphate", category: "caliphate" as const },
   { year: 1526, label: "Mughal Empire Founded", description: "Babur defeats Ibrahim Lodi; Mughal architecture flourishes in India", source: "https://en.wikipedia.org/wiki/Mughal_Empire", category: "caliphate" as const },
+  { year: 1575, label: "Islam Dominant in Java", description: "Hindu Majapahit kingdom falls; Islam spreads throughout Indonesian archipelago", source: "https://en.wikipedia.org/wiki/Spread_of_Islam_in_Indonesia", category: "expansion" as const },
   { year: 1683, label: "Battle of Vienna", description: "Ottoman expansion in Europe halted; turning point in Ottoman-Habsburg relations", source: "https://en.wikipedia.org/wiki/Battle_of_Vienna", category: "era" as const },
+  
+  // Colonial Era
+  { year: 1757, label: "British Colonize Bengal", description: "Battle of Plassey; British East India Company gains control of Bengal, beginning of British India", source: "https://en.wikipedia.org/wiki/Battle_of_Plassey", category: "colonization" as const },
+  { year: 1798, label: "Napoleon Invades Egypt", description: "French forces occupy Egypt; beginning of European colonial interest in Muslim lands", source: "https://en.wikipedia.org/wiki/French_campaign_in_Egypt_and_Syria", category: "colonization" as const },
+  { year: 1830, label: "France Colonizes Algeria", description: "French invasion begins 132 years of colonial rule; waqf properties seized", source: "https://en.wikipedia.org/wiki/French_Algeria", category: "colonization" as const },
   { year: 1857, label: "End of Mughal Empire", description: "Last Mughal emperor Bahadur Shah Zafar exiled after Indian Rebellion", source: "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857", category: "era" as const },
+  { year: 1858, label: "British Raj Begins", description: "British Crown takes direct control of India after 1857 uprising", source: "https://en.wikipedia.org/wiki/British_Raj", category: "colonization" as const },
+  { year: 1881, label: "France Colonizes Tunisia", description: "French establish protectorate; later extended to Morocco (1912)", source: "https://en.wikipedia.org/wiki/French_protectorate_of_Tunisia", category: "colonization" as const },
+  { year: 1882, label: "Britain Occupies Egypt", description: "British forces occupy Egypt; control lasts until 1952", source: "https://en.wikipedia.org/wiki/History_of_Egypt_under_the_British", category: "colonization" as const },
+  { year: 1885, label: "European Scramble for Africa", description: "Berlin Conference divides Africa; Muslim regions of West and East Africa colonized", source: "https://en.wikipedia.org/wiki/Scramble_for_Africa", category: "colonization" as const },
+  { year: 1898, label: "Britain Defeats Sokoto", description: "British conquer Sokoto Caliphate; end of major Islamic state in West Africa", source: "https://en.wikipedia.org/wiki/Sokoto_Caliphate", category: "colonization" as const },
+  { year: 1912, label: "France Colonizes Morocco", description: "Treaty of Fez establishes French protectorate in Morocco", source: "https://en.wikipedia.org/wiki/French_protectorate_in_Morocco", category: "colonization" as const },
+  { year: 1918, label: "Ottoman Partition Begins", description: "Sykes-Picot Agreement divides Ottoman Arab lands between Britain and France", source: "https://en.wikipedia.org/wiki/Sykes%E2%80%93Picot_Agreement", category: "colonization" as const },
   { year: 1924, label: "End of Caliphate", description: "Turkish Republic abolishes Ottoman Caliphate after 1,292 years of succession", source: "https://en.wikipedia.org/wiki/Abolition_of_the_Ottoman_Caliphate", category: "era" as const },
-  { year: 1932, label: "Saudi Arabia Founded", description: "Ibn Saud unifies kingdoms; modern Saudi Arabia established as custodian of the Two Holy Mosques", source: "https://en.wikipedia.org/wiki/Unification_of_Saudi_Arabia", category: "era" as const },
-  { year: 1947, label: "Pakistan Founded", description: "World's first nation founded on Islamic principles; later builds Faisal Mosque as national mosque", source: "https://en.wikipedia.org/wiki/Pakistan#Independence", category: "era" as const },
-  { year: 1957, label: "Malaysia Independence", description: "Federation of Malaya gains independence; Islamic architecture flourishes in new nation", source: "https://en.wikipedia.org/wiki/Hari_Merdeka", category: "era" as const },
-  { year: 1971, label: "Bangladesh Founded", description: "East Pakistan becomes Bangladesh; Baitul Mukarram designated as national mosque", source: "https://en.wikipedia.org/wiki/Bangladesh_Liberation_War", category: "era" as const },
+  { year: 1932, label: "Saudi Arabia Founded", description: "Ibn Saud unifies kingdoms; modern Saudi Arabia established as custodian of the Two Holy Mosques", source: "https://en.wikipedia.org/wiki/Unification_of_Saudi_Arabia", category: "independence" as const },
+  
+  // Independence Era
+  { year: 1947, label: "India & Pakistan Independence", description: "British India partitioned; Pakistan founded as Muslim-majority nation; world's largest Muslim migration", source: "https://en.wikipedia.org/wiki/Partition_of_India", category: "independence" as const },
+  { year: 1956, label: "Sudan, Tunisia, Morocco Independent", description: "Wave of North African independence from European colonial powers", source: "https://www.sas.upenn.edu/~mercerb/chdecol.html", category: "independence" as const },
+  { year: 1957, label: "Malaysia Independence", description: "Federation of Malaya gains independence from Britain; National Mosque later built (1965)", source: "https://en.wikipedia.org/wiki/Hari_Merdeka", category: "independence" as const },
+  { year: 1960, label: "African Independence Year", description: "17 African nations gain independence including Senegal, Mali, Nigeria, and Somalia", source: "https://en.wikipedia.org/wiki/Year_of_Africa", category: "independence" as const },
+  { year: 1962, label: "Algeria Independence", description: "Algeria gains independence after 8-year war; 132 years of French rule end", source: "https://en.wikipedia.org/wiki/Algerian_War", category: "independence" as const },
+  { year: 1971, label: "Bangladesh Founded", description: "East Pakistan becomes Bangladesh; Baitul Mukarram designated as national mosque", source: "https://en.wikipedia.org/wiki/Bangladesh_Liberation_War", category: "independence" as const },
   { year: 1979, label: "Iranian Revolution", description: "Islamic Republic of Iran established; major investment in shrine architecture begins", source: "https://en.wikipedia.org/wiki/Iranian_Revolution", category: "era" as const },
 ] as const;
