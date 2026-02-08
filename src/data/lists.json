@@ -140,7 +140,11 @@
         "seoul-central-mosque",
         "omar-ibn-al-khattab-foz",
         "suraya-mosque-mexico",
-        "auburn-gallipoli-mosque"
+        "auburn-gallipoli-mosque",
+        "manila-golden-mosque",
+        "ban-ho-mosque",
+        "geneva-mosque",
+        "al-noor-hanoi"
       ]
     },
     {
@@ -167,7 +171,10 @@
         "melbourne-grand-mosque",
         "tokyo-camii",
         "essalam-mosque-rotterdam",
-        "mevlana-mosque-rotterdam"
+        "mevlana-mosque-rotterdam",
+        "stockholm-mosque",
+        "copenhagen-grand-mosque",
+        "granada-mosque"
       ]
     },
     {
@@ -619,7 +626,7 @@
     {
       "slug": "european-mosques",
       "name": "European Mosques",
-      "description": "Major mosques across Europe—from historic Paris to modern London, Rome, Cologne, Rotterdam, and Brussels.",
+      "description": "Major mosques across Europe—from historic Paris to modern London, Rome, Cologne, Rotterdam, Brussels, Geneva, and Scandinavia.",
       "mosqueIds": [
         "grand-mosque-of-paris",
         "rome-grand-mosque",
@@ -631,6 +638,11 @@
         "great-mosque-of-brussels",
         "essalam-mosque-rotterdam",
         "mevlana-mosque-rotterdam",
+        "stockholm-mosque",
+        "copenhagen-grand-mosque",
+        "geneva-mosque",
+        "mahmud-mosque-zurich",
+        "granada-mosque",
         "gazi-husrev-beg-mosque",
         "ethem-bey-mosque",
         "mustafa-pasha-mosque",
@@ -672,6 +684,37 @@
         "mesquita-brasil",
         "omar-ibn-al-khattab-foz",
         "suraya-mosque-mexico"
+      ]
+    },
+    {
+      "slug": "southeast-asia",
+      "name": "Southeast Asian Mosques",
+      "description": "Mosques across Southeast Asia—Thailand, Vietnam, Philippines, Singapore, and more.",
+      "mosqueIds": [
+        "sultan-mosque-singapore",
+        "istiqlal-mosque",
+        "ban-ho-mosque",
+        "al-noor-hanoi",
+        "manila-golden-mosque",
+        "sultan-haji-hassanal-bolkiah-mosque"
+      ]
+    },
+    {
+      "slug": "scandinavian-mosques",
+      "name": "Scandinavian Mosques",
+      "description": "Mosques in Sweden, Denmark, Norway—modern Islamic architecture in Northern Europe.",
+      "mosqueIds": [
+        "stockholm-mosque",
+        "copenhagen-grand-mosque"
+      ]
+    },
+    {
+      "slug": "swiss-mosques",
+      "name": "Swiss Mosques",
+      "description": "Mosques in Switzerland—including rare minarets before the 2009 ban.",
+      "mosqueIds": [
+        "geneva-mosque",
+        "mahmud-mosque-zurich"
       ]
     }
   ]
