@@ -33,7 +33,11 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
   const isEager = index < 6;
 
   return (
-    <Link to={`/mosque/${mosque.id}`} className="block outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-lg">
+    <Link 
+      to={`/mosque/${mosque.id}`} 
+      className="block outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-lg"
+      aria-label={`View details for ${mosque.name} in ${mosque.location}, ${mosque.country}`}
+    >
       <article
         className={cn(
           "scrapbook-card group block h-full transition-all duration-300",
@@ -42,8 +46,10 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
           isSwipe && "h-full"
         )}
         style={{ animationDelay: `${index * 100}ms` }}
+        itemScope
+        itemType="https://schema.org/Place"
       >
-        {!isListLayout && !isSwipe && <div className="tape-effect" />}
+        {!isListLayout && !isSwipe && <div className="tape-effect" aria-hidden="true" />}
         <div
           className={cn(
             "relative overflow-hidden shrink-0 bg-muted",
@@ -122,11 +128,12 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
                   !isCompact && isListLayout && "text-lg",
                   !isListLayout && "text-xl"
                 )}
+                itemProp="name"
               >
                 {mosque.name}
               </h3>
               {mosque.arabicName && !isCompact && (
-                <p className="text-sm text-muted-foreground font-arabic">
+                <p className="text-sm text-muted-foreground font-arabic" lang="ar" dir="rtl">
                   {mosque.arabicName}
                 </p>
               )}
