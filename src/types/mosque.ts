@@ -58,7 +58,7 @@ export interface TimelineEvent {
   /** If true, this is an Islamic history context event (not a mosque) */
   isContextEvent?: boolean;
   /** Optional category for context events: era, migration, expansion, etc. */
-  category?: "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education";
+  category?: "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education" | "colonization" | "independence";
 }
 
 export interface MosquesData {

@@ -24,24 +24,33 @@ interface ContextEvent {
   label: string;
   description: string;
   source: string;
-  category: "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education";
+  category: "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education" | "colonization" | "independence";
 }
 
 /** Build combined timeline with mosque events and Islamic history context */
-function buildCombinedTimeline(mosqueEvents: TimelineEvent[], includeContext: boolean): (TimelineEvent | ContextEvent)[] {
-  if (!includeContext) {
-    return mosqueEvents;
-  }
+function buildCombinedTimeline(
+  mosqueEvents: TimelineEvent[], 
+  includeContext: boolean,
+  categoryFilter: string
+): (TimelineEvent | ContextEvent)[] {
+  let contextEvents: ContextEvent[] = [];
   
-  // Combine mosque events with history periods
-  const contextEvents: ContextEvent[] = ISLAMIC_HISTORY_PERIODS.map((p) => ({
-    isContextEvent: true as const,
-    year: String(p.year),
-    label: p.label,
-    description: p.description,
-    source: p.source,
-    category: p.category,
-  }));
+  if (includeContext) {
+    // Combine mosque events with history periods
+    contextEvents = ISLAMIC_HISTORY_PERIODS.map((p) => ({
+      isContextEvent: true as const,
+      year: String(p.year),
+      label: p.label,
+      description: p.description,
+      source: p.source,
+      category: p.category,
+    }));
+    
+    // Filter context events by category if specified
+    if (categoryFilter) {
+      contextEvents = contextEvents.filter((e) => e.category === categoryFilter);
+    }
+  }
   
   const combined = [...mosqueEvents, ...contextEvents];
   return combined.sort((a, b) => {
@@ -67,6 +76,19 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   const [country, setCountry] = useState<string>("");
   const [visitorFriendlyOnly, setVisitorFriendlyOnly] = useState(false);
   const [showHistoryContext, setShowHistoryContext] = useState(!isPreview);
+  const [eventCategory, setEventCategory] = useState<string>("");
+
+  const categoryOptions = [
+    { value: "all", label: "All events" },
+    { value: "expansion", label: "Islamic Expansion" },
+    { value: "colonization", label: "Colonization" },
+    { value: "independence", label: "Independence" },
+    { value: "caliphate", label: "Caliphates" },
+    { value: "architecture", label: "Architecture" },
+    { value: "education", label: "Education" },
+    { value: "era", label: "Historical Eras" },
+    { value: "migration", label: "Migration" },
+  ];
 
   const mosqueById = useMemo(() => new Map(mosques.map((m) => [m.id, m])), []);
   const countries = useMemo(() => getUniqueCountries(), []);
@@ -94,8 +116,8 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
 
   // Combine with Islamic history context if enabled
   const combinedEvents = useMemo(() => {
-    return buildCombinedTimeline(filteredAndSortedEvents, showHistoryContext && !isPreview);
-  }, [filteredAndSortedEvents, showHistoryContext, isPreview]);
+    return buildCombinedTimeline(filteredAndSortedEvents, showHistoryContext && !isPreview, eventCategory);
+  }, [filteredAndSortedEvents, showHistoryContext, isPreview, eventCategory]);
 
   // Apply limit for preview mode - use combinedEvents for full page, filteredAndSortedEvents for preview
   const displayedEvents = isPreview
@@ -172,6 +194,23 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </SelectContent>
             </Select>
           </div>
+          {/* Category filter for history events */}
+          <div className="space-y-2 w-full sm:w-auto sm:min-w-[180px]">
+            <Label className="text-sm text-muted-foreground">Event Type</Label>
+            <Select value={eventCategory || "all"} onValueChange={(v) => setEventCategory(v === "all" ? "" : v)}>
+              <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by event type">
+                <History className="mr-2 h-4 w-4 shrink-0" />
+                <SelectValue placeholder="All events" />
+              </SelectTrigger>
+              <SelectContent>
+                {categoryOptions.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-background cursor-pointer hover:bg-secondary/50 touch-manipulation self-end sm:self-center">
             <input
               type="checkbox"
@@ -183,7 +222,6 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
             <span className="text-sm text-foreground">Non-Muslims can visit</span>
           </label>
           <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-primary/30 bg-primary/5 cursor-pointer hover:bg-primary/10 touch-manipulation self-end sm:self-center">
-            <History className="h-4 w-4 text-primary" />
             <input
               type="checkbox"
               checked={showHistoryContext}
@@ -191,7 +229,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               className="rounded border-border"
               aria-label="Show Islamic history milestones"
             />
-            <span className="text-sm text-foreground">Show Islamic eras</span>
+            <span className="text-sm text-foreground">Show history events</span>
           </label>
           <p className="text-sm text-muted-foreground w-full sm:w-auto sm:self-center">
             {filteredAndSortedEvents.length} mosque{filteredAndSortedEvents.length !== 1 ? "s" : ""} shown
