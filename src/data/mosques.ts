@@ -5,8 +5,14 @@ import data from "./mosques.json";
 
 const { mosques: mosquesList, timelineEvents: timelineRaw } = data as MosquesData;
 
+// Deduplicate mosques by id (keep the last occurrence which typically has more complete data)
+const mosquesById = new Map<string, Mosque>();
+for (const mosque of mosquesList) {
+  mosquesById.set(mosque.id, mosque);
+}
+
 export type { Mosque, TimelineEvent };
-export const mosques: Mosque[] = mosquesList;
+export const mosques: Mosque[] = [...mosquesById.values()];
 
 // Re-export for backwards compatibility
 export { parseEstablishmentYear };
