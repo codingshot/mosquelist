@@ -45,7 +45,8 @@ describe("ListDetailPage", () => {
     const addButtons = screen.getAllByRole("button", { name: /^add$/i });
     expect(addButtons.length).toBeGreaterThan(0);
     fireEvent.click(addButtons[0]);
-    const inListLink = await screen.findByRole("link", { name: /in your list/i }, { timeout: 3000 });
+    // After adding, the button should be replaced with an "In list" link
+    const inListLink = await screen.findByRole("link", { name: /in.*list/i }, { timeout: 3000 });
     expect(inListLink).toHaveAttribute("href", "/bucket-list");
   });
 
