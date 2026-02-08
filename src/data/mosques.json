@@ -40,7 +40,8 @@
       "officialWebsite": "https://www.gph.gov.sa",
       "denomination": "sunni",
       "imageLocal": "/images/mosques/masjid-al-haram.jpg",
-      "sources": ["https://en.wikipedia.org/wiki/Masjid_al-Haram", "https://www.gph.gov.sa"]
+      "sources": ["https://en.wikipedia.org/wiki/Masjid_al-Haram", "https://www.gph.gov.sa"],
+      "youtubeVideoId": "HQzbjtUKjeA"
     },
     {
       "id": "masjid-an-nabawi",
@@ -81,7 +82,8 @@
       "tourismNotes": "Non-Muslims may not enter. Visitors need valid visa. Women pray in designated areas. The Rawdah (green carpet area) is highly sought—visit early morning for shorter queues.",
       "officialWebsite": "https://www.gph.gov.sa",
       "denomination": "sunni",
-      "sources": ["https://en.wikipedia.org/wiki/Al-Masjid_an-Nabawi", "https://www.gph.gov.sa"]
+      "sources": ["https://en.wikipedia.org/wiki/Al-Masjid_an-Nabawi", "https://www.gph.gov.sa"],
+      "youtubeVideoId": "oFViDcxJDhY"
     },
     {
       "id": "al-aqsa",
@@ -118,7 +120,8 @@
       "architectureNotes": "Early Islamic architecture with Byzantine and Persian influences. Gold dome, blue and turquoise tilework, marble columns.",
       "tourismNotes": "Check current access and security. Modest dress required. Non-Muslims may visit the compound at designated times.",
       "denomination": "sunni",
-      "sources": ["https://en.wikipedia.org/wiki/Al-Aqsa_Mosque", "https://en.wikipedia.org/wiki/Temple_Mount"]
+      "sources": ["https://en.wikipedia.org/wiki/Al-Aqsa_Mosque", "https://en.wikipedia.org/wiki/Temple_Mount"],
+      "youtubeVideoId": "Ol2LGO7Nl6c"
     },
     {
       "id": "imam-reza-shrine",
@@ -201,7 +204,8 @@
       "officialWebsite": "https://www.szgmc.gov.ae",
       "denomination": "sunni",
       "constructionCost": "$545 million",
-      "sources": ["https://en.wikipedia.org/wiki/Sheikh_Zayed_Grand_Mosque", "https://www.szgmc.gov.ae"]
+      "sources": ["https://en.wikipedia.org/wiki/Sheikh_Zayed_Grand_Mosque", "https://www.szgmc.gov.ae"],
+      "youtubeVideoId": "lZzjsy7F5cY"
     },
     {
       "id": "hassan-ii",
@@ -243,7 +247,8 @@
       "officialWebsite": "https://www.fmh2.ma",
       "denomination": "sunni",
       "constructionCost": "$800 million",
-      "sources": ["https://en.wikipedia.org/wiki/Hassan_II_Mosque", "https://www.fmh2.ma"]
+      "sources": ["https://en.wikipedia.org/wiki/Hassan_II_Mosque", "https://www.fmh2.ma"],
+      "youtubeVideoId": "7P8G1UnJDtQ"
     },
     {
       "id": "blue-mosque",
@@ -283,7 +288,8 @@
       "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet.",
       "denomination": "sunni",
       "imageLocal": "/images/mosques/blue-mosque.jpg",
-      "sources": ["https://en.wikipedia.org/wiki/Blue_Mosque,_Istanbul"]
+      "sources": ["https://en.wikipedia.org/wiki/Blue_Mosque,_Istanbul"],
+      "youtubeVideoId": "zzoG_zLK08A"
     },
     {
       "id": "suleymaniye-mosque",
@@ -546,7 +552,8 @@
       "architectureNotes": "Tent-shaped design without traditional dome. 88m minarets (tallest in South Asia). White marble. Main hall with 8-sided shell roof.",
       "tourismNotes": "Open to visitors. Located at foot of Margalla Hills. Large courtyards. Educational facilities.",
       "imageLocal": "/images/mosques/faisal-mosque.jpg",
-      "sources": ["https://en.wikipedia.org/wiki/Faisal_Mosque"]
+      "sources": ["https://en.wikipedia.org/wiki/Faisal_Mosque"],
+      "youtubeVideoId": "Vy2Knq1h6V8"
     },
     {
       "id": "istiqlal-mosque",
@@ -582,7 +589,8 @@
         "lng": 106.8294
       },
       "denomination": "sunni",
-      "sources": ["https://en.wikipedia.org/wiki/Istiqlal_Mosque,_Jakarta"]
+      "sources": ["https://en.wikipedia.org/wiki/Istiqlal_Mosque,_Jakarta"],
+      "youtubeVideoId": "ybzU6bMgHD8"
     },
     {
       "id": "grand-jamia",
@@ -649,7 +657,8 @@
       "history": "Built by Emperor Aurangzeb in 1673. The largest mosque in the world for over 300 years until Faisal Mosque (1986).",
       "architectureNotes": "Red sandstone and marble. Symmetrical courtyard, octagonal minarets, Persian calligraphy.",
       "tourismNotes": "Open to visitors. Modest dress required. Located near Lahore Fort. Best in morning light.",
-      "imageLocal": "/images/mosques/badshahi-mosque.jpg"
+      "imageLocal": "/images/mosques/badshahi-mosque.jpg",
+      "youtubeVideoId": "yPi7n4nC_is"
     },
     {
       "id": "sultan-qaboos-grand-mosque",
@@ -684,7 +693,8 @@
         "lng": 58.4048
       },
       "tourismNotes": "Non-Muslims welcome outside prayer times. Modest dress required; abayas provided. One of world's largest chandeliers and carpets.",
-      "officialWebsite": "https://sultanqaboosgrandmosque.com"
+      "officialWebsite": "https://sultanqaboosgrandmosque.com",
+      "youtubeVideoId": "Tmnqmb_sTAQ"
     },
     {
       "id": "putra-mosque",
@@ -2279,7 +2289,8 @@
       "tourismNotes": "Free entry. Closed during prayer times. Modest dress; head coverings provided. Visit early to avoid crowds.",
       "womenPrayerArea": true,
       "touristFriendly": true,
-      "imageLocal": "/images/mosques/hagia-sophia-istanbul.jpg"
+      "imageLocal": "/images/mosques/hagia-sophia-istanbul.jpg",
+      "youtubeVideoId": "5ZQmrQWBESg"
     },
     {
       "id": "al-kauthar-mosque",

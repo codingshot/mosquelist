@@ -44,6 +44,8 @@ export interface Mosque {
   completionExpected?: string;
   /** Status: completed, under-construction, planned */
   status?: "completed" | "under-construction" | "planned";
+  /** YouTube video ID for mosque tour/documentary (e.g., "dQw4w9WgXcQ" from youtube.com/watch?v=dQw4w9WgXcQ) */
+  youtubeVideoId?: string;
 }
 
 export interface TimelineEvent {
