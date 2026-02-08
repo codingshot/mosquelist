@@ -4998,7 +4998,7 @@
       "facilities": ["Prayer hall", "Courtyard", "Historic shrine"],
       "significance": "One of the oldest mosques in the world, severely damaged in Syrian Civil War",
       "description": "The Great Umayyad Mosque of Aleppo was one of the largest and oldest mosques in Syria, founded in the 8th century. Its 45-meter minaret (built 1090) was destroyed in 2013 during the Syrian Civil War. Reconstruction began in 2025.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Great_Mosque_of_Aleppo.jpg/1280px-Great_Mosque_of_Aleppo.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Great_Mosque_of_Aleppo%2C_Panoramic_view_2%2C_Aleppo%2C_Syria.jpg",
       "isHolySite": false,
       "architecturalStyle": "Umayyad Architecture",
       "architectureNotes": "Founded 8th century. 45-meter Seljuk minaret (1090) destroyed 2013. Contains shrine of Zechariah (father of John the Baptist). Hellenistic agora site.",
@@ -5025,7 +5025,7 @@
       "facilities": ["Prayer hall", "Historic library", "Courtyards"],
       "significance": "One of the oldest mosques in the world, allegedly built during Prophet's lifetime",
       "description": "The Great Mosque of Sana'a is one of the oldest mosques in the world, said to have been founded by the Prophet Muhammad himself in 633 CE. It contains ancient Quran manuscripts discovered in 1972. Part of the UNESCO World Heritage Old City of Sana'a.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Great_Mosque_of_Sanaa.jpg/1280px-Great_Mosque_of_Sanaa.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Great_Mosque_of_Sana%27a.jpg",
       "isHolySite": false,
       "architecturalStyle": "Early Islamic",
       "architectureNotes": "One of the world's oldest mosques. Ancient Quranic manuscripts found 1972 (Sana'a manuscripts). Pre-Islamic spolia incorporated.",
@@ -6260,6 +6260,177 @@
       "isContextEvent": true,
       "category": "era",
       "source": "https://en.wikipedia.org/wiki/Third_Anglo-Afghan_War"
+    },
+    {
+      "year": "661",
+      "mosque": "Umayyad Caliphate Founded",
+      "mosqueId": "",
+      "event": "Umayyad dynasty established in Damascus; first hereditary Islamic caliphate",
+      "isContextEvent": true,
+      "category": "caliphate",
+      "source": "https://en.wikipedia.org/wiki/Umayyad_Caliphate"
+    },
+    {
+      "year": "750",
+      "mosque": "Abbasid Caliphate Founded",
+      "mosqueId": "",
+      "event": "Abbasid revolution overthrows Umayyads; Golden Age of Islam begins",
+      "isContextEvent": true,
+      "category": "caliphate",
+      "source": "https://en.wikipedia.org/wiki/Abbasid_Caliphate"
+    },
+    {
+      "year": "1299",
+      "mosque": "Ottoman Empire Founded",
+      "mosqueId": "",
+      "event": "Osman I founds Ottoman dynasty; empire spans 600+ years across three continents",
+      "isContextEvent": true,
+      "category": "caliphate",
+      "source": "https://en.wikipedia.org/wiki/Ottoman_Empire"
+    },
+    {
+      "year": "1501",
+      "mosque": "Safavid Empire Founded",
+      "mosqueId": "",
+      "event": "Shah Ismail I establishes Safavid dynasty; Shia Islam becomes state religion of Persia",
+      "isContextEvent": true,
+      "category": "caliphate",
+      "source": "https://en.wikipedia.org/wiki/Safavid_dynasty"
+    },
+    {
+      "year": "1526",
+      "mosque": "Mughal Empire Founded",
+      "mosqueId": "",
+      "event": "Babur defeats Delhi Sultanate at Panipat; Mughal Empire begins in South Asia",
+      "isContextEvent": true,
+      "category": "caliphate",
+      "source": "https://en.wikipedia.org/wiki/Mughal_Empire"
+    },
+    {
+      "year": "1187",
+      "mosque": "Liberation of Jerusalem",
+      "mosqueId": "",
+      "event": "Saladin recaptures Jerusalem from Crusaders after Battle of Hattin",
+      "isContextEvent": true,
+      "category": "expansion",
+      "source": "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(1187)"
+    },
+    {
+      "year": "1492",
+      "mosque": "Fall of Granada",
+      "mosqueId": "",
+      "event": "Last Muslim kingdom in Iberia falls; end of Al-Andalus after 781 years",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Fall_of_Granada"
+    },
+    {
+      "year": "1538",
+      "mosque": "First Printed Quran",
+      "mosqueId": "",
+      "event": "First Arabic-script Quran printed in Venice (though not widely accepted initially)",
+      "isContextEvent": true,
+      "category": "education",
+      "source": "https://en.wikipedia.org/wiki/Quran_translations"
+    },
+    {
+      "year": "1960",
+      "mosque": "Independence of Nigeria",
+      "mosqueId": "",
+      "event": "Nigeria gains independence; Africa's most populous nation, large Muslim population in north",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Nigeria"
+    },
+    {
+      "year": "1960",
+      "mosque": "Independence of Mauritania",
+      "mosqueId": "",
+      "event": "Mauritania gains independence; Islamic Republic in Saharan West Africa",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Mauritania"
+    },
+    {
+      "year": "1960",
+      "mosque": "Independence of Chad",
+      "mosqueId": "",
+      "event": "Chad gains independence; Muslim-majority nation in Central Africa",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Chad"
+    },
+    {
+      "year": "1958",
+      "mosque": "Independence of Guinea",
+      "mosqueId": "",
+      "event": "Guinea first French African colony to gain independence; predominantly Muslim",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Guinea"
+    },
+    {
+      "year": "1975",
+      "mosque": "Independence of Comoros",
+      "mosqueId": "",
+      "event": "Comoros declares independence; Indian Ocean Islamic nation",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_the_Comoros"
+    },
+    {
+      "year": "1977",
+      "mosque": "Independence of Djibouti",
+      "mosqueId": "",
+      "event": "Djibouti gains independence; strategic Horn of Africa nation",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/History_of_Djibouti"
+    },
+    {
+      "year": "1453",
+      "mosque": "Fall of Constantinople",
+      "mosqueId": "",
+      "event": "Ottoman Sultan Mehmed II conquers Constantinople; end of Byzantine Empire",
+      "isContextEvent": true,
+      "category": "expansion",
+      "source": "https://en.wikipedia.org/wiki/Fall_of_Constantinople"
+    },
+    {
+      "year": "711",
+      "mosque": "Islamic Conquest of Iberia",
+      "mosqueId": "",
+      "event": "Tariq ibn Ziyad crosses Gibraltar; beginning of Al-Andalus (Muslim Spain)",
+      "isContextEvent": true,
+      "category": "expansion",
+      "source": "https://en.wikipedia.org/wiki/Umayyad_conquest_of_Hispania"
+    },
+    {
+      "year": "632",
+      "mosque": "Death of Prophet Muhammad ﷺ",
+      "mosqueId": "",
+      "event": "Prophet Muhammad ﷺ passes away in Medina; Rashidun Caliphate begins",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Muhammad"
+    },
+    {
+      "year": "622",
+      "mosque": "The Hijra",
+      "mosqueId": "",
+      "event": "Prophet Muhammad ﷺ migrates from Mecca to Medina; Islamic calendar begins",
+      "isContextEvent": true,
+      "category": "migration",
+      "source": "https://en.wikipedia.org/wiki/Hegira"
+    },
+    {
+      "year": "610",
+      "mosque": "First Revelation",
+      "mosqueId": "",
+      "event": "Prophet Muhammad ﷺ receives first Quranic revelation in Cave of Hira",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Muhammad%27s_first_revelation"
     }
   ]
 }
