@@ -51,18 +51,27 @@
       "mosqueIds": [
         "masjid-al-haram",
         "masjid-an-nabawi",
-        "great-mosque-of-kairouan"
+        "great-mosque-of-kairouan",
+        "great-mosque-of-sanaa"
       ]
     },
     {
       "slug": "8th-century",
       "name": "8th Century (700s CE)",
-      "description": "Umayyad masterpieces including Damascus and Jerusalem.",
+      "description": "Umayyad masterpieces including Damascus, Jerusalem, Aleppo, and Xi'an.",
       "mosqueIds": [
         "al-aqsa",
         "umayyad-mosque",
-        "imam-reza-shrine"
+        "imam-reza-shrine",
+        "great-mosque-of-aleppo",
+        "xian-great-mosque"
       ]
+    },
+    {
+      "slug": "9th-century",
+      "name": "9th Century (800s CE)",
+      "description": "The founding of Al-Qarawiyyin (oldest university) and early Islamic scholarship.",
+      "mosqueIds": ["al-qarawiyyin"]
     },
     {
       "slug": "10th-century",
@@ -74,6 +83,12 @@
         "al-naqah-mosque-tripoli",
         "niujie-mosque"
       ]
+    },
+    {
+      "slug": "12th-century",
+      "name": "12th Century (1100s CE)",
+      "description": "Almohad and Fatimid masterpieces in Morocco and Egypt.",
+      "mosqueIds": ["koutoubia-mosque", "al-aqmar-mosque"]
     },
     {
       "slug": "16th-century",
@@ -150,7 +165,7 @@
     {
       "slug": "21st-century",
       "name": "21st Century (2000s–Present)",
-      "description": "Contemporary architectural marvels—Abu Dhabi, Algeria, Turkey, and beyond.",
+      "description": "Contemporary architectural marvels—Abu Dhabi, Algeria, Turkey, Lebanon, and beyond.",
       "mosqueIds": [
         "sheikh-zayed",
         "djamaa-el-djazair",
@@ -174,7 +189,8 @@
         "mevlana-mosque-rotterdam",
         "stockholm-mosque",
         "copenhagen-grand-mosque",
-        "granada-mosque"
+        "granada-mosque",
+        "mohammad-al-amin-mosque"
       ]
     },
     {
@@ -373,8 +389,8 @@
     {
       "slug": "morocco",
       "name": "Morocco",
-      "description": "Moroccan architectural masterpieces.",
-      "mosqueIds": ["hassan-ii"]
+      "description": "Moroccan architectural masterpieces from Almohad to modern.",
+      "mosqueIds": ["hassan-ii", "koutoubia-mosque", "al-qarawiyyin"]
     },
     {
       "slug": "iraq",
@@ -398,13 +414,31 @@
       "slug": "syria",
       "name": "Syria",
       "description": "Historic Umayyad and Islamic heritage.",
-      "mosqueIds": ["umayyad-mosque"]
+      "mosqueIds": ["umayyad-mosque", "great-mosque-of-aleppo"]
     },
     {
       "slug": "yemen",
       "name": "Yemen",
-      "description": "Major mosques in Yemen.",
-      "mosqueIds": ["al-saleh-mosque"]
+      "description": "Major mosques in Yemen—including one of the world's oldest.",
+      "mosqueIds": ["al-saleh-mosque", "great-mosque-of-sanaa"]
+    },
+    {
+      "slug": "lebanon",
+      "name": "Lebanon",
+      "description": "Major mosques in Lebanon.",
+      "mosqueIds": ["mohammad-al-amin-mosque"]
+    },
+    {
+      "slug": "bahrain",
+      "name": "Bahrain",
+      "description": "Major mosques in Bahrain.",
+      "mosqueIds": ["al-fateh-grand-mosque"]
+    },
+    {
+      "slug": "kuwait",
+      "name": "Kuwait",
+      "description": "Major mosques in Kuwait.",
+      "mosqueIds": ["grand-mosque-kuwait"]
     },
     {
       "slug": "algeria",
