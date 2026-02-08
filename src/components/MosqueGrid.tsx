@@ -29,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Filter, LayoutGrid, List, AlignLeft, Smartphone, SlidersHorizontal, Search, X, ArrowUpDown, XCircle, MapPin } from "lucide-react";
+import { Filter, LayoutGrid, Smartphone, SlidersHorizontal, Search, X, ArrowUpDown, XCircle, MapPin } from "lucide-react";
 import { ExploreMapView } from "@/components/ExploreMapView";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -55,7 +55,7 @@ const PARAM_FACILITY_GUIDED = "facilityGuided";
 const PARAM_FACILITY_WHEELCHAIR = "facilityWheelchair";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
-type ViewType = "grid" | "list" | "compact" | "swipe" | "map";
+type ViewType = "grid" | "swipe" | "map";
 type SortType = "relevance" | "holyCapacity" | "touristFirst" | "name" | "capacity" | "area" | "established" | "country";
 
 /** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007) */
@@ -71,7 +71,7 @@ function useMosqueSearchParams() {
   const filter = (searchParams.get(PARAM_FILTER) as FilterType) ?? "all";
   const viewParam = searchParams.get(PARAM_VIEW);
   const view: ViewType =
-    viewParam === "grid" || viewParam === "list" || viewParam === "compact" || viewParam === "swipe" || viewParam === "map"
+    viewParam === "grid" || viewParam === "swipe" || viewParam === "map"
       ? viewParam
       : "grid";
   const sortParam = searchParams.get(PARAM_SORT) as SortType | null;
@@ -748,26 +748,6 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     <LayoutGrid className="w-5 h-5" />
                   </Button>
                   <Button
-                    variant={view === "list" ? "secondary" : "ghost"}
-                    size="icon"
-                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
-                    onClick={() => setView("list")}
-                    aria-label="List view"
-                    aria-pressed={view === "list"}
-                  >
-                    <List className="w-5 h-5" />
-                  </Button>
-                  <Button
-                    variant={view === "compact" ? "secondary" : "ghost"}
-                    size="icon"
-                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
-                    onClick={() => setView("compact")}
-                    aria-label="Compact view"
-                    aria-pressed={view === "compact"}
-                  >
-                    <AlignLeft className="w-5 h-5" />
-                  </Button>
-                  <Button
                     variant={view === "swipe" ? "secondary" : "ghost"}
                     size="icon"
                     className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
@@ -982,15 +962,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
             isFavorite={isFavorite}
           />
         ) : (
-          <div
-            className={`grid gap-4 sm:gap-6 ${
-              view === "grid"
-                ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                : view === "compact"
-                  ? "grid-cols-1 max-w-2xl mx-auto gap-2"
-                  : "grid-cols-1 max-w-3xl mx-auto"
-            }`}
-          >
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {displayedMosques.map((mosque, index) => (
               <MosqueCard key={mosque.id} mosque={mosque} index={index} view={view} />
             ))}

@@ -12,6 +12,36 @@ const STOP_WORDS = new Set([
 ]);
 
 /**
+ * Common spelling variations and aliases for mosque names/locations
+ */
+const ALIASES: Record<string, string[]> = {
+  "blue mosque": ["sultan ahmed", "sultanahmet"],
+  "sultanahmet": ["blue mosque", "sultan ahmed"],
+  "sultan ahmed": ["blue mosque", "sultanahmet"],
+  "nabawi": ["prophet's mosque", "masjid an-nabawi", "medina"],
+  "haram": ["grand mosque", "mecca", "kaaba"],
+  "aqsa": ["al-aqsa", "jerusalem", "dome of rock"],
+  "dome": ["dome of the rock", "al-aqsa", "jerusalem"],
+  "sheikh zayed": ["abu dhabi", "grand mosque"],
+  "hagia sophia": ["ayasofya", "istanbul"],
+  "ayasofya": ["hagia sophia", "istanbul"],
+};
+
+/**
+ * Normalize text for consistent matching
+ */
+function normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
+    .replace(/[''`]/g, "'") // Normalize apostrophes
+    .replace(/[-–—]/g, " ") // Normalize dashes to spaces
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
  * Build primary searchable string (name, Arabic name, location, country) for high-priority matching.
  */
 function getPrimarySearchText(m: Mosque): string {
@@ -21,7 +51,7 @@ function getPrimarySearchText(m: Mosque): string {
     m.location,
     m.country,
   ];
-  return parts.join(" ").toLowerCase();
+  return normalizeText(parts.join(" "));
 }
 
 /**
@@ -39,19 +69,48 @@ function getSecondarySearchText(m: Mosque): string {
     m.architectureNotes ?? "",
     ...(m.facilities ?? []),
   ];
-  return parts.join(" ").toLowerCase();
-}
-
-/**
- * Get full searchable string (for backwards compatibility)
- */
-function getSearchText(m: Mosque): string {
-  return getPrimarySearchText(m) + " " + getSecondarySearchText(m);
+  return normalizeText(parts.join(" "));
 }
 
 /** Normalize query: trim, collapse spaces, toLowerCase */
 function normalizeQuery(q: string): string {
-  return q.trim().toLowerCase().replace(/\s+/g, " ");
+  return normalizeText(q);
+}
+
+/**
+ * Check if a term matches with fuzzy tolerance
+ * Allows for minor typos (1-2 character difference for longer words)
+ */
+function fuzzyMatch(text: string, term: string): boolean {
+  // Exact substring match
+  if (text.includes(term)) return true;
+  
+  // For short terms (<=3 chars), require exact match
+  if (term.length <= 3) return false;
+  
+  // Check word-by-word for starts-with matching (helps with typos)
+  const words = text.split(/\s+/);
+  for (const word of words) {
+    // Word starts with term (good for partial typing)
+    if (word.startsWith(term)) return true;
+    // Term starts with word (reverse partial)
+    if (term.startsWith(word) && word.length >= 3) return true;
+  }
+  
+  return false;
+}
+
+/**
+ * Get alias expansions for a query term
+ */
+function getAliasExpansions(term: string): string[] {
+  const expansions: string[] = [];
+  for (const [key, values] of Object.entries(ALIASES)) {
+    if (term.includes(key) || key.includes(term)) {
+      expansions.push(...values);
+    }
+  }
+  return expansions;
 }
 
 /**
@@ -66,14 +125,14 @@ function parseQueryTerms(query: string): { phrases: string[]; terms: string[] } 
   const quoteRegex = /"([^"]+)"/g;
   let match;
   while ((match = quoteRegex.exec(query)) !== null) {
-    phrases.push(match[1].toLowerCase().trim());
+    phrases.push(normalizeText(match[1]));
     remaining = remaining.replace(match[0], " ");
   }
   
   // Get remaining individual terms, filtering stop words
   const terms = remaining
     .split(" ")
-    .map(t => t.trim().toLowerCase())
+    .map(t => normalizeText(t))
     .filter(t => t.length > 0 && !STOP_WORDS.has(t));
   
   return { phrases, terms };
@@ -84,9 +143,12 @@ function parseQueryTerms(query: string): { phrases: string[]; terms: string[] } 
  * Higher score = better match. 0 = no match.
  * 
  * Scoring:
- * - Primary field match (name, location, country): +10 per term
- * - Secondary field match (description, history, etc.): +1 per term
- * - Phrase match: +20 (ensures exact phrases rank highest)
+ * - Exact phrase in primary fields: +50
+ * - Exact phrase in secondary fields: +25
+ * - Term in primary (name, location, country): +15 per term
+ * - Term in secondary (description, history, etc.): +3 per term
+ * - Fuzzy/alias match: +5 per term
+ * - Name starts with query: +20 bonus
  */
 function calculateMatchScore(mosque: Mosque, query: string): number {
   const q = normalizeQuery(query);
@@ -96,19 +158,56 @@ function calculateMatchScore(mosque: Mosque, query: string): number {
   const primary = getPrimarySearchText(mosque);
   const secondary = getSecondarySearchText(mosque);
   const full = primary + " " + secondary;
+  const nameLower = normalizeText(mosque.name);
   
   let score = 0;
+  let allMatch = true;
   
   // Check phrases - all must match for any score
   for (const phrase of phrases) {
-    if (!full.includes(phrase)) return 0; // Phrase not found, no match
-    score += primary.includes(phrase) ? 30 : 15;
+    if (primary.includes(phrase)) {
+      score += 50;
+    } else if (secondary.includes(phrase)) {
+      score += 25;
+    } else {
+      allMatch = false;
+    }
   }
   
-  // Check individual terms - all must match for any score
+  if (!allMatch) return 0;
+  
+  // Check individual terms
   for (const term of terms) {
-    if (!full.includes(term)) return 0; // Term not found, no match
-    score += primary.includes(term) ? 10 : 1;
+    let termMatched = false;
+    
+    // Primary field exact match (highest value)
+    if (primary.includes(term)) {
+      score += 15;
+      termMatched = true;
+    }
+    // Secondary field exact match
+    else if (secondary.includes(term)) {
+      score += 3;
+      termMatched = true;
+    }
+    // Fuzzy match on full text
+    else if (fuzzyMatch(full, term)) {
+      score += 5;
+      termMatched = true;
+    }
+    // Check aliases
+    else {
+      const aliases = getAliasExpansions(term);
+      for (const alias of aliases) {
+        if (full.includes(alias)) {
+          score += 5;
+          termMatched = true;
+          break;
+        }
+      }
+    }
+    
+    if (!termMatched) return 0; // All terms must match
   }
   
   // If no terms after filtering stop words, but original query had content,
@@ -116,9 +215,27 @@ function calculateMatchScore(mosque: Mosque, query: string): number {
   if (phrases.length === 0 && terms.length === 0) {
     const originalTerms = q.split(" ").filter(Boolean);
     for (const term of originalTerms) {
-      if (!full.includes(term)) return 0;
-      score += primary.includes(term) ? 10 : 1;
+      if (primary.includes(term)) {
+        score += 10;
+      } else if (secondary.includes(term)) {
+        score += 1;
+      } else if (fuzzyMatch(full, term)) {
+        score += 2;
+      } else {
+        return 0;
+      }
     }
+  }
+  
+  // Bonus: name starts with the query (or first term)
+  const firstTerm = terms[0] || phrases[0] || q.split(" ")[0];
+  if (firstTerm && nameLower.startsWith(firstTerm)) {
+    score += 20;
+  }
+  
+  // Bonus: exact name match
+  if (nameLower === q || nameLower.includes(q)) {
+    score += 30;
   }
   
   return score;
@@ -162,14 +279,16 @@ export function getSearchSuggestions(mosques: Mosque[], query: string, limit = 5
   const suggestions: { name: string; priority: number }[] = [];
   
   for (const m of mosques) {
-    const nameLower = m.name.toLowerCase();
-    const locationLower = m.location.toLowerCase();
-    const countryLower = m.country.toLowerCase();
+    const nameLower = normalizeText(m.name);
+    const locationLower = normalizeText(m.location);
+    const countryLower = normalizeText(m.country);
     
     if (nameLower.startsWith(q)) {
-      suggestions.push({ name: m.name, priority: 3 });
+      suggestions.push({ name: m.name, priority: 4 });
     } else if (nameLower.includes(q)) {
-      suggestions.push({ name: m.name, priority: 2 });
+      suggestions.push({ name: m.name, priority: 3 });
+    } else if (locationLower.startsWith(q)) {
+      suggestions.push({ name: `${m.name} (${m.location})`, priority: 2 });
     } else if (locationLower.includes(q) || countryLower.includes(q)) {
       suggestions.push({ name: `${m.name} (${m.location})`, priority: 1 });
     }
