@@ -44,6 +44,6 @@ describe("MosqueGrid", () => {
     renderGrid("/explore");
     expect(await screen.findByRole("combobox", { name: /sort by/i }, { timeout: 12000 })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /grid view/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /list view/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /swipe mode/i })).toBeInTheDocument();
   }, 20000);
 });
