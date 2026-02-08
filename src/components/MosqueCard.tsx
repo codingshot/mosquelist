@@ -23,11 +23,14 @@ function formatCapacity(capacity: number) {
 export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid" }: MosqueCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const isLiked = isFavorite(mosque.id);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageState, setImageState] = useState<"loading" | "loaded" | "error">("loading");
   const isListLayout = view === "list" || view === "compact";
   const isCompact = view === "compact";
   const isSwipe = view === "swipe";
   const { src: mainSrc, fallbackUrl: mainFallback } = getMosqueImageSrc(mosque);
+
+  // Determine loading strategy based on position
+  const isEager = index < 6;
 
   return (
     <Link to={`/mosque/${mosque.id}`} className="block outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-lg">
@@ -43,31 +46,31 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
         {!isListLayout && !isSwipe && <div className="tape-effect" />}
         <div
           className={cn(
-            "relative overflow-hidden shrink-0",
+            "relative overflow-hidden shrink-0 bg-muted",
             isCompact && "w-16 h-16 rounded-md",
             !isCompact && isListLayout && "w-28 h-28 md:w-32 md:h-32 rounded-lg",
             isSwipe && "h-52 sm:h-64 md:h-72",
             !isListLayout && !isSwipe && "h-48 md:h-56"
           )}
         >
-          {/* Skeleton placeholder while image loads */}
-          {!imageLoaded && (
-            <div className="absolute inset-0 bg-muted animate-pulse" />
+          {/* Blur placeholder while image loads */}
+          {imageState === "loading" && (
+            <div className="absolute inset-0 bg-secondary animate-pulse" />
           )}
           <img
             src={mainSrc}
             alt={mosque.name}
-            loading={index < 6 ? "eager" : "lazy"}
+            loading={isEager ? "eager" : "lazy"}
             decoding="async"
-            onLoad={() => setImageLoaded(true)}
+            onLoad={() => setImageState("loaded")}
             onError={(e) => {
               setMosqueImageFallback(e.currentTarget, mainFallback);
-              setImageLoaded(true);
+              setImageState("loaded");
             }}
             className={cn(
-              "w-full h-full object-cover transition-all duration-500",
-              "group-hover:scale-110",
-              imageLoaded ? "opacity-100" : "opacity-0"
+              "w-full h-full object-cover transition-all duration-300",
+              "group-hover:scale-105",
+              imageState === "loaded" ? "opacity-100" : "opacity-0"
             )}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
