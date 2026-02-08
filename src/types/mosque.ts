@@ -43,6 +43,12 @@ export interface TimelineEvent {
   mosque: string;
   mosqueId: string;
   event: string;
+  /** Optional: source URL for fact-checking this event */
+  source?: string;
+  /** If true, this is an Islamic history context event (not a mosque) */
+  isContextEvent?: boolean;
+  /** Optional category for context events: era, migration, expansion, etc. */
+  category?: "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education";
 }
 
 export interface MosquesData {

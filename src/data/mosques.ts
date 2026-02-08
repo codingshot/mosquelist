@@ -1,4 +1,5 @@
 import type { Mosque, TimelineEvent, MosquesData } from "@/types/mosque";
+import { parseEstablishmentYear, validateMosqueDate } from "@/lib/timeline-utils";
 
 import data from "./mosques.json";
 
@@ -7,21 +8,30 @@ const { mosques: mosquesList, timelineEvents: timelineRaw } = data as MosquesDat
 export type { Mosque, TimelineEvent };
 export const mosques: Mosque[] = mosquesList;
 
-/** Parse numeric year from established string (e.g. "638 CE" -> 638, "2007" -> 2007, "705–715 CE" -> 705). */
-function parseEstablishmentYear(established: string): number {
-  const match = String(established).match(/\d{1,4}/);
-  return match ? parseInt(match[0], 10) : 0;
-}
+// Re-export for backwards compatibility
+export { parseEstablishmentYear };
 
-/** Timeline expanded from JSON events plus any current mosque with an established date not already in the list. */
+/** 
+ * Timeline expanded from JSON events plus any current mosque with an established date not already in the list.
+ * Properly handles century notation (e.g., "15th century" -> ~1450).
+ */
 const timelineEvents: TimelineEvent[] = (() => {
   const byId = new Map<string, TimelineEvent>(timelineRaw.map((e) => [e.mosqueId, e]));
   for (const m of mosquesList) {
     if (byId.has(m.id)) continue;
     const year = parseEstablishmentYear(m.established);
     if (year <= 0) continue;
+    
+    // Validate historical accuracy (log warnings in dev)
+    if (process.env.NODE_ENV === "development") {
+      const validation = validateMosqueDate(m.established, m.id);
+      if (!validation.valid || validation.warning) {
+        console.warn(`[Timeline] ${m.name}: ${validation.warning}`);
+      }
+    }
+    
     byId.set(m.id, {
-      year: String(year),
+      year: m.established, // Keep original string for display
       mosque: m.name,
       mosqueId: m.id,
       event: `Completed in ${m.location}`,
