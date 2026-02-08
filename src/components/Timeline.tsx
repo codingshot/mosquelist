@@ -217,7 +217,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                     }`}
                   >
                     {/* Dot - accent color for context events */}
-                    <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background z-10 md:-translate-x-1/2" />
+                    <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-emerald-500 dark:bg-emerald-600 border-4 border-background z-10 md:-translate-x-1/2" />
 
                     {/* Content - styled differently for context events */}
                     <div
@@ -225,15 +225,15 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                         index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
                       }`}
                     >
-                      <div className="bg-accent/10 rounded-lg shadow-md border border-accent/30 overflow-hidden min-w-0">
+                      <div className="bg-emerald-50 dark:bg-emerald-950/40 rounded-lg shadow-md border border-emerald-200 dark:border-emerald-800 overflow-hidden min-w-0">
                         <div className="p-4 sm:p-5">
                           <div className="flex items-center gap-2 mb-1">
-                            <History className="h-4 w-4 text-accent-foreground" />
-                            <span className="text-xs font-medium text-accent-foreground uppercase tracking-wide">
+                            <History className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
+                            <span className="text-xs font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-wide">
                               Islamic History
                             </span>
                           </div>
-                          <span className="font-handwriting text-xl sm:text-2xl text-accent-foreground font-semibold">
+                          <span className="font-handwriting text-xl sm:text-2xl text-emerald-800 dark:text-emerald-300 font-semibold">
                             {formatYearDisplay(contextEvent.year)}
                           </span>
                           <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
