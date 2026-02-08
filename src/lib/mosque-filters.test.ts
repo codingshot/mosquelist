@@ -59,6 +59,40 @@ describe("mosque-filters", () => {
         womenPrayerArea: true,
         touristFriendly: false,
       },
+      {
+        id: "kalon",
+        name: "Kalon Mosque",
+        location: "Bukhara",
+        country: "Uzbekistan",
+        capacity: 12000,
+        established: "1514",
+        area: 8000,
+        annualVisitors: "500K",
+        facilities: [],
+        significance: "Silk Road",
+        description: "Historic Bukhara mosque",
+        imageUrl: "/kalon.jpg",
+        isHolySite: false,
+        womenPrayerArea: true,
+        touristFriendly: true,
+      },
+      {
+        id: "hazrat",
+        name: "Hazrat Sultan Mosque",
+        location: "Astana",
+        country: "Kazakhstan",
+        capacity: 10000,
+        established: "2012",
+        area: 17000,
+        annualVisitors: "1M",
+        facilities: [],
+        significance: "National",
+        description: "Kazakhstan's largest mosque",
+        imageUrl: "/hazrat.jpg",
+        isHolySite: false,
+        womenPrayerArea: true,
+        touristFriendly: true,
+      },
     ];
 
     it("returns all when no filters", () => {
@@ -78,7 +112,7 @@ describe("mosque-filters", () => {
         estMin: "",
         estMax: "",
       });
-      expect(result).toHaveLength(2);
+      expect(result).toHaveLength(4);
     });
 
     it("filters by holy filter", () => {
@@ -140,7 +174,92 @@ describe("mosque-filters", () => {
         estMin: "",
         estMax: "",
       });
+      expect(result).toHaveLength(4);
+    });
+
+    it("filters by region (Central Asia)", () => {
+      const result = applyMosqueFilters(mockMosques, {
+        query: "",
+        filter: "all",
+        country: "",
+        region: "Central Asia",
+        denomination: "",
+        womenOnly: false,
+        touristOnly: false,
+        architecturalStyle: "",
+        capMin: "",
+        capMax: "",
+        areaMin: "",
+        areaMax: "",
+        estMin: "",
+        estMax: "",
+      });
       expect(result).toHaveLength(2);
+      expect(result.map((m) => m.country).sort()).toEqual(["Kazakhstan", "Uzbekistan"]);
+    });
+
+    it("filters by country (Uzbekistan)", () => {
+      const result = applyMosqueFilters(mockMosques, {
+        query: "",
+        filter: "all",
+        country: "Uzbekistan",
+        region: "",
+        denomination: "",
+        womenOnly: false,
+        touristOnly: false,
+        architecturalStyle: "",
+        capMin: "",
+        capMax: "",
+        areaMin: "",
+        areaMax: "",
+        estMin: "",
+        estMax: "",
+      });
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe("kalon");
+    });
+
+    it("combines region filter with search query (Central Asia + bukhara)", () => {
+      const result = applyMosqueFilters(mockMosques, {
+        query: "bukhara",
+        filter: "all",
+        country: "",
+        region: "Central Asia",
+        denomination: "",
+        womenOnly: false,
+        touristOnly: false,
+        architecturalStyle: "",
+        capMin: "",
+        capMax: "",
+        areaMin: "",
+        areaMax: "",
+        estMin: "",
+        estMax: "",
+      });
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe("kalon");
+      expect(result[0].location).toBe("Bukhara");
+    });
+
+    it("combines country filter with search query", () => {
+      const result = applyMosqueFilters(mockMosques, {
+        query: "astana",
+        filter: "all",
+        country: "Kazakhstan",
+        region: "",
+        denomination: "",
+        womenOnly: false,
+        touristOnly: false,
+        architecturalStyle: "",
+        capMin: "",
+        capMax: "",
+        areaMin: "",
+        areaMax: "",
+        estMin: "",
+        estMax: "",
+      });
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe("hazrat");
     });
   });
 });
