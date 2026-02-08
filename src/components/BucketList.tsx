@@ -93,23 +93,25 @@ function BucketListItemRow({
           onRemoveToast?.(mosque.name);
         }
       }}
-      className={`px-4 sm:px-6 py-4 flex items-center gap-2 sm:gap-3 transition-colors cursor-pointer ${
+      className={`px-3 sm:px-6 py-3 sm:py-4 flex items-center gap-2 sm:gap-3 transition-colors cursor-pointer ${
         item.visited ? "bg-primary/5" : "hover:bg-secondary/30"
       } ${isDragging ? "opacity-50 shadow-lg" : ""}`}
       aria-label={`${mosque.name}, ${mosque.location}. Click to remove from list.`}
     >
+      {/* Drag handle - smaller on mobile */}
       <button
         type="button"
-        className="touch-manipulation min-h-[44px] min-w-[44px] p-2 rounded hover:bg-secondary text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="touch-manipulation min-h-[40px] min-w-[40px] sm:min-h-[44px] sm:min-w-[44px] p-1.5 sm:p-2 rounded hover:bg-secondary text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         aria-label="Drag to reorder"
         {...attributes}
         {...listeners}
       >
-        <GripVertical className="w-5 h-5" />
+        <GripVertical className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
+      {/* Checkbox - smaller on mobile */}
       <button
         onClick={() => toggleVisited(item.mosqueId)}
-        className={`w-9 h-9 min-w-9 min-h-9 rounded border-2 flex items-center justify-center transition-all shrink-0 touch-manipulation ${
+        className={`w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9 rounded border-2 flex items-center justify-center transition-all shrink-0 touch-manipulation ${
           item.visited
             ? "bg-primary border-primary"
             : "border-border hover:border-primary"
@@ -117,18 +119,21 @@ function BucketListItemRow({
         aria-label={item.visited ? "Mark as not visited" : "Mark as visited"}
       >
         {item.visited && (
-          <Check className="w-3.5 h-3.5 text-primary-foreground" />
+          <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary-foreground" />
         )}
       </button>
+      {/* Mosque thumbnail - smaller on mobile */}
       <Link
         to={`/mosque/${mosque.id}`}
-        className="shrink-0 w-14 h-14 rounded-lg overflow-hidden border border-border bg-muted"
+        className="shrink-0 w-10 h-10 sm:w-14 sm:h-14 rounded-md sm:rounded-lg overflow-hidden border border-border bg-muted"
       >
         <img
           src={getMosqueImageSrc(mosque).src}
           alt=""
           loading="lazy"
           decoding="async"
+          // @ts-expect-error fetchpriority is valid HTML; React types use fetchPriority
+          fetchpriority="low"
           className="w-full h-full object-cover"
           onError={(e) => {
             setMosqueImageFallback(e.currentTarget, getMosqueImageSrc(mosque).fallbackUrl);
@@ -137,7 +142,7 @@ function BucketListItemRow({
       </Link>
       <div className="flex-1 min-w-0">
         <h4
-          className={`font-medium transition-all ${
+          className={`font-medium text-sm sm:text-base transition-all truncate ${
             item.visited
               ? "text-muted-foreground line-through"
               : "text-foreground"
@@ -150,16 +155,17 @@ function BucketListItemRow({
             {mosque.name}
           </Link>
         </h4>
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+        <div className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground truncate">
           <MapPin className="w-3 h-3 shrink-0" />
-          <span>
+          <span className="truncate">
             {mosque.location}, {mosque.country}
           </span>
         </div>
       </div>
-      <div className="flex gap-2 shrink-0">
+      {/* Actions - hide Alhamdulillah on mobile */}
+      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
         {item.visited && (
-          <span className="font-handwriting text-primary text-sm">
+          <span className="hidden sm:inline font-handwriting text-primary text-sm whitespace-nowrap">
             Alhamdulillah! ✓
           </span>
         )}
@@ -170,7 +176,7 @@ function BucketListItemRow({
             removeFromBucketList(item.mosqueId);
             onRemoveToast?.(mosque.name);
           }}
-          className="min-h-[44px] min-w-[44px] p-2 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive flex items-center justify-center touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="min-h-[40px] min-w-[40px] sm:min-h-[44px] sm:min-w-[44px] p-1.5 sm:p-2 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive flex items-center justify-center touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label={`Remove ${mosque.name} from list`}
         >
           <X className="w-4 h-4" />
@@ -336,14 +342,14 @@ export const BucketList = () => {
 
           {/* Filter & Sort */}
           {bucketList.length > 0 && (
-            <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
               <div className="flex rounded-lg border border-border overflow-hidden">
                 {(["all", "unvisited", "visited"] as const).map((f) => (
                   <button
                     key={f}
                     type="button"
                     onClick={() => setFilter(f)}
-                    className={`min-h-[44px] px-3 py-2 text-sm font-medium transition-colors touch-manipulation ${
+                    className={`min-h-[40px] sm:min-h-[44px] px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors touch-manipulation ${
                       filter === f
                         ? "bg-primary text-primary-foreground"
                         : "bg-card hover:bg-secondary/50 text-muted-foreground hover:text-foreground"
@@ -356,7 +362,7 @@ export const BucketList = () => {
                   </button>
                 ))}
               </div>
-              <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-card cursor-pointer hover:bg-secondary/50 touch-manipulation">
+              <label className="hidden sm:flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-card cursor-pointer hover:bg-secondary/50 touch-manipulation">
                 <input
                   type="checkbox"
                   checked={visitorFriendlyOnly}
@@ -370,9 +376,9 @@ export const BucketList = () => {
                 value={sort}
                 onValueChange={(v) => setSort(v as BucketSort)}
               >
-                <SelectTrigger className="w-full min-w-0 sm:w-[180px] gap-2 min-h-[44px] touch-manipulation">
-                  <ArrowUpDown className="h-4 w-4 shrink-0" />
-                  <SelectValue placeholder="Sort by" />
+                <SelectTrigger className="w-auto min-w-0 gap-2 min-h-[40px] sm:min-h-[44px] touch-manipulation text-xs sm:text-sm">
+                  <ArrowUpDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+                  <SelectValue placeholder="Sort" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="list-order">List order</SelectItem>

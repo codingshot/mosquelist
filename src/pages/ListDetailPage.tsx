@@ -382,42 +382,46 @@ export default function ListDetailPage() {
                 return (
                   <li
                     key={mosque.id}
-                    className={`flex items-center gap-3 sm:gap-4 rounded-xl border bg-card p-4 transition-colors ${
+                    className={`flex items-center gap-2 sm:gap-4 rounded-xl border bg-card p-3 sm:p-4 transition-colors ${
                       selected ? "border-primary/50 ring-1 ring-primary/20" : "border-border hover:border-primary/30"
                     } ${inBucket ? "bg-primary/5 border-primary/20" : ""}`}
                   >
+                    {/* Checkbox - smaller on mobile */}
                     {canSelect ? (
                       <button
                         type="button"
                         onClick={() => toggleSelect(mosque.id)}
-                        className={`shrink-0 w-9 h-9 min-w-9 min-h-9 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation ${
+                        className={`shrink-0 w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation ${
                           selected ? "bg-primary border-primary text-primary-foreground" : "border-border hover:border-primary text-muted-foreground"
                         }`}
                         aria-label={selected ? `Deselect ${mosque.name}` : `Select ${mosque.name} to add to My List`}
                         aria-pressed={selected}
                       >
                         {selected ? (
-                          <CheckSquare className="w-3.5 h-3.5" />
+                          <CheckSquare className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         ) : (
-                          <Square className="w-3.5 h-3.5" />
+                          <Square className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         )}
                       </button>
                     ) : !inBucket && notInList.length <= 1 ? (
-                      <span className="shrink-0 w-9 h-9 min-w-9 min-h-9" aria-hidden />
+                      <span className="shrink-0 w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9" aria-hidden />
                     ) : inBucket ? (
-                      <span className="shrink-0 w-9 h-9 min-w-9 min-h-9 flex items-center justify-center text-primary" aria-hidden>
-                        <CheckSquare className="w-3.5 h-3.5" />
+                      <span className="shrink-0 w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9 flex items-center justify-center text-primary" aria-hidden>
+                        <CheckSquare className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </span>
                     ) : null}
+                    {/* Image - smaller on mobile */}
                     <Link
                       to={`/mosque/${mosque.id}`}
-                      className="shrink-0 w-16 h-16 rounded-lg overflow-hidden border border-border bg-muted"
+                      className="shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-md sm:rounded-lg overflow-hidden border border-border bg-muted"
                     >
                       <img
                         src={getMosqueImageSrc(mosque).src}
                         alt=""
                         loading="lazy"
                         decoding="async"
+                        // @ts-expect-error fetchpriority is valid HTML; React types use fetchPriority
+                        fetchpriority="low"
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           setMosqueImageFallback(e.currentTarget, getMosqueImageSrc(mosque).fallbackUrl);
@@ -425,26 +429,26 @@ export default function ListDetailPage() {
                       />
                     </Link>
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 gap-y-1">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 gap-y-0.5 sm:gap-y-1">
                         <Link
                           to={`/mosque/${mosque.id}`}
-                          className="font-serif text-lg font-semibold text-foreground hover:text-primary hover:underline"
+                          className="font-serif text-sm sm:text-lg font-semibold text-foreground hover:text-primary hover:underline truncate"
                         >
                           {mosque.name}
                         </Link>
                         {inBucket && (
-                          <span className="inline-flex items-center gap-1 rounded-md bg-primary/15 px-2 py-0.5 text-xs font-medium text-primary">
+                          <span className="hidden sm:inline-flex items-center gap-1 rounded-md bg-primary/15 px-2 py-0.5 text-xs font-medium text-primary">
                             <CheckSquare className="h-3 w-3" />
                             In your list
                           </span>
                         )}
                       </div>
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-sm text-muted-foreground">
-                        <span className="flex items-center gap-1">
-                          <MapPin className="h-3.5 w-3 shrink-0" />
+                      <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-0.5 sm:gap-y-1 mt-0.5 sm:mt-1 text-xs sm:text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1 truncate">
+                          <MapPin className="h-3 w-3 shrink-0" />
                           <span className="truncate">{mosque.location}, {mosque.country}</span>
                         </span>
-                        <span className="flex items-center gap-1">
+                        <span className="hidden sm:flex items-center gap-1">
                           <Users className="h-3.5 w-3 shrink-0" />
                           {formatCapacity(mosque.capacity)} capacity
                         </span>
@@ -464,17 +468,17 @@ export default function ListDetailPage() {
                           if (added) toast.success(`Added ${mosque.name} to your list`);
                           else toast.info("Already in your list");
                         }}
-                        className="shrink-0 gap-1 min-h-[44px] touch-manipulation"
+                        className="shrink-0 gap-1 min-h-[36px] sm:min-h-[44px] px-2 sm:px-3 text-xs sm:text-sm touch-manipulation"
                       >
-                        <Plus className="h-4 w-4" />
-                        Add
+                        <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                        <span className="hidden sm:inline">Add</span>
                       </Button>
                     )}
                     {inBucket && (
-                      <Button variant="secondary" size="sm" asChild className="gap-1.5 min-h-[44px] touch-manipulation">
-                        <Link to="/bucket-list">
-                          <CheckSquare className="h-4 w-4 shrink-0" />
-                          In your list
+                      <Button variant="secondary" size="sm" asChild className="gap-1 sm:gap-1.5 min-h-[36px] sm:min-h-[44px] px-2 sm:px-3 text-xs sm:text-sm touch-manipulation">
+                        <Link to="/bucket-list" aria-label="In your list">
+                          <CheckSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+                          <span className="sr-only sm:not-sr-only">In list</span>
                         </Link>
                       </Button>
                     )}
