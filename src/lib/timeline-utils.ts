@@ -145,6 +145,7 @@ export const ISLAMIC_HISTORY_PERIODS = [
   { year: 711, label: "Islam Reaches Sindh (Pakistan)", description: "Muhammad bin Qasim conquers Sindh; first permanent Muslim presence in South Asia", source: "https://en.wikipedia.org/wiki/Arab_conquest_of_Sindh", category: "expansion" as const },
   { year: 712, label: "Islam Reaches Multan", description: "Arab forces conquer Multan (Punjab); Sun Temple converted to mosque", source: "https://en.wikipedia.org/wiki/Arab_campaigns_in_India", category: "expansion" as const },
   { year: 713, label: "Islam Reaches Khiva", description: "Arabs conquer Khwarezm region; Khiva later becomes major Islamic center", source: "https://en.wikipedia.org/wiki/Khwarazm", category: "expansion" as const },
+  { year: 742, label: "Great Mosque of Xi'an", description: "One of the oldest mosques in China; built during Tang Dynasty, blends Chinese and Islamic architecture", source: "https://en.wikipedia.org/wiki/Great_Mosque_of_Xi%27an", category: "architecture" as const },
   
   // 8th-9th Century - Abbasid Era & African Expansion
   { year: 750, label: "Abbasid Caliphate Begins", description: "Islamic Golden Age; capital moves to Baghdad; flourishing of science, arts, and scholarship", source: "https://en.wikipedia.org/wiki/Abbasid_Caliphate", category: "caliphate" as const },
@@ -161,8 +162,10 @@ export const ISLAMIC_HISTORY_PERIODS = [
   { year: 879, label: "Ibn Tulun Mosque Completed", description: "Third oldest mosque in Egypt built in Cairo; largest mosque of its time, spiral minaret inspired by Samarra", source: "https://en.wikipedia.org/wiki/Mosque_of_Ibn_Tulun", category: "architecture" as const },
   { year: 900, label: "Zanzibar Islamized", description: "Persian Shirazi traders establish Muslim communities on Zanzibar; later becomes sultanate", source: "https://en.wikipedia.org/wiki/Zanzibar", category: "expansion" as const },
   { year: 900, label: "Ghaznavid Expansion Begins", description: "Turkic Ghaznavids spread Islam into Punjab and northern India through conquest", source: "https://en.wikipedia.org/wiki/Ghaznavid_dynasty", category: "expansion" as const },
+  { year: 927, label: "Kalon Mosque Minaret", description: "Original minaret built in Bukhara (rebuilt 1127); becomes symbol of Central Asian Islam", source: "https://en.wikipedia.org/wiki/Kalyan_minaret", category: "architecture" as const },
   { year: 970, label: "Al-Azhar Founded", description: "Fatimid Caliphate establishes Al-Azhar in Cairo; world's oldest degree-granting university", source: "https://en.wikipedia.org/wiki/Al-Azhar_University", category: "education" as const },
   { year: 977, label: "Ghaznavid Empire Founded", description: "Sabuktigin establishes Ghaznavid dynasty in Afghanistan; Ghazni becomes major Islamic center", source: "https://en.wikipedia.org/wiki/Ghaznavid_dynasty", category: "caliphate" as const },
+  { year: 980, label: "Ibn Sina (Avicenna) Born", description: "Persian polymath born in Bukhara; wrote Canon of Medicine, foundational text of Islamic medicine", source: "https://en.wikipedia.org/wiki/Avicenna", category: "education" as const },
   { year: 999, label: "Karakhanids Convert", description: "Turkic Karakhanid Khanate converts to Islam; first Turkic Muslim state in Central Asia", source: "https://en.wikipedia.org/wiki/Kara-Khanid_Khanate", category: "expansion" as const },
   
   // 10th-11th Century

@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { timelineEvents, mosques, getUniqueCountries } from "@/data/mosques";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
 import { parseEstablishmentYear, formatYearDisplay, ISLAMIC_HISTORY_PERIODS } from "@/lib/timeline-utils";
-import { Calendar, ArrowUpDown, MapPin, ChevronRight, History, ExternalLink } from "lucide-react";
+import { ARCHITECTURE_STYLE_DESCRIPTIONS } from "@/data/architecture-styles";
+import { Calendar, ArrowUpDown, MapPin, ChevronRight, History, ExternalLink, SlidersHorizontal, ChevronDown, Search } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -13,7 +14,10 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Slider } from "@/components/ui/slider";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import type { TimelineEvent } from "@/types/mosque";
 
@@ -62,6 +66,19 @@ function buildCombinedTimeline(
 
 type SortOrder = "oldest" | "newest";
 
+// Get all unique architecture styles from mosques
+const allArchitectureStyles = Array.from(
+  new Set(mosques.map(m => m.architecturalStyle).filter(Boolean))
+).sort() as string[];
+
+// Get min/max years from data
+const allYears = [
+  ...timelineEvents.map(e => parseEstablishmentYear(e.year)),
+  ...ISLAMIC_HISTORY_PERIODS.map(p => p.year)
+].filter(y => y > 0);
+const MIN_YEAR = Math.min(...allYears);
+const MAX_YEAR = Math.max(...allYears, new Date().getFullYear());
+
 interface TimelineProps {
   /** Limit displayed events (for homepage preview) */
   limit?: number;
@@ -77,6 +94,15 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   const [visitorFriendlyOnly, setVisitorFriendlyOnly] = useState(false);
   const [showHistoryContext, setShowHistoryContext] = useState(!isPreview);
   const [eventCategory, setEventCategory] = useState<string>("");
+  
+  // Advanced filters
+  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [yearRange, setYearRange] = useState<[number, number]>([MIN_YEAR, MAX_YEAR]);
+  const [jumpToYear, setJumpToYear] = useState<string>("");
+  const [architectureStyle, setArchitectureStyle] = useState<string>("");
+  const [mosqueType, setMosqueType] = useState<string>("");
+  
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   const categoryOptions = [
     { value: "all", label: "All events" },
@@ -89,10 +115,42 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
     { value: "era", label: "Historical Eras" },
     { value: "migration", label: "Migration" },
   ];
+  
+  const mosqueTypeOptions = [
+    { value: "all", label: "All mosques" },
+    { value: "holySite", label: "Holy Sites" },
+    { value: "womenArea", label: "Women's Prayer Area" },
+    { value: "touristFriendly", label: "Tourist-Friendly" },
+    { value: "sunni", label: "Sunni Tradition" },
+    { value: "shia", label: "Shia Tradition" },
+  ];
 
   const mosqueById = useMemo(() => new Map(mosques.map((m) => [m.id, m])), []);
   const countries = useMemo(() => getUniqueCountries(), []);
   const regions = useMemo(() => getUniqueRegions(countries), [countries]);
+  
+  // Jump to year handler
+  const handleJumpToYear = useCallback(() => {
+    const year = parseInt(jumpToYear, 10);
+    if (isNaN(year) || year < MIN_YEAR || year > MAX_YEAR) return;
+    
+    // Find the event closest to this year
+    const targetId = `year-marker-${year}`;
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      // Find closest event
+      const closestEvent = displayedEvents.find(e => parseEstablishmentYear(e.year) >= year);
+      if (closestEvent && timelineRef.current) {
+        const eventIndex = displayedEvents.indexOf(closestEvent);
+        const eventElements = timelineRef.current.querySelectorAll("[data-timeline-event]");
+        if (eventElements[eventIndex]) {
+          eventElements[eventIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    }
+  }, [jumpToYear]);
 
   const filteredAndSortedEvents = useMemo(() => {
     let list = timelineEvents.filter((event) => {
@@ -106,24 +164,64 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           if (mosqueRegion !== region) return false;
         }
         if (visitorFriendlyOnly && !mosque.touristFriendly) return false;
+        
+        // Year range filter
+        const eventYear = parseEstablishmentYear(event.year);
+        if (eventYear < yearRange[0] || eventYear > yearRange[1]) return false;
+        
+        // Architecture style filter
+        if (architectureStyle && mosque.architecturalStyle !== architectureStyle) return false;
+        
+        // Mosque type filter
+        if (mosqueType) {
+          switch (mosqueType) {
+            case "holySite":
+              if (!mosque.isHolySite) return false;
+              break;
+            case "womenArea":
+              if (!mosque.womenPrayerArea) return false;
+              break;
+            case "touristFriendly":
+              if (!mosque.touristFriendly) return false;
+              break;
+            case "sunni":
+              if (mosque.denomination !== "sunni") return false;
+              break;
+            case "shia":
+              if (mosque.denomination !== "shia") return false;
+              break;
+          }
+        }
       }
       return true;
     });
     const order = sortOrder === "newest" ? -1 : 1;
     list = [...list].sort((a, b) => order * (parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year)));
     return list;
-  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview, visitorFriendlyOnly]);
+  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview, visitorFriendlyOnly, yearRange, architectureStyle, mosqueType]);
 
-  // Combine with Islamic history context if enabled
+  // Combine with Islamic history context if enabled (also apply year range)
   const combinedEvents = useMemo(() => {
-    return buildCombinedTimeline(filteredAndSortedEvents, showHistoryContext && !isPreview, eventCategory);
-  }, [filteredAndSortedEvents, showHistoryContext, isPreview, eventCategory]);
+    const combined = buildCombinedTimeline(filteredAndSortedEvents, showHistoryContext && !isPreview, eventCategory);
+    // Apply year range to combined events
+    return combined.filter(e => {
+      const year = parseEstablishmentYear(e.year);
+      return year >= yearRange[0] && year <= yearRange[1];
+    });
+  }, [filteredAndSortedEvents, showHistoryContext, isPreview, eventCategory, yearRange]);
 
   // Apply limit for preview mode - use combinedEvents for full page, filteredAndSortedEvents for preview
   const displayedEvents = isPreview
     ? filteredAndSortedEvents.slice(0, limit)
     : combinedEvents;
   const hasMore = isPreview && filteredAndSortedEvents.length > limit;
+  
+  // Count active advanced filters
+  const activeAdvancedFilters = [
+    yearRange[0] !== MIN_YEAR || yearRange[1] !== MAX_YEAR,
+    architectureStyle,
+    mosqueType,
+  ].filter(Boolean).length;
 
   return (
     <section id="timeline" className="py-16 md:py-24 bg-background scroll-mt-20">
@@ -147,98 +245,222 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
 
         {/* Sort & Filters — hidden in preview mode */}
         {showFilters && (
-        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end mb-8 md:mb-10 max-w-4xl mx-auto">
-          <div className="space-y-2 w-full sm:w-auto sm:min-w-[160px]">
-            <Label className="text-sm text-muted-foreground">Sort</Label>
-            <Select value={sortOrder} onValueChange={(v) => setSortOrder(v as SortOrder)}>
-              <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Sort timeline">
-                <ArrowUpDown className="mr-2 h-4 w-4 shrink-0" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="oldest">Oldest first</SelectItem>
-                <SelectItem value="newest">Newest first</SelectItem>
-              </SelectContent>
-            </Select>
+        <div className="mb-8 md:mb-10 max-w-4xl mx-auto">
+          {/* Basic Filters Row */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end">
+            <div className="space-y-2 w-full sm:w-auto sm:min-w-[160px]">
+              <Label className="text-sm text-muted-foreground">Sort</Label>
+              <Select value={sortOrder} onValueChange={(v) => setSortOrder(v as SortOrder)}>
+                <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Sort timeline">
+                  <ArrowUpDown className="mr-2 h-4 w-4 shrink-0" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="oldest">Oldest first</SelectItem>
+                  <SelectItem value="newest">Newest first</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2 w-full sm:w-auto sm:min-w-[160px]">
+              <Label className="text-sm text-muted-foreground">Region</Label>
+              <Select value={region || "all"} onValueChange={(v) => setRegion(v === "all" ? "" : v)}>
+                <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by region">
+                  <MapPin className="mr-2 h-4 w-4 shrink-0" />
+                  <SelectValue placeholder="All regions" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All regions</SelectItem>
+                  {regions.map((r) => (
+                    <SelectItem key={r} value={r}>
+                      {r}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2 w-full sm:w-auto sm:min-w-[160px] sm:flex-1 sm:max-w-[220px]">
+              <Label className="text-sm text-muted-foreground">Country</Label>
+              <Select value={country || "all"} onValueChange={(v) => setCountry(v === "all" ? "" : v)}>
+                <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by country">
+                  <SelectValue placeholder="All countries" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All countries</SelectItem>
+                  {countries.map((c) => (
+                    <SelectItem key={c} value={c}>
+                      {c}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {/* Category filter for history events */}
+            <div className="space-y-2 w-full sm:w-auto sm:min-w-[180px]">
+              <Label className="text-sm text-muted-foreground">Event Type</Label>
+              <Select value={eventCategory || "all"} onValueChange={(v) => setEventCategory(v === "all" ? "" : v)}>
+                <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by event type">
+                  <History className="mr-2 h-4 w-4 shrink-0" />
+                  <SelectValue placeholder="All events" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categoryOptions.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-background cursor-pointer hover:bg-secondary/50 touch-manipulation self-end sm:self-center">
+              <input
+                type="checkbox"
+                checked={visitorFriendlyOnly}
+                onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
+                className="rounded border-border"
+                aria-label="Show only mosques where non-Muslims can visit"
+              />
+              <span className="text-sm text-foreground">Non-Muslims can visit</span>
+            </label>
+            <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-primary/30 bg-primary/5 cursor-pointer hover:bg-primary/10 touch-manipulation self-end sm:self-center">
+              <input
+                type="checkbox"
+                checked={showHistoryContext}
+                onChange={(e) => setShowHistoryContext(e.target.checked)}
+                className="rounded border-border"
+                aria-label="Show Islamic history milestones"
+              />
+              <span className="text-sm text-foreground">Show history events</span>
+            </label>
           </div>
-          <div className="space-y-2 w-full sm:w-auto sm:min-w-[160px]">
-            <Label className="text-sm text-muted-foreground">Region</Label>
-            <Select value={region || "all"} onValueChange={(v) => setRegion(v === "all" ? "" : v)}>
-              <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by region">
-                <MapPin className="mr-2 h-4 w-4 shrink-0" />
-                <SelectValue placeholder="All regions" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All regions</SelectItem>
-                {regions.map((r) => (
-                  <SelectItem key={r} value={r}>
-                    {r}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-2 w-full sm:w-auto sm:min-w-[160px] sm:flex-1 sm:max-w-[220px]">
-            <Label className="text-sm text-muted-foreground">Country</Label>
-            <Select value={country || "all"} onValueChange={(v) => setCountry(v === "all" ? "" : v)}>
-              <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by country">
-                <SelectValue placeholder="All countries" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All countries</SelectItem>
-                {countries.map((c) => (
-                  <SelectItem key={c} value={c}>
-                    {c}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          {/* Category filter for history events */}
-          <div className="space-y-2 w-full sm:w-auto sm:min-w-[180px]">
-            <Label className="text-sm text-muted-foreground">Event Type</Label>
-            <Select value={eventCategory || "all"} onValueChange={(v) => setEventCategory(v === "all" ? "" : v)}>
-              <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by event type">
-                <History className="mr-2 h-4 w-4 shrink-0" />
-                <SelectValue placeholder="All events" />
-              </SelectTrigger>
-              <SelectContent>
-                {categoryOptions.map((opt) => (
-                  <SelectItem key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-background cursor-pointer hover:bg-secondary/50 touch-manipulation self-end sm:self-center">
-            <input
-              type="checkbox"
-              checked={visitorFriendlyOnly}
-              onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
-              className="rounded border-border"
-              aria-label="Show only mosques where non-Muslims can visit"
-            />
-            <span className="text-sm text-foreground">Non-Muslims can visit</span>
-          </label>
-          <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-primary/30 bg-primary/5 cursor-pointer hover:bg-primary/10 touch-manipulation self-end sm:self-center">
-            <input
-              type="checkbox"
-              checked={showHistoryContext}
-              onChange={(e) => setShowHistoryContext(e.target.checked)}
-              className="rounded border-border"
-              aria-label="Show Islamic history milestones"
-            />
-            <span className="text-sm text-foreground">Show history events</span>
-          </label>
-          <p className="text-sm text-muted-foreground w-full sm:w-auto sm:self-center">
-            {filteredAndSortedEvents.length} mosque{filteredAndSortedEvents.length !== 1 ? "s" : ""} shown
+
+          {/* Advanced Filters Collapsible */}
+          <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen} className="mt-4">
+            <CollapsibleTrigger asChild>
+              <Button variant="outline" size="sm" className="gap-2">
+                <SlidersHorizontal className="h-4 w-4" />
+                Advanced Filters
+                {activeAdvancedFilters > 0 && (
+                  <span className="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-primary text-primary-foreground">
+                    {activeAdvancedFilters}
+                  </span>
+                )}
+                <ChevronDown className={`h-4 w-4 transition-transform ${advancedOpen ? "rotate-180" : ""}`} />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-4">
+              <div className="p-4 rounded-lg border border-border bg-card/50 space-y-6">
+                {/* Jump to Year */}
+                <div className="flex flex-col sm:flex-row gap-4 sm:items-end">
+                  <div className="space-y-2 flex-1 max-w-[200px]">
+                    <Label className="text-sm text-muted-foreground">Jump to Year</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        type="number"
+                        placeholder={`${MIN_YEAR}–${MAX_YEAR}`}
+                        value={jumpToYear}
+                        onChange={(e) => setJumpToYear(e.target.value)}
+                        min={MIN_YEAR}
+                        max={MAX_YEAR}
+                        className="w-full"
+                        onKeyDown={(e) => e.key === "Enter" && handleJumpToYear()}
+                      />
+                      <Button size="icon" variant="secondary" onClick={handleJumpToYear} aria-label="Jump to year">
+                        <Search className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Year Range Slider */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-sm text-muted-foreground">Year Range</Label>
+                    <span className="text-sm font-medium text-foreground">
+                      {yearRange[0]} CE – {yearRange[1]} CE
+                    </span>
+                  </div>
+                  <Slider
+                    value={yearRange}
+                    min={MIN_YEAR}
+                    max={MAX_YEAR}
+                    step={10}
+                    onValueChange={(v) => setYearRange(v as [number, number])}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground">
+                    <span>{MIN_YEAR} CE</span>
+                    <span>{MAX_YEAR} CE</span>
+                  </div>
+                </div>
+
+                {/* Architecture Style & Mosque Type */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="space-y-2 w-full sm:w-auto sm:min-w-[200px]">
+                    <Label className="text-sm text-muted-foreground">Architecture Style</Label>
+                    <Select value={architectureStyle || "all"} onValueChange={(v) => setArchitectureStyle(v === "all" ? "" : v)}>
+                      <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by architecture style">
+                        <SelectValue placeholder="All styles" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All styles</SelectItem>
+                        {allArchitectureStyles.map((style) => (
+                          <SelectItem key={style} value={style}>
+                            {style}
+                            {ARCHITECTURE_STYLE_DESCRIPTIONS[style] && (
+                              <span className="ml-2 text-xs text-muted-foreground hidden sm:inline">
+                                — {ARCHITECTURE_STYLE_DESCRIPTIONS[style].split(";")[0]}
+                              </span>
+                            )}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2 w-full sm:w-auto sm:min-w-[200px]">
+                    <Label className="text-sm text-muted-foreground">Mosque Type</Label>
+                    <Select value={mosqueType || "all"} onValueChange={(v) => setMosqueType(v === "all" ? "" : v)}>
+                      <SelectTrigger className="w-full min-h-[44px] touch-manipulation text-base" aria-label="Filter by mosque type">
+                        <SelectValue placeholder="All types" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {mosqueTypeOptions.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                {/* Reset Button */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setYearRange([MIN_YEAR, MAX_YEAR]);
+                    setArchitectureStyle("");
+                    setMosqueType("");
+                    setJumpToYear("");
+                  }}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Reset advanced filters
+                </Button>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+
+          {/* Results count */}
+          <p className="text-sm text-muted-foreground mt-4">
+            {displayedEvents.length} event{displayedEvents.length !== 1 ? "s" : ""} shown
+            {showHistoryContext && ` (${filteredAndSortedEvents.length} mosques + history)`}
           </p>
         </div>
         )}
 
         {/* Timeline */}
-        <div className="relative max-w-4xl mx-auto">
+        <div ref={timelineRef} className="relative max-w-4xl mx-auto">
           {/* Center Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2" />
 
