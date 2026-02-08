@@ -3,22 +3,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import { blogPosts } from "@/data/blog";
-import { Calendar } from "lucide-react";
-
-function formatDate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
 
 export default function BlogPage() {
-  const sorted = [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
@@ -39,7 +25,7 @@ export default function BlogPage() {
         </header>
 
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
-          {sorted.map((post) => (
+          {blogPosts.map((post) => (
             <li key={post.slug}>
               <Link
                 to={`/blog/${post.slug}`}
@@ -59,13 +45,6 @@ export default function BlogPage() {
                   />
                 </div>
                 <div className="p-4 sm:p-5">
-                  <time
-                    className="text-sm text-muted-foreground flex items-center gap-1.5 mb-2"
-                    dateTime={post.date}
-                  >
-                    <Calendar className="w-3.5 h-3.5" />
-                    {formatDate(post.date)}
-                  </time>
                   <h2 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
                     {post.title}
                   </h2>
