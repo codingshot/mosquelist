@@ -2,7 +2,7 @@
 
 Last updated: 2026-02-08
 
-**Status: All 12 Special:FilePath URLs fixed with direct upload.wikimedia.org links. See [mosque-image-reference.md](./mosque-image-reference.md) for complete image inventory.**
+**Status: 95+ mosques in database. 14 new mosques added from previously missing countries. Sources now tracked in JSON.**
 
 ---
 
@@ -10,17 +10,51 @@ Last updated: 2026-02-08
 
 | Field | Total Mosques | With Data | Missing |
 |-------|---------------|-----------|---------|
-| Image URL | 81+ | 81+ | 0 |
-| Local Images | 81+ | 15 | ~66 |
-| Official Website | 81+ | ~15 | ~66 |
-| Address | 81+ | ~35 | ~46 |
-| History | 81+ | ~40 | ~41 |
-| Tourism Notes | 81+ | ~35 | ~46 |
-| Architecture Notes | 81+ | ~40 | ~41 |
+| Image URL | 95+ | 95+ | 0 |
+| Local Images | 95+ | 15 | ~80 |
+| Official Website | 95+ | ~20 | ~75 |
+| Address | 95+ | ~40 | ~55 |
+| History | 95+ | ~55 | ~40 |
+| Tourism Notes | 95+ | ~50 | ~45 |
+| Architecture Notes | 95+ | ~55 | ~40 |
+| Sources | 95+ | 14 (new) | ~80 |
 
 ---
 
-## Fixed in Latest Update (2026-02-08)
+## New Countries Added (2026-02-08)
+
+| Country | Mosque | ID | Sources |
+|---------|--------|-----|---------|
+| **Kyrgyzstan** | Bishkek Central Mosque | `bishkek-central-mosque` | Wikipedia, Mosqpedia |
+| **Kyrgyzstan** | Dungan Mosque | `dungan-mosque-karakol` | Wikipedia, VisitKarakol |
+| **Tajikistan** | Imam Abu Hanifa Mosque | `imam-abu-hanifa-mosque-dushanbe` | Wikipedia, Mosqpedia, GlobalVoices |
+| **Somalia** | Mosque of Islamic Solidarity | `mosque-of-islamic-solidarity` | Wikipedia |
+| **Chad** | N'Djamena Grand Mosque | `ndjamena-grand-mosque` | Wikipedia |
+| **Libya** | Al-Naqah Mosque | `al-naqah-mosque-tripoli` | Wikipedia, Nabataea.net |
+| **Libya** | Gurgi Mosque | `gurgi-mosque-tripoli` | Wikipedia |
+| **Sierra Leone** | Freetown Central Mosque | `freetown-central-mosque` | Wikipedia |
+| **Tanzania** | Mohammed VI Mosque | `mohammed-vi-mosque-dar-es-salaam` | Wikipedia |
+| **Eritrea** | Great Mosque of Asmara | `great-mosque-of-asmara` | Wikipedia |
+| **Thailand** | Krue Se Mosque | `krue-se-mosque-pattani` | Wikipedia |
+| **Montenegro** | Husein-paša's Mosque | `husein-pasha-mosque-pljevlja` | Wikipedia |
+| **Comoros** | Badjanani Mosque | `badjanani-mosque-moroni` | Wikipedia |
+| **Tunisia** | Great Mosque of Kairouan | `great-mosque-of-kairouan` | Wikipedia, UNESCO |
+
+---
+
+## Countries Still Missing
+
+Priority countries not yet in database:
+
+| Region | Countries | Priority |
+|--------|-----------|----------|
+| Africa | Mauritania, Cameroon, Ivory Coast, Mozambique | High |
+| Asia | Myanmar | Medium |
+| Indian Ocean | Gabon | Low |
+
+---
+
+## Fixed in Previous Update (2026-02-08)
 
 ### Special:FilePath URLs Converted to Direct Upload URLs
 
@@ -53,6 +87,7 @@ Last updated: 2026-02-08
 | Sultan Qaboos Grand Mosque | https://sultanqaboosgrandmosque.com | ✅ VR Tour |
 | Great Mosque of Central Java | https://majt.or.id | ✅ Official |
 | Islamic Center of Washington | https://www.islamiccenterdc.org | ✅ Official |
+| Great Mosque of Kairouan | https://whc.unesco.org/en/list/499 | ✅ UNESCO |
 
 ---
 
@@ -73,27 +108,25 @@ These mosques have only basic required fields:
 
 ---
 
-## Gallery URLs Still Using Special:FilePath
+## Data Schema
 
-These are secondary images (less critical, but should eventually be converted):
+New `sources` field added to Mosque type:
 
-- Masjid al-Haram: 2 gallery URLs
-- Al-Masjid an-Nabawi: 2 gallery URLs  
-- Al-Aqsa: 2 gallery URLs
-- Imam Reza Shrine: 2 gallery URLs
-- Sheikh Zayed: 2 gallery URLs
-- Hassan II: 2 gallery URLs
-- Blue Mosque: 2 gallery URLs
-- Faisal Mosque: 2 gallery URLs
-- Istiqlal Mosque: 2 gallery URLs
-- Badshahi Mosque: 2 gallery URLs
-- Sultan Qaboos: 2 gallery URLs
+```typescript
+interface Mosque {
+  // ... existing fields
+  /** Data sources and references for this mosque entry */
+  sources?: string[];
+}
+```
+
+All new mosques now include sources for fact-checking. Existing mosques should have sources added when enriching data.
 
 ---
 
 ## Reference Documents
 
-- **[mosque-image-reference.md](./mosque-image-reference.md)** - Complete image URL inventory for all 81+ mosques
+- **[mosque-image-reference.md](./mosque-image-reference.md)** - Complete image URL inventory for all mosques
 - **[countries-and-mosques.md](./countries-and-mosques.md)** - Mosques by country
 - **[missing-countries-and-mosques.md](./missing-countries-and-mosques.md)** - Countries without mosque representation
 

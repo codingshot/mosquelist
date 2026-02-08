@@ -475,6 +475,26 @@ export default function MosquePage() {
                 </div>
               )}
 
+              {mosque.sources && mosque.sources.length > 0 && (
+                <div className="mt-6 pt-4 border-t border-border">
+                  <h2 className="font-serif text-lg font-semibold text-foreground">Sources</h2>
+                  <ul className="mt-2 space-y-1">
+                    {mosque.sources.map((source, idx) => (
+                      <li key={idx} className="text-sm text-muted-foreground">
+                        <a
+                          href={source}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                        >
+                          {source.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {relatedMosques.length > 0 && (
                 <div className="mt-10 pt-8 border-t border-border">
                   <h2 className="font-serif text-xl font-semibold text-foreground">
