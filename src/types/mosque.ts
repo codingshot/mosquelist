@@ -36,6 +36,14 @@ export interface Mosque {
   denomination?: "sunni" | "shia";
   /** Data sources and references for this mosque entry (Wikipedia, official sites, etc.) */
   sources?: string[];
+  /** Construction cost in USD (if known) */
+  constructionCost?: string;
+  /** Year construction started (for under-construction mosques) */
+  constructionStarted?: string;
+  /** Expected completion year (for under-construction mosques) */
+  completionExpected?: string;
+  /** Status: completed, under-construction, planned */
+  status?: "completed" | "under-construction" | "planned";
 }
 
 export interface TimelineEvent {

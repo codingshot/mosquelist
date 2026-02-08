@@ -2,7 +2,7 @@
 
 Outline of **major countries not yet represented** in the mosque list, **major states/regions and cities** to target for large, city-center, and historic mosques, and **suggested mosques to add** for each. Use this for prioritising new entries in `src/data/mosques.json`.
 
-**Current coverage:** 57 countries, 103+ mosques (see `docs/countries-and-mosques.md`).
+**Current coverage:** 57+ countries, 115+ mosques (see `docs/countries-and-mosques.md`).
 
 **Last updated:** 2026-02-08
 
@@ -25,7 +25,7 @@ Outline of **major countries not yet represented** in the mosque list, **major s
 Use these to prioritise **additional** mosques in countries already in the app: large, city-center, or historic mosques in key cities/states.
 
 ### Pakistan
-- **Punjab:** Lahore (Badshahi in app), Faisalabad, Multan, Rawalpindi — large or historic city mosques.
+- **Punjab:** Lahore (Badshahi, Wazir Khan, Moti Masjid in app), Faisalabad, Multan, Rawalpindi — large or historic city mosques.
 - **Sindh:** Karachi (Grand Jamia in app), Hyderabad, Sukkur.
 - **Khyber Pakhtunkhwa:** Peshawar, Mardan — historic frontier mosques.
 - **Balochistan:** Quetta — main city mosque.
@@ -57,6 +57,7 @@ Use these to prioritise **additional** mosques in countries already in the app: 
 - **Cairo:** Al-Azhar, Sultan Hassan in app; others as needed.
 
 ### Turkey
+- **Istanbul:** Süleymaniye, Selimiye, Blue Mosque, Rüstem Pasha, Mihrimah, Yeni Mosque all in app.
 - **Anatolia:** Konya, Kayseri, Sivas, Erzurum — Seljuk or Ottoman historic.
 - **Black Sea:** Trabzon, Samsun — historic or city-center.
 - **Aegean / Mediterranean:** Izmir, Antalya — large or historic.
