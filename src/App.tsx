@@ -61,6 +61,10 @@ const VisitorTipsPage = lazyWithChunkErrorLogging(
   () => import("./pages/VisitorTipsPage"),
   "VisitorTipsPage"
 );
+const GlossaryPage = lazyWithChunkErrorLogging(
+  () => import("./pages/GlossaryPage"),
+  "GlossaryPage"
+);
 const MapPage = lazyWithChunkErrorLogging(() => import("./pages/MapPage"), "MapPage");
 const BlogPage = lazyWithChunkErrorLogging(() => import("./pages/BlogPage"), "BlogPage");
 const BlogPostPage = lazyWithChunkErrorLogging(() => import("./pages/BlogPostPage"), "BlogPostPage");
@@ -100,6 +104,7 @@ const App = () => (
               <Route path="/about" element={<AboutPage />} />
               <Route path="/guides/travel" element={<TravelGuidePage />} />
               <Route path="/guides/visitor-tips" element={<VisitorTipsPage />} />
+              <Route path="/glossary" element={<GlossaryPage />} />
               <Route path="/map" element={<MapPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />

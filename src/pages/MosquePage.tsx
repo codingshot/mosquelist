@@ -6,7 +6,7 @@ import { getMosqueBySlug } from "@/data/mosques";
 import { MosqueSEO } from "@/components/MosqueSEO";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBucketList } from "@/hooks/useBucketList";
-import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown, Images, DoorOpen } from "lucide-react";
+import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown, Images, DoorOpen, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,7 @@ import { getRelatedMosques } from "@/lib/related-mosques";
 import { getArchitectureStyleDescription } from "@/data/architecture-styles";
 import { ImageGallery } from "@/components/ImageGallery";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
+import { getPrayerTimesUrl } from "@/lib/prayer-times";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -365,6 +366,25 @@ export default function MosquePage() {
                     </a>
                   </>
                 )}
+                {(() => {
+                  const prayerUrl = getPrayerTimesUrl(mosque.coordinates, mosque.location, mosque.country);
+                  if (!prayerUrl) return null;
+                  return (
+                    <>
+                      <span className="text-muted-foreground">·</span>
+                      <a
+                        href={prayerUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        aria-label="Prayer times for this location (opens in new tab)"
+                      >
+                        <Clock className="h-4 w-4" />
+                        Prayer times
+                      </a>
+                    </>
+                  );
+                })()}
               </div>
 
               <p className="mt-6 text-lg leading-relaxed text-foreground">{mosque.description}</p>
