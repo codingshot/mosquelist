@@ -75,7 +75,7 @@ const Index = () => {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {curatedLists.map((list) => (
+              {curatedLists.slice(0, 6).map((list) => (
                 <Link
                   key={list.slug}
                   to={`/lists/${list.slug}`}
@@ -100,7 +100,14 @@ const Index = () => {
               ))}
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-12 flex flex-wrap justify-center gap-4">
+              <Button variant="default" size="lg" asChild>
+                <Link to="/lists" className="gap-2">
+                  <List className="h-4 w-4" />
+                  See More Lists
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              </Button>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/bucket-list" className="gap-2">
                   <Star className="h-4 w-4" />

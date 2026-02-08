@@ -5,9 +5,20 @@ import { PageSEO } from "@/components/PageSEO";
 import { getBlogPostBySlug, getRelatedPosts } from "@/data/blog";
 import { getMosqueBySlug } from "@/data/mosques";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ChevronRight, MapPin } from "lucide-react";
+import { ArrowLeft, ChevronRight, MapPin, Search } from "lucide-react";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
+import { getExploreUrl } from "@/lib/explore-url";
 
+/** Map blog slugs to architectural style filter values */
+const ARCHITECTURE_STYLE_MAP: Record<string, string> = {
+  "ottoman-mosque-architecture": "Ottoman",
+  "persian-mosque-architecture": "Persian",
+  "moorish-mosque-architecture": "Moorish",
+  "sudano-sahelian-mosque-architecture": "Sudano-Sahelian",
+  "malay-mosque-architecture": "Malay",
+  "fatimid-mamluk-mosque-architecture": "Fatimid",
+  "mughal-mosque-architecture": "Mughal",
+};
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getBlogPostBySlug(slug) : undefined;
@@ -80,11 +91,33 @@ export default function BlogPostPage() {
 
           <div className="prose prose-lg max-w-none text-foreground">
             {post.paragraphs.map((para, i) => (
-              <p key={i} className="text-muted-foreground mb-6 last:mb-0">
-                {para}
-              </p>
+              <p
+                key={i}
+                className="text-muted-foreground mb-6 last:mb-0"
+                dangerouslySetInnerHTML={{
+                  __html: para
+                    .replace(/\*\*(.+?)\*\*/g, "<strong class='text-foreground font-semibold'>$1</strong>")
+                    .replace(/\\n/g, "<br />")
+                    .replace(/• /g, "<br />• "),
+                }}
+              />
             ))}
           </div>
+
+          {/* Browse mosques by style CTA for architecture posts */}
+          {slug && ARCHITECTURE_STYLE_MAP[slug] && (
+            <div className="mt-8 p-6 rounded-xl border border-primary/20 bg-primary/5">
+              <p className="text-foreground font-medium mb-3">
+                Explore mosques with {ARCHITECTURE_STYLE_MAP[slug]} architecture
+              </p>
+              <Button asChild className="gap-2">
+                <Link to={getExploreUrl({ style: ARCHITECTURE_STYLE_MAP[slug] })}>
+                  <Search className="w-4 h-4" />
+                  Browse {ARCHITECTURE_STYLE_MAP[slug]} Mosques
+                </Link>
+              </Button>
+            </div>
+          )}
 
           {/* Featured Mosques */}
           {featuredMosques.length > 0 && (
