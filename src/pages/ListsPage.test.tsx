@@ -25,7 +25,11 @@ describe("ListsPage", () => {
 
   it("shows holy sites list", () => {
     renderListsPage();
-    expect(screen.getByRole("link", { name: /holy sites/i })).toBeInTheDocument();
+    // Use getAllByRole since there are multiple lists containing "holy sites"
+    const holySitesLinks = screen.getAllByRole("link", { name: /holy sites/i });
+    expect(holySitesLinks.length).toBeGreaterThan(0);
+    // Check the first one (the primary "Holy Sites" list)
+    expect(holySitesLinks[0]).toHaveAttribute("href", "/lists/holy-sites");
   });
 
   it("shows biggest mosques list", () => {

@@ -1,5 +1,6 @@
 const FAVORITES_KEY = "mosquelist_favorites";
 const BUCKET_KEY = "mosquelist_bucket";
+const FAVORITE_LISTS_KEY = "mosquelist_favorite_lists";
 
 function safeGet<T>(key: string, fallback: T): T {
   try {
@@ -46,4 +47,14 @@ export function getBucketList(): BucketListItem[] {
 
 export function setBucketList(items: BucketListItem[]): void {
   safeSet(BUCKET_KEY, items);
+}
+
+/** Favorite lists (curated list slugs) */
+export function getFavoriteLists(): string[] {
+  const data = safeGet<string[]>(FAVORITE_LISTS_KEY, []);
+  return Array.isArray(data) ? data : [];
+}
+
+export function setFavoriteLists(slugs: string[]): void {
+  safeSet(FAVORITE_LISTS_KEY, slugs);
 }

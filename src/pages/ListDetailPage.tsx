@@ -7,6 +7,7 @@ import { ListSEO } from "@/components/ListSEO";
 import { getListBySlug } from "@/data/lists";
 import { getMosqueById } from "@/data/mosques";
 import { useBucketList } from "@/hooks/useBucketList";
+import { useFavoriteLists } from "@/hooks/useFavoriteLists";
 import {
   ArrowLeft,
   Plus,
@@ -35,6 +36,7 @@ export default function ListDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { addToBucketList, bucketList } = useBucketList();
+  const { isFavoriteList, toggleFavoriteList } = useFavoriteLists();
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [listFilter, setListFilter] = useState<ListFilter>("all");
   const [shareOpen, setShareOpen] = useState(false);
@@ -163,9 +165,28 @@ export default function ListDetailPage() {
             <div className="mb-8">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
-                    {list.name}
-                  </h1>
+                  <div className="flex items-center gap-3">
+                    <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
+                      {list.name}
+                    </h1>
+                    {/* Favorite star */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const wasFavorite = isFavoriteList(list.slug);
+                        toggleFavoriteList(list.slug);
+                        toast.success(wasFavorite ? `Removed from favorites` : `Added to favorites`);
+                      }}
+                      className={`p-2 rounded-full transition-all touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                        isFavoriteList(list.slug)
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:text-primary hover:bg-primary/10"
+                      }`}
+                      aria-label={isFavoriteList(list.slug) ? "Remove from favorites" : "Add to favorites"}
+                    >
+                      <Star className={`h-6 w-6 ${isFavoriteList(list.slug) ? "fill-primary" : ""}`} />
+                    </button>
+                  </div>
                   <p className="mt-2 text-muted-foreground text-lg">
                     {list.description}
                   </p>
