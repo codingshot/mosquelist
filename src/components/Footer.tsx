@@ -125,6 +125,11 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/glossary" className="inline-block py-2 min-h-[44px] min-w-[44px] touch-manipulation text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
+                  Glossary
+                </Link>
+              </li>
+              <li>
                 <Link to="/blog" className="inline-block py-2 min-h-[44px] min-w-[44px] touch-manipulation text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded">
                   Blog
                 </Link>
