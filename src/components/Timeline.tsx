@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { timelineEvents, mosques, getUniqueCountries } from "@/data/mosques";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
-import { Calendar, ArrowUpDown, MapPin, ChevronRight } from "lucide-react";
+import { parseEstablishmentYear, formatYearDisplay, ISLAMIC_HISTORY_PERIODS } from "@/lib/timeline-utils";
+import { Calendar, ArrowUpDown, MapPin, ChevronRight, History } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -13,11 +14,28 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
+import type { TimelineEvent } from "@/types/mosque";
 
-/** Parse numeric year from established string (e.g. "537 CE" -> 537, "2019" -> 2019). */
-function parseYear(yearStr: string): number {
-  const match = String(yearStr).match(/\d{1,4}/);
-  return match ? parseInt(match[0], 10) : 0;
+/** Build combined timeline with mosque events and Islamic history context */
+function buildCombinedTimeline(mosqueEvents: TimelineEvent[], includeContext: boolean): (TimelineEvent | { isContextEvent: true; year: string; label: string; description: string })[] {
+  if (!includeContext) {
+    return mosqueEvents;
+  }
+  
+  // Combine mosque events with history periods
+  const contextEvents = ISLAMIC_HISTORY_PERIODS.map((p) => ({
+    isContextEvent: true as const,
+    year: String(p.year),
+    label: p.label,
+    description: p.description,
+  }));
+  
+  const combined = [...mosqueEvents, ...contextEvents];
+  return combined.sort((a, b) => {
+    const yearA = parseEstablishmentYear(a.year);
+    const yearB = parseEstablishmentYear(b.year);
+    return yearA - yearB;
+  });
 }
 
 type SortOrder = "oldest" | "newest";
@@ -35,6 +53,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   const [region, setRegion] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [visitorFriendlyOnly, setVisitorFriendlyOnly] = useState(false);
+  const [showHistoryContext, setShowHistoryContext] = useState(!isPreview);
 
   const mosqueById = useMemo(() => new Map(mosques.map((m) => [m.id, m])), []);
   const countries = useMemo(() => getUniqueCountries(), []);
@@ -56,14 +75,19 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
       return true;
     });
     const order = sortOrder === "newest" ? -1 : 1;
-    list = [...list].sort((a, b) => order * (parseYear(a.year) - parseYear(b.year)));
+    list = [...list].sort((a, b) => order * (parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year)));
     return list;
   }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview, visitorFriendlyOnly]);
 
-  // Apply limit for preview mode
+  // Combine with Islamic history context if enabled
+  const combinedEvents = useMemo(() => {
+    return buildCombinedTimeline(filteredAndSortedEvents, showHistoryContext && !isPreview);
+  }, [filteredAndSortedEvents, showHistoryContext, isPreview]);
+
+  // Apply limit for preview mode - use combinedEvents for full page, filteredAndSortedEvents for preview
   const displayedEvents = isPreview
     ? filteredAndSortedEvents.slice(0, limit)
-    : filteredAndSortedEvents;
+    : combinedEvents;
   const hasMore = isPreview && filteredAndSortedEvents.length > limit;
 
   return (
@@ -145,6 +169,17 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
             />
             <span className="text-sm text-foreground">Non-Muslims can visit</span>
           </label>
+          <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-primary/30 bg-primary/5 cursor-pointer hover:bg-primary/10 touch-manipulation self-end sm:self-center">
+            <History className="h-4 w-4 text-primary" />
+            <input
+              type="checkbox"
+              checked={showHistoryContext}
+              onChange={(e) => setShowHistoryContext(e.target.checked)}
+              className="rounded border-border"
+              aria-label="Show Islamic history milestones"
+            />
+            <span className="text-sm text-foreground">Show Islamic eras</span>
+          </label>
           <p className="text-sm text-muted-foreground w-full sm:w-auto sm:self-center">
             {filteredAndSortedEvents.length} mosque{filteredAndSortedEvents.length !== 1 ? "s" : ""} shown
           </p>
@@ -166,12 +201,63 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </p>
             ) : (
             displayedEvents.map((event, index) => {
-              const mosque = mosqueById.get(event.mosqueId);
+              // Check if this is a context event (Islamic history milestone)
+              const isContext = "isContextEvent" in event && event.isContextEvent;
+              
+              if (isContext) {
+                // Cast to context event type
+                const contextEvent = event as { isContextEvent: true; year: string; label: string; description: string };
+                
+                // Render context event (Islamic history milestone)
+                return (
+                  <div
+                    key={`context-${contextEvent.year}-${index}`}
+                    className={`relative flex items-center gap-6 ${
+                      index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                    }`}
+                  >
+                    {/* Dot - accent color for context events */}
+                    <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-accent border-4 border-background z-10 md:-translate-x-1/2" />
+
+                    {/* Content - styled differently for context events */}
+                    <div
+                      className={`ml-12 md:ml-0 md:w-1/2 ${
+                        index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
+                      }`}
+                    >
+                      <div className="bg-accent/10 rounded-lg shadow-md border border-accent/30 overflow-hidden min-w-0">
+                        <div className="p-4 sm:p-5">
+                          <div className="flex items-center gap-2 mb-1">
+                            <History className="h-4 w-4 text-accent-foreground" />
+                            <span className="text-xs font-medium text-accent-foreground uppercase tracking-wide">
+                              Islamic History
+                            </span>
+                          </div>
+                          <span className="font-handwriting text-xl sm:text-2xl text-accent-foreground font-semibold">
+                            {formatYearDisplay(contextEvent.year)}
+                          </span>
+                          <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
+                            {contextEvent.label}
+                          </h3>
+                          <p className="text-muted-foreground text-sm sm:text-base mt-2">{contextEvent.description}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Empty space for alternating layout */}
+                    <div className="hidden md:block md:w-1/2" />
+                  </div>
+                );
+              }
+              
+              // Regular mosque event
+              const mosqueEvent = event as TimelineEvent;
+              const mosque = mosqueById.get(mosqueEvent.mosqueId);
               const { src: imageSrc, fallbackUrl: imageFallback } = mosque ? getMosqueImageSrc(mosque) : { src: "/placeholder.svg", fallbackUrl: null };
 
               return (
                 <div
-                  key={`${event.mosqueId}-${event.year}-${index}`}
+                  key={`${mosqueEvent.mosqueId}-${mosqueEvent.year}-${index}`}
                   className={`relative flex items-center gap-6 ${
                     index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
@@ -188,10 +274,10 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                     <div className="bg-card rounded-lg shadow-lg border border-border mosque-card-shadow overflow-hidden min-w-0">
                       <div className={`flex ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}>
                         <div className="shrink-0 w-24 sm:w-28 md:w-32 self-stretch min-h-0 overflow-hidden bg-muted">
-                          <Link to={`/mosque/${event.mosqueId}`} className="block h-full w-full">
+                          <Link to={`/mosque/${mosqueEvent.mosqueId}`} className="block h-full w-full">
                             <img
                               src={imageSrc}
-                              alt={mosque ? `${mosque.name} - ${event.year}` : ""}
+                              alt={mosque ? `${mosque.name} - ${mosqueEvent.year}` : ""}
                               className="h-full w-full object-cover"
                               loading="lazy"
                               decoding="async"
@@ -203,17 +289,17 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                         </div>
                         <div className="p-4 sm:p-5 min-w-0 flex-1">
                           <span className="font-handwriting text-xl sm:text-2xl text-primary font-semibold">
-                            {event.year}{event.year.match(/^\d+$/) ? " CE" : ""}
+                            {formatYearDisplay(mosqueEvent.year)}
                           </span>
                           <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
                             <Link
-                              to={`/mosque/${event.mosqueId}`}
+                              to={`/mosque/${mosqueEvent.mosqueId}`}
                               className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
                             >
-                              {event.mosque}
+                              {mosqueEvent.mosque}
                             </Link>
                           </h3>
-                          <p className="text-muted-foreground text-sm sm:text-base mt-2">{event.event}</p>
+                          <p className="text-muted-foreground text-sm sm:text-base mt-2">{mosqueEvent.event}</p>
                           {mosque?.location && mosque?.country && (
                             <p className="text-xs text-muted-foreground mt-1.5">
                               {mosque.location}, {mosque.country}
