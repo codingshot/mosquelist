@@ -282,16 +282,35 @@
     },
     {
       "slug": "unesco-heritage",
-      "name": "UNESCO World Heritage",
-      "description": "Mosques recognized as UNESCO World Heritage Sites for their cultural significance.",
+      "name": "UNESCO World Heritage Mosques",
+      "description": "Mosques and mosque sites recognized by UNESCO for their outstanding universal value—from ancient Kilwa to the walled city of Harar.",
       "mosqueIds": [
+        "great-mosque-of-kilwa",
+        "songo-mnara-mosque",
+        "harar-jami-mosque",
+        "sixty-dome-mosque",
         "great-mosque-of-djenne",
         "great-mosque-of-kairouan",
         "hagia-sophia-istanbul",
         "umayyad-mosque",
         "kalon-mosque-bukhara",
         "al-azhar-mosque",
-        "gazi-husrev-beg-mosque"
+        "selimiye-mosque",
+        "gazi-husrev-beg-mosque",
+        "al-qarawiyyin"
+      ]
+    },
+    {
+      "slug": "swahili-coast",
+      "name": "Swahili Coast Mosques",
+      "description": "Historic mosques along the East African Swahili Coast—from 11th century Kilwa to modern Zanzibar and Mombasa.",
+      "mosqueIds": [
+        "great-mosque-of-kilwa",
+        "songo-mnara-mosque",
+        "mandhry-mosque-mombasa",
+        "friday-mosque-moroni",
+        "mohammed-vi-mosque-dar-es-salaam",
+        "jamia-mosque-nairobi"
       ]
     },
     {
