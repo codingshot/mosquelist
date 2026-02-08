@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { mosques } from "@/data/mosques";
-import { curatedLists } from "@/data/lists";
-import { Check, Plus, MapPin, Plane, X, GripVertical, ArrowUpDown, List, ChevronRight } from "lucide-react";
+import { curatedLists, getListBySlug } from "@/data/lists";
+import { Check, Plus, MapPin, Plane, X, GripVertical, ArrowUpDown, List, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBucketList } from "@/hooks/useBucketList";
+import { useFavoriteLists } from "@/hooks/useFavoriteLists";
 import { toast } from "sonner";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import {
@@ -186,6 +187,60 @@ type BucketSort =
   | "country"
   | "visited-first"
   | "unvisited-first";
+
+/** Section showing favorite lists at the bottom of bucket list page */
+function FavoriteListsSection() {
+  const { favoriteLists, removeFavoriteList } = useFavoriteLists();
+  
+  if (favoriteLists.length === 0) return null;
+  
+  const lists = favoriteLists
+    .map((slug) => getListBySlug(slug))
+    .filter((l): l is NonNullable<typeof l> => l != null);
+  
+  if (lists.length === 0) return null;
+
+  return (
+    <div className="mt-8 rounded-xl border border-primary/20 bg-primary/5 p-4 sm:p-6 mosque-card-shadow">
+      <h3 className="font-semibold text-foreground mb-1 flex items-center gap-2">
+        <Star className="w-4 h-4 text-primary fill-primary shrink-0" />
+        My Favorite Lists
+      </h3>
+      <p className="text-sm text-muted-foreground mb-4">
+        Your starred curated lists for quick access.
+      </p>
+      <div className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2">
+        {lists.map((list) => (
+          <div
+            key={list.slug}
+            className="relative group rounded-lg border border-primary/30 bg-card px-3 py-2.5 hover:border-primary/50 hover:bg-secondary/50 transition-colors"
+          >
+            <Link
+              to={`/lists/${list.slug}`}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[44px] touch-manipulation w-full"
+            >
+              <Star className="w-3.5 h-3.5 shrink-0 text-primary fill-primary" />
+              <span className="min-w-0 truncate flex-1">{list.name}</span>
+              <ChevronRight className="w-3.5 h-3.5 shrink-0 text-muted-foreground" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                removeFavoriteList(list.slug);
+                toast.success(`Removed "${list.name}" from favorites`);
+              }}
+              className="absolute top-1/2 -translate-y-1/2 right-8 p-1 rounded text-muted-foreground hover:text-destructive hover:bg-destructive/10 opacity-0 group-hover:opacity-100 transition-opacity touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label={`Remove ${list.name} from favorites`}
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 
 export const BucketList = () => {
   const {
@@ -531,6 +586,9 @@ export const BucketList = () => {
             </div>
           </div>
 
+          {/* Favorite Lists Section */}
+          <FavoriteListsSection />
+
           {/* Other lists */}
           <div className="mt-8 rounded-xl border border-border bg-card p-4 sm:p-6 mosque-card-shadow">
             <h3 className="font-semibold text-foreground mb-1 flex items-center gap-2">
@@ -541,7 +599,7 @@ export const BucketList = () => {
               Add from 100+ mosques or curated lists: Holy Sites, Biggest Mosques, Turkey, Pakistan, Indonesia, and more.
             </p>
             <div className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2">
-              {curatedLists.map((list) => (
+              {curatedLists.slice(0, 9).map((list) => (
                 <Link
                   key={list.slug}
                   to={`/lists/${list.slug}`}
@@ -553,9 +611,9 @@ export const BucketList = () => {
               ))}
             </div>
             <Button variant="outline" size="sm" className="mt-4 gap-2 min-h-[44px] touch-manipulation w-full sm:w-auto" asChild>
-              <Link to="/bucket-list">
+              <Link to="/lists">
                 <List className="w-4 h-4" />
-                View my list
+                View all lists
               </Link>
             </Button>
           </div>
