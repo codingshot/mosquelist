@@ -56,7 +56,7 @@ const PARAM_FACILITY_WHEELCHAIR = "facilityWheelchair";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
 type ViewType = "grid" | "list" | "compact" | "swipe" | "map";
-type SortType = "holyCapacity" | "touristFirst" | "name" | "capacity" | "area" | "established" | "country";
+type SortType = "relevance" | "holyCapacity" | "touristFirst" | "name" | "capacity" | "area" | "established" | "country";
 
 /** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007) */
 function establishedYear(established: string): number {
@@ -74,7 +74,9 @@ function useMosqueSearchParams() {
     viewParam === "grid" || viewParam === "list" || viewParam === "compact" || viewParam === "swipe" || viewParam === "map"
       ? viewParam
       : "grid";
-  const sort = (searchParams.get(PARAM_SORT) as SortType) || "holyCapacity";
+  const sortParam = searchParams.get(PARAM_SORT) as SortType | null;
+  // Default to relevance when searching, holyCapacity otherwise
+  const sort = sortParam || "holyCapacity";
   const country = searchParams.get(PARAM_COUNTRY) ?? "";
   const region = searchParams.get(PARAM_REGION) ?? "";
   const womenOnly = searchParams.get(PARAM_WOMEN) === "1";
@@ -340,9 +342,20 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
 
     list = filterMosquesByQuery(list, query);
 
+    // When there's a search query and no explicit sort, keep relevance order from filterMosquesByQuery
+    // Otherwise, apply the selected sort
     const order = sort || "holyCapacity";
+    
+    // If searching and using default sort, use relevance (keep search order)
+    const effectiveSort = query && order === "holyCapacity" ? "relevance" : order;
+    
+    if (effectiveSort === "relevance") {
+      // Keep the order from filterMosquesByQuery (already sorted by relevance)
+      return list;
+    }
+    
     const sorted = [...list].sort((a, b) => {
-      switch (order) {
+      switch (effectiveSort) {
         case "holyCapacity":
           if (a.isHolySite !== b.isHolySite) return a.isHolySite ? -1 : 1;
           return b.capacity - a.capacity;
