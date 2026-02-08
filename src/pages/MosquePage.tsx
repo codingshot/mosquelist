@@ -6,7 +6,7 @@ import { getMosqueBySlug } from "@/data/mosques";
 import { MosqueSEO } from "@/components/MosqueSEO";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBucketList } from "@/hooks/useBucketList";
-import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown, Images, DoorOpen, Clock } from "lucide-react";
+import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown, Images, DoorOpen, Clock, Play } from "lucide-react";
 import { toast } from "sonner";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Button } from "@/components/ui/button";
@@ -492,6 +492,28 @@ export default function MosquePage() {
                 <div className="mt-6">
                   <h2 className="font-serif text-xl font-semibold text-foreground">Visitor information</h2>
                   <p className="mt-2 text-muted-foreground">{mosque.tourismNotes}</p>
+                </div>
+              )}
+
+              {mosque.youtubeVideoId && (
+                <div className="mt-6">
+                  <h2 className="font-serif text-xl font-semibold text-foreground flex items-center gap-2">
+                    <Play className="h-5 w-5 text-primary" />
+                    Video Tour
+                  </h2>
+                  <div className="mt-3 relative aspect-video rounded-lg overflow-hidden border border-border bg-secondary/30">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${mosque.youtubeVideoId}?rel=0`}
+                      title={`${mosque.name} video tour`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Video sourced from YouTube. Content belongs to original creators.
+                  </p>
                 </div>
               )}
 
