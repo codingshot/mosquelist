@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/HeroSection";
 import { MosqueGrid } from "@/components/MosqueGrid";
-import { Timeline } from "@/components/Timeline";
-import { BucketList } from "@/components/BucketList";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
 import { Link } from "react-router-dom";
 import { curatedLists } from "@/data/lists";
+
+// Lazy load below-the-fold components
+const Timeline = lazy(() => import("@/components/Timeline").then(m => ({ default: m.Timeline })));
+const BucketList = lazy(() => import("@/components/BucketList").then(m => ({ default: m.BucketList })));
 import {
   List,
   MapPin,
@@ -50,10 +52,14 @@ const Index = () => {
         </section>
 
         {/* Timeline - limited preview with "See All" link */}
-        <Timeline limit={10} showFilters={false} />
+        <Suspense fallback={<div className="py-16 md:py-24 bg-background flex items-center justify-center"><div className="animate-pulse text-muted-foreground">Loading timeline...</div></div>}>
+          <Timeline limit={10} showFilters={false} />
+        </Suspense>
 
         {/* Bucket List - component has id="bucket-list" */}
-        <BucketList />
+        <Suspense fallback={<div className="py-16 md:py-24 bg-paper-cream flex items-center justify-center"><div className="animate-pulse text-muted-foreground">Loading...</div></div>}>
+          <BucketList />
+        </Suspense>
 
         {/* Lists */}
         <section id="lists" className="py-16 md:py-24 bg-paper-cream islamic-pattern scroll-mt-20">

@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useCallback } from "react";
+import { useMemo, useState, useRef, useCallback, memo } from "react";
 import { Link } from "react-router-dom";
 import { timelineEvents, mosques, getUniqueCountries } from "@/data/mosques";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
@@ -17,6 +17,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Slider } from "@/components/ui/slider";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import type { TimelineEvent } from "@/types/mosque";
+import type { Mosque } from "@/types/mosque";
 
 /** Context event type with source URL */
 interface ContextEvent {
@@ -220,24 +221,29 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   ].filter(Boolean).length;
 
   return (
-    <section id="timeline" className="py-16 md:py-24 bg-background scroll-mt-20">
+    <section 
+      id="timeline" 
+      className="py-16 md:py-24 bg-background scroll-mt-20"
+      aria-labelledby="timeline-heading"
+      role="region"
+    >
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 bg-secondary px-4 py-2 rounded-full mb-4">
-            <Calendar className="w-4 h-4 text-primary" />
+        <header className="text-center mb-8 md:mb-12">
+          <div className="inline-flex items-center gap-2 bg-secondary px-4 py-2 rounded-full mb-4" aria-hidden="true">
+            <Calendar className="w-4 h-4 text-primary" aria-hidden="true" />
             <span className="text-sm font-medium text-foreground">
               1400+ Years of History
             </span>
           </div>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 id="timeline-heading" className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Timeline of Major Mosques
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Journey through history—from 622 CE to today—and discover when
             the world's most significant mosques and holy sites were built.
           </p>
-        </div>
+        </header>
 
         {/* Sort & Filters — hidden in preview mode */}
         {showFilters && (
@@ -410,12 +416,17 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
         )}
 
         {/* Timeline */}
-        <div ref={timelineRef} className="relative max-w-4xl mx-auto">
+        <div 
+          ref={timelineRef} 
+          className="relative max-w-4xl mx-auto"
+          role="feed"
+          aria-label={`Timeline showing ${displayedEvents.length} events`}
+        >
           {/* Center Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2" aria-hidden="true" />
 
           {/* Events (filtered & sorted) */}
-          <div className="space-y-6 md:space-y-8">
+          <div className="space-y-6 md:space-y-8" role="list">
             {displayedEvents.length === 0 ? (
               <p className="text-center text-muted-foreground py-12">
                 {visitorFriendlyOnly
