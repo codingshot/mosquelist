@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
-import { PageSEO } from "@/components/PageSEO";
+import { ListSEO } from "@/components/ListSEO";
 import { getListBySlug } from "@/data/lists";
 import { getMosqueById } from "@/data/mosques";
 import { useBucketList } from "@/hooks/useBucketList";
@@ -146,35 +146,9 @@ export default function ListDetailPage() {
     );
   }
 
-  const listSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: list.name,
-    description: list.description,
-    numberOfItems: listMosques.length,
-    url: `https://mosquelist.com/lists/${list.slug}`,
-    itemListElement: listMosques.map((m, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Place",
-        name: m.name,
-        url: `https://mosquelist.com/mosque/${m.id}`,
-      },
-    })),
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO
-        title={`${list.name} - MosqueList | Curated Mosque List`}
-        description={list.description}
-        path={`/lists/${list.slug}`}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
-      />
+      <ListSEO list={list} mosques={listMosques} />
       <Navigation />
       <main id="main-content" className="pt-16">
         <section className="py-16 md:py-24 bg-paper-cream islamic-pattern">

@@ -40,7 +40,202 @@
         "jakarta-islamic-center",
         "at-tin-mosque",
         "sabanci-central-mosque",
-        "jama-masjid-delhi"
+        "jama-masjid-delhi",
+        "great-mosque-of-kairouan"
+      ]
+    },
+    {
+      "slug": "7th-century",
+      "name": "7th Century (600s CE)",
+      "description": "The earliest mosques from Islam's foundational era—Mecca, Medina, and the first conquests.",
+      "mosqueIds": [
+        "masjid-al-haram",
+        "masjid-an-nabawi",
+        "great-mosque-of-kairouan"
+      ]
+    },
+    {
+      "slug": "8th-century",
+      "name": "8th Century (700s CE)",
+      "description": "Umayyad masterpieces including Damascus and Jerusalem.",
+      "mosqueIds": [
+        "al-aqsa",
+        "umayyad-mosque",
+        "imam-reza-shrine"
+      ]
+    },
+    {
+      "slug": "10th-century",
+      "name": "10th Century (900s CE)",
+      "description": "Fatimid and Abbasid era mosques including Al-Azhar and early shrines.",
+      "mosqueIds": [
+        "al-azhar-mosque",
+        "imam-ali-shrine",
+        "al-naqah-mosque-tripoli"
+      ]
+    },
+    {
+      "slug": "16th-century",
+      "name": "16th Century (1500s CE)",
+      "description": "Ottoman Golden Age mosques by master architects like Mimar Sinan.",
+      "mosqueIds": [
+        "blue-mosque",
+        "suleymaniye-mosque",
+        "hagia-sophia-istanbul",
+        "gazi-husrev-beg-mosque",
+        "krue-se-mosque",
+        "husein-pasha-mosque-pljevlja",
+        "mustafa-pasha-mosque"
+      ]
+    },
+    {
+      "slug": "17th-century",
+      "name": "17th Century (1600s CE)",
+      "description": "Mughal masterpieces and Ottoman expansion—Delhi, Lahore, Thatta, and the Maldives.",
+      "mosqueIds": [
+        "jama-masjid-delhi",
+        "badshahi-mosque",
+        "shah-jahan-mosque-thatta",
+        "hukru-miskiy-male"
+      ]
+    },
+    {
+      "slug": "20th-century",
+      "name": "20th Century (1900s CE)",
+      "description": "Modern national mosques from independence-era nations worldwide.",
+      "mosqueIds": [
+        "istiqlal-mosque",
+        "faisal-mosque",
+        "hassan-ii",
+        "national-mosque-malaysia",
+        "sultan-salahuddin-abdul-aziz-mosque",
+        "king-abdullah-i-mosque",
+        "baitul-mukarram",
+        "al-fateh-grand-mosque",
+        "kocatepe-mosque",
+        "grand-mosque-kuwait",
+        "national-mosque-abuja",
+        "islamic-center-washington",
+        "birmingham-central-mosque",
+        "great-mosque-of-djenne",
+        "grand-anwar-mosque-addis-ababa",
+        "sultan-mosque-singapore",
+        "jamia-mosque-nairobi",
+        "dungan-mosque-karakol"
+      ]
+    },
+    {
+      "slug": "21st-century",
+      "name": "21st Century (2000s–Present)",
+      "description": "Contemporary architectural marvels—Abu Dhabi, Algeria, Turkey, and beyond.",
+      "mosqueIds": [
+        "sheikh-zayed",
+        "djamaa-el-djazair",
+        "camlica-mosque",
+        "grand-jamia",
+        "astana-grand-mosque",
+        "heydar-mosque",
+        "massalikoul-djinane-mosque",
+        "al-jabbar-grand-mosque",
+        "hazrat-sultan-mosque",
+        "imam-abu-hanifa-mosque-dushanbe",
+        "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
+        "mohammed-vi-mosque-dar-es-salaam",
+        "bishkek-central-mosque"
+      ]
+    },
+    {
+      "slug": "ottoman-mosques",
+      "name": "Ottoman Mosques",
+      "description": "Imperial Ottoman mosques across Turkey, the Balkans, and beyond—500 years of architectural heritage.",
+      "mosqueIds": [
+        "blue-mosque",
+        "suleymaniye-mosque",
+        "hagia-sophia-istanbul",
+        "camlica-mosque",
+        "sabanci-central-mosque",
+        "kocatepe-mosque",
+        "selahaddin-eyyubi-mosque",
+        "gazi-husrev-beg-mosque",
+        "mustafa-pasha-mosque",
+        "husein-pasha-mosque-pljevlja",
+        "ethem-bey-mosque",
+        "imperial-mosque-pristina",
+        "gurgi-mosque-tripoli"
+      ]
+    },
+    {
+      "slug": "mughal-mosques",
+      "name": "Mughal Mosques",
+      "description": "Mughal architectural masterpieces in India and Pakistan—red sandstone, white marble, and Persian influences.",
+      "mosqueIds": [
+        "jama-masjid-delhi",
+        "badshahi-mosque",
+        "shah-jahan-mosque-thatta",
+        "taj-ul-masajid",
+        "jamia-masjid-srinagar"
+      ]
+    },
+    {
+      "slug": "african-mosques",
+      "name": "African Mosques",
+      "description": "Historic and modern mosques across Africa—from Sudano-Sahelian mud-brick to contemporary grand mosques.",
+      "mosqueIds": [
+        "great-mosque-of-djenne",
+        "djamaa-el-djazair",
+        "hassan-ii",
+        "great-mosque-of-kairouan",
+        "al-azhar-mosque",
+        "national-mosque-abuja",
+        "massalikoul-djinane-mosque",
+        "grand-mosque-of-conakry",
+        "grand-mosque-of-bobo-dioulasso",
+        "grand-mosque-of-niamey",
+        "jamia-mosque-nairobi",
+        "grand-anwar-mosque-addis-ababa",
+        "great-mosque-of-asmara",
+        "great-mosque-khartoum",
+        "king-fahad-mosque-banjul",
+        "mohammed-vi-mosque-dar-es-salaam",
+        "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
+        "al-fattah-al-aleem-mosque",
+        "al-naqah-mosque-tripoli",
+        "gurgi-mosque-tripoli",
+        "emir-abdelkader-mosque",
+        "1st-november-1954-great-mosque"
+      ]
+    },
+    {
+      "slug": "tourist-friendly",
+      "name": "Tourist-Friendly Mosques",
+      "description": "Mosques that welcome non-Muslim visitors with tours, cultural programs, and interfaith dialogue.",
+      "mosqueIds": [
+        "sheikh-zayed",
+        "hassan-ii",
+        "blue-mosque",
+        "sultan-qaboos-grand-mosque",
+        "istiqlal-mosque",
+        "putra-mosque",
+        "national-mosque-malaysia",
+        "islamic-center-washington",
+        "birmingham-central-mosque",
+        "jami-ul-alfar-mosque",
+        "sultan-mosque-singapore",
+        "hagia-sophia-istanbul"
+      ]
+    },
+    {
+      "slug": "unesco-heritage",
+      "name": "UNESCO World Heritage",
+      "description": "Mosques recognized as UNESCO World Heritage Sites for their cultural significance.",
+      "mosqueIds": [
+        "great-mosque-of-djenne",
+        "great-mosque-of-kairouan",
+        "hagia-sophia-istanbul",
+        "umayyad-mosque",
+        "kalon-mosque-bukhara",
+        "al-azhar-mosque",
+        "gazi-husrev-beg-mosque"
       ]
     },
     {
@@ -97,7 +292,7 @@
     {
       "slug": "egypt",
       "name": "Egypt",
-      "description": "Historic and iconic mosques in Egypt.",
+      "description": "Historic and iconic mosques in Egypt—Fatimid, Mamluk, and modern.",
       "mosqueIds": [
         "al-azhar-mosque",
         "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
@@ -125,7 +320,7 @@
     {
       "slug": "malaysia",
       "name": "Malaysia",
-      "description": "Mosques across Malaysia.",
+      "description": "Mosques across Malaysia—national landmarks and state mosques.",
       "mosqueIds": [
         "national-mosque-malaysia",
         "putra-mosque",
@@ -174,7 +369,7 @@
     {
       "slug": "algeria",
       "name": "Algeria",
-      "description": "North African mosque heritage.",
+      "description": "North African mosque heritage—including Africa's largest.",
       "mosqueIds": [
         "djamaa-el-djazair",
         "1st-november-1954-great-mosque",
@@ -184,11 +379,13 @@
     {
       "slug": "west-africa",
       "name": "West Africa",
-      "description": "Major mosques across West Africa.",
+      "description": "Major mosques across West Africa—from Senegal to Mali.",
       "mosqueIds": [
         "massalikoul-djinane-mosque",
         "grand-mosque-of-conakry",
-        "great-mosque-of-djenne"
+        "great-mosque-of-djenne",
+        "grand-mosque-of-bobo-dioulasso",
+        "grand-mosque-of-niamey"
       ]
     },
     {
@@ -220,6 +417,56 @@
       "name": "Albania",
       "description": "Historic mosques in Albania.",
       "mosqueIds": ["ethem-bey-mosque"]
+    },
+    {
+      "slug": "tunisia",
+      "name": "Tunisia",
+      "description": "Ancient and historic mosques in Tunisia—including one of the oldest in the world.",
+      "mosqueIds": ["great-mosque-of-kairouan"]
+    },
+    {
+      "slug": "usa",
+      "name": "United States",
+      "description": "Historic and prominent mosques across America.",
+      "mosqueIds": [
+        "islamic-center-washington",
+        "islamic-center-of-america",
+        "islamic-cultural-center-of-new-york",
+        "king-fahad-mosque-culver-city",
+        "masjid-muhammad-washington-dc",
+        "dar-al-hijrah-islamic-center",
+        "masjid-al-farooq-atlanta",
+        "islamic-society-of-boston-cultural-center",
+        "islamic-center-of-greater-cincinnati",
+        "islamic-center-of-irvine",
+        "east-plano-islamic-center"
+      ]
+    },
+    {
+      "slug": "central-asia",
+      "name": "Central Asia",
+      "description": "Mosques across Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, and Uzbekistan.",
+      "mosqueIds": [
+        "astana-grand-mosque",
+        "hazrat-sultan-mosque",
+        "bishkek-central-mosque",
+        "dungan-mosque-karakol",
+        "imam-abu-hanifa-mosque-dushanbe",
+        "turkmenbasy-ruhy-mosque",
+        "kalon-mosque-bukhara"
+      ]
+    },
+    {
+      "slug": "balkans",
+      "name": "Balkans",
+      "description": "Ottoman and historic mosques across the Balkans—Bosnia, Kosovo, Albania, North Macedonia, Montenegro.",
+      "mosqueIds": [
+        "gazi-husrev-beg-mosque",
+        "imperial-mosque-pristina",
+        "ethem-bey-mosque",
+        "mustafa-pasha-mosque",
+        "husein-pasha-mosque-pljevlja"
+      ]
     }
   ]
 }
