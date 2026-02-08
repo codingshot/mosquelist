@@ -144,14 +144,23 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
                   <div className="flex flex-wrap gap-2">
                     {mosque.touristFriendly && (
                       <Badge variant="secondary" className="text-xs">
-                        Tourist Friendly
+                        Non-Muslims welcome
                       </Badge>
                     )}
                     {mosque.womenPrayerArea && (
                       <Badge variant="secondary" className="text-xs">
-                        Women's Area
+                        Women&apos;s area
                       </Badge>
                     )}
+                    {mosque.facilities && mosque.facilities.length > 0 && (() => {
+                      const hasGuided = mosque.facilities.some((f) => /guided|tour/i.test(f));
+                      const hasWheelchair = mosque.facilities.some((f) => /wheelchair|accessible/i.test(f));
+                      return (hasGuided || hasWheelchair) ? (
+                        <Badge variant="outline" className="text-xs font-normal">
+                          {[hasGuided && "Guided tours", hasWheelchair && "Wheelchair access"].filter(Boolean).join(" · ")}
+                        </Badge>
+                      ) : null;
+                    })()}
                   </div>
                 )}
                 <Button

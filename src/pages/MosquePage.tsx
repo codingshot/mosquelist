@@ -6,8 +6,9 @@ import { getMosqueBySlug } from "@/data/mosques";
 import { MosqueSEO } from "@/components/MosqueSEO";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useBucketList } from "@/hooks/useBucketList";
-import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown, Images } from "lucide-react";
+import { MapPin, Users, Calendar, Star, Building2, ArrowLeft, Heart, Share2, ListPlus, Map, ExternalLink, Copy, ChevronDown, Images, DoorOpen } from "lucide-react";
 import { toast } from "sonner";
+import { ShareSheet } from "@/components/ShareSheet";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getGoogleMapsUrl, getAppleMapsUrl } from "@/lib/maps";
@@ -59,6 +60,7 @@ export default function MosquePage() {
   }, [mosque]);
   const hasGallery = galleryImages.length > 1;
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const openGallery = useCallback(() => setGalleryOpen(true), []);
   const closeGallery = useCallback(() => setGalleryOpen(false), []);
   const relatedMosques = useMemo(
@@ -110,34 +112,20 @@ export default function MosquePage() {
             variant="outline"
             size="sm"
             className="gap-2 min-h-[44px] touch-manipulation"
-            onClick={async () => {
-              const url = window.location.origin + "/mosque/" + mosque.id;
-              const title = `${mosque.name} – MosqueList`;
-              const text = `Discover ${mosque.name} in ${mosque.location}, ${mosque.country}`;
-              if (typeof navigator.share === "function") {
-                try {
-                  await navigator.share({
-                    title,
-                    text,
-                    url,
-                  });
-                  toast.success("Shared successfully");
-                } catch (err) {
-                  if ((err as Error).name !== "AbortError") {
-                    await navigator.clipboard.writeText(url);
-                    toast.success("Link copied to clipboard");
-                  }
-                }
-              } else {
-                await navigator.clipboard.writeText(url);
-                toast.success("Link copied to clipboard");
-              }
-            }}
+            onClick={() => setShareOpen(true)}
             aria-label="Share mosque"
           >
             <Share2 className="h-4 w-4" />
             Share
           </Button>
+          <ShareSheet
+            open={shareOpen}
+            onOpenChange={setShareOpen}
+            path={`/mosque/${mosque.id}`}
+            title={`${mosque.name} – MosqueList`}
+            shareMessage={`Discover ${mosque.name} in ${mosque.location}, ${mosque.country}. Explore on MosqueList.`}
+            context="mosque"
+          />
           {isInBucketList ? (
             <Button variant="secondary" size="sm" className="gap-2 min-h-[44px] touch-manipulation" asChild>
               <Link to="/bucket-list">In your bucket list</Link>
@@ -241,7 +229,7 @@ export default function MosquePage() {
                       to={getExploreUrl({ tourist: true })}
                       className="hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
                     >
-                      Tourist Friendly
+                      Non-Muslims welcome
                     </Link>
                   </Badge>
                 )}
@@ -398,6 +386,58 @@ export default function MosquePage() {
                 </div>
               </div>
 
+              <div className="mt-6 rounded-xl border border-border bg-card p-4 sm:p-5">
+                <h2 className="font-serif text-lg font-semibold text-foreground flex items-center gap-2">
+                  <DoorOpen className="h-5 w-5 text-primary" />
+                  Visitor access &amp; facilities
+                </h2>
+                <dl className="mt-3 grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <dt className="text-sm text-muted-foreground">Non-Muslims can visit</dt>
+                    <dd className="mt-0.5 font-medium text-foreground">
+                      {mosque.touristFriendly ? (
+                        <Link to={getExploreUrl({ tourist: true })} className="text-primary hover:underline">
+                          Yes — open to visitors
+                        </Link>
+                      ) : (
+                        "Restricted (Muslim worshippers only)"
+                      )}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-muted-foreground">Women&apos;s prayer area</dt>
+                    <dd className="mt-0.5 font-medium text-foreground">
+                      {mosque.womenPrayerArea ? (
+                        <Link to={getExploreUrl({ women: true })} className="text-primary hover:underline">
+                          Yes
+                        </Link>
+                      ) : (
+                        "—"
+                      )}
+                    </dd>
+                  </div>
+                </dl>
+                {mosque.facilities && mosque.facilities.length > 0 && (
+                  <div className="mt-4 pt-3 border-t border-border">
+                    <dt className="text-sm text-muted-foreground mb-2">Facilities</dt>
+                    <ul className="flex flex-wrap gap-2">
+                      {mosque.facilities.map((f) => (
+                        <li key={f}>
+                          <Badge variant="outline" className="font-normal" asChild>
+                            <Link
+                              to={getExploreUrl({ q: f })}
+                              className="hover:bg-secondary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+                            >
+                              {f}
+                            </Link>
+                          </Badge>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
               <p className="mt-4 text-sm text-muted-foreground">
                 <span className="font-medium text-foreground">Annual visitors:</span>{" "}
                 {mosque.annualVisitors}
@@ -432,26 +472,6 @@ export default function MosquePage() {
                 <div className="mt-6">
                   <h2 className="font-serif text-xl font-semibold text-foreground">Visitor information</h2>
                   <p className="mt-2 text-muted-foreground">{mosque.tourismNotes}</p>
-                </div>
-              )}
-
-              {mosque.facilities && mosque.facilities.length > 0 && (
-                <div className="mt-6">
-                  <h2 className="font-serif text-xl font-semibold text-foreground">Facilities</h2>
-                  <ul className="mt-2 flex flex-wrap gap-2">
-                    {mosque.facilities.map((f) => (
-                      <li key={f}>
-                        <Badge variant="outline" className="font-normal" asChild>
-                          <Link
-                            to={getExploreUrl({ q: f })}
-                            className="hover:bg-secondary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
-                          >
-                            {f}
-                          </Link>
-                        </Badge>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               )}
 

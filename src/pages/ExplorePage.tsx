@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { MosqueGrid } from "@/components/MosqueGrid";
@@ -5,6 +6,10 @@ import { BackToTop } from "@/components/BackToTop";
 import { PageSEO } from "@/components/PageSEO";
 
 export default function ExplorePage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
@@ -13,7 +18,7 @@ export default function ExplorePage() {
         path="/explore"
       />
       <Navigation />
-      <main id="main-content">
+      <main id="main-content" className="min-h-[60vh]">
         <MosqueGrid />
       </main>
       <Footer />

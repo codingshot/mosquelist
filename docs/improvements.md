@@ -26,6 +26,7 @@ Actionable skills and improvements to make the app more useful, accurate, and ma
 | **Share & deep links** | Share button per mosque (copy link). `/mosque/:id` and `/explore?q=...` work when shared. | Done |
 | **Section routes** | Explore, Timeline, Bucket List, About as dedicated routes with SEO. | Done |
 | **Add to bucket list from detail** | Mosque detail page has “Add to bucket list” / “In your bucket list” button. | Done |
+| **Filters** | Visitor access and facilities clearly shown; advanced filters (non-Muslims can visit, guided tours, wheelchair). See [filters-improvement.md](./filters-improvement.md). | Done |
 | **Map view** | Optional map (e.g. Leaflet/Mapbox) showing mosque locations; link from mosque card/detail. | Medium |
 | **Map links** | Google Maps and Apple Maps links on mosque pages and cards. | Done |
 | **History, tourism, architecture** | Extended history, tourism notes, architecture notes, official websites. | Done |

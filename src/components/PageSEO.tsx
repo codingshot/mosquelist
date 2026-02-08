@@ -8,6 +8,8 @@ interface PageSEOProps {
   description: string;
   path: string;
   canonical?: string;
+  /** Optional absolute URL for social preview (og:image, twitter:image). Defaults to site meta image. */
+  ogImage?: string;
 }
 
 function setMeta(selector: string, attr: string, value: string) {
@@ -15,20 +17,21 @@ function setMeta(selector: string, attr: string, value: string) {
   if (el) el.setAttribute(attr, value);
 }
 
-export function PageSEO({ title, description, path, canonical }: PageSEOProps) {
+export function PageSEO({ title, description, path, canonical, ogImage }: PageSEOProps) {
   useEffect(() => {
     const url = `${SITE_URL}${path}`;
     const canonicalUrl = canonical ?? url;
+    const image = ogImage?.trim() && ogImage.startsWith("http") ? ogImage : DEFAULT_IMAGE;
     document.title = title;
     setMeta('meta[name="description"]', "content", description);
     setMeta('meta[property="og:title"]', "content", title);
     setMeta('meta[property="og:description"]', "content", description);
     setMeta('meta[property="og:url"]', "content", url);
-    setMeta('meta[property="og:image"]', "content", DEFAULT_IMAGE);
+    setMeta('meta[property="og:image"]', "content", image);
     setMeta('meta[property="og:type"]', "content", "website");
     setMeta('meta[name="twitter:title"]', "content", title);
     setMeta('meta[name="twitter:description"]', "content", description);
-    setMeta('meta[name="twitter:image"]', "content", DEFAULT_IMAGE);
+    setMeta('meta[name="twitter:image"]', "content", image);
     setMeta('link[rel="canonical"]', "href", canonicalUrl);
 
     return () => {
@@ -37,7 +40,7 @@ export function PageSEO({ title, description, path, canonical }: PageSEOProps) {
       setMeta('meta[property="og:url"]', "content", SITE_URL);
       setMeta('link[rel="canonical"]', "href", SITE_URL);
     };
-  }, [title, description, path, canonical]);
+  }, [title, description, path, canonical, ogImage]);
 
   return null;
 }

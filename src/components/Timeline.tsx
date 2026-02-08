@@ -34,6 +34,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   const [sortOrder, setSortOrder] = useState<SortOrder>("oldest");
   const [region, setRegion] = useState<string>("");
   const [country, setCountry] = useState<string>("");
+  const [visitorFriendlyOnly, setVisitorFriendlyOnly] = useState(false);
 
   const mosqueById = useMemo(() => new Map(mosques.map((m) => [m.id, m])), []);
   const countries = useMemo(() => getUniqueCountries(), []);
@@ -50,13 +51,14 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           const mosqueRegion = getRegionForCountry(mosque.country);
           if (mosqueRegion !== region) return false;
         }
+        if (visitorFriendlyOnly && !mosque.touristFriendly) return false;
       }
       return true;
     });
     const order = sortOrder === "newest" ? -1 : 1;
     list = [...list].sort((a, b) => order * (parseYear(a.year) - parseYear(b.year)));
     return list;
-  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview]);
+  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview, visitorFriendlyOnly]);
 
   // Apply limit for preview mode
   const displayedEvents = isPreview
@@ -133,6 +135,16 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </SelectContent>
             </Select>
           </div>
+          <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-background cursor-pointer hover:bg-secondary/50 touch-manipulation self-end sm:self-center">
+            <input
+              type="checkbox"
+              checked={visitorFriendlyOnly}
+              onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
+              className="rounded border-border"
+              aria-label="Show only mosques where non-Muslims can visit"
+            />
+            <span className="text-sm text-foreground">Non-Muslims can visit</span>
+          </label>
           <p className="text-sm text-muted-foreground w-full sm:w-auto sm:self-center">
             {filteredAndSortedEvents.length} mosque{filteredAndSortedEvents.length !== 1 ? "s" : ""} shown
           </p>
@@ -148,7 +160,9 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           <div className="space-y-6 md:space-y-8">
             {displayedEvents.length === 0 ? (
               <p className="text-center text-muted-foreground py-12">
-                No mosques match the selected filters. Try a different region or country.
+                {visitorFriendlyOnly
+                  ? "No visitor-friendly mosques match the selected filters. Try a different region or country, or clear Non-Muslims can visit."
+                  : "No mosques match the selected filters. Try a different region or country."}
               </p>
             ) : (
             displayedEvents.map((event, index) => {

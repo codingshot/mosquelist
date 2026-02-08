@@ -51,10 +51,12 @@ const PARAM_EST_MIN = "estMin";
 const PARAM_EST_MAX = "estMax";
 const PARAM_STYLE = "style";
 const PARAM_DENOMINATION = "denomination";
+const PARAM_FACILITY_GUIDED = "facilityGuided";
+const PARAM_FACILITY_WHEELCHAIR = "facilityWheelchair";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
 type ViewType = "grid" | "list" | "compact" | "swipe" | "map";
-type SortType = "holyCapacity" | "name" | "capacity" | "area" | "established" | "country";
+type SortType = "holyCapacity" | "touristFirst" | "name" | "capacity" | "area" | "established" | "country";
 
 /** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007) */
 function establishedYear(established: string): number {
@@ -86,6 +88,8 @@ function useMosqueSearchParams() {
   const architecturalStyle = searchParams.get(PARAM_STYLE) ?? "";
   const denominationParam = searchParams.get(PARAM_DENOMINATION) ?? "";
   const denomination = denominationParam === "sunni" || denominationParam === "shia" ? denominationParam : "";
+  const facilityGuided = searchParams.get(PARAM_FACILITY_GUIDED) === "1";
+  const facilityWheelchair = searchParams.get(PARAM_FACILITY_WHEELCHAIR) === "1";
 
   const setParam = useCallback(
     (key: string, value: string) => {
@@ -118,6 +122,8 @@ function useMosqueSearchParams() {
   const setEstMax = (v: string) => setParam(PARAM_EST_MAX, v);
   const setArchitecturalStyle = (v: string) => setParam(PARAM_STYLE, v);
   const setDenomination = (v: string) => setParam(PARAM_DENOMINATION, v === "all" ? "" : v);
+  const setFacilityGuided = (v: boolean) => setParam(PARAM_FACILITY_GUIDED, v ? "1" : "");
+  const setFacilityWheelchair = (v: boolean) => setParam(PARAM_FACILITY_WHEELCHAIR, v ? "1" : "");
 
   const clearAllFilters = useCallback(() => {
     setSearchParams(new URLSearchParams(), { replace: true });
@@ -132,6 +138,8 @@ function useMosqueSearchParams() {
     region,
     womenOnly,
     touristOnly,
+    facilityGuided,
+    facilityWheelchair,
     capMin,
     capMax,
     areaMin,
@@ -148,6 +156,8 @@ function useMosqueSearchParams() {
     setRegion,
     setWomenOnly,
     setTouristOnly,
+    setFacilityGuided,
+    setFacilityWheelchair,
     setCapMin,
     setCapMax,
     setAreaMin,
@@ -188,6 +198,10 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     setRegion,
     setWomenOnly,
     setTouristOnly,
+    facilityGuided,
+    facilityWheelchair,
+    setFacilityGuided,
+    setFacilityWheelchair,
     setCapMin,
     setCapMax,
     setAreaMin,
@@ -256,6 +270,8 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     denomination !== "" ||
     womenOnly ||
     touristOnly ||
+    facilityGuided ||
+    facilityWheelchair ||
     capMin !== "" ||
     capMax !== "" ||
     areaMin !== "" ||
@@ -269,6 +285,8 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     region,
     womenOnly,
     touristOnly,
+    facilityGuided,
+    facilityWheelchair,
     capMin,
     capMax,
     areaMin,
@@ -298,6 +316,10 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
     if (denomination) list = list.filter((m) => m.denomination === denomination);
     if (womenOnly) list = list.filter((m) => m.womenPrayerArea);
     if (touristOnly) list = list.filter((m) => m.touristFriendly);
+    if (facilityGuided)
+      list = list.filter((m) => (m.facilities || []).some((f) => /guided|tour/i.test(f)));
+    if (facilityWheelchair)
+      list = list.filter((m) => (m.facilities || []).some((f) => /wheelchair|accessible/i.test(f)));
     if (architecturalStyle)
       list = list.filter((m) => m.architecturalStyle === architecturalStyle);
 
@@ -324,6 +346,10 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
         case "holyCapacity":
           if (a.isHolySite !== b.isHolySite) return a.isHolySite ? -1 : 1;
           return b.capacity - a.capacity;
+        case "touristFirst":
+          if (a.touristFriendly !== b.touristFriendly) return a.touristFriendly ? -1 : 1;
+          if (a.isHolySite !== b.isHolySite) return a.isHolySite ? -1 : 1;
+          return b.capacity - a.capacity;
         case "name":
           return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
         case "capacity":
@@ -342,7 +368,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
       }
     });
     return sorted;
-  }, [query, filter, country, region, denomination, womenOnly, touristOnly, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
+  }, [query, filter, country, region, denomination, womenOnly, touristOnly, facilityGuided, facilityWheelchair, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, sort]);
 
   const displayedMosques = isPreview
     ? filteredMosques.slice(0, PREVIEW_GRID_SIZE)
@@ -421,8 +447,9 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     size="sm"
                     onClick={() => setFilter("tourist")}
                     className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}`}
+                    title="Non-Muslims can visit"
                   >
-                    Tourist
+                    Visitors
                   </Button>
                   <Button
                     variant={filter === "biggest" ? "default" : "outline"}
@@ -453,6 +480,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="holyCapacity">Holy first, then biggest</SelectItem>
+                      <SelectItem value="touristFirst">Visitor-friendly first</SelectItem>
                       <SelectItem value="name">Name</SelectItem>
                       <SelectItem value="capacity">Capacity</SelectItem>
                       <SelectItem value="area">Area</SelectItem>
@@ -547,27 +575,61 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
                         </SelectContent>
                       </Select>
                     </div>
-                    <div className="flex items-center space-x-3 min-h-[44px]">
-                      <Checkbox
-                        id="women"
-                        checked={womenOnly}
-                        onCheckedChange={(c) => setWomenOnly(!!c)}
-                        className="touch-manipulation size-5"
-                      />
-                      <Label htmlFor="women" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
-                        Women&apos;s prayer area only
-                      </Label>
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">Visitor access</Label>
+                      <p className="text-xs text-muted-foreground">
+                        Filter by whether non-Muslims can visit and key facilities.
+                      </p>
+                      <div className="flex items-center space-x-3 min-h-[44px]">
+                        <Checkbox
+                          id="tourist-adv"
+                          checked={touristOnly}
+                          onCheckedChange={(c) => setTouristOnly(!!c)}
+                          className="touch-manipulation size-5"
+                        />
+                        <Label htmlFor="tourist-adv" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
+                          Non-Muslims can visit only
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 min-h-[44px]">
+                        <Checkbox
+                          id="women"
+                          checked={womenOnly}
+                          onCheckedChange={(c) => setWomenOnly(!!c)}
+                          className="touch-manipulation size-5"
+                        />
+                        <Label htmlFor="women" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
+                          Women&apos;s prayer area only
+                        </Label>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-3 min-h-[44px]">
-                      <Checkbox
-                        id="tourist-adv"
-                        checked={touristOnly}
-                        onCheckedChange={(c) => setTouristOnly(!!c)}
-                        className="touch-manipulation size-5"
-                      />
-                      <Label htmlFor="tourist-adv" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
-                        Tourist friendly only
-                      </Label>
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">Facilities</Label>
+                      <p className="text-xs text-muted-foreground">
+                        Mosques that list these facilities.
+                      </p>
+                      <div className="flex items-center space-x-3 min-h-[44px]">
+                        <Checkbox
+                          id="facility-guided"
+                          checked={facilityGuided}
+                          onCheckedChange={(c) => setFacilityGuided(!!c)}
+                          className="touch-manipulation size-5"
+                        />
+                        <Label htmlFor="facility-guided" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
+                          Has guided tours
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 min-h-[44px]">
+                        <Checkbox
+                          id="facility-wheelchair"
+                          checked={facilityWheelchair}
+                          onCheckedChange={(c) => setFacilityWheelchair(!!c)}
+                          className="touch-manipulation size-5"
+                        />
+                        <Label htmlFor="facility-wheelchair" className="font-normal cursor-pointer touch-manipulation flex-1 py-2">
+                          Wheelchair accessible
+                        </Label>
+                      </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
@@ -740,7 +802,7 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
               )}
               {filter !== "all" && (
                 <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
-                  {filter === "holy" ? "Holy Sites" : filter === "tourist" ? "Tourist" : "Biggest"}
+                  {filter === "holy" ? "Holy Sites" : filter === "tourist" ? "Visitors" : "Biggest"}
                   <button
                     type="button"
                     onClick={() => setFilter("all")}
@@ -805,12 +867,38 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
               )}
               {touristOnly && (
                 <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
-                  Tourist only
+                  Non-Muslims can visit
                   <button
                     type="button"
                     onClick={() => setTouristOnly(false)}
                     className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
-                    aria-label="Remove tourist filter"
+                    aria-label="Remove non-Muslims can visit filter"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </Badge>
+              )}
+              {facilityGuided && (
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
+                  Guided tours
+                  <button
+                    type="button"
+                    onClick={() => setFacilityGuided(false)}
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
+                    aria-label="Remove guided tours filter"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </Badge>
+              )}
+              {facilityWheelchair && (
+                <Badge variant="secondary" className="pl-2 pr-1 py-1.5 gap-1 font-normal">
+                  Wheelchair access
+                  <button
+                    type="button"
+                    onClick={() => setFacilityWheelchair(false)}
+                    className="rounded-full p-2 min-h-[44px] min-w-[44px] sm:min-h-[28px] sm:min-w-[28px] flex items-center justify-center hover:bg-muted touch-manipulation shrink-0 -m-1 sm:m-0"
+                    aria-label="Remove wheelchair access filter"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -899,7 +987,11 @@ export const MosqueGrid = ({ mode = "full" }: { mode?: "full" | "preview" }) => 
         {isPreview && displayedMosques.length > 0 && (
           <div className="mt-8 text-center">
             <Button size="lg" className="gap-2" asChild>
-              <Link to="/explore">
+              <Link
+                to="/explore"
+                onMouseEnter={() => import("@/pages/ExplorePage")}
+                onFocus={() => import("@/pages/ExplorePage")}
+              >
                 <MapPin className="w-4 h-4" />
                 See all mosques
               </Link>

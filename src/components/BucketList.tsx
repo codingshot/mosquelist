@@ -200,6 +200,7 @@ export const BucketList = () => {
   const [addSheetOpen, setAddSheetOpen] = useState(false);
   const [filter, setFilter] = useState<BucketFilter>("all");
   const [sort, setSort] = useState<BucketSort>("list-order");
+  const [visitorFriendlyOnly, setVisitorFriendlyOnly] = useState(false);
 
   const displayedItems = useMemo(() => {
     let items = bucketList
@@ -211,6 +212,7 @@ export const BucketList = () => {
 
     if (filter === "visited") items = items.filter((x) => x.item.visited);
     else if (filter === "unvisited") items = items.filter((x) => !x.item.visited);
+    if (visitorFriendlyOnly) items = items.filter((x) => x.mosque.touristFriendly === true);
 
     if (sort === "name")
       items = [...items].sort((a, b) =>
@@ -230,7 +232,7 @@ export const BucketList = () => {
       );
 
     return items;
-  }, [bucketList, filter, sort]);
+  }, [bucketList, filter, sort, visitorFriendlyOnly]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -299,6 +301,16 @@ export const BucketList = () => {
                   </button>
                 ))}
               </div>
+              <label className="flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-card cursor-pointer hover:bg-secondary/50 touch-manipulation">
+                <input
+                  type="checkbox"
+                  checked={visitorFriendlyOnly}
+                  onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
+                  className="rounded border-border"
+                  aria-label="Show only visitor-friendly mosques (non-Muslims can visit)"
+                />
+                <span className="text-sm font-medium text-foreground">Visitor-friendly only</span>
+              </label>
               <Select
                 value={sort}
                 onValueChange={(v) => setSort(v as BucketSort)}
@@ -555,7 +567,17 @@ export const BucketList = () => {
               the markets."
             </p>
             <p className="text-sm text-muted-foreground mt-1">
-              — Prophet Muhammad ﷺ (Sahih Muslim)
+              — Prophet Muhammad ﷺ (
+              <a
+                href="https://sunnah.com/muslim:671"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                aria-label="Sahih Muslim 671 on Sunnah.com (opens in new tab)"
+              >
+                Sahih Muslim 671
+              </a>
+              )
             </p>
           </div>
         </div>

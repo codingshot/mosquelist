@@ -18,10 +18,10 @@ function renderNotFound() {
 }
 
 describe("NotFound", () => {
-  it("renders 404 heading and message", () => {
+  it("renders 404 and page not found message", () => {
     renderNotFound();
-    expect(screen.getByRole("heading", { name: "404" })).toBeInTheDocument();
-    expect(screen.getByText(/oops! this page doesn't exist/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Page not found" })).toBeInTheDocument();
+    expect(screen.getByText("404")).toBeInTheDocument();
   });
 
   it("has link to home and explore in main content", () => {

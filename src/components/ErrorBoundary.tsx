@@ -1,6 +1,18 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const QUICK_LINKS = [
+  { label: "Home", to: "/" },
+  { label: "Explore", to: "/explore" },
+  { label: "Map", to: "/map" },
+  { label: "Timeline", to: "/timeline" },
+  { label: "Bucket list", to: "/bucket-list" },
+  { label: "Lists", to: "/lists" },
+  { label: "About", to: "/about" },
+  { label: "Blog", to: "/blog" },
+] as const;
 
 interface Props {
   children: ReactNode;
@@ -70,19 +82,32 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
-          <h1 className="font-serif text-2xl font-bold text-foreground">
-            Something went wrong
-          </h1>
-          <p className="mt-2 text-muted-foreground max-w-md">
-            This page couldn&apos;t load. Try going back or starting from the home page.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3 justify-center">
-            <Button asChild>
-              <Link to="/">Home</Link>
-            </Button>
-            <Button variant="outline" onClick={() => window.location.reload()}>
-              Reload page
-            </Button>
+          <div className="flex flex-col items-center max-w-lg">
+            <div className="rounded-full bg-destructive/10 p-4 mb-4" aria-hidden>
+              <AlertCircle className="w-12 h-12 text-destructive" />
+            </div>
+            <h1 className="font-serif text-2xl font-bold text-foreground">
+              Something went wrong
+            </h1>
+            <p className="mt-2 text-muted-foreground">
+              This page couldn&apos;t load. Go back home or pick somewhere else to continue.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 justify-center">
+              <Button size="lg" asChild>
+                <Link to="/">Go home</Link>
+              </Button>
+              <Button size="lg" variant="outline" onClick={() => window.location.reload()}>
+                Reload page
+              </Button>
+            </div>
+            <p className="mt-8 text-sm font-medium text-foreground">Quick links</p>
+            <div className="mt-2 flex flex-wrap gap-2 justify-center">
+              {QUICK_LINKS.map(({ label, to }) => (
+                <Button key={to} variant="secondary" size="sm" asChild>
+                  <Link to={to}>{label}</Link>
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
       );

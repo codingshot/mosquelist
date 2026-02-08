@@ -191,7 +191,7 @@ describe("All pages load", () => {
         </AllProviders>
       </MemoryRouter>
     );
-    expect(screen.getByRole("heading", { name: /404/i })).toBeInTheDocument();
-    expect(screen.getByText(/doesn't exist|page not found/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /page not found/i })).toBeInTheDocument();
+    expect(screen.getByText(/404/)).toBeInTheDocument();
   });
 });

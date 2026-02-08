@@ -16,10 +16,12 @@ import {
   MapPin,
   Users,
   Star,
+  Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
+import { ShareSheet } from "@/components/ShareSheet";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -35,6 +37,7 @@ export default function ListDetailPage() {
   const { addToBucketList, bucketList } = useBucketList();
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [listFilter, setListFilter] = useState<ListFilter>("all");
+  const [shareOpen, setShareOpen] = useState(false);
 
   const list = slug ? getListBySlug(slug) : undefined;
   const listMosques = list
@@ -184,25 +187,48 @@ export default function ListDetailPage() {
             </Button>
 
             <div className="mb-8">
-              <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
-                {list.name}
-              </h1>
-              <p className="mt-2 text-muted-foreground text-lg">
-                {list.description}
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {listMosques.length} mosque
-                {listMosques.length !== 1 ? "s" : ""} in this list
-                {listMosques.length > 0 && (() => {
-                  const inCount = listMosques.filter((m) => bucketSet.has(m.id)).length;
-                  if (inCount === 0) return null;
-                  return (
-                    <span className="ml-2 text-primary font-medium">
-                      · {inCount} already in your list
-                    </span>
-                  );
-                })()}
-              </p>
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
+                    {list.name}
+                  </h1>
+                  <p className="mt-2 text-muted-foreground text-lg">
+                    {list.description}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {listMosques.length} mosque
+                    {listMosques.length !== 1 ? "s" : ""} in this list
+                    {listMosques.length > 0 && (() => {
+                      const inCount = listMosques.filter((m) => bucketSet.has(m.id)).length;
+                      if (inCount === 0) return null;
+                      return (
+                        <span className="ml-2 text-primary font-medium">
+                          · {inCount} already in your list
+                        </span>
+                      );
+                    })()}
+                  </p>
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="gap-2 min-h-[44px] touch-manipulation shrink-0"
+                  onClick={() => setShareOpen(true)}
+                  aria-label="Share list"
+                >
+                  <Share2 className="h-4 w-4" />
+                  Share
+                </Button>
+              </div>
+              <ShareSheet
+                open={shareOpen}
+                onOpenChange={setShareOpen}
+                path={`/lists/${list.slug}`}
+                title={`${list.name} – MosqueList`}
+                shareMessage={`${list.name}: ${list.description.slice(0, 80)}${list.description.length > 80 ? "…" : ""} ${listMosques.length} mosques on MosqueList.`}
+                context="list"
+              />
             </div>
 
             {/* Add to My List — clear two-path flow */}
