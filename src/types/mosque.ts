@@ -34,6 +34,8 @@ export interface Mosque {
   touristFriendly: boolean;
   /** Predominant tradition when clearly associated (fact-checked). Omitted if mixed or unspecified. */
   denomination?: "sunni" | "shia";
+  /** Data sources and references for this mosque entry (Wikipedia, official sites, etc.) */
+  sources?: string[];
 }
 
 export interface TimelineEvent {
