@@ -79,8 +79,11 @@
       "name": "16th Century (1500s CE)",
       "description": "Ottoman Golden Age mosques by master architects like Mimar Sinan.",
       "mosqueIds": [
-        "blue-mosque",
         "suleymaniye-mosque",
+        "selimiye-mosque",
+        "blue-mosque",
+        "rustem-pasha-mosque",
+        "mihrimah-sultan-mosque-uskudar",
         "hagia-sophia-istanbul",
         "gazi-husrev-beg-mosque",
         "krue-se-mosque",
@@ -95,6 +98,10 @@
       "mosqueIds": [
         "jama-masjid-delhi",
         "badshahi-mosque",
+        "wazir-khan-mosque",
+        "moti-masjid-lahore-fort",
+        "moti-masjid-agra-fort",
+        "yeni-mosque-istanbul",
         "shah-jahan-mosque-thatta",
         "hukru-miskiy-male"
       ]
@@ -149,8 +156,12 @@
       "name": "Ottoman Mosques",
       "description": "Imperial Ottoman mosques across Turkey, the Balkans, and beyond—500 years of architectural heritage.",
       "mosqueIds": [
-        "blue-mosque",
         "suleymaniye-mosque",
+        "selimiye-mosque",
+        "blue-mosque",
+        "rustem-pasha-mosque",
+        "mihrimah-sultan-mosque-uskudar",
+        "yeni-mosque-istanbul",
         "hagia-sophia-istanbul",
         "camlica-mosque",
         "sabanci-central-mosque",
@@ -171,6 +182,9 @@
       "mosqueIds": [
         "jama-masjid-delhi",
         "badshahi-mosque",
+        "wazir-khan-mosque",
+        "moti-masjid-lahore-fort",
+        "moti-masjid-agra-fort",
         "shah-jahan-mosque-thatta",
         "taj-ul-masajid",
         "jamia-masjid-srinagar"
@@ -561,6 +575,26 @@
         "imam-ali-shrine",
         "great-mosque-of-kufa",
         "jamkaran-mosque"
+      ]
+    },
+    {
+      "slug": "under-construction",
+      "name": "Mosques Under Construction",
+      "description": "Major mosque projects currently being built—the future landmarks of Islam.",
+      "mosqueIds": [
+        "grand-mosalla-tehran",
+        "nusantara-national-mosque"
+      ]
+    },
+    {
+      "slug": "mimar-sinan",
+      "name": "Mimar Sinan Masterpieces",
+      "description": "Works of the greatest Ottoman architect—Süleymaniye, Selimiye, and more.",
+      "mosqueIds": [
+        "suleymaniye-mosque",
+        "selimiye-mosque",
+        "rustem-pasha-mosque",
+        "mihrimah-sultan-mosque-uskudar"
       ]
     }
   ]
