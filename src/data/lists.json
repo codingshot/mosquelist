@@ -71,7 +71,8 @@
       "mosqueIds": [
         "al-azhar-mosque",
         "imam-ali-shrine",
-        "al-naqah-mosque-tripoli"
+        "al-naqah-mosque-tripoli",
+        "niujie-mosque"
       ]
     },
     {
@@ -133,7 +134,13 @@
         "grand-anwar-mosque-addis-ababa",
         "sultan-mosque-singapore",
         "jamia-mosque-nairobi",
-        "dungan-mosque-karakol"
+        "dungan-mosque-karakol",
+        "mesquita-brasil",
+        "great-mosque-of-brussels",
+        "seoul-central-mosque",
+        "omar-ibn-al-khattab-foz",
+        "suraya-mosque-mexico",
+        "auburn-gallipoli-mosque"
       ]
     },
     {
@@ -157,7 +164,10 @@
         "king-fahd-islamic-center-buenos-aires",
         "cologne-central-mosque",
         "cambridge-central-mosque",
-        "melbourne-grand-mosque"
+        "melbourne-grand-mosque",
+        "tokyo-camii",
+        "essalam-mosque-rotterdam",
+        "mevlana-mosque-rotterdam"
       ]
     },
     {
@@ -414,8 +424,8 @@
     {
       "slug": "china",
       "name": "China",
-      "description": "Historic mosques in China.",
-      "mosqueIds": ["id-kah-mosque"]
+      "description": "Historic mosques in China—unique Chinese-Islamic architectural fusion.",
+      "mosqueIds": ["id-kah-mosque", "xian-great-mosque", "niujie-mosque"]
     },
     {
       "slug": "philippines",
@@ -609,7 +619,7 @@
     {
       "slug": "european-mosques",
       "name": "European Mosques",
-      "description": "Major mosques across Europe—from historic Paris to modern London, Rome, and Cologne.",
+      "description": "Major mosques across Europe—from historic Paris to modern London, Rome, Cologne, Rotterdam, and Brussels.",
       "mosqueIds": [
         "grand-mosque-of-paris",
         "rome-grand-mosque",
@@ -618,6 +628,9 @@
         "cambridge-central-mosque",
         "cologne-central-mosque",
         "birmingham-central-mosque",
+        "great-mosque-of-brussels",
+        "essalam-mosque-rotterdam",
+        "mevlana-mosque-rotterdam",
         "gazi-husrev-beg-mosque",
         "ethem-bey-mosque",
         "mustafa-pasha-mosque",
@@ -632,7 +645,33 @@
       "mosqueIds": [
         "lakemba-mosque-sydney",
         "melbourne-grand-mosque",
-        "king-fahd-islamic-center-buenos-aires"
+        "auburn-gallipoli-mosque",
+        "king-fahd-islamic-center-buenos-aires",
+        "mesquita-brasil",
+        "omar-ibn-al-khattab-foz"
+      ]
+    },
+    {
+      "slug": "east-asia",
+      "name": "East Asian Mosques",
+      "description": "Mosques in China, Japan, and South Korea—unique blends of Islamic and local architectural traditions.",
+      "mosqueIds": [
+        "xian-great-mosque",
+        "niujie-mosque",
+        "id-kah-mosque",
+        "tokyo-camii",
+        "seoul-central-mosque"
+      ]
+    },
+    {
+      "slug": "latin-america",
+      "name": "Latin American Mosques",
+      "description": "Historic and modern mosques across Latin America—from Brazil to Argentina and Mexico.",
+      "mosqueIds": [
+        "king-fahd-islamic-center-buenos-aires",
+        "mesquita-brasil",
+        "omar-ibn-al-khattab-foz",
+        "suraya-mosque-mexico"
       ]
     }
   ]
