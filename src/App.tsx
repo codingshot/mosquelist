@@ -44,6 +44,10 @@ function lazyWithChunkErrorLogging(
 const MosquePage = lazyWithChunkErrorLogging(() => import("./pages/MosquePage"), "MosquePage");
 const ExplorePage = lazyWithChunkErrorLogging(() => import("./pages/ExplorePage"), "ExplorePage");
 const TimelinePage = lazyWithChunkErrorLogging(() => import("./pages/TimelinePage"), "TimelinePage");
+const IslamicHistoryPage = lazyWithChunkErrorLogging(
+  () => import("./pages/IslamicHistoryPage"),
+  "IslamicHistoryPage"
+);
 const BucketListPage = lazyWithChunkErrorLogging(
   () => import("./pages/BucketListPage"),
   "BucketListPage"
@@ -89,6 +93,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/islamic-history" element={<IslamicHistoryPage />} />
               <Route path="/bucket-list" element={<BucketListPage />} />
               <Route path="/lists" element={<ListsPage />} />
               <Route path="/lists/:slug" element={<ListDetailPage />} />

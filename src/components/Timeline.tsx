@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { timelineEvents, mosques, getUniqueCountries } from "@/data/mosques";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
 import { parseEstablishmentYear, formatYearDisplay, ISLAMIC_HISTORY_PERIODS } from "@/lib/timeline-utils";
-import { Calendar, ArrowUpDown, MapPin, ChevronRight, History } from "lucide-react";
+import { Calendar, ArrowUpDown, MapPin, ChevronRight, History, ExternalLink } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -13,21 +13,34 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import type { TimelineEvent } from "@/types/mosque";
 
+/** Context event type with source URL */
+interface ContextEvent {
+  isContextEvent: true;
+  year: string;
+  label: string;
+  description: string;
+  source: string;
+  category: "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education";
+}
+
 /** Build combined timeline with mosque events and Islamic history context */
-function buildCombinedTimeline(mosqueEvents: TimelineEvent[], includeContext: boolean): (TimelineEvent | { isContextEvent: true; year: string; label: string; description: string })[] {
+function buildCombinedTimeline(mosqueEvents: TimelineEvent[], includeContext: boolean): (TimelineEvent | ContextEvent)[] {
   if (!includeContext) {
     return mosqueEvents;
   }
   
   // Combine mosque events with history periods
-  const contextEvents = ISLAMIC_HISTORY_PERIODS.map((p) => ({
+  const contextEvents: ContextEvent[] = ISLAMIC_HISTORY_PERIODS.map((p) => ({
     isContextEvent: true as const,
     year: String(p.year),
     label: p.label,
     description: p.description,
+    source: p.source,
+    category: p.category,
   }));
   
   const combined = [...mosqueEvents, ...contextEvents];
@@ -206,7 +219,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               
               if (isContext) {
                 // Cast to context event type
-                const contextEvent = event as { isContextEvent: true; year: string; label: string; description: string };
+                const contextEvent = event as ContextEvent;
                 
                 // Render context event (Islamic history milestone)
                 return (
@@ -240,6 +253,23 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                             {contextEvent.label}
                           </h3>
                           <p className="text-muted-foreground text-sm sm:text-base mt-2">{contextEvent.description}</p>
+                          {/* Source tooltip */}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <a
+                                href={contextEvent.source}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 hover:underline mt-2"
+                              >
+                                <ExternalLink className="h-3 w-3" />
+                                Source
+                              </a>
+                            </TooltipTrigger>
+                            <TooltipContent side="bottom" className="max-w-xs">
+                              <p className="text-xs break-all">{contextEvent.source}</p>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                       </div>
                     </div>
