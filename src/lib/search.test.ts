@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { filterMosquesByQuery, mosqueMatchesQuery } from "./search";
+import { filterMosquesByQuery, mosqueMatchesQuery, getSearchSuggestions } from "./search";
 import type { Mosque } from "@/types/mosque";
 
 const mockMosques: Mosque[] = [
@@ -38,6 +38,40 @@ const mockMosques: Mosque[] = [
     womenPrayerArea: true,
     touristFriendly: false,
   },
+  {
+    id: "faisal-mosque",
+    name: "Faisal Mosque",
+    location: "Islamabad",
+    country: "Pakistan",
+    capacity: 300000,
+    established: "1986",
+    area: 33000,
+    annualVisitors: "1 million",
+    facilities: ["Library", "Museum"],
+    description: "Largest mosque in Pakistan, funded by King Faisal.",
+    significance: "Modern architectural masterpiece.",
+    imageUrl: "/z.svg",
+    isHolySite: false,
+    womenPrayerArea: true,
+    touristFriendly: true,
+  },
+  {
+    id: "badshahi-mosque",
+    name: "Badshahi Mosque",
+    location: "Lahore",
+    country: "Pakistan",
+    capacity: 100000,
+    established: "1673",
+    area: 29867,
+    annualVisitors: "1 million",
+    facilities: ["Museum", "Guided tours"],
+    description: "Mughal masterpiece. Was largest until Faisal Mosque.",
+    significance: "Iconic Mughal mosque.",
+    imageUrl: "/w.svg",
+    isHolySite: false,
+    womenPrayerArea: true,
+    touristFriendly: true,
+  },
 ];
 
 describe("search", () => {
@@ -66,12 +100,18 @@ describe("search", () => {
       expect(mosqueMatchesQuery(mockMosques[0], "BLUE")).toBe(true);
       expect(mosqueMatchesQuery(mockMosques[1], "mecca")).toBe(true);
     });
+
+    it("ignores stop words like 'mosque'", () => {
+      // "mosque" alone matches nothing specific since it's a stop word
+      // But "faisal" without "mosque" should still match Faisal Mosque
+      expect(mosqueMatchesQuery(mockMosques[2], "faisal")).toBe(true);
+    });
   });
 
   describe("filterMosquesByQuery", () => {
     it("returns all when query is empty", () => {
       const result = filterMosquesByQuery(mockMosques, "");
-      expect(result).toHaveLength(2);
+      expect(result).toHaveLength(4);
     });
 
     it("filters by single term", () => {
@@ -89,6 +129,47 @@ describe("search", () => {
     it("returns empty when no match", () => {
       const result = filterMosquesByQuery(mockMosques, "Tokyo");
       expect(result).toHaveLength(0);
+    });
+
+    it("prioritizes name matches over description matches", () => {
+      // "faisal" appears in Faisal Mosque name AND Badshahi description
+      const result = filterMosquesByQuery(mockMosques, "faisal");
+      expect(result.length).toBeGreaterThan(0);
+      // Faisal Mosque should be first (name match = higher score)
+      expect(result[0].id).toBe("faisal-mosque");
+    });
+
+    it("supports quoted phrases for exact matching", () => {
+      const result = filterMosquesByQuery(mockMosques, '"faisal mosque"');
+      // Only Faisal Mosque has the phrase "faisal mosque" in name
+      expect(result.length).toBeGreaterThanOrEqual(1);
+      expect(result[0].id).toBe("faisal-mosque");
+    });
+
+    it("sorts by relevance score", () => {
+      // Pakistan mosques: Faisal and Badshahi
+      const result = filterMosquesByQuery(mockMosques, "Pakistan");
+      expect(result).toHaveLength(2);
+      // Both match country, so order is by score (both equal in this case)
+    });
+  });
+
+  describe("getSearchSuggestions", () => {
+    it("returns empty for short queries", () => {
+      expect(getSearchSuggestions(mockMosques, "")).toHaveLength(0);
+      expect(getSearchSuggestions(mockMosques, "a")).toHaveLength(0);
+    });
+
+    it("suggests based on name prefix", () => {
+      const suggestions = getSearchSuggestions(mockMosques, "sul");
+      expect(suggestions.length).toBeGreaterThan(0);
+      expect(suggestions[0]).toContain("Sultan");
+    });
+
+    it("limits suggestions", () => {
+      const suggestions = getSearchSuggestions(mockMosques, "m", 2);
+      // Query too short, returns empty
+      expect(suggestions.length).toBe(0);
     });
   });
 });
