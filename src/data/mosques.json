@@ -39,7 +39,8 @@
       "tourismNotes": "Non-Muslims may not enter. Hajj visa required for pilgrimage. Dress modestly; Ihram for Hajj. Best visited during Ramadan or Hajj season for spiritual atmosphere.",
       "officialWebsite": "https://www.gph.gov.sa",
       "denomination": "sunni",
-      "imageLocal": "/images/mosques/masjid-al-haram.jpg"
+      "imageLocal": "/images/mosques/masjid-al-haram.jpg",
+      "sources": ["https://en.wikipedia.org/wiki/Masjid_al-Haram", "https://www.gph.gov.sa"]
     },
     {
       "id": "masjid-an-nabawi",
@@ -79,7 +80,8 @@
       "history": "Built by Prophet Muhammad ﷺ in 622 CE after the Hijrah. The green dome marks the Prophet's burial place. Successively expanded by Umayyads, Abbasids, Mamluks, Ottomans, and Saudi rulers.",
       "tourismNotes": "Non-Muslims may not enter. Visitors need valid visa. Women pray in designated areas. The Rawdah (green carpet area) is highly sought—visit early morning for shorter queues.",
       "officialWebsite": "https://www.gph.gov.sa",
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Al-Masjid_an-Nabawi", "https://www.gph.gov.sa"]
     },
     {
       "id": "al-aqsa",
@@ -115,7 +117,8 @@
       "history": "Construction began under Umayyad Caliph Abd al-Malik (685 CE); completed by his son al-Walid I (705 CE). The Dome of the Rock enshrines the Foundation Stone. Al-Aqsa mosque lies south.",
       "architectureNotes": "Early Islamic architecture with Byzantine and Persian influences. Gold dome, blue and turquoise tilework, marble columns.",
       "tourismNotes": "Check current access and security. Modest dress required. Non-Muslims may visit the compound at designated times.",
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Al-Aqsa_Mosque", "https://en.wikipedia.org/wiki/Temple_Mount"]
     },
     {
       "id": "imam-reza-shrine",
@@ -152,7 +155,9 @@
       },
       "history": "The shrine of Imam Reza, the eighth Imam of Twelver Shia Islam, was established in 818 CE after his martyrdom. The complex grew under Samanids, Safavids, and Qajars.",
       "architectureNotes": "Persian-Islamic style with turquoise domes, golden minarets, and intricate tilework (kashi-kari).",
-      "tourismNotes": "Non-Muslims may visit most areas. Dress modestly; women need chador (provided). Peak pilgrimage during Nowruz and Ramadan."
+      "tourismNotes": "Non-Muslims may visit most areas. Dress modestly; women need chador (provided). Peak pilgrimage during Nowruz and Ramadan.",
+      "denomination": "shia",
+      "sources": ["https://en.wikipedia.org/wiki/Imam_Reza_shrine"]
     },
     {
       "id": "sheikh-zayed",
@@ -194,7 +199,8 @@
       "architectureNotes": "82 domes, 1,000+ columns, 24-carat gold chandeliers, and the world's largest hand-knotted carpet. White marble and semi-precious stone inlays.",
       "tourismNotes": "Free guided tours for non-Muslims. Modest dress required; abayas provided for women. Best time: morning. Photography allowed. Closed Friday morning.",
       "officialWebsite": "https://www.szgmc.gov.ae",
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Sheikh_Zayed_Grand_Mosque", "https://www.szgmc.gov.ae"]
     },
     {
       "id": "hassan-ii",
@@ -234,7 +240,8 @@
       "architectureNotes": "Traditional Moroccan zellige tilework, carved wood, and plaster. Retractable roof over the main prayer hall.",
       "tourismNotes": "Guided tours for non-Muslims. Modest dress required. Tours run several times daily.",
       "officialWebsite": "https://www.fmh2.ma",
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Hassan_II_Mosque", "https://www.fmh2.ma"]
     },
     {
       "id": "blue-mosque",
@@ -273,7 +280,8 @@
       "architectureNotes": "Famous for 20,000+ hand-painted blue Iznik tiles. Central dome 43 m high. Six minarets. Classic Ottoman layout.",
       "tourismNotes": "Free entry. Closed during prayer times. Modest dress; scarves and robes provided. Opposite Hagia Sophia in Sultanahmet.",
       "denomination": "sunni",
-      "imageLocal": "/images/mosques/blue-mosque.jpg"
+      "imageLocal": "/images/mosques/blue-mosque.jpg",
+      "sources": ["https://en.wikipedia.org/wiki/Blue_Mosque,_Istanbul"]
     },
     {
       "id": "faisal-mosque",
@@ -310,7 +318,8 @@
         "lng": 73.0372
       },
       "denomination": "sunni",
-      "imageLocal": "/images/mosques/faisal-mosque.jpg"
+      "imageLocal": "/images/mosques/faisal-mosque.jpg",
+      "sources": ["https://en.wikipedia.org/wiki/Faisal_Mosque"]
     },
     {
       "id": "istiqlal-mosque",
@@ -344,7 +353,9 @@
       "coordinates": {
         "lat": -6.1702,
         "lng": 106.8294
-      }
+      },
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Istiqlal_Mosque,_Jakarta"]
     },
     {
       "id": "grand-jamia",
@@ -1402,80 +1413,108 @@
     {
       "id": "al-jabbar-grand-mosque",
       "name": "Al Jabbar Grand Mosque",
+      "arabicName": "مسجد الجبار الكبير",
       "location": "Bandung",
       "country": "Indonesia",
       "coordinates": {
-        "lat": -6.9789,
-        "lng": 107.6278
+        "lat": -6.9481,
+        "lng": 107.7036
       },
       "capacity": 60000,
       "established": "2022",
       "area": 25997,
-      "annualVisitors": "—",
+      "annualVisitors": "New landmark, high visitation",
       "facilities": [
         "Prayer halls",
-        "Courtyards",
-        "Ablution facilities"
+        "Floating design on reservoir",
+        "Educational facilities",
+        "Museum",
+        "Library",
+        "99-meter minaret observation deck"
       ],
-      "significance": "A large modern mosque complex in West Java with distinctive architecture.",
-      "description": "Al Jabbar Grand Mosque in Bandung is a contemporary mosque built on a lakefront site with striking geometric forms and a spacious interior.",
-      "imageUrl": "https://images.unsplash.com/photo-1706694767225-6c6714bb7a57?w=1200",
+      "significance": "Largest mosque in West Java, landmark 'floating mosque' designed by Governor Ridwan Kamil",
+      "description": "Al-Jabbar Grand Mosque (Masjid Raya Al Jabbar) is a neo-futuristic mosque on the Gedebage reservoir in Bandung. Designed by Governor Ridwan Kamil, it combines Ottoman, Sundanese, and modern styles. Opened December 2022 after five years of construction costing ~$64 million.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Al_Jabbar_Grand_Mosque_%28Masjid_Raya_Al_Jabbar%29.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Neo-futurism, Ottoman, Sundanese",
+      "architectureNotes": "Main dome without central pillar. Four 99-meter minarets. Floating appearance over reservoir. Geometric latticework (mashrabiya). White and gold palette.",
+      "history": "Groundbreaking December 29, 2017. Opened December 30, 2022. Designed by Ridwan Kamil when he was mayor of Bandung. Built on remnants of ancient Bandung Lake.",
+      "tourismNotes": "Open to visitors. Observation deck on minarets. Part of West Java's tourism promotion. Near Gedebage area.",
+      "officialWebsite": "https://masjidrayaaljabbar.com",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Al_Jabbar_Grand_Mosque", "https://en.antaranews.com/news/267831/al-jabbar-mosque-as-new-landmark-to-promote-west-java"]
     },
     {
       "id": "jameh-mosque-of-makki",
       "name": "Jameh Mosque of Makki",
+      "arabicName": "مسجد جامع مکی زاهدان",
       "location": "Zahedan",
       "country": "Iran",
+      "address": "Central Zahedan, Sistan and Baluchestan",
       "coordinates": {
-        "lat": 29.4963,
-        "lng": 60.8628
+        "lat": 29.488833,
+        "lng": 60.854
       },
       "capacity": 60000,
       "established": "1971",
       "area": 33000,
-      "annualVisitors": "—",
+      "annualVisitors": "Major Sunni congregation",
       "facilities": [
-        "Prayer halls",
-        "Courtyards",
-        "Ablution facilities"
+        "Prayer hall",
+        "Jamiat Darul Uloom seminary",
+        "Educational facilities",
+        "Community center"
       ],
-      "significance": "A major Sunni congregational mosque in southeastern Iran.",
-      "description": "Jameh Mosque of Makki in Zahedan is a large Sunni mosque complex used for major gatherings and religious instruction in the region.",
+      "significance": "Largest Sunni Friday mosque in Iran, one of world's largest Hanafi mosques",
+      "description": "The Jameh Mosque of Makki (Grand Makki Mosque of Zahedan) is the largest Sunni mosque in Iran and one of the world's largest Hanafi mosques. Founded in 1971 by Abdul Aziz Malazada, it serves the Baloch Sunni community. Led by Molavi Abdolhamid, it is a center of Sunni religious life in southeastern Iran.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Masjid_e_Makki_Zahedan.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Islamic",
+      "architecturalStyle": "Ottoman",
+      "architectureNotes": "Ottoman-influenced design. Large prayer hall capacity 60,000. Part of Jamiat Darul Uloom seminary complex. Expanded c. 2010.",
+      "history": "Founded 1971 by Abdul Aziz Malazada as part of Jamiat Darul Uloom seminary. Expanded c. 2010. Center of Sunni religious authority for Baloch community in Iran.",
+      "tourismNotes": "Active mosque. Visitors should check local conditions. Center of Sunni community life in Zahedan.",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Jameh_Mosque_of_Makki"]
     },
     {
       "id": "al-akbar-mosque",
       "name": "Al-Akbar Mosque",
+      "arabicName": "مسجد الأكبر",
       "location": "Surabaya",
       "country": "Indonesia",
+      "address": "Jl. Masjid Al-Akbar Timur No.1, Pagesangan, Surabaya",
       "coordinates": {
-        "lat": -7.2733,
-        "lng": 112.7378
+        "lat": -7.3167,
+        "lng": 112.7167
       },
-      "capacity": 59000,
+      "capacity": 30000,
       "established": "2000",
       "area": 23000,
-      "annualVisitors": "—",
+      "annualVisitors": "Major East Java landmark",
       "facilities": [
-        "Prayer halls",
-        "Courtyards",
-        "Ablution facilities"
+        "Prayer hall",
+        "99-meter minaret observation deck",
+        "Convention hall",
+        "Library",
+        "Parking",
+        "Gardens"
       ],
-      "significance": "One of the largest mosques in Indonesia, located in Surabaya.",
-      "description": "Al-Akbar Mosque in Surabaya is a prominent mosque with a large dome and minaret, serving as a key religious center in East Java.",
+      "significance": "One of Indonesia's largest mosques, landmark of Surabaya with 99-meter minaret",
+      "description": "Masjid Nasional Al-Akbar (National Al-Akbar Mosque) is one of Indonesia's largest mosques, inaugurated in 2000. Known for its striking turquoise-blue dome and 99-meter minaret inspired by the 99 names of Allah. The minaret offers panoramic views of Surabaya.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Al_Akbar_Mosque_Surabaya.jpg",
       "isHolySite": false,
-      "architecturalStyle": "Malay",
+      "architecturalStyle": "Modern Islamic",
+      "architectureNotes": "Vibrant turquoise-blue dome. 99-meter minaret. Combines global Islamic influences with Indonesian elements. Large courtyard and gardens.",
+      "history": "Inaugurated 2000. Built to symbolize Surabaya's role as a major Indonesian city while embracing Islamic heritage.",
+      "tourismNotes": "Open to visitors. 99-meter minaret observation deck offers city views. Accessible by public transport. Gardens and facilities available.",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://kelilingnusantara.com/surabaya-al-akbar-mosque/", "https://en.wikipedia.org/wiki/Al-Akbar_Mosque"]
     },
     {
       "id": "al-saleh-mosque",
@@ -3550,6 +3589,132 @@
       "touristFriendly": true,
       "denomination": "sunni",
       "sources": ["https://en.wikipedia.org/wiki/Great_Mosque_of_Kairouan", "https://whc.unesco.org/en/list/499"]
+    },
+    {
+      "id": "saudi-mosque-nouakchott",
+      "name": "Saudi Mosque",
+      "arabicName": "جامع المدينة المنورة",
+      "location": "Nouakchott",
+      "country": "Mauritania",
+      "coordinates": { "lat": 18.09, "lng": -15.97556 },
+      "capacity": 5000,
+      "established": "2012",
+      "area": 3000,
+      "annualVisitors": "Major national mosque",
+      "facilities": ["Prayer hall", "Minarets", "Islamic center"],
+      "significance": "Nouakchott Grand Mosque, built with Saudi assistance",
+      "description": "The Saudi Mosque (Nouakchott Grand Mosque) is a major Sunni mosque in Mauritania's capital, located southwest of the Presidential Palace. Built with assistance from the Government of Saudi Arabia in 2012, it serves as a prominent landmark and center for religious activities.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e7/%D8%A7%D9%84%D8%AC%D8%A7%D9%85%D8%B9_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%8C_%D8%A3%D8%AD%D8%AF_%D9%85%D8%B9%D8%A7%D9%84%D9%85_%D9%86%D9%88%D8%A7%D9%83%D8%B4%D9%88%D8%B7_%D8%B9%D8%A7%D8%B5%D9%85%D8%A9_%D9%85%D9%88%D8%B1%D9%8A%D8%AA%D8%A7%D9%86%D9%8A%D8%A7.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic",
+      "architectureNotes": "Modern construction with minarets. Saudi-funded. Located near Presidential Palace and Chamber of Commerce.",
+      "history": "Built with Saudi Arabian government assistance. Opened 2012. Bouddah Ould Bousseyri served as imam for several decades.",
+      "tourismNotes": "Major landmark in Nouakchott. Modest dress required.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Saudi_Mosque"]
+    },
+    {
+      "id": "lamido-grand-mosque-ngaoundere",
+      "name": "Lamido Grand Mosque",
+      "arabicName": "مسجد لاميدو الكبير",
+      "location": "Ngaoundéré",
+      "country": "Cameroon",
+      "coordinates": { "lat": 7.3209328, "lng": 13.585453 },
+      "capacity": 3000,
+      "established": "19th century",
+      "area": 1500,
+      "annualVisitors": "Regional mosque",
+      "facilities": ["Prayer hall", "Courtyard", "Connection to Lamido Palace"],
+      "significance": "Historic mosque connected to the Lamido (traditional ruler) palace in northern Cameroon",
+      "description": "The Lamido Grand Mosque in Ngaoundéré is a historic mosque in northern Cameroon, closely connected to the Lamido (traditional Fulani ruler) palace. It reflects the Islamic heritage of the Adamawa region and the relationship between mosque and traditional governance.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/43/LamidoGrandMosque.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Sudano-Sahelian",
+      "architectureNotes": "Traditional Fulani-influenced design. Connected to Lamido Palace. Stone and mud construction.",
+      "history": "Built during the Fulani emirate period. Connected to the Lamido (traditional ruler) of Ngaoundéré. Center of Islamic life in Adamawa region.",
+      "tourismNotes": "Part of cultural tourism in Ngaoundéré. Connected to traditional Fulani ceremonies. Modest dress required.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://en.wikipedia.org/wiki/Lamido_Grand_Mosque"]
+    },
+    {
+      "id": "plateau-salam-mosque-abidjan",
+      "name": "Plateau Salam Mosque",
+      "arabicName": "مسجد السلام",
+      "location": "Abidjan",
+      "country": "Ivory Coast",
+      "coordinates": { "lat": 5.3222, "lng": -4.0167 },
+      "capacity": 6500,
+      "established": "2007",
+      "area": 7500,
+      "annualVisitors": "Major Abidjan landmark",
+      "facilities": ["Prayer hall (3,000)", "Esplanade (3,500)", "Women's area (500)", "Library", "Amphitheatre (300)", "Ablution areas"],
+      "significance": "Largest mosque in Ivory Coast's economic capital, Sudanese-style architecture",
+      "description": "The Plateau Salam Mosque (Mosquée Salam du Plateau) is a major mosque in Abidjan's Plateau district. Inaugurated in 2007 after construction began in 1996, it features a vivid blue dome with gold design and a 65-meter minaret. Inspired by Silk Route Central Asian architecture, it accommodates 6,500 worshippers.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Abidjan_Plateau_Mosque.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Sudanese-Central Asian",
+      "architectureNotes": "Vivid blue dome with gold design. 65-meter minaret. Four floors: parking, ablution areas, main prayer hall, women's section. Silk Route-inspired.",
+      "history": "First stone laid 1994 by President Henri Konan Bédié. Construction began 1996. Inaugurated 2007. Financial assistance from Middle East.",
+      "tourismNotes": "Popular tourist attraction. Located in Plateau district downtown. Modest dress required.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://fr.wikipedia.org/wiki/Mosquée_salam_du_plateau", "https://www.reviewofreligions.org/47320/places-of-worship-the-plateau-salam-mosque/"]
+    },
+    {
+      "id": "surti-sunni-jamah-mosque-yangon",
+      "name": "Surti Sunni Jamah Mosque",
+      "arabicName": "مسجد سورتي السني",
+      "location": "Yangon",
+      "country": "Myanmar",
+      "address": "149 Shwe Bontha St., Pabedan",
+      "coordinates": { "lat": 16.7764, "lng": 96.1633 },
+      "capacity": 1500,
+      "established": "1860s",
+      "area": 800,
+      "annualVisitors": "Historic mosque",
+      "facilities": ["Prayer hall", "Twin minarets", "Arched entrance"],
+      "significance": "Oldest surviving Muslim place of worship in Yangon, built during British colonial era",
+      "description": "The Surti Sunni Jamah Mosque is believed to be Yangon's oldest surviving Muslim place of worship. Built in the 1860s on what was then Mughal Street, it features imposing twin minarets and a large arched entrance. The mosque serves the Indian Muslim community that arrived during British colonial rule.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Surti_Sunni_Jama_Mosque_%288396914437%29.jpg",
+      "isHolySite": false,
+      "architecturalStyle": "Indo-Islamic Colonial",
+      "architectureNotes": "Twin minarets. Large arched entrance tower. Built during British colonial period. On former Mughal Street.",
+      "history": "Built ca. 1860s on Mughal (Shwebontha) Street, heart of 'Indian' Yangon. Served courtiers and attendants of exiled Mughal Emperor Bahadur Shah Zafar who was exiled to Rangoon in 1857.",
+      "tourismNotes": "Historic site in downtown Yangon. Part of colonial-era walking tours. Modest dress required.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://www.yangongui.de/surti-sunni-jamah-mosque/", "https://www.lonelyplanet.com/myanmar-burma/yangon-rangoon/attractions/surti-sunni-jamah-mosque"]
+    },
+    {
+      "id": "maputo-central-mosque",
+      "name": "Maputo Central Mosque",
+      "arabicName": "المسجد المركزي مابوتو",
+      "location": "Maputo",
+      "country": "Mozambique",
+      "coordinates": { "lat": -25.9667, "lng": 32.5833 },
+      "capacity": 2000,
+      "established": "2003",
+      "area": 1500,
+      "annualVisitors": "National mosque",
+      "facilities": ["Prayer hall", "Islamic community center", "Educational facilities"],
+      "significance": "Main mosque in Mozambique's capital, center of Islamic community activities",
+      "description": "The Maputo Central Mosque (Grand Mosque) is the main mosque in Mozambique's capital, inaugurated in early 2003. Built by the Islamic community after obtaining permission for construction in downtown Maputo, it serves as a center for religious services and community activities.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Mesquita_Maputo.JPG",
+      "isHolySite": false,
+      "architecturalStyle": "Modern Islamic",
+      "architectureNotes": "Modern construction. White facade with green accents. Minaret. Downtown Maputo location.",
+      "history": "Completed and inaugurated early 2003. Built after government granted permission for new mosques in city centers. Islamic community construction project.",
+      "tourismNotes": "Center of Islamic community in Maputo. Modest dress required.",
+      "womenPrayerArea": true,
+      "touristFriendly": true,
+      "denomination": "sunni",
+      "sources": ["https://2009-2017.state.gov/j/drl/rls/irf/2004/35373.htm"]
     }
   ],
   "timelineEvents": [
