@@ -6431,6 +6431,123 @@
       "isContextEvent": true,
       "category": "era",
       "source": "https://en.wikipedia.org/wiki/Muhammad%27s_first_revelation"
+    },
+    {
+      "year": "732",
+      "mosque": "Battle of Tours",
+      "mosqueId": "",
+      "event": "Frankish forces under Charles Martel halt Umayyad advance at Tours (Poitiers), marking the high-water mark of Muslim expansion into Western Europe",
+      "isContextEvent": true,
+      "category": "expansion",
+      "source": "https://en.wikipedia.org/wiki/Battle_of_Tours"
+    },
+    {
+      "year": "970",
+      "mosque": "Al-Azhar University Founded",
+      "mosqueId": "",
+      "event": "Fatimid Caliph Al-Mu'izz establishes Al-Azhar as a center of Islamic learning in Cairo; world's second-oldest university",
+      "isContextEvent": true,
+      "category": "education",
+      "source": "https://en.wikipedia.org/wiki/Al-Azhar_University"
+    },
+    {
+      "year": "1291",
+      "mosque": "Fall of Acre",
+      "mosqueId": "",
+      "event": "Mamluk Sultan Al-Ashraf Khalil captures Acre; end of Crusader presence in the Holy Land after 192 years",
+      "isContextEvent": true,
+      "category": "expansion",
+      "source": "https://en.wikipedia.org/wiki/Siege_of_Acre_(1291)"
+    },
+    {
+      "year": "1502",
+      "mosque": "Forced Conversions in Granada",
+      "mosqueId": "",
+      "event": "Spanish Crown orders Muslims in Granada to convert or leave; end of open Islamic practice in Iberia",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Alhambra_Decree"
+    },
+    {
+      "year": "1609",
+      "mosque": "Expulsion of Moriscos",
+      "mosqueId": "",
+      "event": "Philip III expels 300,000 Moriscos (descendants of Muslims) from Spain over 5 years; final erasure of Muslim presence",
+      "isContextEvent": true,
+      "category": "migration",
+      "source": "https://en.wikipedia.org/wiki/Expulsion_of_the_Moriscos"
+    },
+    {
+      "year": "1969",
+      "mosque": "Organisation of Islamic Cooperation Founded",
+      "mosqueId": "",
+      "event": "OIC established in Rabat after Al-Aqsa arson attack; 57 member states representing 1.8 billion Muslims",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Organisation_of_Islamic_Cooperation"
+    },
+    {
+      "year": "1975",
+      "mosque": "Islamic Development Bank Founded",
+      "mosqueId": "",
+      "event": "IDB established in Jeddah to promote economic development in Muslim-majority countries according to Shariah principles",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Islamic_Development_Bank"
+    },
+    {
+      "year": "1990",
+      "mosque": "1990 Hajj Tunnel Stampede",
+      "mosqueId": "",
+      "event": "Stampede in Al-Ma'aisim tunnel kills 1,426 pilgrims; leads to major infrastructure improvements",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/1990_Mecca_tunnel_tragedy"
+    },
+    {
+      "year": "2015",
+      "mosque": "2015 Mina Stampede",
+      "mosqueId": "",
+      "event": "Stampede during Hajj at Mina kills over 2,400 pilgrims; deadliest incident in Hajj history",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/2015_Mina_stampede"
+    },
+    {
+      "year": "1967",
+      "mosque": "Jerusalem Under Israeli Control",
+      "mosqueId": "",
+      "event": "Six-Day War: Israel captures East Jerusalem including Al-Aqsa compound; Islamic holy sites under new administration",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Six-Day_War"
+    },
+    {
+      "year": "2017",
+      "mosque": "Jerusalem Recognition Controversy",
+      "mosqueId": "",
+      "event": "US recognizes Jerusalem as Israel's capital; sparks protests across Muslim world and OIC emergency summit",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/United_States_recognition_of_Jerusalem_as_capital_of_Israel"
+    },
+    {
+      "year": "1963",
+      "mosque": "First Islamic Bank Founded",
+      "mosqueId": "",
+      "event": "Mit Ghamr Savings Bank opens in Egypt; pioneer of modern Islamic banking without interest (riba)",
+      "isContextEvent": true,
+      "category": "era",
+      "source": "https://en.wikipedia.org/wiki/Mit_Ghamr_Savings_Bank"
+    },
+    {
+      "year": "2006",
+      "mosque": "Masjid al-Haram Expansion",
+      "mosqueId": "",
+      "event": "Major expansion project begins in Mecca to increase capacity to 4 million; Abraj Al-Bait towers completed 2012",
+      "isContextEvent": true,
+      "category": "architecture",
+      "source": "https://en.wikipedia.org/wiki/Saudi_Arabia%27s_largest_clock"
     }
   ]
 }
