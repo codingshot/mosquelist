@@ -61,9 +61,15 @@ export default function MosquePage() {
   }, [mosque]);
   const hasGallery = galleryImages.length > 1;
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryStartIndex, setGalleryStartIndex] = useState(0);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [shareOpen, setShareOpen] = useState(false);
-  const openGallery = useCallback(() => setGalleryOpen(true), []);
+  const openGallery = useCallback((startIndex = 0) => {
+    setGalleryStartIndex(startIndex);
+    setGalleryOpen(true);
+  }, []);
   const closeGallery = useCallback(() => setGalleryOpen(false), []);
+  const [failedThumbs, setFailedThumbs] = useState<Set<number>>(new Set());
   const relatedMosques = useMemo(
     () => (mosque ? getRelatedMosques(mosque, 6) : []),
     [mosque]
@@ -154,16 +160,15 @@ export default function MosquePage() {
           <div className="relative overflow-hidden rounded-xl border border-border bg-card mosque-card-shadow">
             <div
               className="relative h-56 sm:h-72 md:h-80 cursor-default"
-              onDoubleClick={hasGallery ? openGallery : undefined}
+              onDoubleClick={hasGallery ? () => openGallery(activeImageIndex) : undefined}
               role={hasGallery ? "button" : undefined}
               tabIndex={hasGallery ? 0 : undefined}
-              onClick={hasGallery ? undefined : undefined}
               onKeyDown={
                 hasGallery
                   ? (e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
-                        openGallery();
+                        openGallery(activeImageIndex);
                       }
                     }
                   : undefined
@@ -171,7 +176,7 @@ export default function MosquePage() {
               aria-label={hasGallery ? "Double-click or press Enter to open image gallery" : undefined}
             >
               <img
-                src={heroImageSrc.src}
+                src={galleryImages[activeImageIndex] || heroImageSrc.src}
                 alt={mosque.name}
                 loading="eager"
                 decoding="async"
@@ -256,6 +261,51 @@ export default function MosquePage() {
                 )}
               </div>
             </div>
+
+            {/* Thumbnail strip for gallery preview */}
+            {hasGallery && (
+              <div className="px-4 py-3 bg-muted/50 border-t border-border">
+                <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+                  {galleryImages.map((img, idx) => {
+                    if (failedThumbs.has(idx)) return null;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveImageIndex(idx)}
+                        onDoubleClick={() => openGallery(idx)}
+                        className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                          idx === activeImageIndex
+                            ? "ring-2 ring-primary ring-offset-2 ring-offset-background"
+                            : "opacity-70 hover:opacity-100"
+                        }`}
+                        aria-label={`View image ${idx + 1} of ${galleryImages.length}`}
+                        aria-pressed={idx === activeImageIndex}
+                      >
+                        <img
+                          src={img}
+                          alt={`${mosque.name} thumbnail ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          onError={() => {
+                            setFailedThumbs(prev => new Set(prev).add(idx));
+                          }}
+                        />
+                      </button>
+                    );
+                  })}
+                  <button
+                    type="button"
+                    onClick={() => openGallery(0)}
+                    className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-muted flex flex-col items-center justify-center gap-1 text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    aria-label="Open full gallery"
+                  >
+                    <Images className="h-5 w-5" />
+                    <span className="text-xs font-medium">All</span>
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div className="p-6 sm:p-8">
               <h1 className="font-serif text-3xl font-bold text-foreground sm:text-4xl">
@@ -596,7 +646,7 @@ export default function MosquePage() {
         {hasGallery && (
           <ImageGallery
             images={galleryImages}
-            initialIndex={0}
+            initialIndex={galleryStartIndex}
             open={galleryOpen}
             onClose={closeGallery}
             title={mosque.name}
