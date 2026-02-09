@@ -12,6 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "fact-check": "node scripts/fact-check-checklist.js",
+    "fact-check:validate": "node scripts/fact-check-validate.js",
+    "dedupe-mosques": "node scripts/dedupe-mosques.js",
     "enrich-mosques": "node scripts/enrich-mosques-from-source.js",
     "populate-mosquedata1": "node scripts/populate-mosquedata1.js",
     "merge-mosques": "node scripts/merge-mosques.js",

@@ -60,13 +60,14 @@ Corrections applied: Al-Masjid an-Nabawi 1.5M capacity / 384,000 m²; Imam Reza 
 
 ### Fact-check schedule & log
 
-**Keep fact-checking:** run `npm run fact-check` to print a checklist of all mosques (capacity, area, established). Re-verify using the source hierarchy above; document corrections here and in "Latest audit," then update `src/data/mosques.json` as needed.
+**Keep fact-checking:** run `npm run fact-check` to print a checklist of all mosques (capacity, area, established). Run `npm run fact-check:validate` to validate dates, coordinates, capacity/area ranges and known reference figures; report written to `docs/fact-check-report.md`. Re-verify using the source hierarchy above; document corrections here and in "Latest audit," then update `src/data/mosques.json` as needed.
 
 | Date       | Scope                    | Notes |
 |------------|--------------------------|--------|
 | 2025-02    | Process added            | Checklist script + this log. Next: quarterly top 10–15 re-audit. |
 | 2025-02    | Country expansion        | Added 11 mosques: Afghanistan (Kabul), Jordan (Amman), Qatar (Doha), Bahrain (Manama), Senegal (Dakar), Azerbaijan (Baku), Lebanon (Beirut), Sudan (Khartoum), Bosnia (Sarajevo), Kazakhstan (Astana), Tunisia (Tunis). |
 | 2025-02    | Address & fact-check     | Added optional `address` field to Mosque type. 10 mosques now have street addresses (Masjid al-Haram, Al-Masjid an-Nabawi, Al-Aqsa, Sheikh Zayed, Hassan II, Blue Mosque, Faisal, Badshahi, Sultan Qaboos, Istiqlal). Fact-check script enhanced with address column and summary. |
+| 2026-02    | Validation & dedupe     | Added `fact-check-validate.js`: validates established dates (pre-Islam/future), coordinates, capacity/area sanity, reference figures for 18 major mosques. Fixed 6 duplicate mosque ids in `mosques.json` via `scripts/dedupe-mosques.js`. Faisal Mosque 300k capacity confirmed (total with grounds). Grand Mosque of Kuwait: 20k m² = building, 45k m² = total site (both valid). |
 
 ---
 
