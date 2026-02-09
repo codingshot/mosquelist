@@ -2,6 +2,8 @@ import { describe, it, expect } from "vitest";
 import { 
   parseEstablishmentYear, 
   formatYearDisplay, 
+  formatEstablishmentRange,
+  getEstablishmentYearRange,
   validateMosqueDate,
   ISLAMIC_HISTORY_PERIODS 
 } from "./timeline-utils";
@@ -18,23 +20,30 @@ describe("parseEstablishmentYear", () => {
     expect(parseEstablishmentYear("1573-1594")).toBe(1573);
   });
 
-  it("parses century notation correctly", () => {
-    // 15th century = 1401-1500, midpoint = 1450
-    expect(parseEstablishmentYear("15th century")).toBe(1450);
-    expect(parseEstablishmentYear("16th century")).toBe(1550);
-    expect(parseEstablishmentYear("19th century")).toBe(1850);
-    expect(parseEstablishmentYear("7th century")).toBe(650);
-    expect(parseEstablishmentYear("1st century")).toBe(50);
+  it("parses century notation as start of range (sorts correctly)", () => {
+    // 14th century = 1300-1399, 15th = 1400-1499 (start year for sort/timeline)
+    expect(parseEstablishmentYear("14th century")).toBe(1300);
+    expect(parseEstablishmentYear("15th century")).toBe(1400);
+    expect(parseEstablishmentYear("16th century")).toBe(1500);
+    expect(parseEstablishmentYear("19th century")).toBe(1800);
+    expect(parseEstablishmentYear("7th century")).toBe(600);
+    expect(parseEstablishmentYear("1st century")).toBe(0);
   });
 
   it("handles case insensitivity", () => {
-    expect(parseEstablishmentYear("15TH CENTURY")).toBe(1450);
-    expect(parseEstablishmentYear("15th Century")).toBe(1450);
+    expect(parseEstablishmentYear("15TH CENTURY")).toBe(1400);
+    expect(parseEstablishmentYear("15th Century")).toBe(1400);
   });
 
   it("returns 0 for unparseable strings", () => {
     expect(parseEstablishmentYear("")).toBe(0);
     expect(parseEstablishmentYear("unknown")).toBe(0);
+    expect(parseEstablishmentYear("Under construction")).toBe(0);
+  });
+
+  it("parses composite strings (takes first year)", () => {
+    expect(parseEstablishmentYear("1824 (current building 1932)")).toBe(1824);
+    expect(parseEstablishmentYear("1950s")).toBe(1950);
   });
 });
 
@@ -44,14 +53,39 @@ describe("formatYearDisplay", () => {
     expect(formatYearDisplay("2007")).toBe("2007 CE");
   });
 
-  it("returns century strings as-is", () => {
-    expect(formatYearDisplay("15th century")).toBe("15th century");
-    expect(formatYearDisplay("16th century")).toBe("16th century");
+  it("returns century as year range for display", () => {
+    expect(formatYearDisplay("14th century")).toBe("1300-1399");
+    expect(formatYearDisplay("15th century")).toBe("1400-1499");
+    expect(formatYearDisplay("16th century")).toBe("1500-1599");
   });
 
   it("returns other strings as-is", () => {
     expect(formatYearDisplay("705–715 CE")).toBe("705–715 CE");
     expect(formatYearDisplay("c. 1500")).toBe("c. 1500");
+  });
+});
+
+describe("formatEstablishmentRange", () => {
+  it("formats century as year range", () => {
+    expect(formatEstablishmentRange("14th century")).toBe("1300-1399");
+    expect(formatEstablishmentRange("15th century")).toBe("1400-1499");
+    expect(formatEstablishmentRange("7th century")).toBe("600-699");
+  });
+
+  it("returns non-century strings unchanged", () => {
+    expect(formatEstablishmentRange("638 CE")).toBe("638 CE");
+    expect(formatEstablishmentRange("705–715 CE")).toBe("705–715 CE");
+  });
+});
+
+describe("getEstablishmentYearRange", () => {
+  it("returns range for century", () => {
+    expect(getEstablishmentYearRange("14th century")).toEqual({ start: 1300, end: 1399 });
+    expect(getEstablishmentYearRange("15th century")).toEqual({ start: 1400, end: 1499 });
+  });
+
+  it("returns same start/end for exact year", () => {
+    expect(getEstablishmentYearRange("638 CE")).toEqual({ start: 638, end: 638 });
   });
 });
 

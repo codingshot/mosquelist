@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { mosques } from "@/data/mosques";
 import { curatedLists, getListBySlug } from "@/data/lists";
-import { Check, Plus, MapPin, Plane, X, GripVertical, ArrowUpDown, List, ChevronRight, Star } from "lucide-react";
+import { Check, Plus, MapPin, Plane, X, GripVertical, ArrowUpDown, List, ChevronRight, Star, Download, Share2, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -19,7 +19,30 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useBucketList } from "@/hooks/useBucketList";
+import {
+  downloadCsv,
+  downloadJson,
+  downloadMarkdown,
+  downloadMosqueDataZip,
+  mosquesToCsv,
+} from "@/lib/mosque-export";
+import {
+  getTwitterShareUrl,
+  getFacebookShareUrl,
+  getLinkedInShareUrl,
+  TWITTER_MAX_MESSAGE,
+  getBucketListShareMessage,
+} from "@/lib/share-urls";
 import { useFavoriteLists } from "@/hooks/useFavoriteLists";
 import { toast } from "sonner";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
@@ -262,6 +285,10 @@ export const BucketList = () => {
   const [filter, setFilter] = useState<BucketFilter>("all");
   const [sort, setSort] = useState<BucketSort>("list-order");
   const [visitorFriendlyOnly, setVisitorFriendlyOnly] = useState(false);
+  const [filtersSheetOpen, setFiltersSheetOpen] = useState(false);
+  const [downloadShareOpen, setDownloadShareOpen] = useState(false);
+  const [shareMessage, setShareMessage] = useState("");
+  const [zipDownloading, setZipDownloading] = useState(false);
 
   const displayedItems = useMemo(() => {
     let items = bucketList
@@ -362,16 +389,6 @@ export const BucketList = () => {
                   </button>
                 ))}
               </div>
-              <label className="hidden sm:flex items-center gap-2 min-h-[44px] px-3 py-2 rounded-lg border border-border bg-card cursor-pointer hover:bg-secondary/50 touch-manipulation">
-                <input
-                  type="checkbox"
-                  checked={visitorFriendlyOnly}
-                  onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
-                  className="rounded border-border"
-                  aria-label="Show only visitor-friendly mosques (non-Muslims can visit)"
-                />
-                <span className="text-sm font-medium text-foreground">Visitor-friendly only</span>
-              </label>
               <Select
                 value={sort}
                 onValueChange={(v) => setSort(v as BucketSort)}
@@ -388,6 +405,240 @@ export const BucketList = () => {
                   <SelectItem value="unvisited-first">Unvisited first</SelectItem>
                 </SelectContent>
               </Select>
+              <Sheet open={filtersSheetOpen} onOpenChange={setFiltersSheetOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-1.5 min-h-[40px] sm:min-h-[44px] touch-manipulation"
+                    aria-label="Advanced filters"
+                  >
+                    <SlidersHorizontal className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <span className="hidden sm:inline">Filters</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-[min(100vw-1rem,20rem)]">
+                  <SheetHeader>
+                    <SheetTitle>Advanced filters</SheetTitle>
+                  </SheetHeader>
+                  <div className="mt-6 space-y-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={visitorFriendlyOnly}
+                        onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
+                        className="rounded border-border h-4 w-4"
+                      />
+                      <span className="text-sm font-medium">Visitor-friendly only</span>
+                    </label>
+                    <p className="text-xs text-muted-foreground">
+                      Show only mosques where non-Muslims can visit.
+                    </p>
+                  </div>
+                </SheetContent>
+              </Sheet>
+              <div className="ml-auto flex items-center gap-1">
+                <Dialog
+                  open={downloadShareOpen}
+                  onOpenChange={(open) => {
+                    setDownloadShareOpen(open);
+                    if (open) {
+                      setShareMessage(
+                        getBucketListShareMessage(
+                          displayedItems.map((x) => x.mosque.name),
+                          visitedCount,
+                          bucketList.length
+                        )
+                      );
+                    }
+                  }}
+                >
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="gap-1.5 min-h-[40px] sm:min-h-[44px] touch-manipulation"
+                      aria-label="Download or share your list"
+                    >
+                      <Download className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      <span className="hidden sm:inline">Download &amp; Share</span>
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="flex items-center gap-2">
+                        <Download className="h-5 w-5" />
+                        Download &amp; Share Your List
+                      </DialogTitle>
+                    </DialogHeader>
+                    <Tabs defaultValue="download" className="mt-2">
+                      <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="download">Download</TabsTrigger>
+                        <TabsTrigger value="share">Share</TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="download" className="space-y-3 mt-3">
+                        <p className="text-sm text-muted-foreground">
+                          Export your current list ({displayedItems.length} mosques) as:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5"
+                            onClick={() => {
+                              const listMosques = displayedItems.map((x) => x.mosque);
+                              downloadJson(listMosques, "mosquelist-bucket-list");
+                            }}
+                          >
+                            <Download className="h-3.5 w-3.5" />
+                            JSON
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5"
+                            onClick={() => {
+                              downloadCsv(
+                                mosquesToCsv(displayedItems.map((x) => x.mosque)),
+                                "mosquelist-bucket-list"
+                              );
+                            }}
+                          >
+                            <Download className="h-3.5 w-3.5" />
+                            CSV
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5"
+                            onClick={() => {
+                              downloadMarkdown(
+                                displayedItems.map((x) => x.mosque),
+                                "mosquelist-bucket-list"
+                              );
+                            }}
+                          >
+                            <Download className="h-3.5 w-3.5" />
+                            Markdown
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5"
+                            disabled={zipDownloading}
+                            onClick={async () => {
+                              setZipDownloading(true);
+                              try {
+                                await downloadMosqueDataZip(
+                                  displayedItems.map((x) => x.mosque),
+                                  "mosquelist-bucket-list"
+                                );
+                              } finally {
+                                setZipDownloading(false);
+                              }
+                            }}
+                          >
+                            {zipDownloading ? (
+                              <span className="animate-pulse">Preparing…</span>
+                            ) : (
+                              <>
+                                <Download className="h-3.5 w-3.5" />
+                                ZIP (all)
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      </TabsContent>
+                      <TabsContent value="share" className="space-y-3 mt-3">
+                        <p className="text-sm text-muted-foreground">
+                          Edit the message below, then copy or share to social. Post intents open with your message (platform limits apply).
+                        </p>
+                        <div className="space-y-2">
+                          <Label htmlFor="share-message">Post message</Label>
+                          <Textarea
+                            id="share-message"
+                            value={shareMessage}
+                            onChange={(e) => setShareMessage(e.target.value)}
+                            rows={4}
+                            className="resize-none text-sm"
+                            placeholder="My mosque bucket list…"
+                          />
+                          <p className="text-xs text-muted-foreground">
+                            Twitter: max {TWITTER_MAX_MESSAGE} chars for message (link added when you share).
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5"
+                            onClick={async () => {
+                              const url =
+                                typeof window !== "undefined"
+                                  ? `${window.location.origin}/bucket-list`
+                                  : "https://mosquelist.com/bucket-list";
+                              const full = `${shareMessage} ${url}`;
+                              try {
+                                await navigator.clipboard.writeText(full);
+                                toast.success("Copied to clipboard");
+                              } catch {
+                                toast.error("Could not copy");
+                              }
+                            }}
+                          >
+                            <Share2 className="h-3.5 w-3.5" />
+                            Copy
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5"
+                            asChild
+                          >
+                            <a
+                              href={getTwitterShareUrl(
+                                shareMessage.length > TWITTER_MAX_MESSAGE
+                                  ? shareMessage.slice(0, TWITTER_MAX_MESSAGE - 1) + "…"
+                                  : shareMessage,
+                                typeof window !== "undefined" ? `${window.location.origin}/bucket-list` : "https://mosquelist.com/bucket-list"
+                              )}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label="Share on X (Twitter)"
+                            >
+                              X (Twitter)
+                            </a>
+                          </Button>
+                          <Button variant="outline" size="sm" className="gap-1.5" asChild>
+                            <a
+                              href={getLinkedInShareUrl(
+                                typeof window !== "undefined" ? `${window.location.origin}/bucket-list` : "https://mosquelist.com/bucket-list"
+                              )}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label="Share on LinkedIn"
+                            >
+                              LinkedIn
+                            </a>
+                          </Button>
+                          <Button variant="outline" size="sm" className="gap-1.5" asChild>
+                            <a
+                              href={getFacebookShareUrl(
+                                typeof window !== "undefined" ? `${window.location.origin}/bucket-list` : "https://mosquelist.com/bucket-list"
+                              )}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label="Share on Facebook"
+                            >
+                              Facebook
+                            </a>
+                          </Button>
+                        </div>
+                      </TabsContent>
+                    </Tabs>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </div>
           )}
 
@@ -404,7 +655,7 @@ export const BucketList = () => {
             {bucketList.length === 0 ? (
               <div className="px-6 py-8 text-center text-muted-foreground">
                 <p className="font-medium text-foreground mb-1">Your list is empty</p>
-                <p className="text-sm mb-4">Browse 100+ mosques in 50+ countries or our curated lists (Holy Sites, Biggest Mosques, by country) and add places to track your spiritual journey.</p>
+                <p className="text-sm mb-4">Browse 199+ mosques in 50+ countries or our curated lists (Holy Sites, Biggest Mosques, Shia Mosques, by country) and add places to track your spiritual journey.</p>
                 <div className="flex flex-wrap gap-2">
                   <Button variant="outline" size="sm" asChild>
                     <Link to="/lists">Curated Lists</Link>
@@ -602,7 +853,7 @@ export const BucketList = () => {
               Browse other lists
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Add from 100+ mosques or curated lists: Holy Sites, Biggest Mosques, Turkey, Pakistan, Indonesia, and more.
+              Add from 199+ mosques or curated lists: Holy Sites, Biggest Mosques, Shia Mosques, Turkey, Pakistan, Indonesia, and more.
             </p>
             <div className="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {curatedLists.slice(0, 9).map((list) => (

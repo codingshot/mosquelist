@@ -276,6 +276,17 @@ export default function VisitorTipsPage() {
           </TooltipProvider>
 
           <footer className="mt-12 pt-8 border-t border-border">
+            <p className="text-sm text-muted-foreground mb-2">
+              For step-by-step wudu and how to pray or follow prayer respectfully, see our blog:{" "}
+              <Link to="/blog/how-to-perform-wudu-before-entering-mosque" className="text-primary hover:underline">
+                How to Perform Wudu
+              </Link>
+              {" "}and{" "}
+              <Link to="/blog/how-to-pray-in-mosque-respectful-guide" className="text-primary hover:underline">
+                How to Pray in a Mosque
+              </Link>
+              .
+            </p>
             <p className="text-sm text-muted-foreground mb-4">
               For travel planning and popular routes, see our{" "}
               <Link to="/guides/travel" className="text-primary hover:underline">
@@ -283,7 +294,7 @@ export default function VisitorTipsPage() {
               </Link>
               . Explore our{" "}
               <Link to="/explore" className="text-primary hover:underline">
-                150+ mosques in 70+ countries
+                199+ mosques in 50+ countries
               </Link>{" "}
               to find visitor-friendly mosques.
             </p>

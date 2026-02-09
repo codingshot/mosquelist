@@ -47,7 +47,7 @@ See `docs/socratic-prompts.md` for more guiding questions.
 | Route | Page component | Purpose | Performance notes |
 |-------|----------------|---------|--------------------|
 | `/` | `Index` | Home: hero, explore preview, timeline, bucket list, curated lists | Eager load. Hero image: fetchpriority="high". MosqueGrid preview limits items. |
-| `/explore` | `ExplorePage` | Full mosque grid with search, filters, sort, view modes | Lazy. MosqueGrid is the main cost; cards use memo + lazy images. |
+| `/explore` | `ExplorePage` | Full mosque grid with search, filters, sort, view modes | Lazy. MosqueGrid is the main cost; cards use memo + lazy images. **Map view** and **Swipe view** are lazy-loaded (dynamic import) so Leaflet/SwipeDeck load only when user switches view. Search uses `useDeferredValue` + 150ms debounce. Table view paginates (50 rows per page). Infinite scroll 24 items per page. |
 | `/mosque/:id` | `MosquePage` | Mosque detail: image, meta, related, bucket list CTA | Lazy. Hero img eager; related section imgs lazy. |
 | `/map` | `MapPage` | Leaflet map, region/country filters, mosque markers | Lazy. In "map" chunk (leaflet). Memoized filtered lists. |
 | `/timeline` | `TimelinePage` | Timeline of mosque events | Lazy. Renders Timeline component. |

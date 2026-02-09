@@ -12,6 +12,7 @@ export default defineConfig({
           if (id.includes("node_modules/leaflet") || id.includes("node_modules/react-leaflet")) return "map";
           if (id.includes("node_modules/@dnd-kit")) return "dnd";
           if (id.includes("node_modules/@tanstack/react-query")) return "query";
+          if (id.includes("src/data/blog")) return "blog";
         },
       },
     },

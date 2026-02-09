@@ -930,7 +930,6 @@
       "architectureNotes": "45,000 m² site. 26m dome, 43m high. 74m Andalusian-style minaret. Cost 13M KWD (~$48M).",
       "history": "Completed 1986. Kuwait's national mosque. Faced Al-Seif Palace on Arabian Gulf Street.",
       "tourismNotes": "Tours available for non-Muslims. Modest dress required. Opposite Al-Seif Palace.",
-      "officialWebsite": null,
       "womenPrayerArea": true,
       "touristFriendly": true,
       "denomination": "sunni",
@@ -2602,7 +2601,7 @@
         "lng": 114.5833
       },
       "capacity": 15000,
-      "established": "1974",
+      "established": "1984",
       "area": 5000,
       "annualVisitors": "—",
       "facilities": [
@@ -2611,12 +2610,15 @@
         "Ablution facilities"
       ],
       "significance": "A major mosque in Banjarmasin on the island of Borneo.",
-      "description": "The Grand Mosque of Sabilal Muhtadin is a large congregational mosque built near the Martapura River in Banjarmasin, South Kalimantan.",
+      "description": "The Grand Mosque of Sabilal Muhtadin is a large congregational mosque built near the Martapura River in Banjarmasin, South Kalimantan. It accommodates 15,000 worshippers (7,500 inside and 7,500 in the courtyard) and was completed in the mid-1980s.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Banten_Masjid_Agung_Banten.jpg/1280px-Banten_Masjid_Agung_Banten.jpg",
       "isHolySite": false,
       "architecturalStyle": "Malay",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Grand_Mosque_of_Sabilal_Muhtadin"
+      ]
     },
     {
       "id": "sultan-haji-hassanal-bolkiah-mosque",
@@ -2642,7 +2644,10 @@
       "isHolySite": false,
       "architecturalStyle": "Malay",
       "womenPrayerArea": true,
-      "touristFriendly": true
+      "touristFriendly": true,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Sultan_Haji_Hassanal_Bolkiah_Mosque"
+      ]
     },
     {
       "id": "imperial-mosque-pristina",
@@ -2651,9 +2656,9 @@
       "location": "Pristina",
       "country": "Kosovo",
       "address": "Old Town, Pristina",
-      "capacity": 5000,
+      "capacity": 800,
       "established": "1461 CE",
-      "area": 2500,
+      "area": 577,
       "annualVisitors": "—",
       "facilities": [
         "Prayer halls",
@@ -2673,7 +2678,10 @@
       "coordinates": {
         "lat": 42.666992,
         "lng": 21.167006
-      }
+      },
+      "sources": [
+        "https://en.wikipedia.org/wiki/Imperial_Mosque_(Pristina)"
+      ]
     },
     {
       "id": "kalon-mosque-bukhara",
@@ -2704,7 +2712,11 @@
       "coordinates": {
         "lat": 39.7756,
         "lng": 64.4146
-      }
+      },
+      "sources": [
+        "https://en.wikipedia.org/wiki/Kalan_Mosque",
+        "https://en.wikipedia.org/wiki/Po-i-Kalyan"
+      ]
     },
     {
       "id": "ethem-bey-mosque",
@@ -2735,7 +2747,10 @@
       "coordinates": {
         "lat": 41.3275,
         "lng": 19.8186
-      }
+      },
+      "sources": [
+        "https://en.wikipedia.org/wiki/Et'hem_Bey_Mosque"
+      ]
     },
     {
       "id": "turkmenbasy-ruhy-mosque",
@@ -2746,7 +2761,7 @@
       "address": "Gypjak village, outskirts of Ashgabat, Turkmenistan",
       "capacity": 10000,
       "established": "2004",
-      "area": 0,
+      "area": 18000,
       "annualVisitors": "—",
       "facilities": [
         "Main prayer hall",
@@ -2771,8 +2786,10 @@
       },
       "history": "Built between 2001 and 2004 under the direction of President Saparmurat Niyazov, the mosque was dedicated as both a place of worship and a memorial to the 'Turkmenbashi' era. Its construction used extensive white marble and gold, and the complex includes Niyazov's mausoleum, making it unusual among modern mosques. Since its opening, it has served as a prominent symbol on the outskirts of Ashgabat and is often featured in representations of Turkmen national identity.",
       "tourismNotes": "Non-Muslim visitors are generally allowed in the courtyard and sometimes in the interior outside of prayer times; modest dress required. The site is a short drive from Ashgabat and often included in local city tours.",
-      "officialWebsite": null,
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "sources": [
+        "https://en.wikipedia.org/wiki/T%C3%BCrkmenba%C5%9Fy_Ruhy_Mosque"
+      ]
     },
     {
       "id": "sultan-mosque-singapore",
@@ -2810,7 +2827,11 @@
       "history": "The first mosque on the site was built in 1824 with funds from the East India Company for Sultan Hussein Shah, marking the establishment of Kampong Glam as a Malay-Muslim enclave. Due to structural deterioration and growing demand, it was rebuilt between 1924 and 1932 in its present form. In 1975, the mosque was designated a national monument in recognition of its religious and cultural importance, and it continues to serve as a key religious hub and a stopover for pilgrims traveling to Mecca.",
       "tourismNotes": "Open to non-Muslim visitors during set visiting hours outside prayer times; modest dress required and robes are provided. Located in a popular heritage and tourism district with many halal eateries and cultural shops nearby.",
       "officialWebsite": "https://www.sultanmosque.sg",
-      "denomination": "sunni"
+      "denomination": "sunni",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Sultan_Mosque,_Singapore",
+        "https://www.sultanmosque.sg"
+      ]
     },
     {
       "id": "jami-ul-alfar-mosque",
@@ -2845,7 +2866,6 @@
       },
       "history": "Commissioned by the local Bohra Muslim trading community in Pettah, construction of the mosque began in 1908 and was completed in 1909 to accommodate daily and Friday prayers. Its distinctive red-and-white brick façade and pomegranate-shaped domes soon made it a navigational landmark for sailors approaching the port of Colombo. Over the years, expansions increased capacity to around several thousand worshippers for Friday prayers and Eid, while preserving the original Indo-Saracenic design.",
       "tourismNotes": "Visitors are welcome outside prayer times but should respect ongoing worship, dress modestly, and ask permission before photographing interior spaces. The mosque is easily accessible on foot within the busy Pettah market area and is often included in city walking tours.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -2881,7 +2901,6 @@
       },
       "history": "Constructed in 1492 during the height of Ottoman rule in the Balkans, the mosque was endowed by Çoban Mustafa Pasha, who later became a vizier to Sultan Selim I. Remarkably, the building has remained largely unchanged since its completion, preserving its original dome, minaret, and interior decoration. A restoration funded by the Turkish government in the early 21st century helped conserve the structure and its surrounding rose garden, reinforcing its status as a key monument in Skopje's historic landscape.",
       "tourismNotes": "Visitors can access the mosque courtyard and, outside prayer times, the interior; modest clothing is required. Its hilltop position offers views over the Old Bazaar and central Skopje, making it a common stop on walking tours of the historic district.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -2918,7 +2937,6 @@
       },
       "history": "Constructed in the 1970s, the Grand Mosque of Niamey was funded largely by Libya and completed around 1977, shortly after Niger's independence. It features a large prayer hall and separate sections for men and women, each accommodating several thousand worshippers, and a minaret with 171 steps that offers views over the city. Over time it has become a central site for national religious ceremonies and community gatherings in Niamey.",
       "tourismNotes": "Generally open to visitors outside Friday prayer; modest dress required and local guides often offer tours for a small donation. Non-Muslim visitors may be allowed inside when accompanied by a guide, and the minaret climb provides panoramic views over Niamey.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -2954,7 +2972,6 @@
       },
       "history": "The mosque was constructed with Saudi funding and opened in February 1988, replacing the earlier Independence Drive mosque as Banjul's main congregational mosque. Its design combines functional modern architecture with traditional Islamic elements, including a spacious prayer hall and two octagonal minarets that dominate Banjul's skyline. Since its inauguration it has served as the focal point for Friday prayers, Eid celebrations and national religious gatherings in the capital.",
       "tourismNotes": "Open to visitors outside prayer times; modest clothing is required and non-Muslim visitors are usually welcome to view the interior with respect. The mosque is centrally located and often included in city sightseeing itineraries around Banjul.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -2992,7 +3009,6 @@
       },
       "history": "Completed in 1984 as part of the Islamic Centre complex, the Grand Friday Mosque was built to serve as the main national mosque and venue for large Friday and Eid congregations. It replaced older mosques as the primary focus of Islamic life in the capital, with a design that integrates a large marble-clad prayer hall, a prominent gold dome and a freestanding minaret visible from the sea. Over time it has become both a religious centre and a key symbol of Maldivian Islamic identity for residents and visitors alike.",
       "tourismNotes": "Visitors are welcome outside prayer times; modest dress is required, and non-Muslims may tour the main hall when accompanied by local staff or guides. The mosque's central location near Republic Square makes it an easy stop on walking tours of Malé.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -3030,7 +3046,6 @@
       },
       "history": "Construction of the Grand Anwar Mosque began under the Italian administration around 1922, but a funding shortfall left 16,000 birr unpaid to the contractor until the local Muslim community raised the remainder. After a brief closure due to legal disputes, the mosque reopened and gradually became the main congregational mosque in Addis Ababa, hosting large gatherings during Ramadan and Eid. Its distinctive white and green color scheme and tall minarets have made it a landmark of the Merkato area and a symbol of Ethiopia's Islamic heritage.",
       "tourismNotes": "Visitors should dress modestly and avoid busy Friday prayer times; the surrounding Merkato area can be very crowded. Non-Muslims may access the courtyard and sometimes the interior if they coordinate with local guides or mosque officials.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -3105,7 +3120,6 @@
       },
       "history": "Construction of the Abdülhamid Han II Mosque and complex began around 2015 under the auspices of Türkiye Diyanet Foundation, using materials and artisans from Turkey. The mosque was inaugurated in November 2019 in a ceremony attended by senior Djiboutian officials and Turkish representatives and has since become the largest and most visible Islamic architectural work in the capital. Its Ottoman-style design and strategic waterfront location underscore Djibouti's growing cultural and diplomatic ties with Turkey.",
       "tourismNotes": "Open to visitors outside prayer times; modest clothing required, and guided visits may be available as it is promoted as a city landmark. Its coastal position makes it easily combined with waterfront walks and visits to nearby civic buildings.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -3141,7 +3155,6 @@
       },
       "history": "The mosque's earliest sections date from the late 19th century and were expanded in the early 20th century as Bobo-Dioulasso grew as a trade centre, resulting in the current large, multi-chambered prayer space. Its earthen construction requires periodic replastering by local masons, a process that has helped preserve traditional building techniques and community involvement in mosque upkeep. Over time it has become both a key religious institution and one of Burkina Faso's most photographed architectural landmarks.",
       "tourismNotes": "Visitors are typically required to hire a local guide; modest dress and removal of shoes are mandatory. Photography is usually permitted from the outside and rooftops, but interior images may require permission from mosque authorities.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -3177,7 +3190,6 @@
       },
       "history": "The mosque was commissioned by Sultan Ibrahim Iskandar I and completed in 1658 on the site of an earlier mosque built soon after the Maldives' conversion to Islam. Its coral-stone walls are carved with Quranic text and geometric patterns, while the interior features elaborately lacquered wood panels and ceiling beams. Conservation efforts in recent decades have focused on protecting the delicate coral fabric from weathering and urban development pressures.",
       "tourismNotes": "Entry for non-Muslims may be restricted and usually requires permission from staff or a local guide; respectful dress is essential. Visitors often combine it with a stop at the nearby Islamic Centre and Grand Friday Mosque.",
-      "officialWebsite": null,
       "denomination": "sunni"
     },
     {
@@ -6046,7 +6058,6 @@
       "architectureNotes": "70m tall minaret. Twelve arches. Fusion of European, African and Arab-Islamic styles. Main dome over 50m. Chandeliers with Arabic calligraphy.",
       "history": "Construction began 1970s, delayed by political instability. Completed 2006, opened March 2008. Funded by Libya. Renamed 'Uganda National Mosque' in 2013 after Gaddafi's death.",
       "tourismNotes": "Open to visitors. Minaret climb offers best view of Kampala. Modest dress required. Located on Old Kampala Hill.",
-      "officialWebsite": null,
       "womenPrayerArea": true,
       "touristFriendly": true,
       "denomination": "sunni",

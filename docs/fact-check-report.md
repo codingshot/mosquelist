@@ -1,10 +1,10 @@
 # Mosque fact-check validation report
 
-Generated: 2026-02-09 15:26:47 UTC
+Generated: 2026-02-09 19:52:40 UTC
 
 **Total mosques:** 199
 **Errors:** 0
-**Warnings:** 87
+**Warnings:** 80
 
 ---
 
@@ -70,13 +70,6 @@ Generated: 2026-02-09 15:26:47 UTC
 - **Emir Abdelkader Mosque** (`emir-abdelkader-mosque`): No sources array; add for fact-check trail
 - **Kocatepe Mosque** (`kocatepe-mosque`): No sources array; add for fact-check trail
 - **Great Mosque of Central Java** (`great-mosque-of-central-java`): No sources array; add for fact-check trail
-- **Grand Mosque of Sabilal Muhtadin** (`grand-mosque-of-sabilal-muhtadin`): No sources array; add for fact-check trail
-- **Sultan Haji Hassanal Bolkiah Mosque** (`sultan-haji-hassanal-bolkiah-mosque`): No sources array; add for fact-check trail
-- **Imperial Mosque** (`imperial-mosque-pristina`): No sources array; add for fact-check trail
-- **Kalon Mosque** (`kalon-mosque-bukhara`): No sources array; add for fact-check trail
-- **Et'hem Bey Mosque** (`ethem-bey-mosque`): No sources array; add for fact-check trail
-- **Türkmenbaşy Ruhy Mosque** (`turkmenbasy-ruhy-mosque`): No sources array; add for fact-check trail
-- **Sultan Mosque** (`sultan-mosque-singapore`): No sources array; add for fact-check trail
 - **Jami Ul-Alfar Mosque** (`jami-ul-alfar-mosque`): No sources array; add for fact-check trail
 - **Mustafa Pasha Mosque** (`mustafa-pasha-mosque`): No sources array; add for fact-check trail
 - **Grand Mosque of Niamey** (`grand-mosque-of-niamey`): No sources array; add for fact-check trail

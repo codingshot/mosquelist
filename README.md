@@ -2,33 +2,44 @@
 
 **Discover, explore, and plan your spiritual journey to the world's most magnificent mosques.**
 
-MosqueList is a single-page web app for Muslims and travelers who want to explore significant mosques worldwide, learn their history, and build a personal prayer bucket list. From the three holiest sites (Masjid al-Haram, Al-Masjid an-Nabawi, Al-Aqsa) to architectural landmarks across 40+ countries, the app helps you plan visits and track your journey.
+MosqueList is a free web app for Muslims and travelers who want to discover significant mosques worldwide, learn their history, and build a personal mosque bucket list. Explore **199+ mosques in 50+ countries**—from the three holiest sites (Masjid al-Haram, Al-Masjid an-Nabawi, Al-Aqsa) to architectural landmarks—with an **interactive map**, **fact-checked Blog**, **Islamic History** timeline, **Glossary**, and visitor guides. Plan visits and track your journey in one place.
 
 ---
 
 ## Features
 
 ### Explore Mosques
-- **Curated mosque catalog** — Browse a growing list of significant mosques with names (English and Arabic), locations, capacity, establishment dates, and brief descriptions.
-- **Filter by category** — View All Mosques, Holy Sites only (the three holiest sites in Islam), or Tourist Friendly mosques.
-- **Grid and list views** — Switch between card grid and list layout for comfortable browsing.
-- **Mosque cards** — Each card shows image, name, location, capacity, establishment date, significance, facilities (e.g. women’s prayer area, tourist-friendly), and a “Holy Site” badge where applicable.
+- **Curated catalog** — 199+ significant mosques with names (English and Arabic), locations, capacity, establishment dates, and descriptions; sources and coordinates where available.
+- **Curated lists** — Holy Sites, Biggest Mosques, by country, by era, by architectural style, UNESCO sites, and more.
+- **Filters** — All Mosques, Holy Sites only, Tourist Friendly; filter by country and region.
+- **Grid and list views** — Switch between card grid and list layout.
+- **Mosque cards** — Image, name, location, capacity, establishment date, significance, facilities (women’s prayer area, tourist-friendly), “Holy Site“ badge; link to detail page.
 
-### Timeline
-- **Historical timeline** — Scroll through key dates (622 CE to present) for when major mosques were built or expanded.
-- **Alternating layout** — Timeline events alternate left/right on desktop for easy reading.
+### Map
+- **Interactive map** — OpenStreetMap-based map showing mosque locations; click markers for name and link to mosque page.
+- **Country/region filters** — Same filters as Explore; map updates to show matching mosques.
+
+### Islamic History
+- **Timeline** — Key dates from 622 CE to present: when major mosques were built or expanded (1,400+ years of context).
+- **Alternating layout** — Events alternate left/right on desktop for easy reading.
+
+### Blog & Guides
+- **Blog** — 35+ fact-checked articles: holiest sites, visitor etiquette, Islamic architecture (Ottoman, Mughal, Persian, etc.), funding, wudu and prayer guides, fun facts, oldest mosques, and more.
+- **Travel guide** — Plan your mosque journey; popular heritage routes.
+- **Visitor tips** — Dress code, photography, best times to visit, what to pack.
+- **Glossary** — Terms (e.g. minaret, iwan, qibla) for readers and students.
 
 ### My Mosque Bucket List
-- **Track visits** — Mark mosques as visited and see progress (e.g. 2/5 visited).
-- **Progress bar** — Visual progress for your bucket list.
-- **“Places to Pray” checklist** — Check off sites with an “Alhamdulillah” style completion state.
-- **Add more (UI)** — Button to extend the list (backend/persistence can be added later).
+- **Track visits** — Mark mosques as visited; progress bar and “Places to Pray“ checklist (persisted in localStorage).
+- **Favorites** — Save mosques to your list from Explore or mosque detail pages.
+
+### Contributing
+- **Contribute** — Page explaining how to suggest new mosques, correct data, or contribute to the project.
 
 ### Navigation & Layout
-- **Sticky header** — Navigation with logo, Explore / Timeline / My List / About, and CTAs.
-- **Mobile menu** — Hamburger menu with full nav and “Start Your Journey” CTA.
-- **Smooth anchor links** — In-page links to #mosques, #timeline, #bucket-list, #about.
-- **Footer** — Brand, quick links (Browse, Timeline, Bucket List, Prayer Times), resources, and credit to ummah.build.
+- **Sticky header** — Explore, Map, Timeline, Blog, Islamic History, Glossary, Contributing, My List, About.
+- **Mobile menu** — Full nav and “Start Your Journey“ CTA.
+- **Footer** — Quick links (Browse, Map, Timeline, Blog, Prayer Times), resources, credit to ummah.build.
 
 ### Design & UX
 - **Islamic-inspired theme** — Warm paper/cream backgrounds, gold accents, serif and handwriting fonts (e.g. Playfair Display, Caveat).
@@ -55,6 +66,7 @@ MosqueList is a single-page web app for Muslims and travelers who want to explor
 - **[docs/improvements.md](docs/improvements.md)** — Improvement skills and roadmap: data, UX, accessibility, performance, testing, and process.
 - **[docs/content-strategy.md](docs/content-strategy.md)** — Strategy for blogs and pages (sacred mosques, biggest by area/capacity, history, architecture, cost, etc.) and SEO.
 - **[docs/personas.md](docs/personas.md)** — Audience personas (Muslims, tourists, non-Muslims, students, architecture enthusiasts) and how to appeal to each.
+- **[docs/wikipedia-api-mosque-data-guide.md](docs/wikipedia-api-mosque-data-guide.md)** — How to pull mosque data from Wikipedia APIs (oldest, largest, by-country lists, Islamic architecture) and map it to MosqueList’s `Mosque` type.
 
 ---
 
@@ -64,18 +76,24 @@ MosqueList is a single-page web app for Muslims and travelers who want to explor
 |------|--------|
 | `src/App.tsx` | Root app: QueryClient, Router, TooltipProvider, Toaster, routes |
 | `src/main.tsx` | React entry point, mounts `App` into `#root` |
-| `src/pages/Index.tsx` | Main page: Navigation, Hero, MosqueGrid, Timeline, BucketList, Footer |
+| `src/pages/Index.tsx` | Home: Hero, Explore, Timeline, Bucket List, Footer |
+| `src/pages/Explore.tsx` | Explore mosques (grid/list, filters, curated lists) |
+| `src/pages/Map.tsx` | Interactive map of mosque locations (OpenStreetMap) |
+| `src/pages/IslamicHistory.tsx` | Islamic History timeline page |
+| `src/pages/Blog.tsx` | Blog index and post pages |
+| `src/pages/Glossary.tsx` | Glossary of terms |
+| `src/pages/Contributing.tsx` | How to contribute |
+| `src/pages/MosqueDetail.tsx` | Single mosque detail page (SEO, facilities, map) |
 | `src/pages/NotFound.tsx` | 404 page |
 | `src/components/Navigation.tsx` | Header with logo, nav links, mobile menu |
 | `src/components/HeroSection.tsx` | Hero with headline, CTAs, stats |
-| `src/components/MosqueGrid.tsx` | Mosque grid/list, filters (all/holy/tourist), view toggle |
-| `src/components/MosqueCard.tsx` | Single mosque card (image, badges, like, details) |
-| `src/components/Timeline.tsx` | Historical timeline of major mosques |
-| `src/components/BucketList.tsx` | Bucket list checklist and progress |
+| `src/components/MosqueCard.tsx` | Mosque card (image, badges, like, details) |
+| `src/components/BucketList.tsx` | Bucket list checklist and progress (persisted) |
 | `src/components/Footer.tsx` | Footer with links and credit |
-| `src/data/mosques.ts` | Mosque data and timeline events (single source of truth) |
+| `src/data/mosques.ts` | Mosque data (single source of truth) |
+| `src/data/blog.ts` | Blog posts (fact-checked articles) |
 | `src/components/ui/*` | shadcn/ui components |
-| `public/` | Favicons, manifest, robots.txt, static assets |
+| `public/` | Favicons, manifest, robots.txt, sitemap, ai.txt, static assets |
 
 ---
 
@@ -86,10 +104,42 @@ MosqueList is a single-page web app for Muslims and travelers who want to explor
 - [x] **Search** — Search mosques by name, country, city, description; URL-synced; advanced filters.
 - [x] **Real images** — Inline mosque photos from Wikimedia Commons (CC-licensed).
 - [x] **Prayer times** — Footer link to IslamicFinder prayer times.
-- [ ] **Map view** — Optional map (e.g. Mapbox/Leaflet) for mosque locations.
-- [ ] **More mosques** — Expand `src/data/mosques.ts` toward the “100+” suggested in the hero.
+- [x] **Map view** — Interactive map (OpenStreetMap/Leaflet) for mosque locations.
+- [x] **More mosques** — 199+ mosques in 50+ countries in `src/data/mosques.ts`.
 - [ ] **i18n** — Optional Arabic (or other language) for UI and content.
 - [ ] **Analytics** — Privacy-respecting analytics for understanding usage (optional).
+
+---
+
+## Future ideas
+
+Ideas for future versions of MosqueList—data, visitor info, reconstruction, and tooling.
+
+### Visitor info & tourism
+- **Links to official tourist pages** — Per-mosque links to official visitor/tourism pages (e.g. government heritage sites, mosque-run visitor info) so users can check hours, tours, and rules.
+- **Ticket / entry info** — Where relevant: free entry vs paid, non-tourist (worshipper) vs tourist ticket pricing, and booking links for timed slots where required (e.g. Sheikh Zayed, some historic sites).
+- **Guided tours & experiences** — Surface whether guided tours exist, languages offered, and links to book (official or trusted partners).
+- **Seasonal & event info** — Ramadan hours, Eid access, special open days or closures, so visitors can plan.
+
+### Facilities & detail
+- **Richer facilities data** — Expand beyond basic flags: wudu facilities (count, accessibility), parking, wheelchair access, women’s prayer area details, library, café, bookshop, ablution notes, and kid-friendly areas.
+- **Accessibility** — Structured accessibility info (step-free access, ramps, accessible toilets, quiet room) for worshippers and tourists with mobility or sensory needs.
+- **Prayer times integration** — Optional link or embed to live prayer times for the mosque (e.g. API or partner) so users see local times on the mosque page.
+
+### Reconstruction & blueprints
+- **“Build / rebuild” and blueprints** — Support for mosques that are under reconstruction, destroyed, or planned: add **blueprints**, plans, or reference images where available (e.g. Al-Nuri Mosul, historic rebuilds). Allow listing “mosques to rebuild” or “under reconstruction” with status and links to campaigns or official rebuild efforts.
+- **Historic plans & archives** — Link or attach historic floor plans, sections, or archival docs (with rights cleared) for education and reconstruction reference.
+
+### Data & scraping
+- **Updated scraping pipeline** — Scripts or jobs to refresh mosque data from trusted sources (Wikipedia, official sites, UNESCO, tourism boards) for capacity, opening hours, and descriptions; keep a clear audit trail and human review for fact-checking.
+- **Source freshness** — Track “last verified” or “last scraped” per field or per mosque so editors know what needs a refresh.
+- **Structured opening hours** — Store and display opening hours (including “closed to tourists during prayer”) where available from scraping or manual entry.
+
+### More product ideas
+- **Offline / PWA** — Improve offline support (e.g. cache key mosque pages and map tiles) so the bucket list and explore work in low-connectivity travel.
+- **User-submitted photos & tips** — Optional, moderated: visitors can submit photos or short tips (best time to visit, what to expect) tied to a mosque.
+- **Routes & itineraries** — Pre-built or user-created “day in Istanbul” or “Gulf highlights” routes that link several mosques with order and transport hints.
+- **Nearby mosques** — “Mosques near me” or “near this mosque” using coordinates for local discovery and travel planning.
 
 ---
 
@@ -107,10 +157,9 @@ MosqueList is a single-page web app for Muslims and travelers who want to explor
 - Ensure hero image is optimized (e.g. WebP, responsive `srcset`).
 
 ### SEO & AI
-- Add JSON-LD (e.g. `WebSite`, `Organization`, or `ItemList` for mosques) in `index.html` or via React.
-- Add an `og-image` (e.g. 1200×630) and reference it in Open Graph and Twitter meta tags.
-- Consider a sitemap (e.g. `/sitemap.xml`) when you have multiple URLs.
-- Keep meta description and title unique and descriptive (already improved in `index.html`).
+- JSON-LD is implemented (WebSite, Place with geo, ItemList, BlogPosting) for mosque and blog pages.
+- Sitemap includes homepage, mosque pages, blog posts, guides, glossary, and contributing; ai.txt is available for AI crawlers.
+- Keep meta description and title unique per page; og-image and og:image:alt are set where applicable.
 
 ### File / Code
 - **`src/data/mosques.ts`** — Consider splitting into `mosques.ts` and `timeline.ts`, or loading from JSON/CMS later.
@@ -183,10 +232,11 @@ Then open [http://localhost:8080](http://localhost:8080) (or the port shown in t
 
 ### Testing the app (mobile responsiveness & functionality)
 - **Local**: Run `npm run dev`, open http://localhost:8080 in Chrome or Safari.
-- **Mobile responsiveness**: Use DevTools (F12 → Toggle device toolbar or Cmd+Shift+M), select a device (e.g. iPhone 12, Pixel 5) and check:
+- **Automated mobile viewport tests**: `npm run test -- src/test/mobile-responsive.test.tsx` (375px; see [docs/mobile-testing-guide.md](docs/mobile-testing-guide.md)).
+- **Mobile responsiveness (manual)**: Use DevTools (F12 → Toggle device toolbar or Cmd+Shift+M), select a device (e.g. iPhone 12, Pixel 5) and check:
   - Header: logo and hamburger menu visible; tapping menu opens nav links and “Start Your Journey”.
-  - Hero: headline and CTAs readable; “Explore Mosques” / “Start My List” stack on small screens; stats row (100+, 50M+, 40+) readable.
-  - Mosque grid: filters (All / Holy Sites / Tourist Friendly) wrap or scroll; grid becomes single column; grid/list toggle works.
+  - Hero: headline and CTAs readable; “Explore Mosques” / “Start My List” stack on small screens; stats row (199+, 50M+, 50+) readable.
+  - Explore/Map: filters and curated lists work; map shows mosque markers; grid/list toggle works.
   - Timeline: events stack vertically; cards readable.
   - Bucket list: progress bar and checklist readable; toggling visited state works.
   - Footer: links and credit readable and tappable.
@@ -204,9 +254,9 @@ This project is structured for search and AI discoverability:
 - **Web manifest** — `public/site.webmanifest` with app name and icons for PWA and rich results.
 - **robots.txt** — Allows crawlers; extend with `Sitemap:` when you add a sitemap.
 
-**Sitemap** — `public/sitemap.xml` is generated at build time from mosque data (homepage + all `/mosque/:id` URLs) and referenced in `robots.txt`. Run `npm run build` to regenerate.
+**Sitemap** — Generated at build time: homepage, all `/mosque/:id` URLs, blog posts, guides, glossary, and contributing. Referenced in `robots.txt`. Run `npm run build` to regenerate.
 
-You can add a dedicated **og-image** (e.g. 1200×630) for better rich results; see “Recommended Improvements” above.
+**ai.txt** — `public/ai.txt` provides a short summary of the project for AI crawlers. JSON-LD (WebSite, Place, ItemList, BlogPosting) is used on relevant pages for rich results.
 
 ---
 

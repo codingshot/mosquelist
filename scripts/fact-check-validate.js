@@ -99,10 +99,28 @@ for (const m of mosques) {
 
   if (m.coordinates) {
     const { lat, lng } = m.coordinates;
-    if (typeof lat !== "number" || lat < -90 || lat > 90)
-      errors.push({ id, name, type: "coordinates", message: `Invalid lat: ${lat}` });
-    if (typeof lng !== "number" || lng < -180 || lng > 180)
-      errors.push({ id, name, type: "coordinates", message: `Invalid lng: ${lng}` });
+    if (typeof lat !== "number" || Number.isNaN(lat) || lat < -90 || lat > 90)
+      errors.push({ id, name, type: "coordinates", message: `Invalid lat: ${lat}`, value: lat });
+    if (typeof lng !== "number" || Number.isNaN(lng) || lng < -180 || lng > 180)
+      errors.push({ id, name, type: "coordinates", message: `Invalid lng: ${lng}`, value: lng });
+  } else {
+    warnings.push({ id, name, type: "coordinates", message: "No coordinates; add lat/lng for map links" });
+  }
+
+  const urlPattern = /^https?:\/\/[^\s"'<>]+$/i;
+  if (m.officialWebsite != null) {
+    if (m.officialWebsite === "") {
+      errors.push({ id, name, type: "officialWebsite", message: "officialWebsite is empty string; remove or set valid URL" });
+    } else if (m.officialWebsite === null) {
+      warnings.push({ id, name, type: "officialWebsite", message: "officialWebsite is null; remove key or set valid URL" });
+    } else if (typeof m.officialWebsite !== "string" || !urlPattern.test(m.officialWebsite.trim())) {
+      errors.push({ id, name, type: "officialWebsite", message: "officialWebsite must be valid http(s) URL", value: m.officialWebsite });
+    }
+  }
+
+  if (m.address !== undefined && m.address !== null) {
+    if (typeof m.address !== "string" || m.address.trim() === "")
+      warnings.push({ id, name, type: "address", message: "address is empty or whitespace; remove or set value" });
   }
 
   const cap = m.capacity;

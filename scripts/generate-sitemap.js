@@ -12,12 +12,17 @@ const baseUrl = process.env.SITE_URL || "https://mosquelist.com";
 
 const mosquesPath = path.join(root, "src", "data", "mosques.json");
 const listsPath = path.join(root, "src", "data", "lists.json");
+const blogPath = path.join(root, "src", "data", "blog.ts");
 const outPath = path.join(root, "public", "sitemap.xml");
 
 const mosquesData = JSON.parse(readFileSync(mosquesPath, "utf-8"));
 const mosques = mosquesData.mosques || [];
 const listsData = JSON.parse(readFileSync(listsPath, "utf-8"));
 const lists = listsData.lists || [];
+
+// Extract blog slugs from blog.ts (match slug: "xxx")
+const blogRaw = readFileSync(blogPath, "utf-8");
+const blogSlugs = [...new Set([...blogRaw.matchAll(/slug:\s*["']([^"']+)["']/g)].map((m) => m[1]))];
 
 const lastmod = new Date().toISOString().slice(0, 10);
 
@@ -30,8 +35,16 @@ const urls = [
   { loc: `${baseUrl}/islamic-history`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/bucket-list`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/about`, changefreq: "monthly", priority: "0.7" },
+  { loc: `${baseUrl}/glossary`, changefreq: "monthly", priority: "0.7" },
+  { loc: `${baseUrl}/contributing`, changefreq: "monthly", priority: "0.7" },
   { loc: `${baseUrl}/guides/travel`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/guides/visitor-tips`, changefreq: "monthly", priority: "0.8" },
+  { loc: `${baseUrl}/blog`, changefreq: "weekly", priority: "0.8" },
+  ...blogSlugs.map((slug) => ({
+    loc: `${baseUrl}/blog/${slug}`,
+    changefreq: "monthly",
+    priority: "0.7",
+  })),
   ...lists.map((l) => ({
     loc: `${baseUrl}/lists/${l.slug}`,
     changefreq: "monthly",

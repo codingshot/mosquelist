@@ -37,7 +37,7 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-background/80 max-w-md text-sm">
-              Discover 100+ mosques in 50+ countries—from the three holiest sites
+              Discover 199+ mosques in 50+ countries—from the three holiest sites
               to architectural masterpieces. Plan visits and build your bucket list.
             </p>
             <Button
@@ -130,6 +130,17 @@ export const Footer = () => {
                   aria-label="Prayer Times at Islamic Finder (opens in new tab)"
                 >
                   Prayer Times
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://praysap.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block py-1.5 min-h-[40px] touch-manipulation text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded text-sm"
+                  aria-label="PRAYSAP (opens in new tab)"
+                >
+                  PRAYSAP
                 </a>
               </li>
             </ul>

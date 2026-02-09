@@ -15,6 +15,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Slider } from "@/components/ui/slider";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import type { TimelineEvent } from "@/types/mosque";
 import type { Mosque } from "@/types/mosque";
@@ -95,6 +97,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   
   // Advanced filters
   const [yearRange, setYearRange] = useState<[number, number]>([MIN_YEAR, MAX_YEAR]);
+  const [yearRangeMode, setYearRangeMode] = useState<"all" | "custom">("all");
   const [jumpToYear, setJumpToYear] = useState<string>("");
   const [architectureStyle, setArchitectureStyle] = useState<string>("");
   const [mosqueType, setMosqueType] = useState<string>("");
@@ -162,9 +165,10 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
         }
         if (visitorFriendlyOnly && !mosque.touristFriendly) return false;
         
-        // Year range filter
+        // Year range filter (use effective range from radio)
         const eventYear = parseEstablishmentYear(event.year);
-        if (eventYear < yearRange[0] || eventYear > yearRange[1]) return false;
+        const [minY, maxY] = yearRangeMode === "all" ? [MIN_YEAR, MAX_YEAR] : yearRange;
+        if (eventYear < minY || eventYear > maxY) return false;
         
         // Architecture style filter
         if (architectureStyle && mosque.architecturalStyle !== architectureStyle) return false;
@@ -195,7 +199,10 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
     const order = sortOrder === "newest" ? -1 : 1;
     list = [...list].sort((a, b) => order * (parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year)));
     return list;
-  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview, visitorFriendlyOnly, yearRange, architectureStyle, mosqueType]);
+  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview, visitorFriendlyOnly, yearRange, yearRangeMode, architectureStyle, mosqueType]);
+
+  const effectiveYearRange: [number, number] =
+    yearRangeMode === "all" ? [MIN_YEAR, MAX_YEAR] : yearRange;
 
   // Combine with Islamic history context if enabled (also apply year range)
   const combinedEvents = useMemo(() => {
@@ -203,9 +210,9 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
     // Apply year range to combined events
     return combined.filter(e => {
       const year = parseEstablishmentYear(e.year);
-      return year >= yearRange[0] && year <= yearRange[1];
+      return year >= effectiveYearRange[0] && year <= effectiveYearRange[1];
     });
-  }, [filteredAndSortedEvents, showHistoryContext, isPreview, eventCategory, yearRange]);
+  }, [filteredAndSortedEvents, showHistoryContext, isPreview, eventCategory, effectiveYearRange]);
 
   // Apply limit for preview mode - use combinedEvents for full page, filteredAndSortedEvents for preview
   const displayedEvents = isPreview
@@ -215,7 +222,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   
   // Count active advanced filters
   const activeAdvancedFilters = [
-    yearRange[0] !== MIN_YEAR || yearRange[1] !== MAX_YEAR,
+    yearRangeMode === "custom" && (yearRange[0] !== MIN_YEAR || yearRange[1] !== MAX_YEAR),
     architectureStyle,
     mosqueType,
   ].filter(Boolean).length;
@@ -332,16 +339,19 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           <div className="flex flex-col sm:flex-row gap-3 mt-3 items-start sm:items-center">
             {/* Year Range Slider - compact */}
             <div className="flex items-center gap-2 flex-1 min-w-0 max-w-md">
-              <span className="text-xs text-muted-foreground whitespace-nowrap">{yearRange[0]}</span>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">{effectiveYearRange[0]}</span>
               <Slider
                 value={yearRange}
                 min={MIN_YEAR}
                 max={MAX_YEAR}
                 step={10}
-                onValueChange={(v) => setYearRange(v as [number, number])}
+                onValueChange={(v) => {
+                  setYearRange(v as [number, number]);
+                  setYearRangeMode("custom");
+                }}
                 className="flex-1"
               />
-              <span className="text-xs text-muted-foreground whitespace-nowrap">{yearRange[1]} CE</span>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">{effectiveYearRange[1]} CE</span>
             </div>
 
             {/* Jump to Year - compact */}
@@ -360,6 +370,32 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                 <Search className="h-3.5 w-3.5" />
               </Button>
             </div>
+
+            {/* Year range mode: All years / Custom - end side of timeline years filter */}
+            <RadioGroup
+              value={yearRangeMode}
+              onValueChange={(v) => {
+                if (v === "all" || v === "custom") {
+                  setYearRangeMode(v);
+                  if (v === "all") setYearRange([MIN_YEAR, MAX_YEAR]);
+                }
+              }}
+              className="flex items-center gap-3 flex-shrink-0"
+              aria-label="Timeline years filter"
+            >
+              <div className="flex items-center gap-1.5">
+                <RadioGroupItem value="all" id="year-all" />
+                <Label htmlFor="year-all" className="text-xs cursor-pointer font-normal">
+                  All years
+                </Label>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <RadioGroupItem value="custom" id="year-custom" />
+                <Label htmlFor="year-custom" className="text-xs cursor-pointer font-normal">
+                  Custom
+                </Label>
+              </div>
+            </RadioGroup>
 
             {/* Toggles - compact */}
             <div className="flex items-center gap-2 flex-wrap">
@@ -392,6 +428,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                 size="sm"
                 onClick={() => {
                   setYearRange([MIN_YEAR, MAX_YEAR]);
+                  setYearRangeMode("all");
                   setArchitectureStyle("");
                   setMosqueType("");
                   setJumpToYear("");
@@ -474,23 +511,25 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                             {contextEvent.label}
                           </h3>
                           <p className="text-muted-foreground text-sm sm:text-base mt-2">{contextEvent.description}</p>
-                          {/* Source tooltip */}
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <a
-                                href={contextEvent.source}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 hover:underline mt-2"
-                              >
-                                <ExternalLink className="h-3 w-3" />
-                                Source
-                              </a>
-                            </TooltipTrigger>
-                            <TooltipContent side="bottom" className="max-w-xs">
-                              <p className="text-xs break-all">{contextEvent.source}</p>
-                            </TooltipContent>
-                          </Tooltip>
+                          {/* Source link — only when context event has a source URL */}
+                          {contextEvent.source && (
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <a
+                                  href={contextEvent.source}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 hover:underline mt-2"
+                                >
+                                  <ExternalLink className="h-3 w-3" />
+                                  Source
+                                </a>
+                              </TooltipTrigger>
+                              <TooltipContent side="bottom" className="max-w-xs">
+                                <p className="text-xs break-all">{contextEvent.source}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
                         </div>
                       </div>
                     </div>

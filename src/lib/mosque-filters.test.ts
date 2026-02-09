@@ -11,6 +11,16 @@ describe("mosque-filters", () => {
       expect(establishedYear("638 CE")).toBe(638);
     });
 
+    it("parses century notation as start of range (same as timeline-utils)", () => {
+      expect(establishedYear("14th century")).toBe(1300);
+      expect(establishedYear("15th century")).toBe(1400);
+      expect(establishedYear("16th century")).toBe(1500);
+    });
+
+    it("returns 0 for unparseable (e.g. Under construction)", () => {
+      expect(establishedYear("Under construction")).toBe(0);
+    });
+
     it("returns 0 for empty or invalid", () => {
       expect(establishedYear("")).toBe(0);
       expect(establishedYear("   ")).toBe(0);

@@ -10,7 +10,7 @@ export default function TravelGuidePage() {
     <div className="min-h-screen bg-background">
       <PageSEO
         title="Mosque Travel Guide - Plan Your Spiritual Journey | MosqueList"
-        description="Plan your mosque visits with our travel guide. 100+ mosques in 50+ countries. Best times to visit, popular routes, what to pack, and tips for spiritual journeys."
+        description="Plan your mosque visits with our travel guide. 199+ mosques in 50+ countries. Best times to visit, popular routes, what to pack, and tips for spiritual journeys."
         path="/guides/travel"
       />
       <Navigation />
@@ -25,7 +25,7 @@ export default function TravelGuidePage() {
               Mosque Travel Guide
             </h1>
             <p className="text-lg text-muted-foreground">
-              Plan your spiritual journey across 100+ mosques in 50+ countries.
+              Plan your spiritual journey across 199+ mosques in 50+ countries.
               From the three holiest sites to historic and modern masterpieces,
               here's how to make the most of your visits.
             </p>
@@ -57,7 +57,7 @@ export default function TravelGuidePage() {
                 UAE (Sheikh Zayed). Southeast Asia: Istiqlal in Jakarta, Putra Mosque,
                 Sultan Mosque in Singapore. Pakistan's Faisal and Badshahi; West Africa's
                 Great Mosque of Djenné and Massalikoul Djinane in Senegal. Use our map
-                and country filters to explore 100+ mosques.
+                and country filters to explore 199+ mosques.
               </p>
               <Button asChild variant="outline" className="mt-4 gap-2">
                 <Link to="/explore">
@@ -88,10 +88,10 @@ export default function TravelGuidePage() {
                 Planning Your List
               </h2>
               <p className="text-muted-foreground mt-3">
-                Use MosqueList to create your personal bucket list from 100+ mosques.
+                Use MosqueList to create your personal bucket list from 199+ mosques.
                 Filter by holy sites, country, region, or capacity. Add places and
-                track your progress. Curated lists—Holy Sites, Biggest Mosques, and
-                by country—help you discover new destinations.
+                track your progress. Curated lists—Holy Sites, Biggest Mosques, Shia
+                Mosques & Shrines, and by country or era—help you discover new destinations.
               </p>
               <Button asChild className="mt-4 gap-2">
                 <Link to="/lists">Browse Curated Lists</Link>

@@ -3,26 +3,39 @@
 MosqueList (https://mosquelist.com) is a travel and discovery site for the world's most significant and beautiful mosques. It helps users explore, plan, and track spiritual journeys and build a personal "bucket list" of mosques to visit.
 
 ## What this site offers
-- **Explore**: Searchable catalog of mosques with details (location, capacity, history, architecture, visitor info).
-- **Curated lists**: Holy Sites (Mecca, Medina, Jerusalem), largest mosques, by country (Turkey, UAE, Malaysia, etc.).
-- **Map**: Interactive map of mosque locations.
+- **Explore**: Searchable catalog of 199+ mosques with details (location, capacity, history, architecture, visitor info, coordinates).
+- **Curated lists**: Holy Sites (Mecca, Medina, Jerusalem), biggest mosques, Shia mosques & Shia shrines, by country (Turkey, UAE, Malaysia, etc.), by era and style.
+- **Map**: Interactive map of mosque locations worldwide.
 - **Timeline**: Key dates in mosque history and construction.
+- **Islamic History**: 1,400+ years of context—caliphates, expansion, architecture milestones.
+- **Blog**: Fact-checked articles on mosque visits, etiquette, architecture, funding, wudu, prayer, and spiritual travel.
+- **Guides**: Travel guide and visitor tips for mosque visits.
+- **Glossary**: Islamic and mosque-related terms.
 - **My List (bucket list)**: Users can add mosques to a personal list and reorder; stored in browser.
-- **Guides**: Travel and visitor tips for mosque visits.
+- **Contributing**: How to add or update mosque data.
 
 ## Key pages
 - Home: https://mosquelist.com
 - Explore (all mosques): https://mosquelist.com/explore
 - Map: https://mosquelist.com/map
 - Lists: https://mosquelist.com/lists
+- List detail: https://mosquelist.com/lists/{slug}
 - Timeline: https://mosquelist.com/timeline
-- Individual mosque pages: https://mosquelist.com/mosque/{id}
-- List detail pages: https://mosquelist.com/lists/{slug}
+- Islamic History: https://mosquelist.com/islamic-history
+- Blog: https://mosquelist.com/blog
+- Blog article: https://mosquelist.com/blog/{slug}
+- Travel guide: https://mosquelist.com/guides/travel
+- Visitor tips: https://mosquelist.com/guides/visitor-tips
+- Glossary: https://mosquelist.com/glossary
+- Contributing: https://mosquelist.com/contributing
+- About: https://mosquelist.com/about
+- Individual mosque: https://mosquelist.com/mosque/{id}
 
-## Structured data
-- Homepage: WebSite schema with SearchAction.
-- Mosque pages: Place schema (name, address, description, image, amenities).
-- List pages: ItemList schema with ListItem entries linking to Place pages.
+## Structured data (JSON-LD)
+- **Homepage**: WebSite schema with SearchAction (search explore?q=).
+- **Mosque pages**: Place schema with name, description, address, geo (GeoCoordinates), image, amenityFeature.
+- **List pages**: ItemList schema with ListItem entries linking to Place pages.
+- **Blog articles**: BlogPosting schema with headline, description, image, url, publisher.
 
 ## Publisher
 ummah.build

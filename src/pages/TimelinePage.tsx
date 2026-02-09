@@ -9,7 +9,7 @@ export default function TimelinePage() {
     <div className="min-h-screen bg-background">
       <PageSEO
         title="Mosque Timeline - MosqueList | Islamic Heritage & History"
-        description="Explore the historical timeline of 100+ significant mosques. From 622 CE (Prophet's Mosque) to today, discover key dates and events in Islamic architectural heritage."
+        description="Explore the historical timeline of 199+ significant mosques. From 622 CE (Prophet's Mosque) to today, discover key dates and events in Islamic architectural heritage."
         path="/timeline"
       />
       <Navigation />

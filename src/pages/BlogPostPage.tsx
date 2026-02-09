@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -9,7 +10,24 @@ import { ArrowLeft, ChevronRight, MapPin, Search } from "lucide-react";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import { getExploreUrl } from "@/lib/explore-url";
 
-/** Map blog slugs to architectural style filter values */
+const BLOG_HERO_FALLBACK = "/placeholder.svg";
+
+function processParagraphHtml(para: string): string {
+  return para
+    .replace(/\*\*(.+?)\*\*/g, "<strong class='text-foreground font-semibold'>$1</strong>")
+    .replace(/\\n/g, "<br />")
+    .replace(/• /g, "<br />• ");
+}
+
+const SITE_URL = "https://mosquelist.com";
+
+/** Absolute URL for blog hero image (for og:image). Relative paths become full URL. */
+function getBlogOgImage(imageUrl: string): string {
+  if (imageUrl.startsWith("http")) return imageUrl;
+  return `${SITE_URL}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
+}
+
+/** Map blog slugs to architectural style filter values (must match mosque architecturalStyle in data) */
 const ARCHITECTURE_STYLE_MAP: Record<string, string> = {
   "ottoman-mosque-architecture": "Ottoman",
   "persian-mosque-architecture": "Persian",
@@ -18,14 +36,29 @@ const ARCHITECTURE_STYLE_MAP: Record<string, string> = {
   "malay-mosque-architecture": "Malay",
   "fatimid-mamluk-mosque-architecture": "Fatimid",
   "mughal-mosque-architecture": "Mughal",
+  "byzantine-influence-islamic-architecture": "Byzantine",
+  "timurid-central-asian-mosque-architecture": "Persian-Timurid",
+  "chinese-islamic-mosque-architecture": "Chinese-Islamic",
+  "swahili-coast-mosque-architecture": "Swahili Coast Architecture",
 };
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getBlogPostBySlug(slug) : undefined;
-  const related = post ? getRelatedPosts(post) : [];
-  const featuredMosques = (post?.featuredMosqueIds ?? [])
-    .map((id) => getMosqueBySlug(id))
-    .filter((m) => m != null);
+  const related = useMemo(
+    () => (post ? getRelatedPosts(post) : []),
+    [post]
+  );
+  const featuredMosques = useMemo(
+    () =>
+      (post?.featuredMosqueIds ?? [])
+        .map((id) => getMosqueBySlug(id))
+        .filter((m) => m != null),
+    [post]
+  );
+  const processedParagraphs = useMemo(
+    () => (post ? post.paragraphs.map(processParagraphHtml) : []),
+    [post]
+  );
 
   if (!post) {
     return (
@@ -50,7 +83,27 @@ export default function BlogPostPage() {
         title={`${post.title} | MosqueList Blog`}
         description={post.description}
         path={`/blog/${post.slug}`}
+        ogImage={getBlogOgImage(post.imageUrl)}
+        ogImageAlt={post.imageAlt}
+        ogType="article"
       />
+      {post && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: post.title,
+              description: post.description,
+              image: getBlogOgImage(post.imageUrl),
+              url: `${SITE_URL}/blog/${post.slug}`,
+              publisher: { "@type": "Organization", name: "MosqueList" },
+              mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blog/${post.slug}` },
+            }),
+          }}
+        />
+      )}
       <Navigation />
       <main id="main-content" className="container mx-auto px-4 pt-20 pb-16 md:py-24">
         <article className="max-w-3xl mx-auto">
@@ -77,29 +130,27 @@ export default function BlogPostPage() {
 
           <div className="rounded-xl overflow-hidden border border-border bg-card mb-10">
             <img
-              src={post.imageUrl}
+              src={post.imageUrl?.trim() || BLOG_HERO_FALLBACK}
               alt={post.imageAlt}
               className="w-full aspect-video object-cover"
               loading="eager"
               decoding="async"
+              fetchPriority="high"
               onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = "/placeholder.svg";
+                const el = e.currentTarget;
+                el.onerror = null;
+                el.src = BLOG_HERO_FALLBACK;
+                el.alt = "Mosque";
               }}
             />
           </div>
 
           <div className="prose prose-lg max-w-none text-foreground">
-            {post.paragraphs.map((para, i) => (
+            {processedParagraphs.map((html, i) => (
               <p
                 key={i}
                 className="text-muted-foreground mb-6 last:mb-0"
-                dangerouslySetInnerHTML={{
-                  __html: para
-                    .replace(/\*\*(.+?)\*\*/g, "<strong class='text-foreground font-semibold'>$1</strong>")
-                    .replace(/\\n/g, "<br />")
-                    .replace(/• /g, "<br />• "),
-                }}
+                dangerouslySetInnerHTML={{ __html: html }}
               />
             ))}
           </div>
@@ -161,6 +212,28 @@ export default function BlogPostPage() {
                     </li>
                   );
                 })}
+              </ul>
+            </aside>
+          )}
+
+          {post.sources && post.sources.length > 0 && (
+            <aside className="mt-12 pt-8 border-t border-border">
+              <h2 className="font-serif text-2xl font-semibold text-foreground mb-6">
+                Sources &amp; further reading
+              </h2>
+              <ul className="space-y-2">
+                {post.sources.map((src, i) => (
+                  <li key={i}>
+                    <a
+                      href={src.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline text-sm"
+                    >
+                      {src.title}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </aside>
           )}

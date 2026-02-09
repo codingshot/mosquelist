@@ -13,8 +13,8 @@ export default function ExplorePage() {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Explore Mosques - MosqueList | 100+ Mosques in 50+ Countries"
-        description="Explore 100+ mosques in 50+ countries. Search by name, location, capacity, and style. Filter by holy sites, region, or country. Map view, timelines, and curated lists."
+        title="Explore Mosques - MosqueList | 199+ Mosques in 50+ Countries"
+        description="Explore 199+ mosques in 50+ countries. Search by name, location, capacity, and style. Filter by holy sites, region, or country. Map view, timelines, and curated lists."
         path="/explore"
       />
       <Navigation />

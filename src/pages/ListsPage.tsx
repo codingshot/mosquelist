@@ -46,7 +46,7 @@ export default function ListsPage() {
     <div className="min-h-screen bg-background">
       <PageSEO
         title="Curated Lists - MosqueList | Holy Sites, Biggest Mosques & More"
-        description="Browse curated mosque lists: Holy Sites (Mecca, Medina, Jerusalem), Biggest Mosques, and by country. 100+ mosques. Add to your bucket list."
+        description="Browse curated mosque lists: Holy Sites, Biggest Mosques, Shia Mosques & Shrines, and by country or era. 199+ mosques. Add to your bucket list."
         path="/lists"
       />
       <Navigation />

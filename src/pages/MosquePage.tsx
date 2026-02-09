@@ -27,6 +27,7 @@ import { getArchitectureStyleDescription } from "@/data/architecture-styles";
 import { ImageGallery } from "@/components/ImageGallery";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import { getPrayerTimesUrl } from "@/lib/prayer-times";
+import { formatEstablishmentRange } from "@/lib/timeline-utils";
 
 function formatCapacity(capacity: number) {
   if (capacity >= 1_000_000) return `${(capacity / 1_000_000).toFixed(1)}M`;
@@ -456,7 +457,7 @@ export default function MosquePage() {
                   <Calendar className="h-5 w-5 text-primary" />
                   <div>
                     <p className="text-sm text-muted-foreground">Established</p>
-                    <p className="font-semibold">{mosque.established}</p>
+                    <p className="font-semibold">{formatEstablishmentRange(mosque.established) || "—"}</p>
                   </div>
                 </div>
               </div>

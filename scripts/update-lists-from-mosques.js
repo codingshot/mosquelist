@@ -1,9 +1,9 @@
 /**
  * Update curated lists from current mosque data:
- * 1. Remove any list mosqueIds that don't exist in mosques (validate).
- * 2. For country lists: add all mosques from that country not already in the list.
- * 3. For biggest-mosques: add top mosques by capacity up to a cap, keeping existing order.
- * 4. For century lists (7th–21st): add mosques whose established year falls in that century.
+ * 1. AUDIT: Remove any list mosqueIds that don't exist in mosques (validate all lists).
+ * 2. COUNTRY LISTS: Ensure every country with ≥1 mosque has a list; set each country list to ALL mosque IDs from that country.
+ * 3. Biggest-mosques: add top by capacity up to cap, keeping order.
+ * 4. Century lists: add mosques whose established year falls in that century.
  *
  * Run: node scripts/update-lists-from-mosques.js
  */
@@ -22,7 +22,34 @@ const mosques = mosquesData.mosques || [];
 const validIdSet = new Set(mosques.map((m) => m.id));
 const mosquesById = new Map(mosques.map((m) => [m.id, m]));
 
-/** Parse first numeric year from established string (e.g. "638 CE" -> 638, "15th century" -> 1450). */
+/** Convert country name to list slug (e.g. "Saudi Arabia" -> "saudi-arabia", "UAE" -> "uae"). */
+function countryNameToSlug(countryName) {
+  if (!countryName || typeof countryName !== "string") return "";
+  return countryName
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+/** Build map: country slug -> { name, mosqueIds } from mosque data. */
+function buildCountryMap(mosques) {
+  const map = new Map();
+  for (const m of mosques) {
+    const country = m.country?.trim();
+    if (!country) continue;
+    const slug = countryNameToSlug(country);
+    if (!slug) continue;
+    if (!map.has(slug)) map.set(slug, { name: country, mosqueIds: [] });
+    map.get(slug).mosqueIds.push(m.id);
+  }
+  for (const entry of map.values()) {
+    entry.mosqueIds.sort();
+  }
+  return map;
+}
+
+/** Parse first numeric year from established string. */
 function parseYear(established) {
   if (!established || typeof established !== "string") return 0;
   const str = established.toLowerCase();
@@ -35,7 +62,6 @@ function parseYear(established) {
   return match ? parseInt(match[0], 10) : 0;
 }
 
-/** Century list slug -> [minYear, maxYear] (inclusive). */
 const centuryRanges = {
   "7th-century": [600, 699],
   "8th-century": [700, 799],
@@ -48,67 +74,39 @@ const centuryRanges = {
   "21st-century": [2000, 2099],
 };
 
-/** List slug -> country name in mosque data. */
-const slugToCountry = {
-  "saudi-arabia": "Saudi Arabia",
-  turkey: "Turkey",
-  pakistan: "Pakistan",
-  indonesia: "Indonesia",
-  egypt: "Egypt",
-  uae: "UAE",
-  india: "India",
-  malaysia: "Malaysia",
-  morocco: "Morocco",
-  iraq: "Iraq",
-  iran: "Iran",
-  kazakhstan: "Kazakhstan",
-  syria: "Syria",
-  yemen: "Yemen",
-  lebanon: "Lebanon",
-  bahrain: "Bahrain",
-  kuwait: "Kuwait",
-  algeria: "Algeria",
-  china: "China",
-  philippines: "Philippines",
-  uzbekistan: "Uzbekistan",
-  kosovo: "Kosovo",
-  albania: "Albania",
-  tunisia: "Tunisia",
-  usa: "USA",
-};
+const countryMap = buildCountryMap(mosques);
+const existingSlugs = new Set((listsData.lists || []).map((l) => l.slug));
 
 const lists = listsData.lists || [];
 const updated = [];
-let removedCount = 0;
-let addedByCountry = 0;
+let removedInvalid = 0;
+let countryListsUpdated = 0;
+let countryListsAdded = 0;
 let addedByBiggest = 0;
 let addedByCentury = 0;
 
 for (const list of lists) {
   const slug = list.slug;
-  let mosqueIds = [...(list.mosqueIds || [])];
+  const isCountryList = countryMap.has(slug);
 
-  // 1. Validate: keep only IDs that exist
-  const before = mosqueIds.length;
-  mosqueIds = mosqueIds.filter((id) => validIdSet.has(id));
-  removedCount += before - mosqueIds.length;
-
-  const existingSet = new Set(mosqueIds);
-
-  // 2. Country lists: add all mosques from that country
-  const country = slugToCountry[slug];
-  if (country) {
-    const fromCountry = mosques
-      .filter((m) => m.country === country && !existingSet.has(m.id))
-      .map((m) => m.id);
-    for (const id of fromCountry) {
-      mosqueIds.push(id);
-      existingSet.add(id);
-      addedByCountry++;
-    }
+  if (isCountryList) {
+    const { name, mosqueIds: ids } = countryMap.get(slug);
+    updated.push({
+      slug,
+      name: list.name || name,
+      description: list.description || `Mosques in ${name}.`,
+      mosqueIds: ids,
+    });
+    countryListsUpdated++;
+    continue;
   }
 
-  // 3. Biggest mosques: add top by capacity not already in list (cap total at 60)
+  let mosqueIds = [...(list.mosqueIds || [])];
+  const before = mosqueIds.length;
+  mosqueIds = mosqueIds.filter((id) => validIdSet.has(id));
+  removedInvalid += before - mosqueIds.length;
+  const existingSet = new Set(mosqueIds);
+
   if (slug === "biggest-mosques") {
     const byCapacity = [...mosques]
       .filter((m) => !existingSet.has(m.id) && (m.capacity || 0) > 0)
@@ -122,7 +120,6 @@ for (const list of lists) {
     }
   }
 
-  // 4. Century lists: add mosques in that century
   const range = centuryRanges[slug];
   if (range) {
     const [minY, maxY] = range;
@@ -145,15 +142,31 @@ for (const list of lists) {
   });
 }
 
+// Add a list for every country that has mosques but no list yet
+const countrySlugsSorted = [...countryMap.keys()].sort((a, b) => {
+  const nameA = countryMap.get(a).name;
+  const nameB = countryMap.get(b).name;
+  return nameA.localeCompare(nameB);
+});
+for (const slug of countrySlugsSorted) {
+  if (existingSlugs.has(slug)) continue;
+  const { name, mosqueIds } = countryMap.get(slug);
+  updated.push({
+    slug,
+    name,
+    description: `Mosques in ${name}.`,
+    mosqueIds,
+  });
+  countryListsAdded++;
+}
+
 const output = { lists: updated };
-writeFileSync(
-  join(dataDir, "lists.json"),
-  JSON.stringify(output, null, 2),
-  "utf-8"
-);
+writeFileSync(join(dataDir, "lists.json"), JSON.stringify(output, null, 2), "utf-8");
 
 console.log("[update-lists-from-mosques] Done.");
-console.log("  Removed invalid refs:", removedCount);
-console.log("  Added by country:", addedByCountry);
-console.log("  Added by biggest:", addedByBiggest);
+console.log("  Removed invalid refs (audit):", removedInvalid);
+console.log("  Country lists updated (full mosque set):", countryListsUpdated);
+console.log("  Country lists added (new countries):", countryListsAdded);
+console.log("  Added by biggest-mosques:", addedByBiggest);
 console.log("  Added by century:", addedByCentury);
+console.log("  Total lists now:", updated.length);

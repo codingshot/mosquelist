@@ -6,24 +6,32 @@
  * Hagia Sophia (537 CE) is the only pre-Islamic structure in our list (converted 1453).
  */
 
-/** 
- * Parse numeric year from established string.
- * Handles: "638 CE", "2007", "705–715 CE", "15th century", "16th century", etc.
- * 
- * Century notation is converted to approximate midpoint:
- * - "15th century" -> 1450 (covers 1401-1500)
- * - "16th century" -> 1550 (covers 1501-1600)
- * - "19th century" -> 1850 (covers 1801-1900)
+/**
+ * Century ranges: Nth century = (N-1)*100 to (N-1)*100+99.
+ * e.g. 14th century = 1300-1399, 15th = 1400-1499.
+ * We use the start year for sorting so centuries order correctly in timelines and tables.
+ */
+function centuryToStartYear(century: number): number {
+  return (century - 1) * 100;
+}
+
+/**
+ * Parse numeric year from established string (for sorting and filtering).
+ * Handles: "638 CE", "2007", "705–715 CE", "15th century", etc.
+ *
+ * Century notation uses the start of the range so sort order is correct:
+ * - "14th century" -> 1300 (range 1300-1399)
+ * - "15th century" -> 1400 (range 1400-1499)
+ * - "7th century" -> 600 (range 600-699)
  */
 export function parseEstablishmentYear(established: string): number {
   const str = String(established).toLowerCase();
-  
-  // Handle century notation first: "15th century" -> midpoint
+
+  // Handle century notation: "14th century" -> start year 1300 (range 1300-1399)
   const centuryMatch = str.match(/(\d{1,2})(?:st|nd|rd|th)\s*century/i);
   if (centuryMatch) {
     const century = parseInt(centuryMatch[1], 10);
-    // 15th century = 1401-1500, midpoint ~1450
-    return (century - 1) * 100 + 50;
+    return centuryToStartYear(century);
   }
   
   // Handle BCE/BC dates (rare, mainly for pre-Islamic sites)
@@ -38,6 +46,39 @@ export function parseEstablishmentYear(established: string): number {
 }
 
 /**
+ * Get the year range for an established string (for overlap logic or display).
+ * - "14th century" -> { start: 1300, end: 1399 }
+ * - "638 CE" -> { start: 638, end: 638 }
+ * - "705–715 CE" -> { start: 705, end: 715 } (if we parse end; currently end = start for ranges)
+ */
+export function getEstablishmentYearRange(established: string): { start: number; end: number } {
+  const str = String(established).toLowerCase();
+  const centuryMatch = str.match(/(\d{1,2})(?:st|nd|rd|th)\s*century/i);
+  if (centuryMatch) {
+    const century = parseInt(centuryMatch[1], 10);
+    const start = centuryToStartYear(century);
+    return { start, end: start + 99 };
+  }
+  const year = parseEstablishmentYear(established);
+  return { start: year, end: year };
+}
+
+/**
+ * Format established date for display. Centuries show as their year range (e.g. "14th century" -> "1300-1399")
+ * so they display in the range they belong to. Other strings are returned unchanged.
+ */
+export function formatEstablishmentRange(established: string): string {
+  const str = String(established).trim();
+  const centuryMatch = str.match(/(\d{1,2})(?:st|nd|rd|th)\s*century/i);
+  if (centuryMatch) {
+    const century = parseInt(centuryMatch[1], 10);
+    const start = centuryToStartYear(century);
+    return `${start}-${start + 99}`;
+  }
+  return str;
+}
+
+/**
  * Format year for display, appending CE suffix for numeric-only years.
  */
 export function formatYearDisplay(yearStr: string): string {
@@ -45,9 +86,9 @@ export function formatYearDisplay(yearStr: string): string {
   if (/^\d+$/.test(yearStr.trim())) {
     return `${yearStr} CE`;
   }
-  // If it contains "century", return as-is (already descriptive)
+  // If it contains "century", show as year range for consistency with timeline logic
   if (yearStr.toLowerCase().includes("century")) {
-    return yearStr;
+    return formatEstablishmentRange(yearStr);
   }
   return yearStr;
 }
@@ -69,42 +110,56 @@ export function validateMosqueDate(
 ): { valid: boolean; warning?: string } {
   const year = parseEstablishmentYear(established);
   const currentYear = new Date().getFullYear();
-  
+
   // Skip validation for unparseable dates
   if (year === 0) {
     return { valid: true, warning: "Could not parse date" };
   }
-  
-  // Future dates are invalid
-  if (year > currentYear) {
-    return { valid: false, warning: `Date ${year} is in the future` };
+
+  // For centuries, use the full range so e.g. 7th century (600-699) is valid (includes 622+)
+  const range = getEstablishmentYearRange(established);
+  const isCentury = range.start !== range.end;
+
+  // Future dates are invalid (use start of range for centuries)
+  if (range.start > currentYear) {
+    return { valid: false, warning: `Date ${range.start} is in the future` };
   }
-  
+
   // Hagia Sophia is the only pre-Islamic structure (built 537, converted 1453)
   const PRE_ISLAMIC_EXCEPTIONS = ["hagia-sophia-istanbul"];
   if (PRE_ISLAMIC_EXCEPTIONS.includes(mosqueId)) {
     return { valid: true };
   }
-  
+
   // Islam began 610 CE; first mosques built after Hijrah (622 CE)
-  // Quba Mosque (622 CE) is the first purpose-built mosque
   const ISLAM_START = 610;
   const FIRST_MOSQUE = 622;
-  
+
+  if (isCentury) {
+    // Century range overlaps valid period if end >= 622
+    if (range.end < FIRST_MOSQUE) {
+      return {
+        valid: false,
+        warning: `Century range ${range.start}-${range.end} predates the Hijrah (622 CE).`,
+      };
+    }
+    if (range.start < FIRST_MOSQUE) {
+      return { valid: true, warning: `Century range ${range.start}-${range.end} spans the Hijrah (622 CE). Verify if accurate.` };
+    }
+    return { valid: true };
+  }
+
   if (year < ISLAM_START) {
-    return { 
-      valid: false, 
-      warning: `Date ${year} predates Islam (610 CE). Only pre-Islamic structures converted later are valid.` 
+    return {
+      valid: false,
+      warning: `Date ${year} predates Islam (610 CE). Only pre-Islamic structures converted later are valid.`,
     };
   }
-  
+
   if (year < FIRST_MOSQUE) {
-    return { 
-      valid: true, 
-      warning: `Date ${year} is before the Hijrah (622 CE). Verify this is accurate.` 
-    };
+    return { valid: true, warning: `Date ${year} is before the Hijrah (622 CE). Verify this is accurate.` };
   }
-  
+
   return { valid: true };
 }
 

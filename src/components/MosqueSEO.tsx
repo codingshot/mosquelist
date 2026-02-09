@@ -8,7 +8,7 @@ interface MosqueSEOProps {
 }
 
 const DEFAULT_TITLE = "MosqueList - Discover the World's Most Magnificent Mosques";
-const DEFAULT_DESC = "Explore 100+ mosques in 50+ countries—from the three holiest sites in Islam to architectural masterpieces. Plan visits and build your personal prayer bucket list.";
+const DEFAULT_DESC = "Explore 199+ mosques in 50+ countries—from the three holiest sites in Islam to architectural masterpieces. Plan visits and build your personal prayer bucket list.";
 const DEFAULT_URL = SITE_URL;
 const DEFAULT_IMAGE = `${SITE_URL}/web-app-manifest-512x512.png`;
 
@@ -41,6 +41,9 @@ export function MosqueSEO({ mosque }: MosqueSEOProps) {
     setMeta('meta[name="twitter:title"]', "content", title);
     setMeta('meta[name="twitter:description"]', "content", description);
     setMeta('meta[name="twitter:image"]', "content", image);
+    const imageAlt = `${mosque.name}, ${mosque.location}`.slice(0, 420);
+    setMeta('meta[property="og:image:alt"]', "content", imageAlt);
+    setMeta('meta[name="twitter:image:alt"]', "content", imageAlt);
     setMeta('link[rel="canonical"]', "href", url);
 
     return () => {
@@ -53,6 +56,8 @@ export function MosqueSEO({ mosque }: MosqueSEOProps) {
       setMeta('meta[name="twitter:title"]', "content", DEFAULT_TITLE);
       setMeta('meta[name="twitter:description"]', "content", DEFAULT_DESC);
       setMeta('meta[name="twitter:image"]', "content", DEFAULT_IMAGE);
+      setMeta('meta[property="og:image:alt"]', "content", "MosqueList - Discover mosques worldwide");
+      setMeta('meta[name="twitter:image:alt"]', "content", "MosqueList - Discover mosques worldwide");
       setMeta('link[rel="canonical"]', "href", DEFAULT_URL);
     };
   }, [mosque]);
@@ -65,14 +70,24 @@ export function MosqueSEO({ mosque }: MosqueSEOProps) {
     "@type": "Place",
     name: mosque.name,
     description: mosque.description ?? "",
+    url: `${SITE_URL}/mosque/${mosque.id}`,
     address: {
       "@type": "PostalAddress",
       ...(mosque.address && { streetAddress: mosque.address }),
       addressLocality: mosque.location,
       addressCountry: mosque.country,
     },
+    ...(mosque.coordinates && {
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: mosque.coordinates.lat,
+        longitude: mosque.coordinates.lng,
+      },
+    }),
     ...(imgForLd && { image: imgForLd.startsWith("http") ? imgForLd : `${SITE_URL}${imgForLd}` }),
-    amenityFeature: mosque.facilities?.map((f) => ({ "@type": "LocationFeatureSpecification", name: f })),
+    ...(mosque.facilities?.length && {
+      amenityFeature: mosque.facilities.map((f) => ({ "@type": "LocationFeatureSpecification", name: f })),
+    }),
   };
 
   return (

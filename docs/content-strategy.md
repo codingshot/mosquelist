@@ -109,3 +109,16 @@ Adjust by search volume and business priority; repurpose for social and email.
 - Internal link clicks to mosque pages and explore/timeline (in-app or analytics).
 
 Use this doc as the master outline; add new clusters and pages here as the strategy evolves.
+
+---
+
+## 6. When you add new features (sitemap & SEO)
+
+When you add a **new route**, **new list**, **new blog post**, or **new guide**, keep sitemap and SEO in sync:
+
+- **New static page (e.g. new guide):** Add route in `App.tsx`, add URL in `scripts/generate-sitemap.js`, and add to **Key pages** (and if relevant, “What this site offers”) in `public/ai.txt`. See **[sitemap-seo-and-features.md](./sitemap-seo-and-features.md)** for the full checklist.
+- **New blog post:** Add in `src/data/blog.ts`; sitemap picks up new slugs automatically.
+- **New list:** Add in `src/data/lists.json`; sitemap picks up new list slugs automatically. Optionally mention in ai.txt “Curated lists” if it’s a major list (e.g. Shia Mosques).
+- **Copy or scale change (e.g. mosque/country counts):** Update `index.html` meta/og/twitter, any guide or landing copy (e.g. Travel guide, README), and [pitch-and-messaging.md](../marketing/pitch-and-messaging.md).
+
+**Single source of truth for “what to update”:** [docs/sitemap-seo-and-features.md](./sitemap-seo-and-features.md).

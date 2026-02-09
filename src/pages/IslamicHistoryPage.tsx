@@ -135,23 +135,25 @@ export default function IslamicHistoryPage() {
                           <p className="text-muted-foreground text-sm sm:text-base mt-2">
                             {event.description}
                           </p>
-                          {/* Source link */}
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <a
-                                href={event.source}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
-                              >
-                                <ExternalLink className="h-3 w-3" />
-                                Source
-                              </a>
-                            </TooltipTrigger>
-                            <TooltipContent side="bottom" className="max-w-xs">
-                              <p className="text-xs break-all">{event.source}</p>
-                            </TooltipContent>
-                          </Tooltip>
+                          {/* Source link — only when event has a source URL */}
+                          {event.source && (
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <a
+                                  href={event.source}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
+                                >
+                                  <ExternalLink className="h-3 w-3" />
+                                  Source
+                                </a>
+                              </TooltipTrigger>
+                              <TooltipContent side="bottom" className="max-w-xs">
+                                <p className="text-xs break-all">{event.source}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
                         </div>
                       </div>
                     </div>

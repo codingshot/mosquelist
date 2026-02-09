@@ -40,15 +40,26 @@ export function ListSEO({ list, mosques }: ListSEOProps) {
     setMeta('meta[name="twitter:title"]', "content", title);
     setMeta('meta[name="twitter:description"]', "content", description);
     setMeta('meta[name="twitter:image"]', "content", image);
+    const imageAlt = `${list.name} - MosqueList`.slice(0, 420);
+    setMeta('meta[property="og:image:alt"]', "content", imageAlt);
+    setMeta('meta[name="twitter:image:alt"]', "content", imageAlt);
     setMeta('link[rel="canonical"]', "href", url);
 
     return () => {
       document.title = "MosqueList - Discover the World's Most Magnificent Mosques";
-      setMeta('meta[name="description"]', "content", "Explore 100+ mosques in 50+ countries—from the three holiest sites in Islam to architectural masterpieces.");
+      setMeta('meta[name="description"]', "content", "Explore 199+ mosques in 50+ countries—from the three holiest sites in Islam to architectural masterpieces.");
+      setMeta('meta[property="og:title"]', "content", "MosqueList - Discover the World's Most Magnificent Mosques");
+      setMeta('meta[property="og:description"]', "content", "Explore 199+ mosques in 50+ countries—from the three holiest sites in Islam to architectural masterpieces.");
       setMeta('meta[property="og:url"]', "content", SITE_URL);
+      setMeta('meta[property="og:image"]', "content", DEFAULT_IMAGE);
+      setMeta('meta[property="og:image:alt"]', "content", "MosqueList - Discover mosques worldwide");
+      setMeta('meta[name="twitter:title"]', "content", "MosqueList - Discover the World's Most Magnificent Mosques");
+      setMeta('meta[name="twitter:description"]', "content", "Explore 199+ mosques in 50+ countries—from the three holiest sites in Islam to architectural masterpieces.");
+      setMeta('meta[name="twitter:image"]', "content", DEFAULT_IMAGE);
+      setMeta('meta[name="twitter:image:alt"]', "content", "MosqueList - Discover mosques worldwide");
       setMeta('link[rel="canonical"]', "href", SITE_URL);
     };
-  }, [title, description, url, image]);
+  }, [title, description, url, image, list.name]);
 
   // ItemList structured data for SEO
   const listSchema = {

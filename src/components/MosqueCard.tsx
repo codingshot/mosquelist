@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
+import { formatEstablishmentRange } from "@/lib/timeline-utils";
 import { cn } from "@/lib/utils";
 
 interface MosqueCardProps {
@@ -195,7 +196,7 @@ export const MosqueCard = memo(function MosqueCard({
                 <span>{formatCapacity(mosque.capacity)} capacity</span>
               </div>
               <div className="text-muted-foreground">
-                Est. {mosque.established}
+                Est. {formatEstablishmentRange(mosque.established) || "—"}
               </div>
             </div>
             {!isCompact && (

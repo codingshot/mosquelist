@@ -2,14 +2,25 @@ import {
   mosques,
   getUniqueCountries,
   getUniqueArchitecturalStyles,
+  getMosqueById,
 } from "@/data/mosques";
+import { curatedLists } from "@/data/lists";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
+import { mosquesToCsv, downloadCsv } from "@/lib/csv-export";
+import {
+  downloadJson,
+  downloadMarkdown,
+  downloadMosqueDataZip,
+} from "@/lib/mosque-export";
+import { useBucketList } from "@/hooks/useBucketList";
 import { filterMosquesByQuery } from "@/lib/search";
+import { establishedYear } from "@/lib/mosque-filters";
+import { formatEstablishmentRange } from "@/lib/timeline-utils";
+import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import { MosqueCard } from "./MosqueCard";
-import { SwipeDeck } from "./SwipeDeck";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { Link, useSearchParams } from "react-router-dom";
-import { useMemo, useCallback, useState, useEffect, useRef } from "react";
+import { useMemo, useCallback, useState, useEffect, useRef, lazy, Suspense, useDeferredValue } from "react";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -36,11 +47,13 @@ import {
   Search,
   X,
   ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
   XCircle,
   MapPin,
   Table2,
+  Download,
 } from "lucide-react";
-import { ExploreMapView } from "@/components/ExploreMapView";
 import {
   Table,
   TableBody,
@@ -49,17 +62,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 
-/** Items per page for infinite scroll */
-const ITEMS_PER_PAGE = 12;
+/** Items per page for infinite scroll (larger batches = fewer "load more" triggers) */
+const ITEMS_PER_PAGE = 24;
 
 const PARAM_QUERY = "q";
 const PARAM_FILTER = "filter";
 const PARAM_VIEW = "view";
 const PARAM_SORT = "sort";
+const PARAM_SORT_ORDER = "order";
 const PARAM_COUNTRY = "country";
 const PARAM_REGION = "region";
 const PARAM_WOMEN = "women";
@@ -82,16 +103,20 @@ type SortType =
   | "holyCapacity"
   | "touristFirst"
   | "name"
+  | "location"
   | "capacity"
   | "area"
   | "established"
   | "country";
+type SortOrderType = "asc" | "desc";
 
-/** Parse year from established string (e.g. "622 CE" -> 622, "2007" -> 2007) */
-function establishedYear(established: string): number {
-  const match = established.match(/\d{1,4}/);
-  return match ? parseInt(match[0], 10) : 0;
-}
+/** Lazy-loaded map (Leaflet) and swipe view to keep initial Explore bundle smaller */
+const LazyExploreMapView = lazy(() =>
+  import("@/components/ExploreMapView").then((m) => ({ default: m.ExploreMapView }))
+);
+const LazySwipeDeck = lazy(() =>
+  import("@/components/SwipeDeck").then((m) => ({ default: m.SwipeDeck }))
+);
 
 function formatTableNumber(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
@@ -110,8 +135,17 @@ function useMosqueSearchParams() {
       ? viewParam
       : "grid";
   const sortParam = searchParams.get(PARAM_SORT) as SortType | null;
-  // Default to relevance when searching, holyCapacity otherwise
-  const sort = sortParam || "holyCapacity";
+  const sortOrderParam = searchParams.get(PARAM_SORT_ORDER) as SortOrderType | null;
+  // Default to relevance when searching, holyCapacity otherwise; table view defaults to established (timeline) asc
+  const viewParamForSort = searchParams.get(PARAM_VIEW);
+  const isTableView = viewParamForSort === "table";
+  const sort = sortParam || (isTableView ? "established" : "holyCapacity");
+  const defaultOrderForSort = (s: SortType): SortOrderType =>
+    s === "capacity" || s === "area" || s === "touristFirst" || s === "holyCapacity" ? "desc" : "asc";
+  const sortOrder: SortOrderType =
+    sortOrderParam === "asc" || sortOrderParam === "desc"
+      ? sortOrderParam
+      : defaultOrderForSort(sort);
   const country = searchParams.get(PARAM_COUNTRY) ?? "";
   const region = searchParams.get(PARAM_REGION) ?? "";
   const womenOnly = searchParams.get(PARAM_WOMEN) === "1";
@@ -151,6 +185,28 @@ function useMosqueSearchParams() {
   const setFilter = (v: FilterType) => setParam(PARAM_FILTER, v);
   const setView = (v: ViewType) => setParam(PARAM_VIEW, v);
   const setSort = (v: SortType) => setParam(PARAM_SORT, v);
+  const setSortOrder = (v: SortOrderType) => setParam(PARAM_SORT_ORDER, v);
+  const setSortAndOrder = useCallback(
+    (column: SortType) => {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          const currentSort = (next.get(PARAM_SORT) as SortType) || "established";
+          const currentOrder = next.get(PARAM_SORT_ORDER) as SortOrderType | null;
+          const defaultOrder = defaultOrderForSort(column);
+          if (currentSort === column) {
+            next.set(PARAM_SORT_ORDER, currentOrder === "asc" ? "desc" : "asc");
+          } else {
+            next.set(PARAM_SORT, column);
+            next.set(PARAM_SORT_ORDER, defaultOrder);
+          }
+          return next;
+        },
+        [setSearchParams],
+      );
+    },
+    [setSearchParams],
+  );
   const setCountry = (v: string) => setParam(PARAM_COUNTRY, v);
   const setRegion = (v: string) => setParam(PARAM_REGION, v);
   const setWomenOnly = (v: boolean) => setParam(PARAM_WOMEN, v ? "1" : "");
@@ -178,6 +234,8 @@ function useMosqueSearchParams() {
     filter,
     view,
     sort,
+    sortOrder,
+    setSortAndOrder,
     country,
     region,
     womenOnly,
@@ -196,6 +254,7 @@ function useMosqueSearchParams() {
     setFilter,
     setView,
     setSort,
+    setSortOrder,
     setCountry,
     setRegion,
     setWomenOnly,
@@ -228,6 +287,8 @@ export const MosqueGrid = ({
     filter,
     view,
     sort,
+    sortOrder,
+    setSortAndOrder,
     country,
     region,
     womenOnly,
@@ -267,19 +328,36 @@ export const MosqueGrid = ({
   const regions = useMemo(() => getUniqueRegions(countries), [countries]);
   const styles = useMemo(() => getUniqueArchitecturalStyles(), []);
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { bucketList } = useBucketList();
 
   const [searchInput, setSearchInput] = useState(query);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const deferredQuery = useDeferredValue(query);
+
+  const [downloadOpen, setDownloadOpen] = useState(false);
+  const [selectedListSlug, setSelectedListSlug] = useState<string>("");
+  const [zipDownloading, setZipDownloading] = useState(false);
 
   // Infinite scroll state
   const [page, setPage] = useState(1);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [tablePage, setTablePage] = useState(1);
+  const TABLE_PAGE_SIZE = 50;
+
+  const bucketListMosques = useMemo(
+    () =>
+      bucketList
+        .map((item) => getMosqueById(item.mosqueId))
+        .filter((m): m is NonNullable<typeof m> => m != null),
+    [bucketList],
+  );
 
   // Reset page when filters change
   useEffect(() => {
     setPage(1);
-  }, [query, filter, country, region, womenOnly, touristOnly, facilityGuided, facilityWheelchair, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, denomination, sort]);
+    setTablePage(1);
+  }, [query, filter, country, region, womenOnly, touristOnly, facilityGuided, facilityWheelchair, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, denomination, sort, sortOrder]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -309,7 +387,7 @@ export const MosqueGrid = ({
       debounceRef.current = setTimeout(() => {
         setQuery(value.trim());
         debounceRef.current = null;
-      }, 280);
+      }, 150);
     },
     [setQuery],
   );
@@ -407,7 +485,7 @@ export const MosqueGrid = ({
     if (!Number.isNaN(maxEst))
       list = list.filter((m) => establishedYear(m.established) <= maxEst);
 
-    list = filterMosquesByQuery(list, query);
+    list = filterMosquesByQuery(list, deferredQuery);
 
     // When there's a search query and no explicit sort, keep relevance order from filterMosquesByQuery
     // Otherwise, apply the selected sort
@@ -415,45 +493,64 @@ export const MosqueGrid = ({
 
     // If searching and using default sort, use relevance (keep search order)
     const effectiveSort =
-      query && order === "holyCapacity" ? "relevance" : order;
+      deferredQuery && order === "holyCapacity" ? "relevance" : order;
 
     if (effectiveSort === "relevance") {
       // Keep the order from filterMosquesByQuery (already sorted by relevance)
       return list;
     }
 
+    const naturalAsc =
+      effectiveSort === "name" ||
+      effectiveSort === "location" ||
+      effectiveSort === "country" ||
+      effectiveSort === "established";
+    const mult = naturalAsc === (sortOrder === "asc") ? 1 : -1;
+
     const sorted = [...list].sort((a, b) => {
+      let cmp = 0;
       switch (effectiveSort) {
         case "holyCapacity":
-          if (a.isHolySite !== b.isHolySite) return a.isHolySite ? -1 : 1;
-          return b.capacity - a.capacity;
+          if (a.isHolySite !== b.isHolySite) return (a.isHolySite ? -1 : 1) * mult;
+          cmp = b.capacity - a.capacity;
+          break;
         case "touristFirst":
           if (a.touristFriendly !== b.touristFriendly)
-            return a.touristFriendly ? -1 : 1;
-          if (a.isHolySite !== b.isHolySite) return a.isHolySite ? -1 : 1;
-          return b.capacity - a.capacity;
+            return (a.touristFriendly ? -1 : 1) * mult;
+          if (a.isHolySite !== b.isHolySite) return (a.isHolySite ? -1 : 1) * mult;
+          cmp = b.capacity - a.capacity;
+          break;
         case "name":
-          return a.name.localeCompare(b.name, undefined, {
-            sensitivity: "base",
-          });
+          cmp = a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+          break;
+        case "location":
+          cmp =
+            a.location.localeCompare(b.location, undefined, {
+              sensitivity: "base",
+            }) || a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+          break;
         case "capacity":
-          return b.capacity - a.capacity;
+          cmp = b.capacity - a.capacity;
+          break;
         case "area":
-          return b.area - a.area;
+          cmp = b.area - a.area;
+          break;
         case "established": {
           const ya = establishedYear(a.established);
           const yb = establishedYear(b.established);
-          return ya - yb;
+          cmp = ya - yb;
+          break;
         }
         case "country":
-          return (
+          cmp =
             a.country.localeCompare(b.country, undefined, {
               sensitivity: "base",
-            }) || a.name.localeCompare(b.name)
-          );
+            }) || a.name.localeCompare(b.name);
+          break;
         default:
           return 0;
       }
+      return cmp * mult;
     });
     return sorted;
   }, [
@@ -474,6 +571,8 @@ export const MosqueGrid = ({
     estMax,
     architecturalStyle,
     sort,
+    sortOrder,
+    deferredQuery,
   ]);
 
   // Calculate paginated mosques for infinite scroll
@@ -526,9 +625,7 @@ export const MosqueGrid = ({
             Explore Magnificent Mosques
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            From the three holiest sites in Islam to historic and modern
-            masterpieces across 50+ countries. Search, filter, and add to your
-            list.
+            Discover {mosques.length} mosques in {countries.length} countries—from the three holiest sites in Islam to historic and modern masterpieces. Search, filter, and add to your list.
           </p>
         </div>
 
@@ -634,9 +731,10 @@ export const MosqueGrid = ({
                         Visitor-friendly first
                       </SelectItem>
                       <SelectItem value="name">Name</SelectItem>
+                      <SelectItem value="location">Location</SelectItem>
                       <SelectItem value="capacity">Capacity</SelectItem>
                       <SelectItem value="area">Area</SelectItem>
-                      <SelectItem value="established">Date</SelectItem>
+                      <SelectItem value="established">Date (timeline)</SelectItem>
                       <SelectItem value="country">Country</SelectItem>
                     </SelectContent>
                   </Select>
@@ -929,6 +1027,64 @@ export const MosqueGrid = ({
                           </Button>
                         </div>
                       )}
+                      <div className="mt-6 pt-4 border-t border-border space-y-2">
+                        <Label className="text-sm font-medium">Download mosque data</Label>
+                        <p className="text-xs text-muted-foreground">
+                          Export current filtered view ({filteredMosques.length} mosques) as:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5 touch-manipulation"
+                            onClick={() => downloadJson(filteredMosques, "mosquelist-export")}
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                            JSON
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5 touch-manipulation"
+                            onClick={() =>
+                              downloadCsv(mosquesToCsv(filteredMosques), "mosquelist-export")
+                            }
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                            CSV
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5 touch-manipulation"
+                            onClick={() => downloadMarkdown(filteredMosques, "mosquelist-export")}
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                            Markdown
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5 touch-manipulation"
+                            disabled={zipDownloading}
+                            onClick={async () => {
+                              setZipDownloading(true);
+                              try {
+                                await downloadMosqueDataZip(filteredMosques, "mosquelist-export");
+                              } finally {
+                                setZipDownloading(false);
+                              }
+                            }}
+                          >
+                            {zipDownloading ? (
+                              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            ) : (
+                              <Download className="w-3.5 h-3.5" />
+                            )}
+                            ZIP (all)
+                          </Button>
+                        </div>
+                      </div>
                     </SheetContent>
                   </Sheet>
                 </div>
@@ -1212,15 +1368,136 @@ export const MosqueGrid = ({
         )}
 
         {view === "map" ? (
-          <ExploreMapView mosques={filteredMosquesWithCoords} />
+          <Suspense
+            fallback={
+              <div className="min-h-[400px] flex items-center justify-center bg-muted/30 rounded-xl">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" aria-hidden />
+                <span className="sr-only">Loading map...</span>
+              </div>
+            }
+          >
+            <LazyExploreMapView mosques={filteredMosquesWithCoords} />
+          </Suspense>
         ) : view === "swipe" ? (
-          <SwipeDeck
-            mosques={displayedMosques}
-            onLike={(mosque) => toggleFavorite(mosque.id)}
-            isFavorite={isFavorite}
-          />
+          <Suspense
+            fallback={
+              <div className="min-h-[400px] flex items-center justify-center bg-muted/30 rounded-xl">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" aria-hidden />
+                <span className="sr-only">Loading swipe view...</span>
+              </div>
+            }
+          >
+            <LazySwipeDeck
+              mosques={displayedMosques}
+              onLike={(mosque) => toggleFavorite(mosque.id)}
+              isFavorite={isFavorite}
+            />
+          </Suspense>
         ) : view === "table" ? (
           filteredMosques.length === 0 ? null : (
+          <div className="space-y-3">
+            {!isPreview && (
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-sm text-muted-foreground">
+                  {filteredMosques.length} mosque{filteredMosques.length !== 1 ? "s" : ""} in this view
+                </p>
+                <Dialog open={downloadOpen} onOpenChange={setDownloadOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="gap-2 touch-manipulation"
+                      aria-label="Download list as CSV"
+                    >
+                      <Download className="w-4 h-4" />
+                      Download CSV
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md" aria-describedby="download-dialog-desc">
+                    <DialogHeader>
+                      <DialogTitle>Download list as CSV</DialogTitle>
+                    </DialogHeader>
+                    <p id="download-dialog-desc" className="text-sm text-muted-foreground">
+                      Export name, location, country, capacity, date, and more for use in spreadsheets.
+                    </p>
+                    <div className="flex flex-col gap-3 pt-2">
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="w-full justify-start gap-2"
+                        onClick={() => {
+                          downloadCsv(
+                            mosquesToCsv(filteredMosques),
+                            "mosquelist-current-view.csv",
+                          );
+                          setDownloadOpen(false);
+                        }}
+                      >
+                        <Download className="w-4 h-4" />
+                        Current view ({filteredMosques.length} mosques)
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full justify-start gap-2"
+                        onClick={() => {
+                          downloadCsv(
+                            mosquesToCsv(bucketListMosques),
+                            "mosquelist-bucket-list.csv",
+                          );
+                          setDownloadOpen(false);
+                        }}
+                        disabled={bucketListMosques.length === 0}
+                      >
+                        <Download className="w-4 h-4" />
+                        Your bucket list ({bucketListMosques.length} mosques)
+                      </Button>
+                      <div className="space-y-2">
+                        <Label className="text-sm">A curated list</Label>
+                        <div className="flex gap-2">
+                          <Select
+                            value={selectedListSlug || "_none"}
+                            onValueChange={(v) => setSelectedListSlug(v === "_none" ? "" : v)}
+                          >
+                            <SelectTrigger className="flex-1 min-w-0">
+                              <SelectValue placeholder="Choose a list" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="_none">Choose a list</SelectItem>
+                              {curatedLists.map((list) => (
+                                <SelectItem key={list.slug} value={list.slug}>
+                                  {list.name} ({list.mosqueIds.length})
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            disabled={!selectedListSlug}
+                            onClick={() => {
+                              if (!selectedListSlug) return;
+                              const list = curatedLists.find((l) => l.slug === selectedListSlug);
+                              if (!list) return;
+                              const listMosques = list.mosqueIds
+                                .map((id) => getMosqueById(id))
+                                .filter((m): m is NonNullable<typeof m> => m != null);
+                              downloadCsv(
+                                mosquesToCsv(listMosques),
+                                `mosquelist-${list.slug}.csv`,
+                              );
+                              setDownloadOpen(false);
+                            }}
+                          >
+                            Download
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            )}
           <div className="rounded-xl border border-border overflow-hidden bg-card">
             <div className="overflow-x-auto max-h-[70vh] overflow-y-auto">
               <Table>
@@ -1229,77 +1506,105 @@ export const MosqueGrid = ({
                     <TableHead>
                       <button
                         type="button"
-                        onClick={() => setSort("name")}
+                        onClick={() => setSortAndOrder("name")}
                         className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        aria-label={sort === "name" ? `Sort by name ${sortOrder === "asc" ? "ascending" : "descending"}, click to reverse` : "Sort by name"}
                       >
                         Name
-                        {sort === "name" && <ArrowUpDown className="w-4 h-4" />}
+                        {sort === "name" ? sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" /> : <ArrowUpDown className="w-4 h-4" />}
                       </button>
                     </TableHead>
-                    <TableHead className="whitespace-nowrap">Location</TableHead>
                     <TableHead>
                       <button
                         type="button"
-                        onClick={() => setSort("country")}
+                        onClick={() => setSortAndOrder("location")}
+                        className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded whitespace-nowrap"
+                        aria-label={sort === "location" ? `Sort by location ${sortOrder === "asc" ? "ascending" : "descending"}, click to reverse` : "Sort by location"}
+                      >
+                        Location
+                        {sort === "location" ? sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" /> : <ArrowUpDown className="w-4 h-4" />}
+                      </button>
+                    </TableHead>
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => setSortAndOrder("country")}
                         className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        aria-label={sort === "country" ? `Sort by country ${sortOrder === "asc" ? "ascending" : "descending"}, click to reverse` : "Sort by country"}
                       >
                         Country
-                        {sort === "country" && <ArrowUpDown className="w-4 h-4" />}
+                        {sort === "country" ? sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" /> : <ArrowUpDown className="w-4 h-4" />}
                       </button>
                     </TableHead>
                     <TableHead>
                       <button
                         type="button"
-                        onClick={() => setSort("capacity")}
+                        onClick={() => setSortAndOrder("capacity")}
                         className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        aria-label={sort === "capacity" ? `Sort by capacity ${sortOrder === "asc" ? "ascending" : "descending"}, click to reverse` : "Sort by capacity"}
                       >
                         Capacity
-                        {sort === "capacity" && <ArrowUpDown className="w-4 h-4" />}
+                        {sort === "capacity" ? sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" /> : <ArrowUpDown className="w-4 h-4" />}
                       </button>
                     </TableHead>
                     <TableHead>
                       <button
                         type="button"
-                        onClick={() => setSort("area")}
+                        onClick={() => setSortAndOrder("area")}
                         className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        aria-label={sort === "area" ? `Sort by area ${sortOrder === "asc" ? "ascending" : "descending"}, click to reverse` : "Sort by area"}
                       >
                         Area (m²)
-                        {sort === "area" && <ArrowUpDown className="w-4 h-4" />}
+                        {sort === "area" ? sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" /> : <ArrowUpDown className="w-4 h-4" />}
                       </button>
                     </TableHead>
                     <TableHead>
                       <button
                         type="button"
-                        onClick={() => setSort("established")}
+                        onClick={() => setSortAndOrder("established")}
                         className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        aria-label={sort === "established" ? `Sort by date ${sortOrder === "asc" ? "oldest first" : "newest first"}, click to reverse` : "Sort by date (timeline)"}
                       >
                         Established
-                        {sort === "established" && <ArrowUpDown className="w-4 h-4" />}
+                        {sort === "established" ? sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" /> : <ArrowUpDown className="w-4 h-4" />}
                       </button>
                     </TableHead>
                     <TableHead className="whitespace-nowrap">Style</TableHead>
                     <TableHead>
                       <button
                         type="button"
-                        onClick={() => setSort("touristFirst")}
+                        onClick={() => setSortAndOrder("touristFirst")}
                         className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        aria-label={sort === "touristFirst" ? `Sort by visitors ${sortOrder === "asc" ? "ascending" : "descending"}, click to reverse` : "Sort by visitors"}
                       >
                         Visitors
-                        {sort === "touristFirst" && <ArrowUpDown className="w-4 h-4" />}
+                        {sort === "touristFirst" ? sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" /> : <ArrowUpDown className="w-4 h-4" />}
                       </button>
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredMosques.map((mosque) => (
+                  {filteredMosques.slice(0, tablePage * TABLE_PAGE_SIZE).map((mosque) => (
                     <TableRow key={mosque.id} className="hover:bg-muted/30">
                       <TableCell className="font-medium">
-                        <Link
-                          to={`/mosque/${mosque.id}`}
-                          className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
-                        >
-                          {mosque.name}
-                        </Link>
+                        <div className="flex items-center gap-3">
+                          <div className="shrink-0 w-10 h-10 rounded-md overflow-hidden bg-muted">
+                            <img
+                              src={getMosqueImageSrc(mosque).src || "/placeholder.svg"}
+                              alt=""
+                              className="h-full w-full object-cover"
+                              onError={(e) => {
+                                setMosqueImageFallback(e.currentTarget, getMosqueImageSrc(mosque).fallbackUrl);
+                              }}
+                            />
+                          </div>
+                          <Link
+                            to={`/mosque/${mosque.id}`}
+                            className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                          >
+                            {mosque.name}
+                          </Link>
+                        </div>
                       </TableCell>
                       <TableCell className="text-muted-foreground whitespace-nowrap">
                         {mosque.location}
@@ -1311,7 +1616,7 @@ export const MosqueGrid = ({
                       <TableCell className="tabular-nums whitespace-nowrap">
                         {mosque.area ? formatTableNumber(mosque.area) : "—"}
                       </TableCell>
-                      <TableCell className="whitespace-nowrap">{mosque.established || "—"}</TableCell>
+                      <TableCell className="whitespace-nowrap">{mosque.established ? formatEstablishmentRange(mosque.established) : "—"}</TableCell>
                       <TableCell className="text-muted-foreground max-w-[140px] truncate" title={mosque.architecturalStyle ?? ""}>
                         {mosque.architecturalStyle || "—"}
                       </TableCell>
@@ -1323,6 +1628,19 @@ export const MosqueGrid = ({
                 </TableBody>
               </Table>
             </div>
+            {filteredMosques.length > tablePage * TABLE_PAGE_SIZE && (
+              <div className="flex justify-center py-3 border-t border-border bg-muted/20">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setTablePage((p) => p + 1)}
+                  className="touch-manipulation"
+                >
+                  Load more rows ({Math.min(TABLE_PAGE_SIZE, filteredMosques.length - tablePage * TABLE_PAGE_SIZE)} more)
+                </Button>
+              </div>
+            )}
+          </div>
           </div>
           )
         ) : (
@@ -1339,7 +1657,7 @@ export const MosqueGrid = ({
         )}
 
         {/* Infinite scroll sentinel and loading indicator */}
-        {!isPreview && view !== "map" && view !== "swipe" && view !== "table" && hasMore && (
+        {!isPreview && view === "grid" && hasMore && (
           <>
             <div
               ref={setSentinelRef}

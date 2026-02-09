@@ -453,15 +453,15 @@
       "description": "Magnificent Ottoman and historic mosques in Turkey.",
       "mosqueIds": [
         "blue-mosque",
-        "suleymaniye-mosque",
         "camlica-mosque",
-        "sabanci-central-mosque",
         "hagia-sophia-istanbul",
-        "selahaddin-eyyubi-mosque",
         "kocatepe-mosque",
-        "selimiye-mosque",
-        "rustem-pasha-mosque",
         "mihrimah-sultan-mosque-uskudar",
+        "rustem-pasha-mosque",
+        "sabanci-central-mosque",
+        "selahaddin-eyyubi-mosque",
+        "selimiye-mosque",
+        "suleymaniye-mosque",
         "yeni-mosque-istanbul"
       ]
     },
@@ -470,15 +470,15 @@
       "name": "Pakistan",
       "description": "Major mosques in Pakistan—from Mughal masterpieces to modern marvels.",
       "mosqueIds": [
-        "grand-jamia",
-        "faisal-mosque",
+        "aqsa-mosque-rabwah",
         "badshahi-mosque",
         "bahria-grand-mosque",
         "cmh-masjid-jhelum",
-        "shah-jahan-mosque-thatta",
-        "wazir-khan-mosque",
+        "faisal-mosque",
+        "grand-jamia",
         "moti-masjid-lahore-fort",
-        "aqsa-mosque-rabwah"
+        "shah-jahan-mosque-thatta",
+        "wazir-khan-mosque"
       ]
     },
     {
@@ -486,18 +486,18 @@
       "name": "Indonesia",
       "description": "Southeast Asia's largest mosques in Indonesia.",
       "mosqueIds": [
-        "istiqlal-mosque",
         "al-akbar-mosque",
+        "al-azhom-grand-mosque",
+        "al-jabbar-grand-mosque",
         "at-tin-mosque",
         "dian-al-mahri-mosque",
-        "jakarta-islamic-center",
-        "al-jabbar-grand-mosque",
-        "grand-mosque-of-west-sumatra",
-        "raja-hamidah-great-mosque-of-batam",
         "grand-mosque-of-sabilal-muhtadin",
+        "grand-mosque-of-west-sumatra",
         "great-mosque-of-central-java",
-        "al-azhom-grand-mosque",
-        "nusantara-national-mosque"
+        "istiqlal-mosque",
+        "jakarta-islamic-center",
+        "nusantara-national-mosque",
+        "raja-hamidah-great-mosque-of-batam"
       ]
     },
     {
@@ -505,11 +505,11 @@
       "name": "Egypt",
       "description": "Historic and iconic mosques in Egypt—Fatimid, Mamluk, and modern.",
       "mosqueIds": [
+        "al-aqmar-mosque",
         "al-azhar-mosque",
-        "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
         "al-fattah-al-aleem-mosque",
         "amr-ibn-al-as-mosque",
-        "al-aqmar-mosque"
+        "egypts-islamic-cultural-center-masjid-misr-al-kabeer"
       ]
     },
     {
@@ -525,14 +525,14 @@
       "name": "India",
       "description": "Mughal and historic mosques in India.",
       "mosqueIds": [
+        "adina-mosque",
+        "aqsa-mosque-qadian",
+        "cheraman-juma-masjid",
         "jama-masjid-delhi",
-        "taj-ul-masajid",
         "jamia-masjid-srinagar",
         "jamiul-futuh-indian-grand-masjid",
-        "aqsa-mosque-qadian",
         "moti-masjid-agra-fort",
-        "cheraman-juma-masjid",
-        "adina-mosque"
+        "taj-ul-masajid"
       ]
     },
     {
@@ -540,12 +540,12 @@
       "name": "Malaysia",
       "description": "Mosques across Malaysia—national landmarks and state mosques.",
       "mosqueIds": [
+        "al-kauthar-mosque",
+        "federal-territory-mosque",
         "national-mosque-malaysia",
         "putra-mosque",
         "sultan-salahuddin-abdul-aziz-mosque",
-        "tuanku-mizan-zainal-abidin-mosque",
-        "federal-territory-mosque",
-        "al-kauthar-mosque"
+        "tuanku-mizan-zainal-abidin-mosque"
       ]
     },
     {
@@ -553,9 +553,9 @@
       "name": "Morocco",
       "description": "Moroccan architectural masterpieces from Almohad to modern.",
       "mosqueIds": [
+        "al-qarawiyyin",
         "hassan-ii",
-        "koutoubia-mosque",
-        "al-qarawiyyin"
+        "koutoubia-mosque"
       ]
     },
     {
@@ -563,10 +563,10 @@
       "name": "Iraq",
       "description": "Holy and historic shrines in Iraq.",
       "mosqueIds": [
-        "imam-ali-shrine",
-        "great-mosque-of-kufa",
         "great-mosque-of-basra",
-        "great-mosque-of-samarra"
+        "great-mosque-of-kufa",
+        "great-mosque-of-samarra",
+        "imam-ali-shrine"
       ]
     },
     {
@@ -574,10 +574,10 @@
       "name": "Iran",
       "description": "Major Shia shrines and mosques in Iran.",
       "mosqueIds": [
+        "grand-mosalla-tehran",
         "imam-reza-shrine",
-        "jamkaran-mosque",
         "jameh-mosque-of-makki",
-        "grand-mosalla-tehran"
+        "jamkaran-mosque"
       ]
     },
     {
@@ -586,11 +586,11 @@
       "description": "Central Asia's grandest mosques.",
       "mosqueIds": [
         "astana-grand-mosque",
-        "hazrat-sultan-mosque",
-        "nur-astana-mosque",
         "central-mosque-almaty",
+        "hazrat-sultan-mosque",
+        "manjali-mosque",
         "mashkhur-jusup-mosque",
-        "manjali-mosque"
+        "nur-astana-mosque"
       ]
     },
     {
@@ -598,8 +598,8 @@
       "name": "Syria",
       "description": "Historic Umayyad and Islamic heritage.",
       "mosqueIds": [
-        "umayyad-mosque",
-        "great-mosque-of-aleppo"
+        "great-mosque-of-aleppo",
+        "umayyad-mosque"
       ]
     },
     {
@@ -640,8 +640,8 @@
       "name": "Algeria",
       "description": "North African mosque heritage—including Africa's largest.",
       "mosqueIds": [
-        "djamaa-el-djazair",
         "1st-november-1954-great-mosque",
+        "djamaa-el-djazair",
         "emir-abdelkader-mosque"
       ]
     },
@@ -663,8 +663,8 @@
       "description": "Historic mosques in China—unique Chinese-Islamic architectural fusion.",
       "mosqueIds": [
         "id-kah-mosque",
-        "xian-great-mosque",
-        "niujie-mosque"
+        "niujie-mosque",
+        "xian-great-mosque"
       ]
     },
     {
@@ -672,10 +672,10 @@
       "name": "Philippines",
       "description": "Major mosques in the Philippines.",
       "mosqueIds": [
-        "sultan-haji-hassanal-bolkiah-mosque",
+        "grand-mosque-cotabato",
         "manila-golden-mosque",
         "sheikh-karimul-makhdum-mosque",
-        "grand-mosque-cotabato"
+        "sultan-haji-hassanal-bolkiah-mosque"
       ]
     },
     {
@@ -683,12 +683,12 @@
       "name": "Uzbekistan",
       "description": "Historic Silk Road mosques in Uzbekistan.",
       "mosqueIds": [
-        "kalon-mosque-bukhara",
         "bibi-khanym-mosque",
-        "kalan-mosque",
+        "bolo-haouz-mosque",
         "hazrat-imam-mosque",
-        "minor-mosque",
-        "bolo-haouz-mosque"
+        "kalan-mosque",
+        "kalon-mosque-bukhara",
+        "minor-mosque"
       ]
     },
     {
@@ -712,8 +712,8 @@
       "name": "Tunisia",
       "description": "Ancient and historic mosques in Tunisia—including one of the oldest in the world.",
       "mosqueIds": [
-        "great-mosque-of-kairouan",
-        "al-zaytuna-mosque"
+        "al-zaytuna-mosque",
+        "great-mosque-of-kairouan"
       ]
     },
     {
@@ -721,17 +721,17 @@
       "name": "United States",
       "description": "Historic and prominent mosques across America.",
       "mosqueIds": [
-        "islamic-center-washington",
-        "islamic-center-of-america",
-        "islamic-cultural-center-of-new-york",
-        "king-fahad-mosque-culver-city",
-        "masjid-muhammad-washington-dc",
         "dar-al-hijrah-islamic-center",
-        "masjid-al-farooq-atlanta",
-        "islamic-society-of-boston-cultural-center",
+        "east-plano-islamic-center",
+        "islamic-center-of-america",
         "islamic-center-of-greater-cincinnati",
         "islamic-center-of-irvine",
-        "east-plano-islamic-center"
+        "islamic-center-washington",
+        "islamic-cultural-center-of-new-york",
+        "islamic-society-of-boston-cultural-center",
+        "king-fahad-mosque-culver-city",
+        "masjid-al-farooq-atlanta",
+        "masjid-muhammad-washington-dc"
       ]
     },
     {
@@ -856,6 +856,19 @@
       ]
     },
     {
+      "slug": "shia-mosques",
+      "name": "Shia Mosques",
+      "description": "Significant mosques and shrines associated with Shia Islam—from the Imam Reza and Imam Ali shrines to the Islamic Center of America and beyond.",
+      "mosqueIds": [
+        "imam-reza-shrine",
+        "imam-ali-shrine",
+        "great-mosque-of-kufa",
+        "jamkaran-mosque",
+        "islamic-center-of-america",
+        "grand-mosalla-tehran"
+      ]
+    },
+    {
       "slug": "under-construction",
       "name": "Mosques Under Construction",
       "description": "Major mosque projects currently being built—the future landmarks of Islam.",
@@ -967,6 +980,515 @@
       "mosqueIds": [
         "geneva-mosque",
         "mahmud-mosque-zurich"
+      ]
+    },
+    {
+      "slug": "afghanistan",
+      "name": "Afghanistan",
+      "description": "Mosques in Afghanistan.",
+      "mosqueIds": [
+        "abdul-rahman-mosque"
+      ]
+    },
+    {
+      "slug": "argentina",
+      "name": "Argentina",
+      "description": "Mosques in Argentina.",
+      "mosqueIds": [
+        "king-fahd-islamic-center-buenos-aires"
+      ]
+    },
+    {
+      "slug": "australia",
+      "name": "Australia",
+      "description": "Mosques in Australia.",
+      "mosqueIds": [
+        "auburn-gallipoli-mosque",
+        "lakemba-mosque-sydney",
+        "melbourne-grand-mosque"
+      ]
+    },
+    {
+      "slug": "azerbaijan",
+      "name": "Azerbaijan",
+      "description": "Mosques in Azerbaijan.",
+      "mosqueIds": [
+        "heydar-mosque"
+      ]
+    },
+    {
+      "slug": "bangladesh",
+      "name": "Bangladesh",
+      "description": "Mosques in Bangladesh.",
+      "mosqueIds": [
+        "baitul-mukarram",
+        "sixty-dome-mosque",
+        "star-mosque-dhaka"
+      ]
+    },
+    {
+      "slug": "belgium",
+      "name": "Belgium",
+      "description": "Mosques in Belgium.",
+      "mosqueIds": [
+        "great-mosque-of-brussels"
+      ]
+    },
+    {
+      "slug": "bosnia-and-herzegovina",
+      "name": "Bosnia and Herzegovina",
+      "description": "Mosques in Bosnia and Herzegovina.",
+      "mosqueIds": [
+        "gazi-husrev-beg-mosque"
+      ]
+    },
+    {
+      "slug": "brazil",
+      "name": "Brazil",
+      "description": "Mosques in Brazil.",
+      "mosqueIds": [
+        "mesquita-brasil",
+        "omar-ibn-al-khattab-foz"
+      ]
+    },
+    {
+      "slug": "brunei",
+      "name": "Brunei",
+      "description": "Mosques in Brunei.",
+      "mosqueIds": [
+        "jame-asr-hassanil-bolkiah",
+        "omar-ali-saifuddien-mosque"
+      ]
+    },
+    {
+      "slug": "burkina-faso",
+      "name": "Burkina Faso",
+      "description": "Mosques in Burkina Faso.",
+      "mosqueIds": [
+        "grand-mosque-of-bobo-dioulasso"
+      ]
+    },
+    {
+      "slug": "cameroon",
+      "name": "Cameroon",
+      "description": "Mosques in Cameroon.",
+      "mosqueIds": [
+        "lamido-grand-mosque-ngaoundere"
+      ]
+    },
+    {
+      "slug": "chad",
+      "name": "Chad",
+      "description": "Mosques in Chad.",
+      "mosqueIds": [
+        "ndjamena-grand-mosque"
+      ]
+    },
+    {
+      "slug": "comoros",
+      "name": "Comoros",
+      "description": "Mosques in Comoros.",
+      "mosqueIds": [
+        "badjanani-mosque-moroni",
+        "friday-mosque-moroni"
+      ]
+    },
+    {
+      "slug": "denmark",
+      "name": "Denmark",
+      "description": "Mosques in Denmark.",
+      "mosqueIds": [
+        "copenhagen-grand-mosque"
+      ]
+    },
+    {
+      "slug": "djibouti",
+      "name": "Djibouti",
+      "description": "Mosques in Djibouti.",
+      "mosqueIds": [
+        "abdulhamid-han-ii-mosque-djibouti",
+        "abdulhamid-ii-mosque"
+      ]
+    },
+    {
+      "slug": "eritrea",
+      "name": "Eritrea",
+      "description": "Mosques in Eritrea.",
+      "mosqueIds": [
+        "great-mosque-asmara",
+        "great-mosque-of-asmara"
+      ]
+    },
+    {
+      "slug": "ethiopia",
+      "name": "Ethiopia",
+      "description": "Mosques in Ethiopia.",
+      "mosqueIds": [
+        "grand-anwar-mosque-addis-ababa",
+        "harar-jami-mosque",
+        "harar-jugol-mosques"
+      ]
+    },
+    {
+      "slug": "france",
+      "name": "France",
+      "description": "Mosques in France.",
+      "mosqueIds": [
+        "grand-mosque-of-paris"
+      ]
+    },
+    {
+      "slug": "gambia",
+      "name": "Gambia",
+      "description": "Mosques in Gambia.",
+      "mosqueIds": [
+        "king-fahad-mosque-banjul"
+      ]
+    },
+    {
+      "slug": "germany",
+      "name": "Germany",
+      "description": "Mosques in Germany.",
+      "mosqueIds": [
+        "cologne-central-mosque"
+      ]
+    },
+    {
+      "slug": "guinea",
+      "name": "Guinea",
+      "description": "Mosques in Guinea.",
+      "mosqueIds": [
+        "grand-mosque-of-conakry"
+      ]
+    },
+    {
+      "slug": "italy",
+      "name": "Italy",
+      "description": "Mosques in Italy.",
+      "mosqueIds": [
+        "rome-grand-mosque"
+      ]
+    },
+    {
+      "slug": "ivory-coast",
+      "name": "Ivory Coast",
+      "description": "Mosques in Ivory Coast.",
+      "mosqueIds": [
+        "plateau-salam-mosque-abidjan"
+      ]
+    },
+    {
+      "slug": "japan",
+      "name": "Japan",
+      "description": "Mosques in Japan.",
+      "mosqueIds": [
+        "tokyo-camii"
+      ]
+    },
+    {
+      "slug": "jordan",
+      "name": "Jordan",
+      "description": "Mosques in Jordan.",
+      "mosqueIds": [
+        "king-abdullah-i-mosque"
+      ]
+    },
+    {
+      "slug": "kenya",
+      "name": "Kenya",
+      "description": "Mosques in Kenya.",
+      "mosqueIds": [
+        "jamia-mosque-nairobi",
+        "mandhry-mosque-mombasa"
+      ]
+    },
+    {
+      "slug": "kyrgyzstan",
+      "name": "Kyrgyzstan",
+      "description": "Mosques in Kyrgyzstan.",
+      "mosqueIds": [
+        "bishkek-central-mosque",
+        "dungan-mosque-karakol"
+      ]
+    },
+    {
+      "slug": "libya",
+      "name": "Libya",
+      "description": "Mosques in Libya.",
+      "mosqueIds": [
+        "al-naqah-mosque-tripoli",
+        "gurgi-mosque-tripoli"
+      ]
+    },
+    {
+      "slug": "maldives",
+      "name": "Maldives",
+      "description": "Mosques in Maldives.",
+      "mosqueIds": [
+        "grand-friday-mosque-male",
+        "hukru-miskiy-male"
+      ]
+    },
+    {
+      "slug": "mali",
+      "name": "Mali",
+      "description": "Mosques in Mali.",
+      "mosqueIds": [
+        "great-mosque-of-djenne"
+      ]
+    },
+    {
+      "slug": "mauritania",
+      "name": "Mauritania",
+      "description": "Mosques in Mauritania.",
+      "mosqueIds": [
+        "saudi-mosque-nouakchott"
+      ]
+    },
+    {
+      "slug": "mexico",
+      "name": "Mexico",
+      "description": "Mosques in Mexico.",
+      "mosqueIds": [
+        "suraya-mosque-mexico"
+      ]
+    },
+    {
+      "slug": "montenegro",
+      "name": "Montenegro",
+      "description": "Mosques in Montenegro.",
+      "mosqueIds": [
+        "husein-pasha-mosque-pljevlja"
+      ]
+    },
+    {
+      "slug": "mozambique",
+      "name": "Mozambique",
+      "description": "Mosques in Mozambique.",
+      "mosqueIds": [
+        "maputo-central-mosque"
+      ]
+    },
+    {
+      "slug": "myanmar",
+      "name": "Myanmar",
+      "description": "Mosques in Myanmar.",
+      "mosqueIds": [
+        "surti-sunni-jamah-mosque-yangon"
+      ]
+    },
+    {
+      "slug": "netherlands",
+      "name": "Netherlands",
+      "description": "Mosques in Netherlands.",
+      "mosqueIds": [
+        "essalam-mosque-rotterdam",
+        "mevlana-mosque-rotterdam"
+      ]
+    },
+    {
+      "slug": "niger",
+      "name": "Niger",
+      "description": "Mosques in Niger.",
+      "mosqueIds": [
+        "grand-mosque-of-niamey"
+      ]
+    },
+    {
+      "slug": "nigeria",
+      "name": "Nigeria",
+      "description": "Mosques in Nigeria.",
+      "mosqueIds": [
+        "national-mosque-abuja"
+      ]
+    },
+    {
+      "slug": "north-macedonia",
+      "name": "North Macedonia",
+      "description": "Mosques in North Macedonia.",
+      "mosqueIds": [
+        "mustafa-pasha-mosque"
+      ]
+    },
+    {
+      "slug": "oman",
+      "name": "Oman",
+      "description": "Mosques in Oman.",
+      "mosqueIds": [
+        "sultan-qaboos-grand-mosque"
+      ]
+    },
+    {
+      "slug": "palestine",
+      "name": "Palestine",
+      "description": "Mosques in Palestine.",
+      "mosqueIds": [
+        "al-aqsa"
+      ]
+    },
+    {
+      "slug": "qatar",
+      "name": "Qatar",
+      "description": "Mosques in Qatar.",
+      "mosqueIds": [
+        "imam-abdul-wahhab-mosque"
+      ]
+    },
+    {
+      "slug": "russia",
+      "name": "Russia",
+      "description": "Mosques in Russia.",
+      "mosqueIds": [
+        "grand-mosque-of-makhachkala",
+        "pride-of-muslims-mosque-shali"
+      ]
+    },
+    {
+      "slug": "senegal",
+      "name": "Senegal",
+      "description": "Mosques in Senegal.",
+      "mosqueIds": [
+        "massalikoul-djinane-mosque"
+      ]
+    },
+    {
+      "slug": "sierra-leone",
+      "name": "Sierra Leone",
+      "description": "Mosques in Sierra Leone.",
+      "mosqueIds": [
+        "freetown-central-mosque"
+      ]
+    },
+    {
+      "slug": "singapore",
+      "name": "Singapore",
+      "description": "Mosques in Singapore.",
+      "mosqueIds": [
+        "sultan-mosque-singapore"
+      ]
+    },
+    {
+      "slug": "somalia",
+      "name": "Somalia",
+      "description": "Mosques in Somalia.",
+      "mosqueIds": [
+        "mosque-of-islamic-solidarity"
+      ]
+    },
+    {
+      "slug": "south-korea",
+      "name": "South Korea",
+      "description": "Mosques in South Korea.",
+      "mosqueIds": [
+        "seoul-central-mosque"
+      ]
+    },
+    {
+      "slug": "spain",
+      "name": "Spain",
+      "description": "Mosques in Spain.",
+      "mosqueIds": [
+        "granada-mosque",
+        "great-mosque-of-cordoba"
+      ]
+    },
+    {
+      "slug": "sri-lanka",
+      "name": "Sri Lanka",
+      "description": "Mosques in Sri Lanka.",
+      "mosqueIds": [
+        "jami-ul-alfar-colombo",
+        "jami-ul-alfar-mosque"
+      ]
+    },
+    {
+      "slug": "sudan",
+      "name": "Sudan",
+      "description": "Mosques in Sudan.",
+      "mosqueIds": [
+        "great-mosque-khartoum"
+      ]
+    },
+    {
+      "slug": "sweden",
+      "name": "Sweden",
+      "description": "Mosques in Sweden.",
+      "mosqueIds": [
+        "stockholm-mosque"
+      ]
+    },
+    {
+      "slug": "switzerland",
+      "name": "Switzerland",
+      "description": "Mosques in Switzerland.",
+      "mosqueIds": [
+        "geneva-mosque",
+        "mahmud-mosque-zurich"
+      ]
+    },
+    {
+      "slug": "tajikistan",
+      "name": "Tajikistan",
+      "description": "Mosques in Tajikistan.",
+      "mosqueIds": [
+        "imam-abu-hanifa-mosque-dushanbe"
+      ]
+    },
+    {
+      "slug": "tanzania",
+      "name": "Tanzania",
+      "description": "Mosques in Tanzania.",
+      "mosqueIds": [
+        "friday-mosque-songo-mnara",
+        "great-mosque-kilwa",
+        "great-mosque-of-kilwa",
+        "songo-mnara-mosque"
+      ]
+    },
+    {
+      "slug": "thailand",
+      "name": "Thailand",
+      "description": "Mosques in Thailand.",
+      "mosqueIds": [
+        "ban-ho-mosque",
+        "krue-se-mosque-pattani"
+      ]
+    },
+    {
+      "slug": "turkmenistan",
+      "name": "Turkmenistan",
+      "description": "Mosques in Turkmenistan.",
+      "mosqueIds": [
+        "turkmenbashy-ruhy-mosque",
+        "turkmenbasy-ruhy-mosque"
+      ]
+    },
+    {
+      "slug": "uganda",
+      "name": "Uganda",
+      "description": "Mosques in Uganda.",
+      "mosqueIds": [
+        "kibuli-mosque",
+        "uganda-national-mosque"
+      ]
+    },
+    {
+      "slug": "united-kingdom",
+      "name": "United Kingdom",
+      "description": "Mosques in United Kingdom.",
+      "mosqueIds": [
+        "birmingham-central-mosque",
+        "cambridge-central-mosque",
+        "east-london-mosque",
+        "london-central-mosque"
+      ]
+    },
+    {
+      "slug": "vietnam",
+      "name": "Vietnam",
+      "description": "Mosques in Vietnam.",
+      "mosqueIds": [
+        "al-noor-hanoi"
       ]
     }
   ]
