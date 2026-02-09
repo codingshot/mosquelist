@@ -68,6 +68,8 @@ MosqueList is a free web app for Muslims and travelers who want to discover sign
 - **[docs/personas.md](docs/personas.md)** — Audience personas (Muslims, tourists, non-Muslims, students, architecture enthusiasts) and how to appeal to each.
 - **[docs/wikipedia-api-mosque-data-guide.md](docs/wikipedia-api-mosque-data-guide.md)** — How to pull mosque data from Wikipedia APIs (oldest, largest, by-country lists, Islamic architecture) and map it to MosqueList’s `Mosque` type.
 
+- **Brand guide (in-app):** [/brand](https://mosquelist.com/brand) — Colors (HEX/RGB), fonts, voice, personas, logo & favicon, component showcase, downloadable brand ZIP. SEO-optimized; in sitemap.
+
 ---
 
 ## Project Structure
@@ -84,6 +86,7 @@ MosqueList is a free web app for Muslims and travelers who want to discover sign
 | `src/pages/Glossary.tsx` | Glossary of terms |
 | `src/pages/Contributing.tsx` | How to contribute |
 | `src/pages/MosqueDetail.tsx` | Single mosque detail page (SEO, facilities, map) |
+| `src/pages/BrandPage.tsx` | Brand guide: colors, fonts, voice, personas, logo, components, download ZIP |
 | `src/pages/NotFound.tsx` | 404 page |
 | `src/components/Navigation.tsx` | Header with logo, nav links, mobile menu |
 | `src/components/HeroSection.tsx` | Hero with headline, CTAs, stats |

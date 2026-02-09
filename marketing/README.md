@@ -15,6 +15,7 @@
 | File | Purpose |
 |------|--------|
 | [content-types.md](./content-types.md) | Types of content to post and where |
+| [new-content-and-announcements.md](./new-content-and-announcements.md) | **Latest stats & features**, new marketing content ideas, and announcement blog ideas (update regularly) |
 | [social-announcements.md](./social-announcements.md) | Announcement post templates for different social platforms |
 | [channel-playbook.md](./channel-playbook.md) | Per-channel strategy (Instagram, Twitter, TikTok, etc.) |
 | [seasonal-calendar.md](./seasonal-calendar.md) | Islamic & travel calendar for planning content and campaigns |

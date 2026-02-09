@@ -2,6 +2,8 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 const QUICK_LINKS = [
   { label: "Home", to: "/" },
@@ -81,34 +83,38 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
-          <div className="flex flex-col items-center max-w-lg">
-            <div className="rounded-full bg-destructive/10 p-4 mb-4" aria-hidden>
-              <AlertCircle className="w-12 h-12 text-destructive" />
-            </div>
-            <h1 className="font-serif text-2xl font-bold text-foreground">
-              Something went wrong
-            </h1>
-            <p className="mt-2 text-muted-foreground">
-              This page couldn&apos;t load. Go back home or pick somewhere else to continue.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3 justify-center">
-              <Button size="lg" asChild>
-                <Link to="/">Go home</Link>
-              </Button>
-              <Button size="lg" variant="outline" onClick={() => window.location.reload()}>
-                Reload page
-              </Button>
-            </div>
-            <p className="mt-8 text-sm font-medium text-foreground">Quick links</p>
-            <div className="mt-2 flex flex-wrap gap-2 justify-center">
-              {QUICK_LINKS.map(({ label, to }) => (
-                <Button key={to} variant="secondary" size="sm" asChild>
-                  <Link to={to}>{label}</Link>
+        <div className="min-h-screen bg-background flex flex-col">
+          <Navigation />
+          <main id="main-content" className="flex flex-1 min-h-[calc(100vh-4rem)] items-center justify-center px-4 pt-24 pb-20">
+            <div className="flex flex-col items-center max-w-lg w-full text-center">
+              <div className="rounded-full bg-destructive/10 p-4 mb-4" aria-hidden>
+                <AlertCircle className="w-12 h-12 text-destructive" />
+              </div>
+              <h1 className="font-serif text-2xl font-bold text-foreground">
+                Something went wrong
+              </h1>
+              <p className="mt-2 text-muted-foreground">
+                This page couldn&apos;t load. Go back home or pick somewhere else to continue.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3 justify-center">
+                <Button size="lg" asChild>
+                  <Link to="/">Go home</Link>
                 </Button>
-              ))}
+                <Button size="lg" variant="outline" onClick={() => window.location.reload()}>
+                  Reload page
+                </Button>
+              </div>
+              <p className="mt-8 text-sm font-medium text-foreground">Quick links</p>
+              <div className="mt-2 flex flex-wrap gap-2 justify-center">
+                {QUICK_LINKS.map(({ label, to }) => (
+                  <Button key={to} variant="secondary" size="sm" asChild>
+                    <Link to={to}>{label}</Link>
+                  </Button>
+                ))}
+              </div>
             </div>
-          </div>
+          </main>
+          <Footer />
         </div>
       );
     }

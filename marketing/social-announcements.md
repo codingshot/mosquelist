@@ -1,6 +1,21 @@
 # Social Announcement Posts — MosqueList
 
-Templates for launching or announcing MosqueList (or major features) on different platforms. **Internal use only** — adapt copy to fit your voice and current features.
+Templates for launching or announcing MosqueList (or major features) on different platforms. **Internal use only** — adapt copy to fit your voice and current features. For latest stats and feature list see [new-content-and-announcements.md](./new-content-and-announcements.md).
+
+---
+
+## New features (download, share, table view)
+
+**Twitter / X (≈280):**  
+New on MosqueList: 199 mosques in 85 countries. Table view + sort by capacity or date. Download your list as CSV, JSON, or Markdown—or share your bucket list to X, LinkedIn, or Facebook. Explore, save, and take it with you. 👉 [link]
+
+**Instagram caption:**  
+You can now download your mosque list—or share it. CSV, JSON, Markdown, or a ZIP of all three. Plus table view: sort by capacity, country, or when a mosque was built. 199 mosques in 85 countries. Your bucket list, your way. Link in bio. #MosqueList #IslamicTravel #BucketList
+
+**Email subject lines:**  
+- New: Download your mosque list (CSV, JSON, Markdown)  
+- Share your mosque bucket list—we added one-tap share to X, LinkedIn, and Facebook  
+- 199 mosques in 85 countries + table view and sorting  
 
 ---
 
@@ -107,4 +122,4 @@ Discover, explore, and plan your spiritual journey. Browse 199+ mosques in 50+ c
 
 ---
 
-Update these when you add major features (e.g. new countries, new lists, new discovery tools, or new blog/guides). See also [announcements-by-persona.md](./announcements-by-persona.md) for persona-specific posts.
+Update these when you add major features (e.g. new countries, new lists, new discovery tools, or new blog/guides). See also [announcements-by-persona.md](./announcements-by-persona.md) for persona-specific posts and [new-content-and-announcements.md](./new-content-and-announcements.md) for latest stats and announcement blog ideas.

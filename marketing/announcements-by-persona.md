@@ -176,6 +176,7 @@ Explore on the map and use it for projects or travel. Link in bio.
 
 ## Quick reference
 
+- **Latest stats & new ideas:** [new-content-and-announcements.md](./new-content-and-announcements.md) — update numbers and features here when the product changes; use for new marketing content and announcement blog ideas.
 - **Founder / personal:** See “Founder / personal angle” above (blog, announcements, why I built this).
 - **Personas:** [customer-personas.md](./customer-personas.md)
 - **Messaging:** [pitch-and-messaging.md](./pitch-and-messaging.md)

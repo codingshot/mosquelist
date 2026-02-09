@@ -702,6 +702,25 @@ export const blogPosts: BlogPost[] = [
       { title: "Contribute in the app", url: "/contributing" },
     ],
   },
+  {
+    slug: "whats-new-mosquelist-more-mosques-explore-share",
+    title: "What's New on MosqueList: More Mosques, New Ways to Explore and Share",
+    description: "Product update: 199 mosques in 85 countries, table view and sorting, download your list as JSON/CSV/Markdown or ZIP, and share your bucket list on social—plus advanced filters and timeline improvements.",
+    imageUrl: "/images/mosques/sheikh-zayed.jpg",
+    imageAlt: "Sheikh Zayed Grand Mosque—one of 199 mosques you can explore and add to your list",
+    relatedSlugs: ["introducing-mosquelist-discover-plan-track", "how-to-plan-mosque-bucket-list", "fork-contribute-mosquelist-mit-open-source", "plan-your-mosque-journey-travel-guide"],
+    featuredMosqueIds: ["masjid-al-haram", "sheikh-zayed", "blue-mosque", "badshahi-mosque"],
+    paragraphs: [
+      "MosqueList has grown: you can now explore **199 mosques in 85 countries**—from the three holiest sites to architectural landmarks on every continent. We've also added new ways to explore, download, and share your mosque bucket list.",
+      "**Table view and sorting**\n\nIn Explore, switch to **table view** to see mosques in a sortable table. Click any column header to sort by name, country, capacity, area, established date, visitors, or location—ascending or descending. A small thumbnail appears next to each mosque name so you can scan quickly. Use this with filters (country, holy sites, tourist-friendly, women's prayer area) to find exactly the mosques you care about.",
+      "**Download mosque data**\n\nYou can now **download** the list you're viewing. From the Explore page, use **Download CSV** to export the current view (or your bucket list, or a curated list) as a spreadsheet. In **Advanced filters**, open the **Download mosque data** section and choose **JSON**, **CSV**, **Markdown**, or **ZIP** (all three in one file). Use it for offline planning, research, or sharing with travel buddies.",
+      "**My List: download and share**\n\nOn **My List** (your mosque bucket list), a **Download & Share** button opens a dialog with two tabs. **Download:** export your list as JSON, CSV, Markdown, or ZIP. **Share:** we generate a short summary of your top mosques and a sentence you can edit; then copy the text or use one-tap share to **X (Twitter), LinkedIn, or Facebook**—each with character limits so your post fits. Perfect for \"here are the mosques I want to visit\" or \"I've prayed at these places.\"",
+      "**Advanced filters for My List**\n\nNext to the sort control on My List, a **Filters** button opens advanced options—for example, **Visitor-friendly only**—so you can focus your list on mosques that welcome tourists.",
+      "**Timeline and Explore tweaks**\n\nThe **Islamic History** timeline now has a clearer year filter: choose **All years** or **Custom** and use the slider to narrow the range; **Reset** returns to all years. On the Explore page, the subtitle shows the **actual number of mosques and countries** in the catalog (e.g. \"Discover 199 mosques in 85 countries\") so you always see up-to-date counts.",
+      "**What hasn't changed**\n\nMosqueList is still free, with no sign-up required. Your bucket list is saved in your browser. We still focus on accuracy, cited sources, and respect for sacred sites—and our Blog still has 35+ fact-checked articles on the holiest sites, visitor etiquette, Islamic architecture, and how to contribute (the project is MIT open source).",
+      "Explore the new table view, download your list, or share your bucket list—and if you have feedback, we'd love to hear it. Your mosque journey starts here.",
+    ],
+  },
 ];
 
 const slugToPost = new Map(blogPosts.map((p) => [p.slug, p]));

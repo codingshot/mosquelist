@@ -35,6 +35,7 @@ const urls = [
   { loc: `${baseUrl}/islamic-history`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/bucket-list`, changefreq: "monthly", priority: "0.8" },
   { loc: `${baseUrl}/about`, changefreq: "monthly", priority: "0.7" },
+  { loc: `${baseUrl}/brand`, changefreq: "monthly", priority: "0.6" },
   { loc: `${baseUrl}/glossary`, changefreq: "monthly", priority: "0.7" },
   { loc: `${baseUrl}/contributing`, changefreq: "monthly", priority: "0.7" },
   { loc: `${baseUrl}/guides/travel`, changefreq: "monthly", priority: "0.8" },
