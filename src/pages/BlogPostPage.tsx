@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import { getBlogPostBySlug, getRelatedPosts } from "@/data/blog";
 import { getMosqueBySlug } from "@/data/mosques";
+import type { Mosque } from "@/types/mosque";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronRight, MapPin, Search } from "lucide-react";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
@@ -52,7 +53,7 @@ export default function BlogPostPage() {
     () =>
       (post?.featuredMosqueIds ?? [])
         .map((id) => getMosqueBySlug(id))
-        .filter((m) => m != null),
+        .filter((m): m is Mosque => m != null),
     [post]
   );
   const processedParagraphs = useMemo(
@@ -135,7 +136,7 @@ export default function BlogPostPage() {
               className="w-full aspect-video object-cover"
               loading="eager"
               decoding="async"
-              fetchPriority="high"
+              fetchpriority="high"
               onError={(e) => {
                 const el = e.currentTarget;
                 el.onerror = null;

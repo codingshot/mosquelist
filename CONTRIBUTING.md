@@ -6,7 +6,11 @@ Thank you for helping improve MosqueList. You can add new mosques, fix existing 
 
 1. **Report issues or suggest mosques**  
    Open an issue on GitHub: [github.com/codingshot/mosquelist/issues](https://github.com/codingshot/mosquelist/issues)  
-   Use the templates for "New mosque suggestion" or "Data correction" when available.
+   When you click **New issue**, choose a template:
+   - **Bug report** — something isn’t working (include device, browser, steps)
+   - **Feature request** — an idea or improvement
+   - **Mosque suggestion / data correction** — new mosque or fix to existing data (include sources)
+   - **General feedback** — anything else (usability, content, questions)
 
 2. **Use the in-app Contributing guide**  
    The app has a **Contribute** page with:

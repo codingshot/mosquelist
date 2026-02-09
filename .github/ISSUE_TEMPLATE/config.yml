@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: MosqueList Contribute (in-app)
+    url: https://mosquelist.com/contributing
+    about: Use the in-app Contribute page for JSON schema and mosque data help.
+  - name: Discussions
+    url: https://github.com/codingshot/mosquelist/discussions
+    about: Ask questions or share ideas in Discussions.

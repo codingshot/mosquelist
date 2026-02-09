@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { Heart, ChevronLeft, X } from "lucide-react";
 
 const SWIPE_THRESHOLD = 80;
+const SNAP_BACK_DURATION_MS = 220;
 const LIKE_COLOR = "rgba(34, 197, 94, 0.85)";
 const SKIP_COLOR = "rgba(148, 163, 184, 0.85)";
 
@@ -14,6 +15,17 @@ function hapticLight() {
   try {
     if (typeof navigator !== "undefined" && navigator.vibrate) {
       navigator.vibrate(10);
+    }
+  } catch {
+    // ignore
+  }
+}
+
+/** Stronger haptic for swipe commit (like/skip) - works on supported mobile devices */
+function hapticSwipe() {
+  try {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      navigator.vibrate([15, 50, 15]);
     }
   } catch {
     // ignore
@@ -32,12 +44,15 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
   const [galleryImageIndex, setGalleryImageIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
+  const [isSnappingBack, setIsSnappingBack] = useState(false);
   const startXRef = useRef(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const justSwipedRef = useRef(false);
   const hasCommittedThisGestureRef = useRef(false);
   const hasDraggedRef = useRef(false);
+  const pointerIdRef = useRef<number | null>(null);
+  const snapBackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const currentMosque = mosques[index];
   const hasPrev = index > 0;
@@ -104,7 +119,7 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
       if (!currentMosque || hasCommittedThisGestureRef.current) return;
       hasCommittedThisGestureRef.current = true;
       justSwipedRef.current = true;
-      hapticLight();
+      hapticSwipe();
       setTimeout(() => {
         justSwipedRef.current = false;
       }, 450);
@@ -117,33 +132,54 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
         setDragX(0);
         setIsExiting(false);
         hasCommittedThisGestureRef.current = false;
+        pointerIdRef.current = null;
       }, 280);
     },
     [currentMosque, onLike, mosques.length],
   );
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
-    if (isExiting) return;
+    if (isExiting || isSnappingBack) return;
+    if (snapBackTimeoutRef.current) {
+      clearTimeout(snapBackTimeoutRef.current);
+      snapBackTimeoutRef.current = null;
+    }
     hasCommittedThisGestureRef.current = false;
     hasDraggedRef.current = false;
     startXRef.current = e.clientX;
+    pointerIdRef.current = e.pointerId;
     e.preventDefault();
-    cardRef.current?.setPointerCapture(e.pointerId);
-  }, [isExiting]);
+    const el = cardRef.current;
+    if (el) {
+      el.setPointerCapture(e.pointerId);
+    }
+  }, [isExiting, isSnappingBack]);
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
-      if (isExiting) return;
+      if (isExiting || isSnappingBack) return;
+      if (pointerIdRef.current !== null && e.pointerId !== pointerIdRef.current) return;
       const dx = e.clientX - startXRef.current;
-      if (Math.abs(dx) > 5) hasDraggedRef.current = true;
+      if (Math.abs(dx) > 5) {
+        hasDraggedRef.current = true;
+        e.preventDefault();
+      }
       setDragX(dx);
     },
-    [isExiting],
+    [isExiting, isSnappingBack],
   );
 
   const handlePointerUp = useCallback(
     (e: React.PointerEvent) => {
-      cardRef.current?.releasePointerCapture?.(e.pointerId);
+      const el = cardRef.current;
+      if (el && typeof el.releasePointerCapture === "function") {
+        try {
+          el.releasePointerCapture(e.pointerId);
+        } catch {
+          // ignore if already released
+        }
+      }
+      pointerIdRef.current = null;
       if (isExiting || hasCommittedThisGestureRef.current) return;
       const dx = e.clientX - startXRef.current;
       if (dx > SWIPE_THRESHOLD) {
@@ -154,18 +190,31 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
         if (hasDraggedRef.current) {
           justSwipedRef.current = true;
           setTimeout(() => { justSwipedRef.current = false; }, 400);
+          setIsSnappingBack(true);
+          setDragX(0);
+          snapBackTimeoutRef.current = setTimeout(() => {
+            setIsSnappingBack(false);
+            snapBackTimeoutRef.current = null;
+          }, SNAP_BACK_DURATION_MS);
+        } else {
+          setDragX(0);
         }
-        setDragX(0);
       }
     },
     [isExiting, triggerSwipe],
   );
 
-  /** Only snap back on leave; never commit swipe here. Prevents double-fire on touch (leave can fire after up). */
+  /** Only snap back on leave when not dragging (no pointer capture). Prevents double-fire on touch. */
   const handlePointerLeave = useCallback(() => {
-    if (isExiting || hasCommittedThisGestureRef.current) return;
+    if (isExiting || hasCommittedThisGestureRef.current || pointerIdRef.current !== null) return;
     setDragX(0);
   }, [isExiting]);
+
+  useEffect(() => {
+    return () => {
+      if (snapBackTimeoutRef.current) clearTimeout(snapBackTimeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -202,25 +251,39 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
   return (
     <div ref={containerRef} className="w-full max-w-2xl mx-auto px-2 sm:px-4">
       <p className="text-center text-sm text-muted-foreground mb-3">
-        Tap card to open mosque · Swipe right to like, left to skip · ← → arrows · L or Space to like
+        Tap card to open · Drag or swipe right to like, left to skip · ← → arrows · L or Space to like
       </p>
 
-      <div className="relative min-h-[420px] rounded-xl overflow-hidden touch-none" style={{ touchAction: "none" }}>
+      <div
+        className="relative min-h-[420px] rounded-xl overflow-hidden touch-none select-none"
+        style={{ touchAction: "none", WebkitUserSelect: "none", userSelect: "none" }}
+      >
         <div
           ref={cardRef}
-          className="absolute inset-0 cursor-grab active:cursor-grabbing select-none"
+          className="absolute inset-0 cursor-grab select-none"
           style={{
             transform: `translateX(${dragX}px) rotate(${rotation}deg)`,
-            transition: isExiting ? "transform 0.28s ease-out" : "none",
+            transition: isExiting
+              ? "transform 0.28s ease-out"
+              : isSnappingBack
+                ? `transform ${SNAP_BACK_DURATION_MS}ms ease-out`
+                : "none",
             touchAction: "none",
+            cursor: Math.abs(dragX) > 2 ? "grabbing" : "grab",
           }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerLeave}
           onPointerCancel={() => {
-            setDragX(0);
+            pointerIdRef.current = null;
             hasCommittedThisGestureRef.current = false;
+            if (snapBackTimeoutRef.current) {
+              clearTimeout(snapBackTimeoutRef.current);
+              snapBackTimeoutRef.current = null;
+            }
+            setIsSnappingBack(false);
+            setDragX(0);
           }}
           onClick={(e) => {
             if (justSwipedRef.current || hasCommittedThisGestureRef.current) return;

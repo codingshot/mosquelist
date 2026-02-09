@@ -13,8 +13,10 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const goToRandomMosque = () => {
+    if (mosques.length === 0) return;
     const randomIndex = Math.floor(Math.random() * mosques.length);
     const randomMosque = mosques[randomIndex];
+    if (!randomMosque) return;
     navigate(`/mosque/${randomMosque.id}`);
   };
 

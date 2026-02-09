@@ -16,6 +16,7 @@ import TravelGuidePage from "@/pages/TravelGuidePage";
 import VisitorTipsPage from "@/pages/VisitorTipsPage";
 import MapPage from "@/pages/MapPage";
 import MosquePage from "@/pages/MosquePage";
+import BrandPage from "@/pages/BrandPage";
 import NotFound from "@/pages/NotFound";
 
 const AllProviders = ({ children }: { children: React.ReactNode }) => (
@@ -194,6 +195,20 @@ describe("All pages load", () => {
     );
     await screen.findByRole("main");
     expect(screen.getByRole("heading", { name: /blue mosque/i })).toBeInTheDocument();
+  });
+
+  it("Brand (/brand) loads", async () => {
+    render(
+      <MemoryRouter initialEntries={["/brand"]}>
+        <AllProviders>
+          <Routes>
+            <Route path="/brand" element={<BrandPage />} />
+          </Routes>
+        </AllProviders>
+      </MemoryRouter>
+    );
+    await screen.findByRole("main");
+    expect(screen.getByRole("heading", { name: /mosquelist brand guide/i })).toBeInTheDocument();
   });
 
   it("NotFound (*) loads for unknown path", async () => {

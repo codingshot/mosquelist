@@ -405,39 +405,39 @@ export const BucketList = () => {
                   <SelectItem value="unvisited-first">Unvisited first</SelectItem>
                 </SelectContent>
               </Select>
-              <Sheet open={filtersSheetOpen} onOpenChange={setFiltersSheetOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="gap-1.5 min-h-[40px] sm:min-h-[44px] touch-manipulation"
-                    aria-label="Advanced filters"
-                  >
-                    <SlidersHorizontal className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    <span className="hidden sm:inline">Filters</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[min(100vw-1rem,20rem)]">
-                  <SheetHeader>
-                    <SheetTitle>Advanced filters</SheetTitle>
-                  </SheetHeader>
-                  <div className="mt-6 space-y-4">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={visitorFriendlyOnly}
-                        onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
-                        className="rounded border-border h-4 w-4"
-                      />
-                      <span className="text-sm font-medium">Visitor-friendly only</span>
-                    </label>
-                    <p className="text-xs text-muted-foreground">
-                      Show only mosques where non-Muslims can visit.
-                    </p>
-                  </div>
-                </SheetContent>
-              </Sheet>
-              <div className="ml-auto flex items-center gap-1">
+              <div className="flex items-center gap-2 ml-auto">
+                <Sheet open={filtersSheetOpen} onOpenChange={setFiltersSheetOpen}>
+                  <SheetTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="gap-1.5 min-h-[40px] sm:min-h-[44px] touch-manipulation shrink-0"
+                      aria-label="Advanced filters"
+                    >
+                      <SlidersHorizontal className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      <span className="hidden sm:inline">Filters</span>
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-[min(100vw-1rem,20rem)]">
+                    <SheetHeader>
+                      <SheetTitle>Advanced filters</SheetTitle>
+                    </SheetHeader>
+                    <div className="mt-6 space-y-4">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={visitorFriendlyOnly}
+                          onChange={(e) => setVisitorFriendlyOnly(e.target.checked)}
+                          className="rounded border-border h-4 w-4"
+                        />
+                        <span className="text-sm font-medium">Visitor-friendly only</span>
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Show only mosques where non-Muslims can visit.
+                      </p>
+                    </div>
+                  </SheetContent>
+                </Sheet>
                 <Dialog
                   open={downloadShareOpen}
                   onOpenChange={(open) => {
@@ -457,11 +457,10 @@ export const BucketList = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="gap-1.5 min-h-[40px] sm:min-h-[44px] touch-manipulation"
+                      className="min-h-[40px] w-[40px] sm:min-h-[44px] sm:w-[44px] p-0 touch-manipulation shrink-0"
                       aria-label="Download or share your list"
                     >
                       <Download className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                      <span className="hidden sm:inline">Download &amp; Share</span>
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">

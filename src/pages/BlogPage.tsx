@@ -30,7 +30,7 @@ const BlogCard = memo(function BlogCard({
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading={isAboveFold && index === 0 ? "eager" : "lazy"}
             decoding="async"
-            fetchPriority={index === 0 ? "high" : undefined}
+            {...(index === 0 ? { fetchpriority: "high" as const } : {})}
             onError={(e) => {
               const el = e.currentTarget;
               el.onerror = null;
