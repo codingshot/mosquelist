@@ -156,7 +156,7 @@
   }
 
   .scrapbook-card {
-    @apply relative bg-card rounded-lg shadow-lg overflow-hidden;
+    @apply relative bg-card rounded-lg shadow-lg;
     transform: rotate(-1deg);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -166,8 +166,12 @@
   }
 
   .scrapbook-card:hover {
-    transform: rotate(0deg) scale(1.02);
+    transform: rotate(-1deg) translateY(-4px);
     @apply shadow-xl;
+  }
+
+  .scrapbook-card:nth-child(even):hover {
+    transform: rotate(1deg) translateY(-4px);
   }
 
   .tape-effect {
@@ -313,7 +317,10 @@
     animation: none;
   }
 
-  .scrapbook-card:hover {
+  .scrapbook-card,
+  .scrapbook-card:hover,
+  .scrapbook-card:nth-child(even),
+  .scrapbook-card:nth-child(even):hover {
     transform: none;
   }
 }
