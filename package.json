@@ -17,7 +17,8 @@
     "merge-mosques": "node scripts/merge-mosques.js",
     "download-mosque-images": "node scripts/download-mosque-images.js",
     "sync-mosque-images": "node scripts/sync-mosque-images-from-disk.js",
-    "fix-broken-images": "node scripts/fix-broken-images.js"
+    "fix-broken-images": "node scripts/fix-broken-images.js",
+    "update-lists": "node scripts/update-lists-from-mosques.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

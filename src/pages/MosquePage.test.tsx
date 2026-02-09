@@ -44,4 +44,22 @@ describe("MosquePage", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/not found/i);
     expect(screen.getByRole("link", { name: /back to explore/i })).toBeInTheDocument();
   });
+
+  it("shows Related mosques section when mosque has related mosques", () => {
+    renderMosquePage("/mosque/blue-mosque");
+    const relatedHeading = screen.queryByRole("heading", { name: /related mosques/i });
+    expect(relatedHeading).toBeInTheDocument();
+  });
+
+  it("shows Lists containing this mosque section with links to curated lists", () => {
+    renderMosquePage("/mosque/blue-mosque");
+    const listsHeading = screen.queryByRole("heading", { name: /lists containing this mosque/i });
+    expect(listsHeading).toBeInTheDocument();
+    // Section contains links to /lists/:slug (curated lists), not explore
+    const main = screen.getByRole("main");
+    const listPageLinks = Array.from(main.querySelectorAll('a[href^="/lists/"]'));
+    expect(listPageLinks.length).toBeGreaterThan(0);
+    const listNames = listPageLinks.map((a) => a.textContent?.trim()).filter(Boolean);
+    expect(listNames.some((n) => /turkey|ottoman|16th|tourist|mimar sinan/i.test(n ?? ""))).toBe(true);
+  });
 });

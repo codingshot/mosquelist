@@ -11,6 +11,7 @@ import BucketListPage from "@/pages/BucketListPage";
 import ListsPage from "@/pages/ListsPage";
 import ListDetailPage from "@/pages/ListDetailPage";
 import AboutPage from "@/pages/AboutPage";
+import ContributingPage from "@/pages/ContributingPage";
 import TravelGuidePage from "@/pages/TravelGuidePage";
 import VisitorTipsPage from "@/pages/VisitorTipsPage";
 import MapPage from "@/pages/MapPage";
@@ -122,6 +123,20 @@ describe("All pages load", () => {
     );
     await screen.findByRole("main");
     expect(screen.getByRole("heading", { name: /your journey to the sacred places/i })).toBeInTheDocument();
+  });
+
+  it("Contributing (/contributing) loads", async () => {
+    render(
+      <MemoryRouter initialEntries={["/contributing"]}>
+        <AllProviders>
+          <Routes>
+            <Route path="/contributing" element={<ContributingPage />} />
+          </Routes>
+        </AllProviders>
+      </MemoryRouter>
+    );
+    await screen.findByRole("main");
+    expect(screen.getByRole("heading", { name: /add or update mosque data/i })).toBeInTheDocument();
   });
 
   it("Travel guide (/guides/travel) loads", async () => {

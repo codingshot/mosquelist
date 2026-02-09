@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Heart, Twitter, Linkedin, Shuffle } from "lucide-react";
+import { Heart, Twitter, Linkedin, Github, Shuffle } from "lucide-react";
 import { getSuggestMosqueTweetUrl } from "@/lib/share-urls";
 import { mosques } from "@/data/mosques";
 import { Button } from "@/components/ui/button";
 
 const UMMAH_BUILD_X = "https://x.com/ummahbuild";
 const UMMAH_BUILD_LINKEDIN = "https://www.linkedin.com/company/ummah-build/";
+const GITHUB_REPO = "https://github.com/codingshot/mosquelist";
 
 export const Footer = () => {
   const navigate = useNavigate();
@@ -77,6 +78,15 @@ export const Footer = () => {
                   aria-label="ummah.build on LinkedIn (opens in new tab)"
                 >
                   <Linkedin className="h-4 w-4" />
+                </a>
+                <a
+                  href={GITHUB_REPO}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded p-1.5 min-h-[40px] min-w-[40px] inline-flex items-center justify-center touch-manipulation"
+                  aria-label="MosqueList on GitHub (opens in new tab)"
+                >
+                  <Github className="h-4 w-4" />
                 </a>
               </span>
             </p>
@@ -152,6 +162,11 @@ export const Footer = () => {
               <li>
                 <Link to="/about" className="inline-block py-1.5 min-h-[40px] touch-manipulation text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded text-sm">
                   About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contributing" className="inline-block py-1.5 min-h-[40px] touch-manipulation text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded text-sm">
+                  Contribute
                 </Link>
               </li>
               <li>

@@ -1,12 +1,24 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Mosque } from "@/types/mosque";
 import { MosqueCard } from "./MosqueCard";
+import { getMosqueImageSrc } from "@/lib/mosque-image";
 import { Button } from "./ui/button";
 import { Heart, ChevronLeft, X } from "lucide-react";
 
 const SWIPE_THRESHOLD = 80;
 const LIKE_COLOR = "rgba(34, 197, 94, 0.85)";
 const SKIP_COLOR = "rgba(148, 163, 184, 0.85)";
+
+function hapticLight() {
+  try {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+  } catch {
+    // ignore
+  }
+}
 
 interface SwipeDeckProps {
   mosques: Mosque[];
@@ -15,7 +27,9 @@ interface SwipeDeckProps {
 }
 
 export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
+  const [galleryImageIndex, setGalleryImageIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
   const startXRef = useRef(0);
@@ -29,31 +43,68 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
   const hasPrev = index > 0;
   const hasNext = index < mosques.length - 1;
 
+  const galleryImages = useMemo(() => {
+    if (!currentMosque) return [];
+    const { src } = getMosqueImageSrc(currentMosque);
+    const extras = (currentMosque.galleryUrls ?? []).filter((u): u is string => typeof u === "string" && u.trim().length > 0);
+    const seen = new Set<string>();
+    const out: string[] = [];
+    for (const u of [src, ...extras]) {
+      const url = u.trim();
+      if (!seen.has(url)) {
+        seen.add(url);
+        out.push(url);
+      }
+    }
+    return out;
+  }, [currentMosque]);
+
+  useEffect(() => {
+    setGalleryImageIndex(0);
+  }, [index]);
+
   const goPrev = useCallback(() => {
     if (!hasPrev) return;
+    hapticLight();
     setIndex((i) => i - 1);
   }, [hasPrev]);
 
   const goNext = useCallback(() => {
     if (!hasNext) return;
+    hapticLight();
     setIndex((i) => i + 1);
   }, [hasNext]);
 
   const handleLike = useCallback(() => {
     if (!currentMosque) return;
+    hapticLight();
     onLike(currentMosque);
     if (hasNext) setIndex((i) => i + 1);
   }, [currentMosque, onLike, hasNext]);
 
   const handleSkip = useCallback(() => {
-    if (hasNext) setIndex((i) => i + 1);
+    if (!hasNext) return;
+    hapticLight();
+    setIndex((i) => i + 1);
   }, [hasNext]);
+
+  const cycleGalleryImage = useCallback(() => {
+    if (galleryImages.length <= 1) return;
+    hapticLight();
+    setGalleryImageIndex((i) => (i + 1) % galleryImages.length);
+  }, [galleryImages.length]);
+
+  const handleCardTap = useCallback(() => {
+    if (hasDraggedRef.current || justSwipedRef.current || !currentMosque) return;
+    navigate(`/mosque/${currentMosque.id}`);
+  }, [currentMosque, navigate]);
 
   const triggerSwipe = useCallback(
     (direction: "left" | "right") => {
       if (!currentMosque || hasCommittedThisGestureRef.current) return;
       hasCommittedThisGestureRef.current = true;
       justSwipedRef.current = true;
+      hapticLight();
       setTimeout(() => {
         justSwipedRef.current = false;
       }, 450);
@@ -151,7 +202,7 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
   return (
     <div ref={containerRef} className="w-full max-w-2xl mx-auto px-2 sm:px-4">
       <p className="text-center text-sm text-muted-foreground mb-3">
-        Swipe right to like, left to skip · ← → arrows · L or Space to like
+        Tap card to open mosque · Swipe right to like, left to skip · ← → arrows · L or Space to like
       </p>
 
       <div className="relative min-h-[420px] rounded-xl overflow-hidden touch-none" style={{ touchAction: "none" }}>
@@ -171,6 +222,14 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
             setDragX(0);
             hasCommittedThisGestureRef.current = false;
           }}
+          onClick={(e) => {
+            if (justSwipedRef.current || hasCommittedThisGestureRef.current) return;
+            if (!hasDraggedRef.current && currentMosque) {
+              e.preventDefault();
+              e.stopPropagation();
+              handleCardTap();
+            }
+          }}
           onClickCapture={(e) => {
             if (justSwipedRef.current) {
               e.preventDefault();
@@ -180,15 +239,19 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
         >
           <div
             className="h-full w-full rounded-xl overflow-hidden shadow-lg"
-            style={{ pointerEvents: Math.abs(dragX) > 5 || isExiting ? "none" : "auto" }}
+            style={{
+              pointerEvents: Math.abs(dragX) > 5 || isExiting ? "none" : "auto",
+              willChange: isExiting ? "transform" : undefined,
+            }}
           >
             {/* Like stripe (right) */}
             <div
-              className="absolute inset-0 z-10 flex items-center justify-end pr-6 pointer-events-none rounded-xl border-4 border-green-500"
+              className="absolute inset-0 z-10 flex items-center justify-end pr-6 pointer-events-none rounded-xl"
               style={{
                 opacity: likeOpacity,
                 backgroundColor: LIKE_COLOR,
               }}
+              aria-hidden
             >
               <span className="text-4xl font-bold text-white uppercase tracking-wider rotate-12">
                 Like
@@ -196,18 +259,26 @@ export function SwipeDeck({ mosques, onLike, isFavorite }: SwipeDeckProps) {
             </div>
             {/* Skip stripe (left) */}
             <div
-              className="absolute inset-0 z-10 flex items-center justify-start pl-6 pointer-events-none rounded-xl border-4 border-slate-400"
+              className="absolute inset-0 z-10 flex items-center justify-start pl-6 pointer-events-none rounded-xl"
               style={{
                 opacity: skipOpacity,
                 backgroundColor: SKIP_COLOR,
               }}
+              aria-hidden
             >
               <span className="text-4xl font-bold text-white uppercase tracking-wider -rotate-12">
                 Skip
               </span>
             </div>
             <div className="h-full">
-              <MosqueCard mosque={currentMosque} index={0} view="swipe" />
+              <MosqueCard
+                mosque={currentMosque}
+                index={0}
+                view="swipe"
+                galleryImages={galleryImages}
+                galleryImageIndex={galleryImageIndex}
+                onGalleryImageClick={galleryImages.length > 1 ? cycleGalleryImage : undefined}
+              />
             </div>
           </div>
         </div>

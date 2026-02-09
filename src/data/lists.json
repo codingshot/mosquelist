@@ -4,7 +4,11 @@
       "slug": "holy-sites",
       "name": "Holy Sites",
       "description": "The three holiest sites in Islam—Mecca, Medina, and Jerusalem.",
-      "mosqueIds": ["masjid-al-haram", "masjid-an-nabawi", "al-aqsa"]
+      "mosqueIds": [
+        "masjid-al-haram",
+        "masjid-an-nabawi",
+        "al-aqsa"
+      ]
     },
     {
       "slug": "biggest-mosques",
@@ -41,7 +45,36 @@
         "at-tin-mosque",
         "sabanci-central-mosque",
         "jama-masjid-delhi",
-        "great-mosque-of-kairouan"
+        "great-mosque-of-kairouan",
+        "al-aqsa",
+        "grand-mosalla-tehran",
+        "imam-abu-hanifa-mosque-dushanbe",
+        "great-mosque-of-samarra",
+        "great-mosque-of-kufa",
+        "nusantara-national-mosque",
+        "sheikh-zayed",
+        "great-mosque-of-cordoba",
+        "jamia-masjid-srinagar",
+        "pride-of-muslims-mosque-shali",
+        "1st-november-1954-great-mosque",
+        "bishkek-central-mosque",
+        "jamiul-futuh-indian-grand-masjid",
+        "cmh-masjid-jhelum",
+        "selahaddin-eyyubi-mosque",
+        "uganda-national-mosque",
+        "al-qarawiyyin",
+        "sultan-qaboos-grand-mosque",
+        "al-azhar-mosque",
+        "aqsa-mosque-rabwah",
+        "dian-al-mahri-mosque",
+        "grand-mosque-of-conakry",
+        "grand-mosque-of-west-sumatra",
+        "id-kah-mosque",
+        "shah-jahan-mosque-thatta",
+        "tuanku-mizan-zainal-abidin-mosque",
+        "quba-mosque",
+        "koutoubia-mosque",
+        "raja-hamidah-great-mosque-of-batam"
       ]
     },
     {
@@ -52,7 +85,12 @@
         "masjid-al-haram",
         "masjid-an-nabawi",
         "great-mosque-of-kairouan",
-        "great-mosque-of-sanaa"
+        "great-mosque-of-sanaa",
+        "quba-mosque",
+        "amr-ibn-al-as-mosque",
+        "great-mosque-of-kufa",
+        "great-mosque-of-basra",
+        "cheraman-juma-masjid"
       ]
     },
     {
@@ -64,14 +102,20 @@
         "umayyad-mosque",
         "imam-reza-shrine",
         "great-mosque-of-aleppo",
-        "xian-great-mosque"
+        "xian-great-mosque",
+        "al-zaytuna-mosque",
+        "great-mosque-of-cordoba"
       ]
     },
     {
       "slug": "9th-century",
       "name": "9th Century (800s CE)",
       "description": "The founding of Al-Qarawiyyin (oldest university) and early Islamic scholarship.",
-      "mosqueIds": ["al-qarawiyyin"]
+      "mosqueIds": [
+        "al-qarawiyyin",
+        "imam-reza-shrine",
+        "great-mosque-of-samarra"
+      ]
     },
     {
       "slug": "10th-century",
@@ -81,14 +125,20 @@
         "al-azhar-mosque",
         "imam-ali-shrine",
         "al-naqah-mosque-tripoli",
-        "niujie-mosque"
+        "niujie-mosque",
+        "jamkaran-mosque",
+        "harar-jugol-mosques",
+        "harar-jami-mosque"
       ]
     },
     {
       "slug": "12th-century",
       "name": "12th Century (1100s CE)",
       "description": "Almohad and Fatimid masterpieces in Morocco and Egypt.",
-      "mosqueIds": ["koutoubia-mosque", "al-aqmar-mosque"]
+      "mosqueIds": [
+        "koutoubia-mosque",
+        "al-aqmar-mosque"
+      ]
     },
     {
       "slug": "16th-century",
@@ -102,9 +152,12 @@
         "mihrimah-sultan-mosque-uskudar",
         "hagia-sophia-istanbul",
         "gazi-husrev-beg-mosque",
-        "krue-se-mosque",
         "husein-pasha-mosque-pljevlja",
-        "mustafa-pasha-mosque"
+        "mustafa-pasha-mosque",
+        "kalon-mosque-bukhara",
+        "krue-se-mosque-pattani",
+        "kalan-mosque",
+        "mandhry-mosque-mombasa"
       ]
     },
     {
@@ -119,7 +172,8 @@
         "moti-masjid-agra-fort",
         "yeni-mosque-istanbul",
         "shah-jahan-mosque-thatta",
-        "hukru-miskiy-male"
+        "hukru-miskiy-male",
+        "blue-mosque"
       ]
     },
     {
@@ -159,7 +213,46 @@
         "manila-golden-mosque",
         "ban-ho-mosque",
         "geneva-mosque",
-        "al-noor-hanoi"
+        "al-noor-hanoi",
+        "putra-mosque",
+        "taj-ul-masajid",
+        "great-mosque-khartoum",
+        "jameh-mosque-of-makki",
+        "sabanci-central-mosque",
+        "at-tin-mosque",
+        "cmh-masjid-jhelum",
+        "jakarta-islamic-center",
+        "aqsa-mosque-rabwah",
+        "grand-mosque-of-conakry",
+        "raja-hamidah-great-mosque-of-batam",
+        "al-kauthar-mosque",
+        "grand-mosque-of-makhachkala",
+        "emir-abdelkader-mosque",
+        "grand-mosque-of-sabilal-muhtadin",
+        "jami-ul-alfar-mosque",
+        "grand-mosque-of-niamey",
+        "king-fahad-mosque-banjul",
+        "grand-friday-mosque-male",
+        "grand-mosque-of-bobo-dioulasso",
+        "islamic-center-of-america",
+        "islamic-cultural-center-of-new-york",
+        "masjid-muhammad-washington-dc",
+        "king-fahad-mosque-culver-city",
+        "dar-al-hijrah-islamic-center",
+        "islamic-center-of-greater-cincinnati",
+        "islamic-center-of-irvine",
+        "masjid-al-farooq-atlanta",
+        "mosque-of-islamic-solidarity",
+        "ndjamena-grand-mosque",
+        "freetown-central-mosque",
+        "great-mosque-of-asmara",
+        "mahmud-mosque-zurich",
+        "central-mosque-almaty",
+        "kibuli-mosque",
+        "great-mosque-asmara",
+        "jami-ul-alfar-colombo",
+        "omar-ali-saifuddien-mosque",
+        "jame-asr-hassanil-bolkiah"
       ]
     },
     {
@@ -178,7 +271,6 @@
         "hazrat-sultan-mosque",
         "imam-abu-hanifa-mosque-dushanbe",
         "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
-        "mohammed-vi-mosque-dar-es-salaam",
         "bishkek-central-mosque",
         "king-fahd-islamic-center-buenos-aires",
         "cologne-central-mosque",
@@ -190,7 +282,41 @@
         "stockholm-mosque",
         "copenhagen-grand-mosque",
         "granada-mosque",
-        "mohammad-al-amin-mosque"
+        "mohammad-al-amin-mosque",
+        "sultan-qaboos-grand-mosque",
+        "abdul-rahman-mosque",
+        "imam-abdul-wahhab-mosque",
+        "bahria-grand-mosque",
+        "al-akbar-mosque",
+        "al-saleh-mosque",
+        "jamiul-futuh-indian-grand-masjid",
+        "pride-of-muslims-mosque-shali",
+        "1st-november-1954-great-mosque",
+        "selahaddin-eyyubi-mosque",
+        "dian-al-mahri-mosque",
+        "grand-mosque-of-west-sumatra",
+        "tuanku-mizan-zainal-abidin-mosque",
+        "al-fattah-al-aleem-mosque",
+        "federal-territory-mosque",
+        "al-azhom-grand-mosque",
+        "great-mosque-of-central-java",
+        "sultan-haji-hassanal-bolkiah-mosque",
+        "turkmenbasy-ruhy-mosque",
+        "abdulhamid-han-ii-mosque-djibouti",
+        "islamic-society-of-boston-cultural-center",
+        "east-plano-islamic-center",
+        "saudi-mosque-nouakchott",
+        "plateau-salam-mosque-abidjan",
+        "maputo-central-mosque",
+        "nur-astana-mosque",
+        "mashkhur-jusup-mosque",
+        "manjali-mosque",
+        "turkmenbashy-ruhy-mosque",
+        "hazrat-imam-mosque",
+        "minor-mosque",
+        "uganda-national-mosque",
+        "abdulhamid-ii-mosque",
+        "grand-mosque-cotabato"
       ]
     },
     {
@@ -252,7 +378,6 @@
         "great-mosque-of-asmara",
         "great-mosque-khartoum",
         "king-fahad-mosque-banjul",
-        "mohammed-vi-mosque-dar-es-salaam",
         "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
         "al-fattah-al-aleem-mosque",
         "al-naqah-mosque-tripoli",
@@ -309,7 +434,6 @@
         "songo-mnara-mosque",
         "mandhry-mosque-mombasa",
         "friday-mosque-moroni",
-        "mohammed-vi-mosque-dar-es-salaam",
         "jamia-mosque-nairobi"
       ]
     },
@@ -317,7 +441,11 @@
       "slug": "saudi-arabia",
       "name": "Saudi Arabia",
       "description": "Mosques across the Kingdom of Saudi Arabia.",
-      "mosqueIds": ["masjid-al-haram", "masjid-an-nabawi"]
+      "mosqueIds": [
+        "masjid-al-haram",
+        "masjid-an-nabawi",
+        "quba-mosque"
+      ]
     },
     {
       "slug": "turkey",
@@ -330,7 +458,11 @@
         "sabanci-central-mosque",
         "hagia-sophia-istanbul",
         "selahaddin-eyyubi-mosque",
-        "kocatepe-mosque"
+        "kocatepe-mosque",
+        "selimiye-mosque",
+        "rustem-pasha-mosque",
+        "mihrimah-sultan-mosque-uskudar",
+        "yeni-mosque-istanbul"
       ]
     },
     {
@@ -343,7 +475,10 @@
         "badshahi-mosque",
         "bahria-grand-mosque",
         "cmh-masjid-jhelum",
-        "shah-jahan-mosque-thatta"
+        "shah-jahan-mosque-thatta",
+        "wazir-khan-mosque",
+        "moti-masjid-lahore-fort",
+        "aqsa-mosque-rabwah"
       ]
     },
     {
@@ -361,7 +496,8 @@
         "raja-hamidah-great-mosque-of-batam",
         "grand-mosque-of-sabilal-muhtadin",
         "great-mosque-of-central-java",
-        "al-azhom-grand-mosque"
+        "al-azhom-grand-mosque",
+        "nusantara-national-mosque"
       ]
     },
     {
@@ -371,14 +507,18 @@
       "mosqueIds": [
         "al-azhar-mosque",
         "egypts-islamic-cultural-center-masjid-misr-al-kabeer",
-        "al-fattah-al-aleem-mosque"
+        "al-fattah-al-aleem-mosque",
+        "amr-ibn-al-as-mosque",
+        "al-aqmar-mosque"
       ]
     },
     {
       "slug": "uae",
       "name": "United Arab Emirates",
       "description": "Grand mosques across the UAE.",
-      "mosqueIds": ["sheikh-zayed"]
+      "mosqueIds": [
+        "sheikh-zayed"
+      ]
     },
     {
       "slug": "india",
@@ -389,7 +529,10 @@
         "taj-ul-masajid",
         "jamia-masjid-srinagar",
         "jamiul-futuh-indian-grand-masjid",
-        "aqsa-mosque-qadian"
+        "aqsa-mosque-qadian",
+        "moti-masjid-agra-fort",
+        "cheraman-juma-masjid",
+        "adina-mosque"
       ]
     },
     {
@@ -409,55 +552,88 @@
       "slug": "morocco",
       "name": "Morocco",
       "description": "Moroccan architectural masterpieces from Almohad to modern.",
-      "mosqueIds": ["hassan-ii", "koutoubia-mosque", "al-qarawiyyin"]
+      "mosqueIds": [
+        "hassan-ii",
+        "koutoubia-mosque",
+        "al-qarawiyyin"
+      ]
     },
     {
       "slug": "iraq",
       "name": "Iraq",
       "description": "Holy and historic shrines in Iraq.",
-      "mosqueIds": ["imam-ali-shrine"]
+      "mosqueIds": [
+        "imam-ali-shrine",
+        "great-mosque-of-kufa",
+        "great-mosque-of-basra",
+        "great-mosque-of-samarra"
+      ]
     },
     {
       "slug": "iran",
       "name": "Iran",
       "description": "Major Shia shrines and mosques in Iran.",
-      "mosqueIds": ["imam-reza-shrine", "jamkaran-mosque"]
+      "mosqueIds": [
+        "imam-reza-shrine",
+        "jamkaran-mosque",
+        "jameh-mosque-of-makki",
+        "grand-mosalla-tehran"
+      ]
     },
     {
       "slug": "kazakhstan",
       "name": "Kazakhstan",
       "description": "Central Asia's grandest mosques.",
-      "mosqueIds": ["astana-grand-mosque", "hazrat-sultan-mosque"]
+      "mosqueIds": [
+        "astana-grand-mosque",
+        "hazrat-sultan-mosque",
+        "nur-astana-mosque",
+        "central-mosque-almaty",
+        "mashkhur-jusup-mosque",
+        "manjali-mosque"
+      ]
     },
     {
       "slug": "syria",
       "name": "Syria",
       "description": "Historic Umayyad and Islamic heritage.",
-      "mosqueIds": ["umayyad-mosque", "great-mosque-of-aleppo"]
+      "mosqueIds": [
+        "umayyad-mosque",
+        "great-mosque-of-aleppo"
+      ]
     },
     {
       "slug": "yemen",
       "name": "Yemen",
       "description": "Major mosques in Yemen—including one of the world's oldest.",
-      "mosqueIds": ["al-saleh-mosque", "great-mosque-of-sanaa"]
+      "mosqueIds": [
+        "al-saleh-mosque",
+        "great-mosque-of-sanaa"
+      ]
     },
     {
       "slug": "lebanon",
       "name": "Lebanon",
       "description": "Major mosques in Lebanon.",
-      "mosqueIds": ["mohammad-al-amin-mosque"]
+      "mosqueIds": [
+        "mohammad-al-amin-mosque"
+      ]
     },
     {
       "slug": "bahrain",
       "name": "Bahrain",
       "description": "Major mosques in Bahrain.",
-      "mosqueIds": ["al-fateh-grand-mosque"]
+      "mosqueIds": [
+        "al-fateh-grand-mosque"
+      ]
     },
     {
       "slug": "kuwait",
       "name": "Kuwait",
       "description": "Major mosques in Kuwait.",
-      "mosqueIds": ["grand-mosque-kuwait"]
+      "mosqueIds": [
+        "grand-mosque-kuwait"
+      ]
     },
     {
       "slug": "algeria",
@@ -485,37 +661,60 @@
       "slug": "china",
       "name": "China",
       "description": "Historic mosques in China—unique Chinese-Islamic architectural fusion.",
-      "mosqueIds": ["id-kah-mosque", "xian-great-mosque", "niujie-mosque"]
+      "mosqueIds": [
+        "id-kah-mosque",
+        "xian-great-mosque",
+        "niujie-mosque"
+      ]
     },
     {
       "slug": "philippines",
       "name": "Philippines",
       "description": "Major mosques in the Philippines.",
-      "mosqueIds": ["sultan-haji-hassanal-bolkiah-mosque"]
+      "mosqueIds": [
+        "sultan-haji-hassanal-bolkiah-mosque",
+        "manila-golden-mosque",
+        "sheikh-karimul-makhdum-mosque",
+        "grand-mosque-cotabato"
+      ]
     },
     {
       "slug": "uzbekistan",
       "name": "Uzbekistan",
       "description": "Historic Silk Road mosques in Uzbekistan.",
-      "mosqueIds": ["kalon-mosque-bukhara"]
+      "mosqueIds": [
+        "kalon-mosque-bukhara",
+        "bibi-khanym-mosque",
+        "kalan-mosque",
+        "hazrat-imam-mosque",
+        "minor-mosque",
+        "bolo-haouz-mosque"
+      ]
     },
     {
       "slug": "kosovo",
       "name": "Kosovo",
       "description": "Ottoman and Islamic heritage in Kosovo.",
-      "mosqueIds": ["imperial-mosque-pristina"]
+      "mosqueIds": [
+        "imperial-mosque-pristina"
+      ]
     },
     {
       "slug": "albania",
       "name": "Albania",
       "description": "Historic mosques in Albania.",
-      "mosqueIds": ["ethem-bey-mosque"]
+      "mosqueIds": [
+        "ethem-bey-mosque"
+      ]
     },
     {
       "slug": "tunisia",
       "name": "Tunisia",
       "description": "Ancient and historic mosques in Tunisia—including one of the oldest in the world.",
-      "mosqueIds": ["great-mosque-of-kairouan"]
+      "mosqueIds": [
+        "great-mosque-of-kairouan",
+        "al-zaytuna-mosque"
+      ]
     },
     {
       "slug": "usa",

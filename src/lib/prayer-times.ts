@@ -1,6 +1,6 @@
 /**
  * Prayer times link generator for mosques.
- * Uses IslamicFinder which provides prayer times based on coordinates.
+ * Uses IslamicFinder prayer-times page; accepts latitude/longitude query params (no 404).
  */
 
 interface Coordinates {
@@ -8,28 +8,27 @@ interface Coordinates {
   lng: number;
 }
 
+const ISLAMICFINDER_PRAYER_TIMES = "https://www.islamicfinder.org/prayer-times/";
+
 /**
  * Generate a prayer times URL for a location.
+ * Uses IslamicFinder's main prayer-times page with latitude/longitude so the page loads correctly (avoids /world/country/city/ 404s).
  * Returns null if coordinates are not available.
  */
 export function getPrayerTimesUrl(
   coordinates: Coordinates | undefined,
-  location: string,
-  country: string
+  _location: string,
+  _country: string
 ): string | null {
   if (!coordinates) return null;
-
-  // Use IslamicFinder which accepts coordinates
   const { lat, lng } = coordinates;
-  return `https://www.islamicfinder.org/world/${encodeURIComponent(country.toLowerCase())}/${encodeURIComponent(location.toLowerCase().replace(/\s+/g, "-"))}/?latitude=${lat}&longitude=${lng}`;
+  const params = new URLSearchParams({ latitude: String(lat), longitude: String(lng) });
+  return `${ISLAMICFINDER_PRAYER_TIMES}?${params.toString()}`;
 }
 
 /**
- * Alternative: Get a general prayer times URL for a city/country
- * Useful when coordinates aren't available
+ * Fallback when coordinates aren't available: link to main prayer times page so user can search or use location.
  */
-export function getPrayerTimesCityUrl(location: string, country: string): string {
-  const citySlug = location.toLowerCase().replace(/\s+/g, "-");
-  const countrySlug = country.toLowerCase().replace(/\s+/g, "-");
-  return `https://www.islamicfinder.org/world/${countrySlug}/${citySlug}/`;
+export function getPrayerTimesCityUrl(_location: string, _country: string): string {
+  return ISLAMICFINDER_PRAYER_TIMES;
 }

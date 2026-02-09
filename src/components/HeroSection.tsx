@@ -38,9 +38,9 @@ export const HeroSection = () => {
 
           {/* Headline */}
           <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight [text-shadow:_0_1px_3px_rgba(0,0,0,0.12)]">
-            Your Journey to the{" "}
-            <span className="hero-text-gold">Sacred Places</span>{" "}
-            Begins Here
+            Pray in the Most{" "}
+            <span className="hero-text-gold">Beautiful Mosques</span>{" "}
+            Around the World
           </h1>
 
           {/* Subheadline */}

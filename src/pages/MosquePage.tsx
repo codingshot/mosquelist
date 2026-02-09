@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getRegionForCountry } from "@/data/regions";
 import { getRelatedMosques } from "@/lib/related-mosques";
+import { getListsContainingMosque } from "@/data/lists";
 import { getArchitectureStyleDescription } from "@/data/architecture-styles";
 import { ImageGallery } from "@/components/ImageGallery";
 import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
@@ -72,6 +73,10 @@ export default function MosquePage() {
   const [failedThumbs, setFailedThumbs] = useState<Set<number>>(new Set());
   const relatedMosques = useMemo(
     () => (mosque ? getRelatedMosques(mosque, 6) : []),
+    [mosque]
+  );
+  const listsContainingMosque = useMemo(
+    () => (mosque ? getListsContainingMosque(mosque.id) : []),
     [mosque]
   );
 
@@ -633,6 +638,29 @@ export default function MosquePage() {
                               </span>
                             )}
                           </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {listsContainingMosque.length > 0 && (
+                <div className="mt-10 pt-8 border-t border-border">
+                  <h2 className="font-serif text-xl font-semibold text-foreground">
+                    Lists containing this mosque
+                  </h2>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Curated collections that include {mosque.name}
+                  </p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {listsContainingMosque.map((list) => (
+                      <li key={list.slug}>
+                        <Link
+                          to={`/lists/${list.slug}`}
+                          className="inline-flex items-center rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground hover:border-primary/40 hover:bg-secondary/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-lg"
+                        >
+                          {list.name}
                         </Link>
                       </li>
                     ))}

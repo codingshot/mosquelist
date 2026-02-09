@@ -54,6 +54,9 @@ export default function AboutPage() {
                 My Bucket List
               </Link>
             </Button>
+            <Button variant="outline" asChild className="gap-2">
+              <Link to="/contributing">Contribute</Link>
+            </Button>
           </div>
         </div>
       </main>

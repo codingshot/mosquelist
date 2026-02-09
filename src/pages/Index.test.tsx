@@ -34,7 +34,7 @@ describe("Index page", () => {
 
   it("renders hero section with headline", async () => {
     renderIndex();
-    const heroHeading = await screen.findByRole("heading", { level: 1, name: /your journey to the sacred places/i }, { timeout: 12000 });
+    const heroHeading = await screen.findByRole("heading", { level: 1, name: /pray in the most beautiful mosques around the world/i }, { timeout: 12000 });
     expect(heroHeading).toBeInTheDocument();
   }, 15000);
 

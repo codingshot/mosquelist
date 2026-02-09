@@ -38,8 +38,17 @@ import {
   ArrowUpDown,
   XCircle,
   MapPin,
+  Table2,
 } from "lucide-react";
 import { ExploreMapView } from "@/components/ExploreMapView";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -67,7 +76,7 @@ const PARAM_FACILITY_GUIDED = "facilityGuided";
 const PARAM_FACILITY_WHEELCHAIR = "facilityWheelchair";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
-type ViewType = "grid" | "swipe" | "map";
+type ViewType = "grid" | "swipe" | "map" | "table";
 type SortType =
   | "relevance"
   | "holyCapacity"
@@ -84,6 +93,12 @@ function establishedYear(established: string): number {
   return match ? parseInt(match[0], 10) : 0;
 }
 
+function formatTableNumber(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(0)}K`;
+  return String(n);
+}
+
 function useMosqueSearchParams() {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -91,7 +106,7 @@ function useMosqueSearchParams() {
   const filter = (searchParams.get(PARAM_FILTER) as FilterType) ?? "all";
   const viewParam = searchParams.get(PARAM_VIEW);
   const view: ViewType =
-    viewParam === "grid" || viewParam === "swipe" || viewParam === "map"
+    viewParam === "grid" || viewParam === "swipe" || viewParam === "map" || viewParam === "table"
       ? viewParam
       : "grid";
   const sortParam = searchParams.get(PARAM_SORT) as SortType | null;
@@ -952,6 +967,16 @@ export const MosqueGrid = ({
                   >
                     <MapPin className="w-5 h-5" />
                   </Button>
+                  <Button
+                    variant={view === "table" ? "secondary" : "ghost"}
+                    size="icon"
+                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    onClick={() => setView("table")}
+                    aria-label="Table view"
+                    aria-pressed={view === "table"}
+                  >
+                    <Table2 className="w-5 h-5" />
+                  </Button>
                   {hasActiveFilters && (
                     <Button
                       variant="ghost"
@@ -1194,6 +1219,112 @@ export const MosqueGrid = ({
             onLike={(mosque) => toggleFavorite(mosque.id)}
             isFavorite={isFavorite}
           />
+        ) : view === "table" ? (
+          filteredMosques.length === 0 ? null : (
+          <div className="rounded-xl border border-border overflow-hidden bg-card">
+            <div className="overflow-x-auto max-h-[70vh] overflow-y-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50 hover:bg-muted/50 sticky top-0 z-10 border-b border-border">
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => setSort("name")}
+                        className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                      >
+                        Name
+                        {sort === "name" && <ArrowUpDown className="w-4 h-4" />}
+                      </button>
+                    </TableHead>
+                    <TableHead className="whitespace-nowrap">Location</TableHead>
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => setSort("country")}
+                        className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                      >
+                        Country
+                        {sort === "country" && <ArrowUpDown className="w-4 h-4" />}
+                      </button>
+                    </TableHead>
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => setSort("capacity")}
+                        className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                      >
+                        Capacity
+                        {sort === "capacity" && <ArrowUpDown className="w-4 h-4" />}
+                      </button>
+                    </TableHead>
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => setSort("area")}
+                        className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                      >
+                        Area (m²)
+                        {sort === "area" && <ArrowUpDown className="w-4 h-4" />}
+                      </button>
+                    </TableHead>
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => setSort("established")}
+                        className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                      >
+                        Established
+                        {sort === "established" && <ArrowUpDown className="w-4 h-4" />}
+                      </button>
+                    </TableHead>
+                    <TableHead className="whitespace-nowrap">Style</TableHead>
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => setSort("touristFirst")}
+                        className="flex items-center gap-1 font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                      >
+                        Visitors
+                        {sort === "touristFirst" && <ArrowUpDown className="w-4 h-4" />}
+                      </button>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredMosques.map((mosque) => (
+                    <TableRow key={mosque.id} className="hover:bg-muted/30">
+                      <TableCell className="font-medium">
+                        <Link
+                          to={`/mosque/${mosque.id}`}
+                          className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                        >
+                          {mosque.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell className="text-muted-foreground whitespace-nowrap">
+                        {mosque.location}
+                      </TableCell>
+                      <TableCell className="whitespace-nowrap">{mosque.country}</TableCell>
+                      <TableCell className="tabular-nums whitespace-nowrap">
+                        {formatTableNumber(mosque.capacity)}
+                      </TableCell>
+                      <TableCell className="tabular-nums whitespace-nowrap">
+                        {mosque.area ? formatTableNumber(mosque.area) : "—"}
+                      </TableCell>
+                      <TableCell className="whitespace-nowrap">{mosque.established || "—"}</TableCell>
+                      <TableCell className="text-muted-foreground max-w-[140px] truncate" title={mosque.architecturalStyle ?? ""}>
+                        {mosque.architecturalStyle || "—"}
+                      </TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        {mosque.touristFriendly ? "Yes" : "No"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+          )
         ) : (
           <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-2 px-1">
             {displayedMosques.map((mosque, index) => (
@@ -1208,7 +1339,7 @@ export const MosqueGrid = ({
         )}
 
         {/* Infinite scroll sentinel and loading indicator */}
-        {!isPreview && view !== "map" && view !== "swipe" && hasMore && (
+        {!isPreview && view !== "map" && view !== "swipe" && view !== "table" && hasMore && (
           <>
             <div
               ref={setSentinelRef}
@@ -1226,7 +1357,7 @@ export const MosqueGrid = ({
           </>
         )}
 
-        {!isPreview && !hasMore && displayedMosques.length > 0 && (
+        {!isPreview && view !== "table" && !hasMore && displayedMosques.length > 0 && (
           <p className="text-center text-sm text-muted-foreground py-6">
             You&apos;ve reached the end. {filteredMosques.length} mosques total.
           </p>

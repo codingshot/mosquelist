@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, memo, useEffect } from "react";
 import type { Mosque } from "@/types/mosque";
 import { Link } from "react-router-dom";
 import { Heart, MapPin, Users, Star, ChevronRight } from "lucide-react";
@@ -13,6 +13,12 @@ interface MosqueCardProps {
   index: number;
   /** "grid" = card layout; "list" = row with image inline; "compact" = dense row; "swipe" = full-width for carousel */
   view?: "grid" | "list" | "compact" | "swipe";
+  /** For swipe view: full list of image URLs (main + gallery). When set, image is clickable to cycle. */
+  galleryImages?: string[];
+  /** For swipe view: index into galleryImages to show. */
+  galleryImageIndex?: number;
+  /** For swipe view: called when image is tapped (cycle to next). */
+  onGalleryImageClick?: () => void;
 }
 
 function formatCapacity(capacity: number) {
@@ -20,7 +26,14 @@ function formatCapacity(capacity: number) {
   return `${(capacity / 1000).toFixed(0)}K`;
 }
 
-export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid" }: MosqueCardProps) {
+export const MosqueCard = memo(function MosqueCard({
+  mosque,
+  index,
+  view = "grid",
+  galleryImages,
+  galleryImageIndex = 0,
+  onGalleryImageClick,
+}: MosqueCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const isLiked = isFavorite(mosque.id);
   const [imageState, setImageState] = useState<"loading" | "loaded" | "error">("loading");
@@ -28,17 +41,21 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
   const isCompact = view === "compact";
   const isSwipe = view === "swipe";
   const { src: mainSrc, fallbackUrl: mainFallback } = getMosqueImageSrc(mosque);
+  const useGallery = isSwipe && galleryImages && galleryImages.length > 0;
+  const displaySrc = useGallery
+    ? galleryImages[Math.min(galleryImageIndex, galleryImages.length - 1)] ?? mainSrc
+    : mainSrc;
+  const hasMultipleImages = useGallery && galleryImages!.length > 1;
+
+  useEffect(() => {
+    if (useGallery) setImageState("loading");
+  }, [useGallery, galleryImageIndex, displaySrc]);
 
   // Determine loading strategy based on position
   const isEager = index < 6;
 
-  return (
-    <Link 
-      to={`/mosque/${mosque.id}`} 
-      className="block outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-lg"
-      aria-label={`View details for ${mosque.name} in ${mosque.location}, ${mosque.country}`}
-    >
-      <article
+  const articleContent = (
+    <article
         className={cn(
           "scrapbook-card group block h-full transition-all duration-300",
           "hover:shadow-lg hover:-translate-y-1 hover:border-primary/30",
@@ -60,16 +77,38 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
           )}
         >
           {/* Image container with rounded top */}
-          <div className={cn(
-            "absolute inset-0 overflow-hidden",
-            !isCompact && !isListLayout && "rounded-t-2xl"
-          )}>
+          <div
+            className={cn(
+              "absolute inset-0 overflow-hidden",
+              !isCompact && !isListLayout && "rounded-t-2xl",
+              hasMultipleImages && "cursor-pointer"
+            )}
+            role={hasMultipleImages ? "button" : undefined}
+            tabIndex={hasMultipleImages ? 0 : undefined}
+            onClick={hasMultipleImages
+              ? (e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onGalleryImageClick?.();
+                }
+              : undefined}
+            onKeyDown={hasMultipleImages && onGalleryImageClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onGalleryImageClick();
+                  }
+                }
+              : undefined}
+            aria-label={hasMultipleImages ? "Next image" : undefined}
+          >
             {/* Blur placeholder while image loads */}
             {imageState === "loading" && (
               <div className="absolute inset-0 bg-secondary animate-pulse" />
             )}
             <img
-              src={mainSrc}
+              src={displaySrc}
               alt={mosque.name}
               loading={isEager ? "eager" : "lazy"}
               decoding="async"
@@ -83,6 +122,7 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
                 "group-hover:scale-105",
                 imageState === "loaded" ? "opacity-100" : "opacity-0"
               )}
+              draggable={false}
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
@@ -214,6 +254,18 @@ export const MosqueCard = memo(function MosqueCard({ mosque, index, view = "grid
           )}
         </div>
       </article>
+  );
+
+  if (isSwipe) {
+    return <div className="block outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-lg">{articleContent}</div>;
+  }
+  return (
+    <Link
+      to={`/mosque/${mosque.id}`}
+      className="block outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-lg"
+      aria-label={`View details for ${mosque.name} in ${mosque.location}, ${mosque.country}`}
+    >
+      {articleContent}
     </Link>
   );
 });

@@ -53,6 +53,10 @@ const BucketListPage = lazyWithChunkErrorLogging(
   "BucketListPage"
 );
 const AboutPage = lazyWithChunkErrorLogging(() => import("./pages/AboutPage"), "AboutPage");
+const ContributingPage = lazyWithChunkErrorLogging(
+  () => import("./pages/ContributingPage"),
+  "ContributingPage"
+);
 const TravelGuidePage = lazyWithChunkErrorLogging(
   () => import("./pages/TravelGuidePage"),
   "TravelGuidePage"
@@ -102,6 +106,7 @@ const App = () => (
               <Route path="/lists" element={<ListsPage />} />
               <Route path="/lists/:slug" element={<ListDetailPage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/contributing" element={<ContributingPage />} />
               <Route path="/guides/travel" element={<TravelGuidePage />} />
               <Route path="/guides/visitor-tips" element={<VisitorTipsPage />} />
               <Route path="/glossary" element={<GlossaryPage />} />
