@@ -18,7 +18,7 @@ export default function ExplorePage() {
         path="/explore"
       />
       <Navigation />
-      <main id="main-content" className="min-h-[60vh]">
+      <main id="main-content">
         <MosqueGrid />
       </main>
       <Footer />

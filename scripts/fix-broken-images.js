@@ -1,10 +1,10 @@
 /**
- * Check and fix broken mosque images using multiple sources
+ * Search and replace ALL mosque images using multiple sources
  * Run: node scripts/fix-broken-images.js
  *
  * Sources: Wikipedia, Wikimedia Commons, Flickr, Pixabay, Pexels, DuckDuckGo, Firecrawl
  */
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, copyFileSync } from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
 import FirecrawlApp from "@mendable/firecrawl-js";
@@ -12,6 +12,7 @@ import FirecrawlApp from "@mendable/firecrawl-js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const dataPath = path.join(root, "src", "data", "mosques.json");
+const backupPath = path.join(root, "src", "data", "mosques-backup.json");
 
 // Load env
 const envPath = path.join(root, ".env");
@@ -37,364 +38,407 @@ if (FIRECRAWL_API_KEY) {
   firecrawl = new FirecrawlApp({ apiKey: FIRECRAWL_API_KEY });
 }
 
-// Check if image URL is accessible
-async function checkImageUrl(url) {
-  if (!url || (!url.startsWith("http://") && !url.startsWith("https://"))) {
-    return { ok: false, reason: "invalid url" };
+// Keywords to exclude from image search (flags, maps, diagrams, etc.)
+const EXCLUDE_KEYWORDS = [
+  'flag', 'flags', 'flag_of', 'flagof', 'emblem', 'coat_of_arms', 'coa', 'seal', 'logo', 'symbol', 'icon',
+  'map', 'maps', 'location', 'diagram', 'chart', 'graph', 'illustration',
+  'vector', 'svg', 'drawing', 'clipart', 'cartoon', 'silhouette',
+  'sketch', 'plan', 'blueprint', 'schematic', 'infographic',
+  'stamp', 'postage', 'coin', 'currency', 'money', 'banknote',
+  'passport', 'document', 'certificate', 'banner', 'poster',
+  'sword', 'weapon', 'shield', 'crest', 'saudi_arabia_flag', 'saudi_flag',
+  'shahada', 'kalima', 'calligraphy', 'arabic_text', 'arabic_script'
+];
+
+// Check if URL contains excluded keywords
+function isValidImageUrl(url) {
+  if (!url) return false;
+  const lowerUrl = url.toLowerCase();
+  return !EXCLUDE_KEYWORDS.some(keyword => lowerUrl.includes(keyword));
+}
+
+// Build optimized search query using mosque data
+function buildSearchQuery(mosque, isGallery = false) {
+  const { id, name, location, country, address } = mosque;
+  
+  // Extract meaningful parts from ID (e.g., "masjid-al-haram" -> "masjid al haram")
+  const idWords = id ? id.replace(/-/g, ' ').replace(/_/g, ' ').toLowerCase() : '';
+  
+  // Clean name - remove common suffixes that might confuse search
+  const cleanName = name ? name.replace(/\s+mosque$/i, '').replace(/\s+masjid$/i, '').trim() : '';
+  
+  // Build location context
+  const locationParts = [];
+  if (location && location !== country) locationParts.push(location);
+  if (country) locationParts.push(country);
+  const locationStr = locationParts.join(', ');
+  
+  // Try different query strategies in order of specificity
+  const queries = [];
+  
+  // Strategy 1: Name + Location + Country + specific building terms (avoid flags)
+  if (cleanName && locationStr) {
+    queries.push(`${cleanName} ${locationStr} mosque building architecture`);
+    queries.push(`${cleanName} ${locationStr} mosque exterior photo`);
+    queries.push(`${cleanName} ${locationStr} mosque facade`);
   }
-
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
-
-    const res = await fetch(url, {
-      method: "HEAD",
-      signal: controller.signal,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-      },
-      redirect: "follow"
-    });
-
-    clearTimeout(timeout);
-
-    if (!res.ok) {
-      const getRes = await fetch(url, {
-        method: "GET",
-        signal: AbortSignal.timeout(8000),
-        headers: {
-          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        },
-        redirect: "follow"
-      });
-
-      if (!getRes.ok) {
-        return { ok: false, reason: `HTTP ${getRes.status}` };
+  
+  // Strategy 2: ID-based query (good for unique identification)
+  if (idWords && idWords !== cleanName.toLowerCase()) {
+    const idQuery = locationStr ? `${idWords} ${locationStr} mosque building` : `${idWords} mosque building`;
+    queries.push(idQuery);
+  }
+  
+  // Strategy 3: Name + Country + building/photo keywords
+  if (cleanName && country) {
+    queries.push(`${cleanName} ${country} mosque building architecture`);
+    queries.push(`${cleanName} ${country} mosque exterior`);
+    queries.push(`${cleanName} ${country} mosque dome minaret`);
+  }
+  
+  // Strategy 4: Include address keywords if available (extract city/district)
+  if (address) {
+    // Extract city/district from address (usually the part before last comma)
+    const addrParts = address.split(',').map(p => p.trim()).filter(p => p);
+    if (addrParts.length >= 2) {
+      const cityOrDistrict = addrParts[addrParts.length - 2]; // Usually city
+      if (cleanName && cityOrDistrict && cityOrDistrict !== location) {
+        queries.push(`${cleanName} ${cityOrDistrict} mosque building`);
       }
-      return { ok: true };
     }
-
-    return { ok: true };
-  } catch (err) {
-    return { ok: false, reason: err.message || String(err) };
   }
+  
+  // Strategy 5: Just name + specific terms (fallback)
+  if (cleanName) {
+    queries.push(`${cleanName} mosque building architecture`);
+    queries.push(`${cleanName} mosque dome`);
+    queries.push(`${cleanName} mosque exterior`);
+  }
+  
+  // For gallery/interior images
+  if (isGallery) {
+    return queries.map(q => q.replace(/\s+mosque\s+(building|photo)$/, '') + ' mosque interior');
+  }
+  
+  // Remove duplicates while preserving order
+  return [...new Set(queries)];
 }
 
 // 1. Wikipedia Page Images
-async function searchWikipediaPage(mosqueName) {
-  const searchTerm = encodeURIComponent(mosqueName);
+async function searchWikipediaPage(searchQueries) {
+  // Try each query in order
+  for (const query of searchQueries) {
+    const searchTerm = encodeURIComponent(query);
 
-  try {
-    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json&srlimit=3`;
-    const searchRes = await fetch(searchUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
-    if (!searchRes.ok) return null;
+    try {
+      const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json&srlimit=3`;
+      const searchRes = await fetch(searchUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+      if (!searchRes.ok) continue;
 
-    const searchData = await searchRes.json();
-    if (!searchData.query?.search?.length) return null;
+      const searchData = await searchRes.json();
+      if (!searchData.query?.search?.length) continue;
 
-    for (const result of searchData.query.search) {
-      const pageTitle = result.title;
+      for (const result of searchData.query.search) {
+        const pageTitle = result.title;
 
-      // Get page thumbnail directly
-      const thumbUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(pageTitle)}&prop=pageimages&pithumbsize=1200&format=json`;
-      const thumbRes = await fetch(thumbUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+        // Get page thumbnail directly
+        const thumbUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(pageTitle)}&prop=pageimages&pithumbsize=1200&format=json`;
+        const thumbRes = await fetch(thumbUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
 
-      if (thumbRes.ok) {
-        const thumbData = await thumbRes.json();
-        const pages = thumbData.query?.pages;
-        if (pages) {
-          for (const pageId of Object.keys(pages)) {
-            const thumb = pages[pageId]?.thumbnail?.source;
-            if (thumb) {
-              const check = await checkImageUrl(thumb);
-              if (check.ok) return thumb;
+        if (thumbRes.ok) {
+          const thumbData = await thumbRes.json();
+          const pages = thumbData.query?.pages;
+          if (pages) {
+            for (const pageId of Object.keys(pages)) {
+              const thumb = pages[pageId]?.thumbnail?.source;
+              if (thumb && isValidImageUrl(thumb)) return thumb;
             }
           }
         }
-      }
 
-      // Fallback to page images list
-      const imagesUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(pageTitle)}&prop=images&format=json`;
-      const imagesRes = await fetch(imagesUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
-      if (!imagesRes.ok) continue;
+        // Fallback to page images list
+        const imagesUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(pageTitle)}&prop=images&format=json`;
+        const imagesRes = await fetch(imagesUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+        if (!imagesRes.ok) continue;
 
-      const imagesData = await imagesRes.json();
-      const pages = imagesData.query?.pages;
-      if (!pages) continue;
+        const imagesData = await imagesRes.json();
+        const pages = imagesData.query?.pages;
+        if (!pages) continue;
 
-      for (const pageId of Object.keys(pages)) {
-        const images = pages[pageId]?.images || [];
-        for (const img of images) {
-          const imgTitle = img.title;
-          if (!imgTitle.match(/\.(jpg|jpeg|png)$/i)) continue;
-          if (imgTitle.includes("Icon") || imgTitle.includes("Logo") || imgTitle.includes("Flag") || imgTitle.includes("Commons-logo") || imgTitle.includes("Symbol")) continue;
+        for (const pageId of Object.keys(pages)) {
+          const images = pages[pageId]?.images || [];
+          for (const img of images) {
+            const imgTitle = img.title;
+            if (!imgTitle.match(/\.(jpg|jpeg|png)$/i)) continue;
+            // Skip flags, logos, maps, diagrams
+            const lowerTitle = imgTitle.toLowerCase();
+            if (EXCLUDE_KEYWORDS.some(kw => lowerTitle.includes(kw))) continue;
+            if (imgTitle.includes("Icon") || imgTitle.includes("Logo") || imgTitle.includes("Flag") || imgTitle.includes("Commons-logo") || imgTitle.includes("Symbol")) continue;
 
-          const fileUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(imgTitle)}&prop=imageinfo&iiprop=url&format=json`;
-          const fileRes = await fetch(fileUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+            const fileUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(imgTitle)}&prop=imageinfo&iiprop=url&format=json`;
+            const fileRes = await fetch(fileUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
 
-          if (fileRes.ok) {
-            const fileData = await fileRes.json();
-            const filePages = fileData.query?.pages;
-            if (filePages) {
-              for (const fPageId of Object.keys(filePages)) {
-                const imageInfo = filePages[fPageId]?.imageinfo?.[0];
-                if (imageInfo?.url) {
-                  const check = await checkImageUrl(imageInfo.url);
-                  if (check.ok) return imageInfo.url;
+            if (fileRes.ok) {
+              const fileData = await fileRes.json();
+              const filePages = fileData.query?.pages;
+              if (filePages) {
+                for (const fPageId of Object.keys(filePages)) {
+                  const imageInfo = filePages[fPageId]?.imageinfo?.[0];
+                  if (imageInfo?.url && isValidImageUrl(imageInfo.url)) return imageInfo.url;
                 }
               }
             }
           }
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
 
 // 2. Wikimedia Commons
-async function searchWikimediaCommons(mosqueName) {
-  const searchTerm = encodeURIComponent(mosqueName);
+async function searchWikimediaCommons(searchQueries) {
+  for (const query of searchQueries) {
+    const searchTerm = encodeURIComponent(query);
 
-  try {
-    const wikiUrl = `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&srnamespace=6&format=json&srlimit=15`;
-    const res = await fetch(wikiUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
-    if (!res.ok) return null;
+    try {
+      const wikiUrl = `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&srnamespace=6&format=json&srlimit=15`;
+      const res = await fetch(wikiUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+      if (!res.ok) continue;
 
-    const data = await res.json();
-    if (data.query?.search?.length > 0) {
-      for (const result of data.query.search) {
-        const title = result.title;
-        if (!title.match(/\.(jpg|jpeg|png|webp)$/i)) continue;
+      const data = await res.json();
+      if (data.query?.search?.length > 0) {
+        for (const result of data.query.search) {
+          const title = result.title;
+          if (!title.match(/\.(jpg|jpeg|png|webp)$/i)) continue;
+          // Skip flags, logos, maps, diagrams based on title
+          const lowerTitle = title.toLowerCase();
+          if (EXCLUDE_KEYWORDS.some(kw => lowerTitle.includes(kw))) continue;
 
-        const fileUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url&format=json`;
-        const fileRes = await fetch(fileUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+          const fileUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url&format=json`;
+          const fileRes = await fetch(fileUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
 
-        if (fileRes.ok) {
-          const fileData = await fileRes.json();
-          const pages = fileData.query?.pages;
-          if (pages) {
-            for (const pageId of Object.keys(pages)) {
-              const imageInfo = pages[pageId]?.imageinfo?.[0];
-              if (imageInfo?.url) {
-                const check = await checkImageUrl(imageInfo.url);
-                if (check.ok) return imageInfo.url;
+          if (fileRes.ok) {
+            const fileData = await fileRes.json();
+            const pages = fileData.query?.pages;
+            if (pages) {
+              for (const pageId of Object.keys(pages)) {
+                const imageInfo = pages[pageId]?.imageinfo?.[0];
+                if (imageInfo?.url && isValidImageUrl(imageInfo.url)) return imageInfo.url;
               }
             }
           }
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
 
 // 3. Flickr (free API)
-async function searchFlickr(mosqueName, country) {
-  try {
-    // Use Flickr public feed (no API key needed)
-    const query = encodeURIComponent(`${mosqueName} mosque`);
-    const flickrUrl = `https://www.flickr.com/services/feeds/photos_public.gne?tags=${query}&format=json&nojsoncallback=1`;
+async function searchFlickr(searchQueries, country) {
+  for (const query of searchQueries) {
+    try {
+      // Use Flickr public feed (no API key needed)
+      const encodedQuery = encodeURIComponent(query);
+      const flickrUrl = `https://www.flickr.com/services/feeds/photos_public.gne?tags=${encodedQuery}&format=json&nojsoncallback=1`;
 
-    const res = await fetch(flickrUrl, {
-      headers: { "User-Agent": "MosqueList/1.0" }
-    });
+      const res = await fetch(flickrUrl, {
+        headers: { "User-Agent": "MosqueList/1.0" }
+      });
 
-    if (!res.ok) return null;
+      if (!res.ok) continue;
 
-    const data = await res.json();
-    if (data.items && data.items.length > 0) {
-      for (const item of data.items) {
-        // Get larger image by modifying URL
-        let imgUrl = item.media?.m;
-        if (imgUrl) {
-          // Change _m to _b for larger image
-          imgUrl = imgUrl.replace("_m.jpg", "_b.jpg");
-          const check = await checkImageUrl(imgUrl);
-          if (check.ok) return imgUrl;
+      const data = await res.json();
+      if (data.items && data.items.length > 0) {
+        for (const item of data.items) {
+          // Get larger image by modifying URL
+          let imgUrl = item.media?.m;
+          if (imgUrl) {
+            // Change _m to _b for larger image
+            imgUrl = imgUrl.replace("_m.jpg", "_b.jpg");
+            if (isValidImageUrl(imgUrl)) return imgUrl;
+          }
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
 
 // 4. Pixabay (needs API key, but has free tier)
-async function searchPixabay(mosqueName) {
+async function searchPixabay(searchQueries) {
   if (!PIXABAY_API_KEY) return null;
 
-  try {
-    const query = encodeURIComponent(`${mosqueName} mosque`);
-    const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${query}&image_type=photo&min_width=800&per_page=5`;
+  for (const query of searchQueries) {
+    try {
+      const encodedQuery = encodeURIComponent(query);
+      const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodedQuery}&image_type=photo&min_width=800&per_page=5`;
 
-    const res = await fetch(url);
-    if (!res.ok) return null;
+      const res = await fetch(url);
+      if (!res.ok) continue;
 
-    const data = await res.json();
-    if (data.hits && data.hits.length > 0) {
-      for (const hit of data.hits) {
-        const imgUrl = hit.largeImageURL || hit.webformatURL;
-        if (imgUrl) {
-          const check = await checkImageUrl(imgUrl);
-          if (check.ok) return imgUrl;
+      const data = await res.json();
+      if (data.hits && data.hits.length > 0) {
+        for (const hit of data.hits) {
+          const imgUrl = hit.largeImageURL || hit.webformatURL;
+          if (imgUrl && isValidImageUrl(imgUrl)) return imgUrl;
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
 
 // 5. Pexels (needs API key)
-async function searchPexels(mosqueName) {
+async function searchPexels(searchQueries) {
   if (!PEXELS_API_KEY) return null;
 
-  try {
-    const query = encodeURIComponent(`${mosqueName} mosque`);
-    const url = `https://api.pexels.com/v1/search?query=${query}&per_page=5`;
+  for (const query of searchQueries) {
+    try {
+      const encodedQuery = encodeURIComponent(query);
+      const url = `https://api.pexels.com/v1/search?query=${encodedQuery}&per_page=5`;
 
-    const res = await fetch(url, {
-      headers: { "Authorization": PEXELS_API_KEY }
-    });
-    if (!res.ok) return null;
+      const res = await fetch(url, {
+        headers: { "Authorization": PEXELS_API_KEY }
+      });
+      if (!res.ok) continue;
 
-    const data = await res.json();
-    if (data.photos && data.photos.length > 0) {
-      for (const photo of data.photos) {
-        const imgUrl = photo.src?.large || photo.src?.medium;
-        if (imgUrl) {
-          const check = await checkImageUrl(imgUrl);
-          if (check.ok) return imgUrl;
+      const data = await res.json();
+      if (data.photos && data.photos.length > 0) {
+        for (const photo of data.photos) {
+          const imgUrl = photo.src?.large || photo.src?.medium;
+          if (imgUrl && isValidImageUrl(imgUrl)) return imgUrl;
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
 
 // 6. Unsplash (needs access key)
-async function searchUnsplash(mosqueName) {
+async function searchUnsplash(searchQueries) {
   if (!UNSPLASH_ACCESS_KEY) return null;
 
-  try {
-    const query = encodeURIComponent(`${mosqueName} mosque`);
-    const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=5`;
+  for (const query of searchQueries) {
+    try {
+      const encodedQuery = encodeURIComponent(query);
+      const url = `https://api.unsplash.com/search/photos?query=${encodedQuery}&per_page=5`;
 
-    const res = await fetch(url, {
-      headers: { "Authorization": `Client-ID ${UNSPLASH_ACCESS_KEY}` }
-    });
-    if (!res.ok) return null;
+      const res = await fetch(url, {
+        headers: { "Authorization": `Client-ID ${UNSPLASH_ACCESS_KEY}` }
+      });
+      if (!res.ok) continue;
 
-    const data = await res.json();
-    if (data.results && data.results.length > 0) {
-      for (const photo of data.results) {
-        const imgUrl = photo.urls?.regular || photo.urls?.small;
-        if (imgUrl) {
-          const check = await checkImageUrl(imgUrl);
-          if (check.ok) return imgUrl;
+      const data = await res.json();
+      if (data.results && data.results.length > 0) {
+        for (const photo of data.results) {
+          const imgUrl = photo.urls?.regular || photo.urls?.small;
+          if (imgUrl && isValidImageUrl(imgUrl)) return imgUrl;
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
 
 // 7. DuckDuckGo Images (no API key needed)
-async function searchDuckDuckGo(mosqueName, country) {
-  try {
-    const query = encodeURIComponent(`${mosqueName} ${country} mosque`);
+async function searchDuckDuckGo(searchQueries) {
+  for (const query of searchQueries) {
+    try {
+      const encodedQuery = encodeURIComponent(query);
 
-    // Get vqd token first
-    const tokenRes = await fetch(`https://duckduckgo.com/?q=${query}`, {
-      headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" }
-    });
+      // Get vqd token first
+      const tokenRes = await fetch(`https://duckduckgo.com/?q=${encodedQuery}`, {
+        headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" }
+      });
 
-    if (!tokenRes.ok) return null;
+      if (!tokenRes.ok) continue;
 
-    const html = await tokenRes.text();
-    const vqdMatch = html.match(/vqd=["']?([^"'&]+)/);
-    if (!vqdMatch) return null;
+      const html = await tokenRes.text();
+      const vqdMatch = html.match(/vqd=["']?([^"'&]+)/);
+      if (!vqdMatch) continue;
 
-    const vqd = vqdMatch[1];
+      const vqd = vqdMatch[1];
 
-    // Search images
-    const imgUrl = `https://duckduckgo.com/i.js?q=${query}&vqd=${vqd}&p=1`;
-    const imgRes = await fetch(imgUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        "Referer": "https://duckduckgo.com/"
-      }
-    });
+      // Search images
+      const imgUrl = `https://duckduckgo.com/i.js?q=${encodedQuery}&vqd=${vqd}&p=1`;
+      const imgRes = await fetch(imgUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+          "Referer": "https://duckduckgo.com/"
+        }
+      });
 
-    if (!imgRes.ok) return null;
+      if (!imgRes.ok) continue;
 
-    const data = await imgRes.json();
-    if (data.results && data.results.length > 0) {
-      for (const result of data.results) {
-        const url = result.image;
-        if (url && url.startsWith("http")) {
-          // Skip small images
-          if (result.width < 400 || result.height < 300) continue;
-
-          const check = await checkImageUrl(url);
-          if (check.ok) return url;
+      const data = await imgRes.json();
+      if (data.results && data.results.length > 0) {
+        for (const result of data.results) {
+          const url = result.image;
+          if (url && url.startsWith("http")) {
+            // Skip small images
+            if (result.width < 400 || result.height < 300) continue;
+            if (isValidImageUrl(url)) return url;
+          }
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
 
 // 8. Wikidata Images
-async function searchWikidata(mosqueName) {
-  try {
-    const query = encodeURIComponent(mosqueName);
-    const searchUrl = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${query}&language=en&format=json&limit=3`;
+async function searchWikidata(searchQueries) {
+  for (const query of searchQueries) {
+    try {
+      const encodedQuery = encodeURIComponent(query);
+      const searchUrl = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodedQuery}&language=en&format=json&limit=3`;
 
-    const searchRes = await fetch(searchUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
-    if (!searchRes.ok) return null;
+      const searchRes = await fetch(searchUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+      if (!searchRes.ok) continue;
 
-    const searchData = await searchRes.json();
-    if (!searchData.search?.length) return null;
+      const searchData = await searchRes.json();
+      if (!searchData.search?.length) continue;
 
-    for (const entity of searchData.search) {
-      const entityId = entity.id;
-      const entityUrl = `https://www.wikidata.org/w/api.php?action=wbgetclaims&entity=${entityId}&property=P18&format=json`;
+      for (const entity of searchData.search) {
+        const entityId = entity.id;
+        const entityUrl = `https://www.wikidata.org/w/api.php?action=wbgetclaims&entity=${entityId}&property=P18&format=json`;
 
-      const entityRes = await fetch(entityUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
-      if (!entityRes.ok) continue;
+        const entityRes = await fetch(entityUrl, { headers: { "User-Agent": "MosqueList/1.0" } });
+        if (!entityRes.ok) continue;
 
-      const entityData = await entityRes.json();
-      const claims = entityData.claims?.P18;
+        const entityData = await entityRes.json();
+        const claims = entityData.claims?.P18;
 
-      if (claims && claims.length > 0) {
-        const fileName = claims[0]?.mainsnak?.datavalue?.value;
-        if (fileName) {
-          // Convert filename to Commons URL
-          const encodedName = encodeURIComponent(fileName.replace(/ /g, "_"));
-          const md5 = await getMD5Hash(fileName.replace(/ /g, "_"));
-          const imgUrl = `https://upload.wikimedia.org/wikipedia/commons/${md5[0]}/${md5.slice(0,2)}/${encodedName}`;
-
-          const check = await checkImageUrl(imgUrl);
-          if (check.ok) return imgUrl;
+        if (claims && claims.length > 0) {
+          const fileName = claims[0]?.mainsnak?.datavalue?.value;
+          if (fileName) {
+            // Convert filename to Commons URL
+            const encodedName = encodeURIComponent(fileName.replace(/ /g, "_"));
+            const md5 = await getMD5Hash(fileName.replace(/ /g, "_"));
+            const imgUrl = `https://upload.wikimedia.org/wikipedia/commons/${md5[0]}/${md5.slice(0,2)}/${encodedName}`;
+            if (isValidImageUrl(imgUrl)) return imgUrl;
+          }
         }
       }
+    } catch (err) {
+      // Silent fail, try next query
     }
-  } catch (err) {
-    // Silent fail
   }
   return null;
 }
@@ -421,82 +465,85 @@ async function getMD5Hash(filename) {
 }
 
 // 9. Firecrawl (last resort, uses tokens)
-async function searchFirecrawl(mosqueName, country) {
+async function searchFirecrawl(searchQueries) {
   if (!firecrawl) return null;
 
-  try {
-    const result = await firecrawl.search(`${mosqueName} ${country} mosque`, {
-      sources: ["images"],
-      limit: 5,
-      timeout: 10000
-    });
+  for (const query of searchQueries) {
+    try {
+      const result = await firecrawl.search(query, {
+        sources: ["images"],
+        limit: 5,
+        timeout: 10000
+      });
 
-    if (!result.success) return null;
+      if (!result.success) continue;
 
-    if (result.images && result.images.length > 0) {
-      for (const img of result.images) {
-        const imgUrl = img.url || img.image || img;
-        if (typeof imgUrl === 'string' && imgUrl.startsWith('http')) {
-          if (imgUrl.includes("logo") || imgUrl.includes("icon") || imgUrl.includes("thumb") || imgUrl.includes("favicon")) continue;
-          const check = await checkImageUrl(imgUrl);
-          if (check.ok) return imgUrl;
+      if (result.images && result.images.length > 0) {
+        for (const img of result.images) {
+          const imgUrl = img.url || img.image || img;
+          if (typeof imgUrl === 'string' && imgUrl.startsWith('http')) {
+            if (imgUrl.includes("logo") || imgUrl.includes("icon") || imgUrl.includes("thumb") || imgUrl.includes("favicon")) continue;
+            if (isValidImageUrl(imgUrl)) return imgUrl;
+          }
         }
       }
-    }
 
-    if (result.data && result.data.length > 0) {
-      for (const item of result.data) {
-        if (item.metadata?.ogImage) {
-          const check = await checkImageUrl(item.metadata.ogImage);
-          if (check.ok) return item.metadata.ogImage;
+      if (result.data && result.data.length > 0) {
+        for (const item of result.data) {
+          if (item.metadata?.ogImage && isValidImageUrl(item.metadata.ogImage)) {
+            return item.metadata.ogImage;
+          }
         }
       }
+    } catch (err) {
+      console.log(`  [!] Firecrawl error: ${err.message}`);
     }
-  } catch (err) {
-    console.log(`  [!] Firecrawl error: ${err.message}`);
   }
   return null;
 }
 
 // Main search function - tries all sources
-async function findImage(name, country, isGallery = false) {
-  const searchName = isGallery ? `${name} interior` : name;
+async function findImage(mosque, isGallery = false) {
+  // Build multiple search queries with different strategies
+  const searchQueries = buildSearchQuery(mosque, isGallery);
+  
+  console.log(`  Search queries: ${searchQueries.slice(0, 3).join(' | ')}${searchQueries.length > 3 ? '...' : ''}`);
 
   // 1. Wikipedia (best quality, free)
-  let url = await searchWikipediaPage(searchName);
+  let url = await searchWikipediaPage(searchQueries);
   if (url) return { url, source: "Wikipedia" };
 
   // 2. Wikimedia Commons
-  url = await searchWikimediaCommons(searchName);
+  url = await searchWikimediaCommons(searchQueries);
   if (url) return { url, source: "Wikimedia Commons" };
 
   // 3. Wikidata
-  url = await searchWikidata(searchName);
+  url = await searchWikidata(searchQueries);
   if (url) return { url, source: "Wikidata" };
 
   // 4. Flickr (free)
-  url = await searchFlickr(searchName, country);
+  url = await searchFlickr(searchQueries, mosque.country);
   if (url) return { url, source: "Flickr" };
 
   // 5. DuckDuckGo (free, no API)
-  url = await searchDuckDuckGo(searchName, country);
+  url = await searchDuckDuckGo(searchQueries);
   if (url) return { url, source: "DuckDuckGo" };
 
   // 6. Pixabay (if API key provided)
-  url = await searchPixabay(searchName);
+  url = await searchPixabay(searchQueries);
   if (url) return { url, source: "Pixabay" };
 
   // 7. Pexels (if API key provided)
-  url = await searchPexels(searchName);
+  url = await searchPexels(searchQueries);
   if (url) return { url, source: "Pexels" };
 
   // 8. Unsplash (if API key provided)
-  url = await searchUnsplash(searchName);
+  url = await searchUnsplash(searchQueries);
   if (url) return { url, source: "Unsplash" };
 
   // 9. Firecrawl (last resort, costs tokens)
   if (firecrawl) {
-    url = await searchFirecrawl(searchName, country);
+    url = await searchFirecrawl(searchQueries);
     if (url) return { url, source: "Firecrawl" };
   }
 
@@ -515,6 +562,12 @@ async function main() {
   const mosques = data.mosques || [];
 
   console.log(`Found ${mosques.length} mosques\n`);
+
+  // Create backup
+  console.log("Creating backup...");
+  copyFileSync(dataPath, backupPath);
+  console.log(`Backup saved to: ${backupPath}\n`);
+
   console.log("Available sources:");
   console.log("  - Wikipedia (free)");
   console.log("  - Wikimedia Commons (free)");
@@ -526,159 +579,109 @@ async function main() {
   console.log(`  - Unsplash (${UNSPLASH_ACCESS_KEY ? "enabled" : "no API key"})`);
   console.log(`  - Firecrawl (${FIRECRAWL_API_KEY ? "enabled - last resort" : "no API key"})\n`);
 
-  const brokenImages = [];
-  const brokenGallery = [];
-  let checkedCount = 0;
-
-  // Phase 1: Check all images
-  console.log("=== Phase 1: Checking all image URLs ===\n");
-
-  for (let i = 0; i < mosques.length; i++) {
-    const mosque = mosques[i];
-    checkedCount++;
-
-    process.stdout.write(`\r[${checkedCount}/${mosques.length}] Checking: ${mosque.name.substring(0, 40).padEnd(40)}`);
-
-    if (mosque.imageUrl) {
-      const result = await checkImageUrl(mosque.imageUrl);
-      if (!result.ok) {
-        brokenImages.push({
-          index: i,
-          id: mosque.id,
-          name: mosque.name,
-          country: mosque.country,
-          url: mosque.imageUrl,
-          reason: result.reason
-        });
-      }
-    } else {
-      brokenImages.push({
-        index: i,
-        id: mosque.id,
-        name: mosque.name,
-        country: mosque.country,
-        url: null,
-        reason: "no imageUrl"
-      });
-    }
-
-    if (mosque.galleryUrls && Array.isArray(mosque.galleryUrls)) {
-      for (let j = 0; j < mosque.galleryUrls.length; j++) {
-        const galleryUrl = mosque.galleryUrls[j];
-        const result = await checkImageUrl(galleryUrl);
-        if (!result.ok) {
-          brokenGallery.push({
-            mosqueIndex: i,
-            galleryIndex: j,
-            id: mosque.id,
-            name: mosque.name,
-            country: mosque.country,
-            url: galleryUrl,
-            reason: result.reason
-          });
-        }
-      }
-    }
-
-    if (i % 5 === 0) {
-      await new Promise(r => setTimeout(r, 30));
-    }
-  }
-
-  console.log("\n\n=== Check Results ===");
-  console.log(`Broken main images: ${brokenImages.length}`);
-  console.log(`Broken gallery images: ${brokenGallery.length}`);
-
-  if (brokenImages.length > 0) {
-    console.log("\nBroken main images:");
-    for (const b of brokenImages.slice(0, 15)) {
-      console.log(`  - ${b.name} (${b.country}): ${b.reason}`);
-    }
-    if (brokenImages.length > 15) {
-      console.log(`  ... and ${brokenImages.length - 15} more`);
-    }
-  }
-
-  if (brokenImages.length === 0 && brokenGallery.length === 0) {
-    console.log("\nAll images are working!");
-    return;
-  }
-
-  // Phase 2: Fix broken main images
-  console.log("\n=== Phase 2: Finding replacement images ===\n");
+  // Confirm before proceeding
+  console.log("⚠️  WARNING: This will replace ALL mosque images with newly searched ones.");
+  console.log(`   Total mosques to process: ${mosques.length}\n`);
+  
+  // Phase 1: Replace ALL main images
+  console.log("=== Phase 1: Replacing ALL main images ===\n");
 
   let fixed = 0;
   let failedToFix = 0;
   const sourceStats = {};
 
-  for (const broken of brokenImages) {
-    console.log(`\n[${fixed + failedToFix + 1}/${brokenImages.length}] ${broken.name} (${broken.country})`);
-
-    const result = await findImage(broken.name, broken.country);
+  for (let i = 0; i < mosques.length; i++) {
+    const mosque = mosques[i];
+    const oldImageUrl = mosque.imageUrl;
+    
+    console.log(`\n[${i + 1}/${mosques.length}] ${mosque.name} (${mosque.country})`);
+    console.log(`  ID: ${mosque.id}`);
+    if (oldImageUrl) {
+      console.log(`  Old: ${oldImageUrl.substring(0, 60)}...`);
+    }
+    
+    // Pass full mosque info to findImage
+    const mosqueInfo = {
+      id: mosque.id,
+      name: mosque.name,
+      country: mosque.country,
+      location: mosque.location,
+      address: mosque.address
+    };
+    
+    const result = await findImage(mosqueInfo);
 
     if (result) {
-      console.log(`  Found via ${result.source}: ${result.url.substring(0, 70)}...`);
-      mosques[broken.index].imageUrl = result.url;
+      console.log(`  ✓ New: ${result.url.substring(0, 60)}...`);
+      console.log(`  ✓ Source: ${result.source}`);
+      mosques[i].imageUrl = result.url;
       saveData(data); // Save immediately
-      console.log(`  Saved to mosques.json`);
+      console.log(`  ✓ Saved`);
       fixed++;
       sourceStats[result.source] = (sourceStats[result.source] || 0) + 1;
     } else {
-      console.log("  No replacement found");
+      console.log("  ✗ No image found");
       failedToFix++;
     }
 
-    await new Promise(r => setTimeout(r, 200));
+    // Delay to avoid rate limiting
+    await new Promise(r => setTimeout(r, 300));
   }
 
-  // Phase 3: Fix broken gallery images
-  console.log("\n=== Phase 3: Fixing gallery images ===\n");
+  // Phase 2: Replace ALL gallery images
+  console.log("\n=== Phase 2: Replacing ALL gallery images ===\n");
 
   let galleryFixed = 0;
-  let galleryRemoved = 0;
+  let galleryFailed = 0;
 
-  const galleryByMosque = new Map();
-  for (const broken of brokenGallery) {
-    if (!galleryByMosque.has(broken.mosqueIndex)) {
-      galleryByMosque.set(broken.mosqueIndex, []);
+  for (let i = 0; i < mosques.length; i++) {
+    const mosque = mosques[i];
+    
+    if (!mosque.galleryUrls || !Array.isArray(mosque.galleryUrls) || mosque.galleryUrls.length === 0) {
+      continue;
     }
-    galleryByMosque.get(broken.mosqueIndex).push(broken);
-  }
 
-  for (const [mosqueIndex, brokenList] of galleryByMosque) {
-    const mosque = mosques[mosqueIndex];
-    console.log(`\nFixing gallery for: ${mosque.name}`);
+    console.log(`\n[${i + 1}/${mosques.length}] ${mosque.name} - ${mosque.galleryUrls.length} gallery images`);
 
-    for (const broken of brokenList) {
-      const result = await findImage(broken.name, broken.country, true);
+    const newGalleryUrls = [];
+    
+    for (let j = 0; j < mosque.galleryUrls.length; j++) {
+      const oldUrl = mosque.galleryUrls[j];
+      console.log(`  Gallery ${j + 1}: Searching...`);
+      
+      const mosqueInfo = {
+        id: mosque.id,
+        name: mosque.name,
+        country: mosque.country,
+        location: mosque.location,
+        address: mosque.address
+      };
+      
+      const result = await findImage(mosqueInfo, true);
 
-      if (result && mosque.galleryUrls) {
-        const idx = mosque.galleryUrls.indexOf(broken.url);
-        if (idx !== -1) {
-          mosque.galleryUrls[idx] = result.url;
-          saveData(data); // Save immediately
-          galleryFixed++;
-          console.log(`  Replaced via ${result.source} - Saved`);
-          sourceStats[result.source] = (sourceStats[result.source] || 0) + 1;
-        }
+      if (result) {
+        console.log(`    ✓ Found: ${result.source}`);
+        newGalleryUrls.push(result.url);
+        galleryFixed++;
+        sourceStats[result.source] = (sourceStats[result.source] || 0) + 1;
       } else {
-        if (mosque.galleryUrls) {
-          mosque.galleryUrls = mosque.galleryUrls.filter(u => u !== broken.url);
-          saveData(data); // Save immediately
-          galleryRemoved++;
-          console.log(`  Removed broken URL - Saved`);
-        }
+        console.log("    ✗ Not found, keeping old URL");
+        newGalleryUrls.push(oldUrl);
+        galleryFailed++;
       }
 
-      await new Promise(r => setTimeout(r, 150));
+      await new Promise(r => setTimeout(r, 200));
     }
+
+    mosques[i].galleryUrls = newGalleryUrls;
+    saveData(data);
+    console.log(`  ✓ Gallery saved`);
   }
 
   console.log(`\n=== Summary ===`);
-  console.log(`Main images fixed: ${fixed}/${brokenImages.length}`);
-  console.log(`Gallery images fixed: ${galleryFixed}`);
-  console.log(`Gallery images removed: ${galleryRemoved}`);
-  console.log(`Failed to fix: ${failedToFix}`);
+  console.log(`Main images: ${fixed} replaced, ${failedToFix} failed`);
+  console.log(`Gallery images: ${galleryFixed} replaced, ${galleryFailed} kept`);
+  console.log(`Total mosques: ${mosques.length}`);
 
   if (Object.keys(sourceStats).length > 0) {
     console.log(`\nImages by source:`);
@@ -686,6 +689,8 @@ async function main() {
       console.log(`  - ${source}: ${count}`);
     }
   }
+
+  console.log(`\nBackup saved at: ${backupPath}`);
 }
 
 main().catch(err => {

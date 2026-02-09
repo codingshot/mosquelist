@@ -7,10 +7,11 @@ import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
 import { filterMosquesByQuery } from "@/lib/search";
 import { MosqueCard } from "./MosqueCard";
 import { SwipeDeck } from "./SwipeDeck";
-import { VirtualizedMosqueGrid } from "./VirtualizedMosqueGrid";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { Link, useSearchParams } from "react-router-dom";
 import { useMemo, useCallback, useState, useEffect, useRef } from "react";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -43,8 +44,8 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 
-/** Threshold for using virtualization (number of items) */
-const VIRTUALIZATION_THRESHOLD = 50;
+/** Items per page for infinite scroll */
+const ITEMS_PER_PAGE = 12;
 
 const PARAM_QUERY = "q";
 const PARAM_FILTER = "filter";
@@ -256,6 +257,15 @@ export const MosqueGrid = ({
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  // Infinite scroll state
+  const [page, setPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [query, filter, country, region, womenOnly, touristOnly, facilityGuided, facilityWheelchair, capMin, capMax, areaMin, areaMax, estMin, estMax, architecturalStyle, denomination, sort]);
+
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -451,9 +461,35 @@ export const MosqueGrid = ({
     sort,
   ]);
 
-  const displayedMosques = isPreview
-    ? filteredMosques.slice(0, PREVIEW_GRID_SIZE)
-    : filteredMosques;
+  // Calculate paginated mosques for infinite scroll
+  const paginatedMosques = useMemo(() => {
+    if (isPreview) {
+      return filteredMosques.slice(0, PREVIEW_GRID_SIZE);
+    }
+    return filteredMosques.slice(0, page * ITEMS_PER_PAGE);
+  }, [filteredMosques, isPreview, page]);
+
+  const hasMore = !isPreview && paginatedMosques.length < filteredMosques.length;
+
+  // Load more handler
+  const loadMore = useCallback(() => {
+    if (isLoadingMore || !hasMore) return;
+    setIsLoadingMore(true);
+    // Simulate small delay for smooth UX
+    setTimeout(() => {
+      setPage((p) => p + 1);
+      setIsLoadingMore(false);
+    }, 300);
+  }, [hasMore, isLoadingMore]);
+
+  // Infinite scroll hook
+  const { setSentinelRef } = useInfiniteScroll({
+    onLoadMore: loadMore,
+    hasMore,
+    isLoading: isLoadingMore,
+  });
+
+  const displayedMosques = paginatedMosques;
 
   const filteredMosquesWithCoords = useMemo(
     () =>
@@ -1158,11 +1194,8 @@ export const MosqueGrid = ({
             onLike={(mosque) => toggleFavorite(mosque.id)}
             isFavorite={isFavorite}
           />
-        ) : displayedMosques.length > VIRTUALIZATION_THRESHOLD && !isPreview ? (
-          // Use virtualization for large lists
-          <VirtualizedMosqueGrid mosques={displayedMosques} />
         ) : (
-          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-2 px-1">
             {displayedMosques.map((mosque, index) => (
               <MosqueCard
                 key={mosque.id}
@@ -1172,6 +1205,31 @@ export const MosqueGrid = ({
               />
             ))}
           </div>
+        )}
+
+        {/* Infinite scroll sentinel and loading indicator */}
+        {!isPreview && view !== "map" && view !== "swipe" && hasMore && (
+          <>
+            <div
+              ref={setSentinelRef}
+              className="h-8 w-full mt-4"
+              aria-hidden="true"
+            />
+            {isLoadingMore && (
+              <div className="flex items-center justify-center py-4">
+                <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                <span className="ml-2 text-sm text-muted-foreground">
+                  Loading more mosques...
+                </span>
+              </div>
+            )}
+          </>
+        )}
+
+        {!isPreview && !hasMore && displayedMosques.length > 0 && (
+          <p className="text-center text-sm text-muted-foreground py-6">
+            You&apos;ve reached the end. {filteredMosques.length} mosques total.
+          </p>
         )}
 
         {isPreview && displayedMosques.length > 0 && (
