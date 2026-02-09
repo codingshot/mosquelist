@@ -790,35 +790,6 @@
       "imageLocal": "/images/mosques/putra-mosque.jpg"
     },
     {
-      "id": "sultan-omar-ali-saifuddin",
-      "name": "Sultan Omar Ali Saifuddin Mosque",
-      "arabicName": "مسجد عمر علي سيف الدين",
-      "location": "Bandar Seri Begawan",
-      "country": "Brunei",
-      "capacity": 3000,
-      "established": "1958",
-      "area": 5000,
-      "annualVisitors": "Major tourist attraction",
-      "facilities": [
-        "Visitor viewing",
-        "Lagoon setting",
-        "Golden dome",
-        "Marble minaret"
-      ],
-      "significance": "National symbol of Brunei, one of Asia's most beautiful mosques",
-      "description": "Built in 1958, this mosque stands in an artificial lagoon and is crowned by a golden dome. It blends Mughal and Malay styles and is one of the most photographed religious buildings in Southeast Asia.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Sultan_Omar_Ali_Saifuddin_Mosque_02.jpg/1280px-Sultan_Omar_Ali_Saifuddin_Mosque_02.jpg",
-      "isHolySite": false,
-      "architecturalStyle": "Mughal and Malay",
-      "womenPrayerArea": true,
-      "touristFriendly": true,
-      "coordinates": {
-        "lat": 4.8903,
-        "lng": 114.9422
-      },
-      "tourismNotes": "Visitor viewing. Stands in artificial lagoon. Golden dome. One of Southeast Asia's most photographed mosques."
-    },
-    {
       "id": "baitul-mukarram",
       "name": "Baitul Mukarram",
       "arabicName": "بيت المكرّم",
@@ -1441,7 +1412,7 @@
       ],
       "significance": "Largest mosque in Sudan, historic Turkish-Islamic style",
       "description": "The Great Mosque of Khartoum, also known as Al Kabir Mosque, is Sudan's largest mosque. Built in Turkish-Islamic style with reddish sandstone, it was opened in 1901 and accommodates up to 10,000 worshippers.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/%C2%A9Nile-Project_-Sari_Omer_0025.jpg/1280px-%C2%A9Nile-Project_-Sari_Omer_0025.jpg",
+      "imageUrl": "https://www.sudanmemory.org/api/v1/records/IAH-0000081/files/images/IAH-0000081.tif/full/1550,/0/default.jpg",
       "isHolySite": false,
       "architecturalStyle": "Turkish-Islamic",
       "womenPrayerArea": true,
@@ -1626,7 +1597,7 @@
       "facilities": ["Prayer halls", "Courtyards", "Ablution facilities"],
       "significance": "One of the oldest and most historically significant mosques in the world.",
       "description": "The Umayyad Mosque in Damascus is a major early Islamic monument known for its large courtyard, prayer hall, and rich historical associations.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Umayyad_Mosque%2C_Damascus.jpg/1280px-Umayyad_Mosque%2C_Damascus.jpg",
+      "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/eb/32/93/an-amazing-place-to-visit.jpg?w=1200&h=-1&s=1",
       "isHolySite": false,
       "architecturalStyle": "Umayyad",
       "womenPrayerArea": true,
@@ -2315,7 +2286,7 @@
       "facilities": ["Prayer halls", "Courtyards", "Ablution facilities"],
       "significance": "A large mosque in Kuala Lumpur inspired by Ottoman and Malay styles.",
       "description": "Federal Territory Mosque is a major congregational mosque in Kuala Lumpur with multiple domes and landscaped surrounds, serving the capital’s Muslim population.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Bukit_Bintang_junction_in_2024_2.jpg/1280px-Bukit_Bintang_junction_in_2024_2.jpg",
+      "imageUrl": "https://cdn3.ivivu.com/2023/06/Federal-Territory-Mosque-ivivu-14.jpg",
       "isHolySite": false,
       "architecturalStyle": "Malay",
       "womenPrayerArea": true,
@@ -2854,10 +2825,10 @@
       ],
       "significance": "Oldest and largest mosque in Addis Ababa and a key religious centre for Muslims in the Ethiopian capital.",
       "description": "Grand Anwar Mosque, located near Merkato in the Arada district, is Addis Ababa's oldest and largest mosque, completed around 1922. Built initially by the Italian administration and later finished with funds from the Muslim community, it is easily recognised by its white and green façade, multiple domes and prominent minarets, and serves as a focal point for Friday and Ramadan congregations.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Addis_in_night.jpg/1280px-Addis_in_night.jpg",
+      "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/3c/b9/8b/main-building.jpg?w=900&h=-1&s=1",
       "galleryUrls": [
-        "https://upload.wikimedia.org/wikipedia/commons/8/89/Hosni_Mubarak_-_Official_Photo.JPG",
-        "https://upload.wikimedia.org/wikipedia/commons/8/89/Hosni_Mubarak_-_Official_Photo.JPG"
+        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/3c/b9/8b/main-building.jpg?w=900&h=-1&s=1",
+        "https://upload.wikimedia.org/wikipedia/commons/a/ae/Anwar_Grand_Mosque.jpg"
       ],
       "isHolySite": false,
       "architecturalStyle": "Early 20th-century Islamic with Italian influences",
@@ -2929,10 +2900,10 @@
       ],
       "significance": "Largest mosque in Djibouti and a prominent Ottoman-style landmark built as a symbol of Turkey–Djibouti cooperation.",
       "description": "Abdülhamid Han II Mosque is a large Ottoman-style mosque built on reclaimed land in the Salines Ouest district of Djibouti City, near the presidential palace. Covering more than 13,000 square metres, it features a central dome about 27 metres high, two 46-metre minarets and interior decoration inspired by classic Turkish mosques, making it the biggest symbolic religious structure in the country.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ec/1A1182101_283348VIII008_%2815246932635%29.jpg",
+      "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/7b/6d/7c/c.jpg?w=900&h=-1&s=1",
       "galleryUrls": [
-        "https://upload.wikimedia.org/wikipedia/commons/e/ec/1A1182101_283348VIII008_%2815246932635%29.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/e/ec/1A1182101_283348VIII008_%2815246932635%29.jpg"
+        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/7b/6d/7c/c.jpg?w=900&h=-1&s=1",
+        "https://www.colorkinetics.com/content/dam/color-kinetics/showcases/abdulhamid-han-mosque/abdulhamid-han-mosque-thumb.jpg"
       ],
       "isHolySite": false,
       "architecturalStyle": "Ottoman-inspired modern Islamic",
@@ -2965,10 +2936,10 @@
       ],
       "significance": "One of the best-known examples of Sudano-Sahelian earthen mosque architecture and a major religious site in western Burkina Faso.",
       "description": "The Grand Mosque of Bobo-Dioulasso is a large adobe mosque in the old quarter of Bobo-Dioulasso, characterized by thick mud-brick walls, wooden toron beams and tapering minaret towers typical of Sudano-Sahelian architecture. It remains a functioning place of worship while also attracting visitors who come to explore its narrow interior spaces and rooftop views over the old town.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/BoboDioulasso-Market.JPG/1280px-BoboDioulasso-Market.JPG",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Moschee_von_Bobo-Dioulasso.jpg/500px-Moschee_von_Bobo-Dioulasso.jpg",
       "galleryUrls": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Masjid_e_Nabawi_Interior_2.jpg/1280px-Masjid_e_Nabawi_Interior_2.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Masjid_e_Nabawi_Interior_2.jpg/1280px-Masjid_e_Nabawi_Interior_2.jpg"
+        "https://www.islamicarchitecturalheritage.com/wp-content/uploads/2020/07/grand-mosque-of-bobo-dioulasso.jpg",
+        "https://www.islamicarchitecturalheritage.com/wp-content/uploads/2020/07/grand-mosque-of-bobo-dioulasso-4.jpg"
       ],
       "isHolySite": false,
       "architecturalStyle": "Sudano-Sahelian earthen mosque",
@@ -3036,10 +3007,10 @@
       ],
       "significance": "One of the largest mosques in North America and a major Shia Islamic center serving the Lebanese-American community and wider Muslim population.",
       "description": "The Islamic Center of America in Dearborn is a 120,000-square-foot complex that serves as a religious, educational and cultural hub for Muslims in the Detroit area. Its modern building, opened in 2005, features a grand prayer hall, large dome and multiple community spaces, hosting major events, interfaith programs and large Friday and Ramadan congregations.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Former_city_hall_during_Memorial_Day_Parade%2C_Dearborn%2C_Michigan.jpg/1280px-Former_city_hall_during_Memorial_Day_Parade%2C_Dearborn%2C_Michigan.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Islamic_Center_of_America.jpg",
       "galleryUrls": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Former_city_hall_during_Memorial_Day_Parade%2C_Dearborn%2C_Michigan.jpg/1280px-Former_city_hall_during_Memorial_Day_Parade%2C_Dearborn%2C_Michigan.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Former_city_hall_during_Memorial_Day_Parade%2C_Dearborn%2C_Michigan.jpg/1280px-Former_city_hall_during_Memorial_Day_Parade%2C_Dearborn%2C_Michigan.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/3/3c/Islamic_Center_of_America.jpg",
+        "https://storage.googleapis.com/clio-images/large_30693.70871.jpg"
       ],
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic with Middle Eastern influences",
@@ -3073,10 +3044,10 @@
       ],
       "significance": "The first purpose-built mosque in New York City and a major Islamic center serving a diverse international community.",
       "description": "The Islamic Cultural Center of New York, located on Manhattan's Upper East Side, is a prominent mosque with a striking modern design, featuring a tall minaret and a cubical prayer hall capped by a dome. It serves Muslims from many countries and hosts large Friday and Eid congregations, educational programs and interfaith activities.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1280px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg",
+      "imageUrl": "https://neildegrassetyson.com/wp-content/uploads/2022/11/Mosque-B-1024x768.jpg",
       "galleryUrls": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1280px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1280px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/7/76/Islamic_Cultural_Center_E96_jeh.JPG",
+        "https://neildegrassetyson.com/wp-content/uploads/2022/11/Mosque-B-1024x768.jpg"
       ],
       "isHolySite": false,
       "architecturalStyle": "Modernist Islamic",
@@ -3291,9 +3262,9 @@
       ],
       "significance": "One of the fastest-growing and most well-known mosques in Texas, noted for its large congregation and programming.",
       "description": "The East Plano Islamic Center (EPIC Masjid) is a large suburban mosque and community center that has become widely known through its programs, scholars and strong online presence. It serves a rapidly growing Muslim population in the Dallas-Fort Worth metroplex.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Al-Farooq_Masjid_Mosque_Atlanta%2C_Georgia.jpg",
+      "imageUrl": "https://npr.brightspotcdn.com/dims4/default/d3aaebb/2147483647/strip/true/crop/8068x4236+0+573/resize/1200x630!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F53%2Fe5%2Fad6d868440bf986c6ea048df0445%2F04022025-epic-mosque-03-kera.jpg",
       "galleryUrls": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/RoxburyMosque2.JPG/1280px-RoxburyMosque2.JPG"
+        "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/KZ4BSR5HMRISD7T2GCDNMXMXYI.jpg&w=1800&h=1800"
       ],
       "isHolySite": false,
       "architecturalStyle": "Modern suburban mosque",
@@ -3358,9 +3329,9 @@
       ],
       "significance": "A prominent Atlanta mosque known for its large campus, schools and community services.",
       "description": "Masjid Al-Farooq in Atlanta is recognized for its sizeable complex, including schools and a variety of services, and is a key Islamic institution in the southeastern United States. Its design features multiple domes and minarets and serves a large, diverse congregation.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Al-Farooq_Masjid_Mosque_Atlanta%2C_Georgia.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Al-Farooq_Masjid%2C_Atlanta_3.jpg",
       "galleryUrls": [
-        "https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Lal_Masjid_Exterior.jpeg/1280px-Lal_Masjid_Exterior.jpeg"
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7vfnGml-9uDoNPjwsK5StmJHuhPd25NisZg&s"
       ],
       "isHolySite": false,
       "architecturalStyle": "Traditional-style American mosque",
@@ -3433,7 +3404,7 @@
       ],
       "significance": "Unique wooden Chinese-style mosque built without nails by Dungan Muslim refugees",
       "description": "The Dungan Mosque was built between 1907 and 1910 by Dungan (Chinese Muslim) refugees fleeing persecution in China. Designed by a Chinese architect, it was built entirely without nails using interlocking wood. The colorful building resembles a Buddhist pagoda but serves as a mosque.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/%D0%9A%D0%B0%D1%80%D0%B0%D0%BA%D0%BE%D0%BB%2C_%D0%BF%D0%B0%D1%80%D0%BA_%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D0%B0%2C_%D1%81%D1%84%D0%B5%D1%80%D0%BE%D0%BF%D0%B0%D0%BD%D0%BE%D1%80%D0%B0%D0%BC%D0%B0.jpg/1280px-%D0%9A%D0%B0%D1%80%D0%B0%D0%BA%D0%BE%D0%BB%2C_%D0%BF%D0%B0%D1%80%D0%BA_%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D0%B0%2C_%D1%81%D1%84%D0%B5%D1%80%D0%BE%D0%BF%D0%B0%D0%BD%D0%BE%D1%80%D0%B0%D0%BC%D0%B0.jpg",
+      "imageUrl": "https://www.advantour.com/img/kyrgyzstan/karakol/karakol-dungan-mosque.jpg",
       "isHolySite": false,
       "architecturalStyle": "Chinese",
       "architectureNotes": "Chinese pagoda-style construction. Built without nails using interlocking wood. Colors represent Dungan cultural concepts: yellow for wealth, green for happiness.",
@@ -3504,7 +3475,7 @@
       "facilities": ["Prayer halls", "Courtyards", "Renovated facilities"],
       "significance": "Largest mosque in the Horn of Africa, national mosque of Somalia",
       "description": "The Mosque of Islamic Solidarity in Mogadishu is the largest mosque in the Horn of Africa. Completed in 1987, it overlooks the Somali Sea. Rebuilt and renovated in 2013 with Turkish funding after years of conflict damage.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lido_beach_from_the_sea_in_Mogadishu.jpg/1280px-Lido_beach_from_the_sea_in_Mogadishu.jpg",
+      "imageUrl": "https://www.alluringworld.com/wp-content/uploads/2017/01/4-Solidarity-Somalia.jpg",
       "isHolySite": false,
       "architecturalStyle": "Islamic",
       "history": "Built 1987. Damaged during Somali Civil War. Rebuilt and renovated 2013 with Turkish assistance.",
@@ -3616,7 +3587,7 @@
       "facilities": ["Prayer halls", "Central location"],
       "significance": "One of the largest mosques in Sierra Leone, seat of Chief Imam",
       "description": "Freetown Central Mosque is one of the two largest mosques in Sierra Leone. Located in the capital Freetown, it serves as the seat of Sheikh Ahmad Tejan Sillah, the Chief Imam and spiritual leader of the United Council of Imams in Sierra Leone.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Freetown-aerialview.jpg/1280px-Freetown-aerialview.jpg",
+      "imageUrl": "https://www.islamicarchitecturalheritage.com/wp-content/uploads/2020/09/freetown-central-mosque-gaddafi-mosque-sierra-leone.jpg",
       "isHolySite": false,
       "architecturalStyle": "Islamic",
       "tourismNotes": "Central location in Freetown. Seat of Sierra Leone's Chief Imam.",
@@ -3624,40 +3595,6 @@
       "touristFriendly": true,
       "denomination": "sunni",
       "sources": ["https://en.wikipedia.org/wiki/Freetown_Central_Mosque"]
-    },
-    {
-      "id": "mohammed-vi-mosque-dar-es-salaam",
-      "name": "Mohammed VI Mosque",
-      "arabicName": "مسجد محمد السادس",
-      "location": "Dar es Salaam",
-      "country": "Tanzania",
-      "coordinates": {
-        "lat": -6.7896,
-        "lng": 39.268
-      },
-      "capacity": 8000,
-      "established": "2022",
-      "area": 7400,
-      "annualVisitors": "National Muslim Council HQ",
-      "facilities": [
-        "Prayer halls",
-        "National Muslim Council HQ",
-        "Moroccan craftsmanship"
-      ],
-      "significance": "Major grand mosque in Tanzania, headquarters of National Muslim Council",
-      "description": "Mohammed VI Mosque is a grand mosque in Dar es Salaam, Tanzania, funded by King Mohammed VI of Morocco. Completed April 15, 2022, it serves as the headquarters of the National Muslim Council of Tanzania. Built in Moorish architectural style.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/St_Joseph%27s_Catholic_Cathedral_%2834895613805%29.jpg",
-      "isHolySite": false,
-      "architecturalStyle": "Moorish",
-      "architectureNotes": "Moorish Revival architecture. Single minaret. Moroccan craftsmanship and design.",
-      "history": "Groundbreaking October 25, 2016. Completed April 15, 2022. Funded by King Mohammed VI of Morocco.",
-      "tourismNotes": "Headquarters of National Muslim Council of Tanzania. Modern facility.",
-      "womenPrayerArea": true,
-      "touristFriendly": true,
-      "denomination": "sunni",
-      "sources": [
-        "https://en.wikipedia.org/wiki/Mohammed_VI_Mosque_(Dar_es_Salaam)"
-      ]
     },
     {
       "id": "great-mosque-of-asmara",
@@ -3676,7 +3613,7 @@
       "facilities": ["Prayer hall", "Minaret", "Art Deco city context"],
       "significance": "One of three prominent edifices in UNESCO-listed Asmara, featuring unique minaret design",
       "description": "The Great Mosque of Asmara (Al Kulafah Al Rashidan) is a mosque in central Asmara, Eritrea. Built in 1938 during Italian colonial rule, its minaret resembles a fluted Roman column. It is one of three prominent buildings in the city, alongside the Church of Our Lady of the Rosary and the Orthodox cathedral.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Asmara_Montage.png/1280px-Asmara_Montage.png",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Great_Mosque_%288351473351%29.jpg",
       "isHolySite": false,
       "architecturalStyle": "Italian Colonial",
       "architectureNotes": "Minaret resembles a fluted Roman column. Built during Italian colonial period. Part of Asmara's UNESCO-listed modernist architecture.",
@@ -3763,7 +3700,7 @@
       "facilities": ["Prayer hall", "Historic architecture", "Medina location"],
       "significance": "Historic Friday mosque in the capital, part of Moroni's historic medina",
       "description": "The Badjanani Mosque (Ancienne Mosquée du Vendredi / Old Friday Mosque) is a historic mosque in the medina of Moroni, capital of the Comoros. Dating to the 15th–19th century, it features calligraphy, minarets, and tilework. Located near the old harbor, it is similar in style to mosques in Lamu.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/-%D8%A7%D9%84%D8%AF%D9%8A%D8%A7%D9%86%D9%8A_-_panoramio.jpg",
+      "imageUrl": "https://www.alluringworld.com/wp-content/uploads/2016/03/3-Badjanani.jpg",
       "isHolySite": false,
       "architecturalStyle": "Swahili-Islamic",
       "architectureNotes": "Traditional Comorian and Swahili coastal architecture. Calligraphy and tilework. Similar to Lamu mosques.",
@@ -3829,7 +3766,7 @@
       "facilities": ["Prayer hall", "Minarets", "Islamic center"],
       "significance": "Nouakchott Grand Mosque, built with Saudi assistance",
       "description": "The Saudi Mosque (Nouakchott Grand Mosque) is a major Sunni mosque in Mauritania's capital, located southwest of the Presidential Palace. Built with assistance from the Government of Saudi Arabia in 2012, it serves as a prominent landmark and center for religious activities.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Nouakchott.jpg/1280px-Nouakchott.jpg",
+      "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/cd/c8/9c/saudi-mosque.jpg?w=1200&h=-1&s=1",
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic",
       "architectureNotes": "Modern construction with minarets. Saudi-funded. Located near Presidential Palace and Chamber of Commerce.",
@@ -3892,7 +3829,7 @@
       ],
       "significance": "Largest mosque in Ivory Coast's economic capital, Sudanese-style architecture",
       "description": "The Plateau Salam Mosque (Mosquée Salam du Plateau) is a major mosque in Abidjan's Plateau district. Inaugurated in 2007 after construction began in 1996, it features a vivid blue dome with gold design and a 65-meter minaret. Inspired by Silk Route Central Asian architecture, it accommodates 6,500 worshippers.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/019_Rally_%2839025071401%29.jpg",
+      "imageUrl": "https://www.reviewofreligions.org/wp-content/uploads/2025/10/shutterstock_2448619431.jpg",
       "isHolySite": false,
       "architecturalStyle": "Sudanese-Central Asian",
       "architectureNotes": "Vivid blue dome with gold design. 65-meter minaret. Four floors: parking, ablution areas, main prayer hall, women's section. Silk Route-inspired.",
@@ -3959,7 +3896,7 @@
       ],
       "significance": "Main mosque in Mozambique's capital, center of Islamic community activities",
       "description": "The Maputo Central Mosque (Grand Mosque) is the main mosque in Mozambique's capital, inaugurated in early 2003. Built by the Islamic community after obtaining permission for construction in downtown Maputo, it serves as a center for religious services and community activities.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8f/A_Direc%C3%A7%C3%A3o_dos_Correios%2C_Tel%C3%A9grafos_e_Telefones_e_o_seu_pessoal_-_Louren%C3%A7o_Marques.jpg",
+      "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/e8/78/d1/getlstd-property-photo.jpg?w=1200&h=-1&s=1",
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic",
       "architectureNotes": "Modern construction. White facade with green accents. Minaret. Downtown Maputo location.",
@@ -4710,7 +4647,7 @@
       ],
       "significance": "Largest mosque in Japan",
       "description": "Tokyo Camii is the largest mosque in Japan, located in Shibuya. The original mosque was built by Tatar refugees in 1938 and rebuilt in 2000 in Ottoman architectural style. The Turkish Cultural Center below promotes interfaith dialogue. It's one of Asia's most beautiful mosques.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Abbasid_Dinar_-_Al-Mu%27tasim-225h.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/25/Tokyo_Camii_2009.jpg",
       "isHolySite": false,
       "architecturalStyle": "Ottoman",
       "architectureNotes": "Ottoman-style architecture with 23m dome. Two minarets. Interior tiles from Turkey. Rebuilt 2000 with Turkish government support.",
@@ -4778,7 +4715,7 @@
       "facilities": ["Prayer hall", "Community center", "Cemetery nearby"],
       "significance": "Oldest mosque in South America",
       "description": "Mesquita Brasil (Brazil Mosque), originally called São Paulo Mosque, is considered the oldest mosque in South America, founded in 1929. Built by Syrian and Lebanese immigrants, it was renamed 'Brazil Mosque' to avoid the Christian saint's name. A historic landmark of Muslim presence in Latin America.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Marginal_Pinheiros_e_Jockey_Club.jpg/1280px-Marginal_Pinheiros_e_Jockey_Club.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Mesquita.JPG",
       "isHolySite": false,
       "architecturalStyle": "Moorish Revival",
       "architectureNotes": "1929 construction. Moorish-influenced architecture with arches. Modest size. Historic community center.",
@@ -4812,7 +4749,7 @@
       ],
       "significance": "Largest mosque in Latin America, tourist landmark near Iguazu Falls",
       "description": "The Omar Ibn Al-Khattab Mosque in Foz do Iguaçu is one of the largest mosques in Latin America. Located in the tri-border region (Brazil-Argentina-Paraguay), it serves the local Arab community and is a tourist attraction near the famous Iguazu Falls. Its distinctive minaret is a city landmark.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/36/SkylineFoz.JPG",
+      "imageUrl": "https://imaginoso.com/files/brazil/foz-do-iguacu/2409-omar-ibn-al-khatab-mosque-southwest-elevation-4035.jpg",
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic",
       "architectureNotes": "Prominent minaret. Modern construction. Located in tri-border area with significant Arab population.",
@@ -4914,7 +4851,7 @@
       ],
       "significance": "Largest mosque in the Netherlands, one of the largest in Europe",
       "description": "Essalam Mosque is the largest mosque in the Netherlands and often cited as one of the largest in Europe. Funded by the Al Maktoum Foundation (UAE), it opened in 2010 after years of controversy. Its distinctive domes and minarets make it a Rotterdam landmark.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/A_view_of_Rotterdam%2C_taken_from_the_roof_of_the_Maassilo%2C_Rotterdam%2C_The_Netherlands.jpg/1280px-A_view_of_Rotterdam%2C_taken_from_the_roof_of_the_Maassilo%2C_Rotterdam%2C_The_Netherlands.jpg",
+      "imageUrl": "https://mosqpedia.org/wp-content/uploads/2024/09/BxyTWXh3wb3b7nCB8HNDNboSuxHzYsMDUR5oRjh1.jpeg",
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic",
       "architectureNotes": "50m minarets (among tallest in Europe). Large central dome. Capacity 3,000. Funded by UAE.",
@@ -5007,7 +4944,7 @@
       "facilities": ["Prayer hall", "Educational hall", "Cemetery"],
       "significance": "Main mosque of Chiang Mai's Hui Muslim community",
       "description": "Ban Ho Mosque (Masjid Hedayatul Islam) is the main mosque of Chiang Mai's Hui Muslim community, descendants of Chinese Muslim traders who settled in northern Thailand. Built in 1917, it blends Thai and Chinese architectural elements with Islamic design.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/0020-%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%AB%E0%B9%8C%E0%B8%A7%E0%B8%A3%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3.jpg/1280px-0020-%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%AB%E0%B9%8C%E0%B8%A7%E0%B8%A3%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Baan_Haw_Mosque_4-6-09.jpg",
       "isHolySite": false,
       "architecturalStyle": "Thai-Chinese Islamic",
       "architectureNotes": "Blend of Thai, Chinese, and Islamic styles. Serves Hui Muslim community (Chin Haw). Two buildings: prayer hall and educational hall.",
@@ -5301,7 +5238,7 @@
       "facilities": ["Prayer hall", "University", "Library", "Courtyards"],
       "significance": "World's oldest continually operating university, founded 859 CE",
       "description": "Al-Qarawiyyin Mosque and University is recognized by UNESCO and Guinness World Records as the oldest continually operating university in the world. Founded in 859 CE by Fatima al-Fihri, it has been a leading center of Islamic scholarship for over 1,100 years.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Fatima_Fihria.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/University_of_Al_Qaraouiyine.jpg/500px-University_of_Al_Qaraouiyine.jpg",
       "isHolySite": false,
       "architecturalStyle": "Moroccan Islamic",
       "architectureNotes": "Multiple courtyards. Historic library. One of the world's oldest educational institutions. Intricate zellige tilework, carved plaster, and cedar wood.",
@@ -5522,7 +5459,7 @@
       ],
       "significance": "One of the largest mosques in Central Asia, landmark of Astana",
       "description": "Nur-Astana Mosque was Kazakhstan's main Friday mosque before the Astana Grand Mosque opened. Completed in 2005, it features a 40m dome and four 63m minarets, blending modern design with Islamic architectural traditions.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Astana_DSC04362_%287711355642%29.jpg/1280px-Astana_DSC04362_%287711355642%29.jpg",
+      "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/c3/92/ec/getlstd-property-photo.jpg?w=900&h=500&s=1",
       "isHolySite": false,
       "architecturalStyle": "Modern Islamic",
       "architectureNotes": "40m central dome, four 63m minarets. White granite and marble exterior. Capacity doubled original plans.",
@@ -5858,7 +5795,7 @@
       "facilities": ["Prayer hall", "Islamic school", "Community center"],
       "significance": "Historic hilltop mosque and cultural landmark of Ugandan Islam",
       "description": "Kibuli Mosque sits on one of Kampala's seven hills and serves as the headquarters of the Uganda Muslim Supreme Council. The white-domed mosque overlooks downtown Kampala and holds deep historical significance for Uganda's Muslim community.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Kampalamontage.png",
+      "imageUrl": "https://africaadventurevacations.com/wp-content/uploads/2018/09/sdf.jpg",
       "isHolySite": false,
       "architecturalStyle": "Colonial Islamic",
       "architectureNotes": "White-washed exterior. Hilltop location. Views of Kampala.",
@@ -6052,7 +5989,7 @@
       ],
       "significance": "Largest mosque in Djibouti, built by Turkey's Diyanet Foundation",
       "description": "Abdülhamid II Mosque is the largest mosque in Djibouti, built on land reclaimed from the sea. Constructed by Turkey's Diyanet Foundation and named after Ottoman Sultan Abdülhamid II, it accommodates 6,000 worshippers and features a 27m dome and two 40m minarets.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Djibcapital.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Photo_of_Abd%C3%BClhamid_II_Mosque.jpg",
       "isHolySite": false,
       "architecturalStyle": "Neo-Ottoman",
       "architectureNotes": "27m dome. Two 40m minarets. Built on reclaimed land. Turkish Diyanet Foundation construction.",
@@ -6108,7 +6045,7 @@
       "facilities": ["Prayer hall", "Minaret", "Courtyard"],
       "significance": "Historic Friday mosque in Comoros capital, reflecting Swahili Coast Islamic heritage",
       "description": "The Friday Mosque of Moroni (Ancienne Mosquée du Vendredi) is the main congregational mosque of Comoros' capital. Dating to 1427, it reflects the islands' deep connection to Swahili Coast Islamic culture and Arab-African trading traditions.",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Cairo_Skyline_%282020%29.jpg",
+      "imageUrl": "https://live.staticflickr.com/1419/1267461661_afafe8270f_b.jpg",
       "isHolySite": false,
       "architecturalStyle": "Swahili-Arab",
       "architectureNotes": "White-washed walls. Traditional minaret. Swahili Coast influences.",
@@ -6359,7 +6296,7 @@
     },
     {
       "id": "omar-ali-saifuddien-mosque",
-      "name": "Sultan Omar Ali Saifuddien Mosque",
+      "name": "Omar Ali Saifuddien Mosque",
       "arabicName": "مسجد عمر علي سيف الدين",
       "location": "Bandar Seri Begawan",
       "country": "Brunei",
@@ -7030,12 +6967,6 @@
       "mosque": "Gurgi Mosque",
       "mosqueId": "gurgi-mosque-tripoli",
       "event": "Ottoman-era mosque completed in Tripoli's medina"
-    },
-    {
-      "year": "2022",
-      "mosque": "Mohammed VI Mosque",
-      "mosqueId": "mohammed-vi-mosque-dar-es-salaam",
-      "event": "Morocco-funded grand mosque completed in Dar es Salaam, Tanzania"
     },
     {
       "year": "1938",
