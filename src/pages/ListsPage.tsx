@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -17,7 +17,11 @@ export default function ListsPage() {
   const { bucketList } = useBucketList();
   const { favoriteLists, isFavoriteList, toggleFavoriteList } = useFavoriteLists();
   const [filter, setFilter] = useState<ListFilter>("all");
-  
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const bucketSet = useMemo(
     () => new Set(bucketList.map((i) => i.mosqueId)),
     [bucketList]

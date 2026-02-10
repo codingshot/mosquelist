@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { BucketList } from "@/components/BucketList";
@@ -5,6 +6,9 @@ import { BackToTop } from "@/components/BackToTop";
 import { PageSEO } from "@/components/PageSEO";
 
 export default function BucketListPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="min-h-screen bg-background">
       <PageSEO

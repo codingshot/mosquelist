@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ComponentType } from "react";
+import { lazy, Suspense, useEffect, type ComponentType } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,8 +10,6 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
-import ListsPage from "./pages/ListsPage";
-import ListDetailPage from "./pages/ListDetailPage";
 
 /** Lazy-load a page and log a clear console message if the chunk fails to load. */
 function lazyWithChunkErrorLogging(
@@ -73,6 +71,11 @@ const MapPage = lazyWithChunkErrorLogging(() => import("./pages/MapPage"), "MapP
 const BlogPage = lazyWithChunkErrorLogging(() => import("./pages/BlogPage"), "BlogPage");
 const BlogPostPage = lazyWithChunkErrorLogging(() => import("./pages/BlogPostPage"), "BlogPostPage");
 const BrandPage = lazyWithChunkErrorLogging(() => import("./pages/BrandPage"), "BrandPage");
+const ListsPage = lazyWithChunkErrorLogging(() => import("./pages/ListsPage"), "ListsPage");
+const ListDetailPage = lazyWithChunkErrorLogging(
+  () => import("./pages/ListDetailPage"),
+  "ListDetailPage"
+);
 const NotFound = lazyWithChunkErrorLogging(() => import("./pages/NotFound"), "NotFound");
 
 const queryClient = new QueryClient();
@@ -86,6 +89,15 @@ const SkipLink = () => (
   </a>
 );
 
+/** Remove the initial HTML loading overlay as soon as the app has mounted (first paint). */
+function RemoveInitialLoader() {
+  useEffect(() => {
+    const el = document.getElementById("app-loading");
+    if (el?.parentNode) el.remove();
+  }, []);
+  return null;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BucketListProvider>
@@ -94,6 +106,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <RemoveInitialLoader />
           <SkipLink />
           <InstallPrompt />
           <ErrorBoundary>

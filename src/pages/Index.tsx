@@ -51,12 +51,12 @@ const Index = () => {
         </section>
 
         {/* Timeline - limited preview with "See All" link */}
-        <Suspense fallback={<div className="py-16 md:py-24 bg-background flex items-center justify-center"><div className="animate-pulse text-muted-foreground">Loading timeline...</div></div>}>
+        <Suspense fallback={<div className="py-12 md:py-16 bg-background flex items-center justify-center min-h-[120px]"><span className="animate-pulse text-sm text-muted-foreground">Loading timeline…</span></div>}>
           <Timeline limit={10} showFilters={false} />
         </Suspense>
 
         {/* Bucket List - component has id="bucket-list" */}
-        <Suspense fallback={<div className="py-16 md:py-24 bg-paper-cream flex items-center justify-center"><div className="animate-pulse text-muted-foreground">Loading...</div></div>}>
+        <Suspense fallback={<div className="py-12 md:py-16 bg-paper-cream flex items-center justify-center min-h-[120px]"><span className="animate-pulse text-sm text-muted-foreground">Loading…</span></div>}>
           <BucketList />
         </Suspense>
 

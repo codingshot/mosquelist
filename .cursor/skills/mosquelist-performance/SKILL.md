@@ -49,11 +49,11 @@ See `docs/socratic-prompts.md` for more guiding questions.
 | `/` | `Index` | Home: hero, explore preview, timeline, bucket list, curated lists | Eager load. Hero image: fetchpriority="high". MosqueGrid preview limits items. |
 | `/explore` | `ExplorePage` | Full mosque grid with search, filters, sort, view modes | Lazy. MosqueGrid is the main cost; cards use memo + lazy images. **Map view** and **Swipe view** are lazy-loaded (dynamic import) so Leaflet/SwipeDeck load only when user switches view. Search uses `useDeferredValue` + 150ms debounce. Table view paginates (50 rows per page). Infinite scroll 24 items per page. |
 | `/mosque/:id` | `MosquePage` | Mosque detail: image, meta, related, bucket list CTA | Lazy. Hero img eager; related section imgs lazy. |
-| `/map` | `MapPage` | Leaflet map, region/country filters, mosque markers | Lazy. In "map" chunk (leaflet). Memoized filtered lists. |
+| `/map` | `MapPage` | Redirect to /explore?view=map (map is a view mode) | Lazy. Uses &lt;Navigate&gt; so no loading screen. |
 | `/timeline` | `TimelinePage` | Timeline of mosque events | Lazy. Renders Timeline component. |
 | `/bucket-list` | `BucketListPage` | User bucket list + "other lists" links | Lazy. Uses "dnd" chunk for drag-drop. |
-| `/lists` | `ListsPage` | Curated list cards (Holy Sites, Biggest, etc.) | Lazy. Light; only links and counts. |
-| `/lists/:slug` | `ListDetailPage` | Single list: mosque cards, Add all / Add | Lazy. List images lazy. |
+| `/lists` | `ListsPage` | Curated list cards (Holy Sites, Biggest, etc.) | Lazy. Light; only links and counts. Scroll to top on mount. |
+| `/lists/:slug` | `ListDetailPage` | Single list: mosque cards, Add all / Add | Lazy. List images lazy. Scroll to top when slug changes. |
 | `/about` | `AboutPage` | About + links | Lazy. Static content. |
 | `/guides/travel` | `TravelGuidePage` | Travel guide copy | Lazy. Static. |
 | `/guides/visitor-tips` | `VisitorTipsPage` | Visitor tips copy | Lazy. Static. |

@@ -29,16 +29,11 @@ if (typeof window !== "undefined") {
 
 const loadingEl = document.getElementById("app-loading");
 
-/** Remove loading overlay after a timeout so users aren't stuck if app fails to boot. */
-const LOADING_TIMEOUT_MS = 15000;
-const timeoutId = window.setTimeout(() => {
-  if (loadingEl?.parentNode) {
-    loadingEl.remove();
-  }
+/** If the app never mounts (e.g. script error), remove loading overlay so user isn't stuck. */
+const LOADING_TIMEOUT_MS = 8000;
+window.setTimeout(() => {
+  if (loadingEl?.parentNode) loadingEl.remove();
 }, LOADING_TIMEOUT_MS);
 
 const rootEl = document.getElementById("root")!;
 createRoot(rootEl).render(<App />);
-
-if (loadingEl) loadingEl.remove();
-window.clearTimeout(timeoutId);

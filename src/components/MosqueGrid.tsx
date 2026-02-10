@@ -656,18 +656,19 @@ export const MosqueGrid = ({
                 </button>
               )}
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 w-full min-w-0">
-              <div className="flex items-center gap-2 min-w-0 w-full sm:w-auto sm:flex-wrap">
+            <div className="flex flex-col gap-2 sm:gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 w-full min-w-0">
+              {/* Filter pills: compact on mobile (short labels, less padding) */}
+              <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 w-full sm:w-auto sm:flex-wrap">
                 <Filter
                   className="w-5 h-5 text-muted-foreground shrink-0 hidden sm:block"
                   aria-hidden
                 />
-                <div className="flex overflow-x-auto gap-1.5 sm:gap-2 py-1 -mx-1 px-1 sm:overflow-visible sm:mx-0 sm:px-0 sm:flex-wrap touch-manipulation [scrollbar-width:thin] overflow-y-hidden">
+                <div className="flex overflow-x-auto gap-1 sm:gap-2 py-0.5 -mx-1 px-1 sm:overflow-visible sm:mx-0 sm:px-0 sm:flex-wrap touch-manipulation [scrollbar-width:thin] overflow-y-hidden">
                   <Button
                     variant={filter === "all" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setFilter("all")}
-                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "all" ? "gradient-gold text-primary-foreground" : ""}`}
+                    className={`shrink-0 h-8 min-h-8 px-2.5 sm:min-h-0 sm:h-auto sm:px-3 touch-manipulation text-xs sm:text-sm ${filter === "all" ? "gradient-gold text-primary-foreground" : ""}`}
                   >
                     All
                   </Button>
@@ -675,24 +676,26 @@ export const MosqueGrid = ({
                     variant={filter === "holy" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setFilter("holy")}
-                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "holy" ? "gradient-gold text-primary-foreground" : ""}`}
+                    className={`shrink-0 h-8 min-h-8 px-2.5 sm:min-h-0 sm:h-auto sm:px-3 touch-manipulation text-xs sm:text-sm ${filter === "holy" ? "gradient-gold text-primary-foreground" : ""}`}
                   >
-                    Holy Sites
+                    <span className="sm:hidden">Holy</span>
+                    <span className="hidden sm:inline">Holy Sites</span>
                   </Button>
                   <Button
                     variant={filter === "tourist" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setFilter("tourist")}
-                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}`}
                     title="Non-Muslims can visit"
+                    className={`shrink-0 h-8 min-h-8 px-2.5 sm:min-h-0 sm:h-auto sm:px-3 touch-manipulation text-xs sm:text-sm ${filter === "tourist" ? "gradient-gold text-primary-foreground" : ""}`}
                   >
-                    Visitors
+                    <span className="sm:hidden">Visit</span>
+                    <span className="hidden sm:inline">Visitors</span>
                   </Button>
                   <Button
                     variant={filter === "biggest" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setFilter("biggest")}
-                    className={`shrink-0 min-h-[44px] sm:min-h-0 touch-manipulation ${filter === "biggest" ? "gradient-gold text-primary-foreground" : ""}`}
+                    className={`shrink-0 h-8 min-h-8 px-2.5 sm:min-h-0 sm:h-auto sm:px-3 touch-manipulation text-xs sm:text-sm ${filter === "biggest" ? "gradient-gold text-primary-foreground" : ""}`}
                   >
                     Biggest
                   </Button>
@@ -701,15 +704,15 @@ export const MosqueGrid = ({
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="shrink-0 text-sm text-muted-foreground hover:text-foreground underline-offset-4 hover:underline touch-manipulation min-h-[44px] sm:min-h-0 sm:self-center py-2 sm:py-0"
+                    className="shrink-0 text-xs sm:text-sm text-muted-foreground hover:text-foreground underline-offset-4 hover:underline touch-manipulation h-8 sm:min-h-0 sm:h-auto sm:self-center py-0 sm:py-0"
                   >
-                    Clear filters
+                    Clear
                   </button>
                 )}
               </div>
-              {/* Sort + Filters row on mobile; same row as view on sm+ */}
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-2 w-full sm:w-auto min-w-0">
-                <div className="flex items-center gap-2 w-full min-w-0 sm:w-auto">
+              {/* Sort + Filters + View: one row on mobile when space allows */}
+              <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto min-w-0">
+                <div className="flex items-center gap-2 min-w-0 flex-1 sm:flex-initial">
                   <Select
                     value={sort}
                     onValueChange={(v) =>
@@ -717,7 +720,7 @@ export const MosqueGrid = ({
                     }
                   >
                     <SelectTrigger
-                      className="flex-1 min-w-0 sm:flex-none sm:w-[160px] h-11 min-h-[44px] touch-manipulation text-base"
+                      className="flex-1 min-w-0 sm:flex-none sm:w-[160px] h-9 min-h-9 sm:h-11 sm:min-h-[44px] touch-manipulation text-sm sm:text-base"
                       aria-label="Sort by"
                     >
                       <ArrowUpDown className="mr-2 h-4 w-4 shrink-0" />
@@ -743,7 +746,7 @@ export const MosqueGrid = ({
                       <Button
                         variant="outline"
                         size="sm"
-                        className="gap-2 h-11 min-h-[44px] min-w-[44px] sm:min-w-0 shrink-0 relative touch-manipulation"
+                        className="gap-1.5 h-9 min-h-9 min-w-9 sm:h-11 sm:min-h-[44px] sm:min-w-0 sm:px-3 shrink-0 relative touch-manipulation"
                       >
                         <SlidersHorizontal className="w-4 h-4 shrink-0" />
                         <span className="hidden sm:inline">Filters</span>
@@ -1096,7 +1099,7 @@ export const MosqueGrid = ({
                   <Button
                     variant={view === "grid" ? "secondary" : "ghost"}
                     size="icon"
-                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    className="h-9 w-9 min-h-9 min-w-9 sm:h-11 sm:w-11 sm:min-h-[44px] sm:min-w-[44px] shrink-0 touch-manipulation"
                     onClick={() => setView("grid")}
                     aria-label="Grid view"
                     aria-pressed={view === "grid"}
@@ -1106,7 +1109,7 @@ export const MosqueGrid = ({
                   <Button
                     variant={view === "swipe" ? "secondary" : "ghost"}
                     size="icon"
-                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    className="h-9 w-9 min-h-9 min-w-9 sm:h-11 sm:w-11 sm:min-h-[44px] sm:min-w-[44px] shrink-0 touch-manipulation"
                     onClick={() => setView("swipe")}
                     aria-label="Swipe mode"
                     aria-pressed={view === "swipe"}
@@ -1116,7 +1119,7 @@ export const MosqueGrid = ({
                   <Button
                     variant={view === "map" ? "secondary" : "ghost"}
                     size="icon"
-                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    className="h-9 w-9 min-h-9 min-w-9 sm:h-11 sm:w-11 sm:min-h-[44px] sm:min-w-[44px] shrink-0 touch-manipulation"
                     onClick={() => setView("map")}
                     aria-label="Map view"
                     aria-pressed={view === "map"}
@@ -1126,7 +1129,7 @@ export const MosqueGrid = ({
                   <Button
                     variant={view === "table" ? "secondary" : "ghost"}
                     size="icon"
-                    className="h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation"
+                    className="h-9 w-9 min-h-9 min-w-9 sm:h-11 sm:w-11 sm:min-h-[44px] sm:min-w-[44px] shrink-0 touch-manipulation"
                     onClick={() => setView("table")}
                     aria-label="Table view"
                     aria-pressed={view === "table"}
@@ -1137,7 +1140,7 @@ export const MosqueGrid = ({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="gap-1.5 min-h-[44px] shrink-0 text-muted-foreground touch-manipulation"
+                      className="gap-1.5 h-9 min-h-9 sm:min-h-[44px] shrink-0 text-muted-foreground touch-manipulation text-xs sm:text-sm"
                       onClick={clearAllFilters}
                     >
                       <XCircle className="w-4 h-4" />
@@ -1397,7 +1400,7 @@ export const MosqueGrid = ({
           filteredMosques.length === 0 ? null : (
           <div className="space-y-3">
             {!isPreview && (
-              <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 min-h-9">
                 <p className="text-sm text-muted-foreground">
                   {filteredMosques.length} mosque{filteredMosques.length !== 1 ? "s" : ""} in this view
                 </p>
@@ -1405,12 +1408,11 @@ export const MosqueGrid = ({
                   <DialogTrigger asChild>
                     <Button
                       variant="outline"
-                      size="sm"
-                      className="gap-2 touch-manipulation"
+                      size="icon"
+                      className="h-9 w-9 min-h-9 min-w-9 sm:h-10 sm:min-h-10 sm:w-10 sm:min-w-10 touch-manipulation shrink-0"
                       aria-label="Download list as CSV"
                     >
                       <Download className="w-4 h-4" />
-                      Download CSV
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-md" aria-describedby="download-dialog-desc">

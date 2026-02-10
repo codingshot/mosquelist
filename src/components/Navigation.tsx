@@ -67,31 +67,31 @@ export const Navigation = () => {
             </Button>
           </div>
 
-          {/* Mobile: heart link to My List (bucket list) with count */}
-          <Link
-            to="/bucket-list"
-            className="md:hidden relative min-h-[44px] min-w-[44px] p-3 flex items-center justify-center rounded-md hover:bg-secondary text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            aria-label={`My list${favoriteCount > 0 ? `, ${favoriteCount} saved` : ""}`}
-          >
-            <Heart className="w-6 h-6" />
-            {favoriteCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 min-w-[18px] h-[18px] rounded-full bg-primary px-1 flex items-center justify-center text-[10px] font-semibold text-primary-foreground">
-                {favoriteCount > 99 ? "99+" : favoriteCount}
-              </span>
-            )}
-          </Link>
-
-          {/* Mobile Menu Button - min 44px touch target */}
-          <button
-            type="button"
-            className="md:hidden min-h-[44px] min-w-[44px] p-3 flex items-center justify-center rounded-md hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            aria-controls="mobile-nav"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile: heart + hamburger grouped next to each other on the right */}
+          <div className="md:hidden flex items-center">
+            <Link
+              to="/bucket-list"
+              className="relative min-h-[44px] min-w-[44px] p-3 flex items-center justify-center rounded-md hover:bg-secondary text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              aria-label={`My list${favoriteCount > 0 ? `, ${favoriteCount} saved` : ""}`}
+            >
+              <Heart className="w-6 h-6" />
+              {favoriteCount > 0 && (
+                <span className="absolute top-1.5 right-1.5 min-w-[18px] h-[18px] rounded-full bg-primary px-1 flex items-center justify-center text-[10px] font-semibold text-primary-foreground">
+                  {favoriteCount > 99 ? "99+" : favoriteCount}
+                </span>
+              )}
+            </Link>
+            <button
+              type="button"
+              className="min-h-[44px] min-w-[44px] p-3 flex items-center justify-center rounded-md hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-nav"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 

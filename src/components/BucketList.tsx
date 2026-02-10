@@ -131,10 +131,10 @@ function BucketListItemRow({
       >
         <GripVertical className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
-      {/* Checkbox - smaller on mobile */}
+      {/* Checkbox - compact size */}
       <button
         onClick={() => toggleVisited(item.mosqueId)}
-        className={`w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9 rounded border-2 flex items-center justify-center transition-all shrink-0 touch-manipulation ${
+        className={`w-6 h-6 sm:w-8 sm:h-8 min-w-6 sm:min-w-8 min-h-6 sm:min-h-8 rounded border-2 flex items-center justify-center transition-all shrink-0 touch-manipulation ${
           item.visited
             ? "bg-primary border-primary"
             : "border-border hover:border-primary"
@@ -142,7 +142,7 @@ function BucketListItemRow({
         aria-label={item.visited ? "Mark as not visited" : "Mark as visited"}
       >
         {item.visited && (
-          <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary-foreground" />
+          <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary-foreground" />
         )}
       </button>
       {/* Mosque thumbnail - smaller on mobile */}

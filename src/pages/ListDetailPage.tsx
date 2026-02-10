@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -42,6 +42,11 @@ export default function ListDetailPage() {
   const [shareOpen, setShareOpen] = useState(false);
 
   const list = slug ? getListBySlug(slug) : undefined;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
   const listMosques = list
     ? list.mosqueIds
         .map((id) => getMosqueById(id))
@@ -386,28 +391,28 @@ export default function ListDetailPage() {
                       selected ? "border-primary/50 ring-1 ring-primary/20" : "border-border hover:border-primary/30"
                     } ${inBucket ? "bg-primary/5 border-primary/20" : ""}`}
                   >
-                    {/* Checkbox - smaller on mobile */}
+                    {/* Checkbox - compact size */}
                     {canSelect ? (
                       <button
                         type="button"
                         onClick={() => toggleSelect(mosque.id)}
-                        className={`shrink-0 w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation ${
+                        className={`shrink-0 w-6 h-6 sm:w-8 sm:h-8 min-w-6 sm:min-w-8 min-h-6 sm:min-h-8 rounded-md border-2 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 touch-manipulation ${
                           selected ? "bg-primary border-primary text-primary-foreground" : "border-border hover:border-primary text-muted-foreground"
                         }`}
                         aria-label={selected ? `Deselect ${mosque.name}` : `Select ${mosque.name} to add to My List`}
                         aria-pressed={selected}
                       >
                         {selected ? (
-                          <CheckSquare className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                          <CheckSquare className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         ) : (
-                          <Square className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                          <Square className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         )}
                       </button>
                     ) : !inBucket && notInList.length <= 1 ? (
-                      <span className="shrink-0 w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9" aria-hidden />
+                      <span className="shrink-0 w-6 h-6 sm:w-8 sm:h-8 min-w-6 sm:min-w-8 min-h-6 sm:min-h-8" aria-hidden />
                     ) : inBucket ? (
-                      <span className="shrink-0 w-7 h-7 sm:w-9 sm:h-9 min-w-7 sm:min-w-9 min-h-7 sm:min-h-9 flex items-center justify-center text-primary" aria-hidden>
-                        <CheckSquare className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      <span className="shrink-0 w-6 h-6 sm:w-8 sm:h-8 min-w-6 sm:min-w-8 min-h-6 sm:min-h-8 flex items-center justify-center text-primary" aria-hidden>
+                        <CheckSquare className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                       </span>
                     ) : null}
                     {/* Image - smaller on mobile */}
