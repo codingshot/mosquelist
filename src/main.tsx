@@ -27,8 +27,18 @@ if (typeof window !== "undefined") {
   window.addEventListener("unhandledrejection", onUnhandledRejection);
 }
 
+const loadingEl = document.getElementById("app-loading");
+
+/** Remove loading overlay after a timeout so users aren't stuck if app fails to boot. */
+const LOADING_TIMEOUT_MS = 15000;
+const timeoutId = window.setTimeout(() => {
+  if (loadingEl?.parentNode) {
+    loadingEl.remove();
+  }
+}, LOADING_TIMEOUT_MS);
+
 const rootEl = document.getElementById("root")!;
 createRoot(rootEl).render(<App />);
 
-const loadingEl = document.getElementById("app-loading");
 if (loadingEl) loadingEl.remove();
+window.clearTimeout(timeoutId);
