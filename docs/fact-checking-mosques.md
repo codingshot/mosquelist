@@ -50,8 +50,20 @@ Guidance for verifying mosque information, especially **capacity**, **links**, a
 | **Türkmenbaşy Ruhy Mosque, Gypjak** | Area 0 → 18,000 m²; capacity 10,000 confirmed. Added sources. | [Wikipedia](https://en.wikipedia.org/wiki/Türkmenbaşy_Ruhy_Mosque) |
 | **Sultan Mosque, Singapore** | Capacity 5,000 confirmed. Added sources. | [Wikipedia](https://en.wikipedia.org/wiki/Sultan_Mosque,_Singapore), [sultanmosque.sg](https://www.sultanmosque.sg) |
 
+## Islamic history timeline (`src/lib/timeline-utils.ts`)
+
+The **ISLAMIC_HISTORY_PERIODS** array powers the Islamic History page and timeline context. Each event has `year`, `label`, `description`, `source` (Wikipedia URL), and `category`. When adding or editing:
+
+- **Years** must be in chronological order (test enforces this). Use the year the event is most commonly cited for (e.g. siege start, conversion date).
+- **Descriptions** should be fact-checked against the `source` link. Prefer neutral, encyclopedic wording.
+- **Corrections applied (timeline):**
+  - **Conquest of Damascus:** 635 → 634 (siege was Aug–Sep 634 per [Wikipedia](https://en.wikipedia.org/wiki/Siege_of_Damascus_(634))).
+  - **Grand Mosque Seizure (Mecca):** Clarified dates (20 Nov–4 Dec 1979) and that Saudi forces recaptured with French GIGN *advisory* support (not French recapture).
+  - **Maldives conversion:** Specified king Dhovemi took title Sultan Muhammad al-Adil; noted some sources give 1193.
+
 ## Ongoing
 
 - Run `node scripts/fact-check-validate.js` after data changes to refresh `docs/fact-check-report.md`.
 - Prioritize adding **sources** to mosques that still have no `sources` array (see report).
 - For less well-known mosques, prefer at least one Wikipedia or official link before publishing capacity or date changes.
+- When editing **ISLAMIC_HISTORY_PERIODS**, verify year and description against the event’s Wikipedia (or source) link; keep chronological order.
