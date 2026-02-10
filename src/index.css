@@ -337,3 +337,29 @@
   margin: 0;
   overflow: hidden;
 }
+
+/* Map cards: force visible text and non-blue links (Leaflet context can lose theme) */
+.map-popup .leaflet-popup-content-wrapper,
+.map-popup .leaflet-popup-content,
+.map-marker-tooltip .leaflet-tooltip-inner {
+  color: hsl(var(--foreground));
+}
+.map-popup a,
+.map-marker-tooltip a {
+  color: hsl(var(--foreground));
+}
+.map-popup a:hover,
+.map-marker-tooltip a:hover {
+  color: hsl(var(--foreground));
+  opacity: 0.9;
+}
+/* Primary button in popup: ensure label is visible on gold background */
+.map-popup [class*="gradient-gold"] a,
+.map-popup .bg-primary a {
+  color: hsl(var(--primary-foreground));
+}
+.map-popup [class*="gradient-gold"] a:hover,
+.map-popup .bg-primary a:hover {
+  color: hsl(var(--primary-foreground));
+  opacity: 0.95;
+}

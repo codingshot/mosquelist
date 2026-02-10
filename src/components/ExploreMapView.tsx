@@ -171,8 +171,8 @@ function PopupContentWithImage({ mosque }: { mosque: MosqueWithCoords }) {
           </p>
         </div>
         <div className="flex flex-col gap-2 pt-1">
-          <Button size="sm" className="w-full gap-1.5" asChild>
-            <Link to={`/mosque/${mosque.id}`}>
+          <Button size="sm" className="w-full gap-1.5 gradient-gold text-primary-foreground hover:opacity-90" asChild>
+            <Link to={`/mosque/${mosque.id}`} className="text-primary-foreground hover:text-primary-foreground">
               <MapPin className="w-3.5 h-3.5" />
               View mosque
             </Link>
@@ -181,7 +181,7 @@ function PopupContentWithImage({ mosque }: { mosque: MosqueWithCoords }) {
             href={getGoogleMapsUrl(mosque.coordinates, mosque.address)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-medium hover:bg-secondary/80 transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-medium text-foreground hover:bg-secondary/80 hover:text-foreground transition-colors"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             Open in Google Maps
