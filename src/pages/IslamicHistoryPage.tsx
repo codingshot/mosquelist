@@ -15,7 +15,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-type CategoryFilter = "all" | "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education";
+type CategoryFilter = "all" | "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education" | "trade" | "destruction" | "colonization" | "independence";
 
 const CATEGORY_LABELS: Record<CategoryFilter, string> = {
   all: "All Events",
@@ -25,6 +25,10 @@ const CATEGORY_LABELS: Record<CategoryFilter, string> = {
   caliphate: "Caliphates & Empires",
   architecture: "Architecture",
   education: "Education & Scholarship",
+  trade: "Trading Posts & Commerce",
+  destruction: "Mosque & Heritage Destruction",
+  colonization: "Colonial Era",
+  independence: "Independence & Modern",
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -34,6 +38,10 @@ const CATEGORY_COLORS: Record<string, string> = {
   caliphate: "bg-purple-100 dark:bg-purple-900/30 border-purple-300 dark:border-purple-700",
   architecture: "bg-emerald-100 dark:bg-emerald-900/30 border-emerald-300 dark:border-emerald-700",
   education: "bg-cyan-100 dark:bg-cyan-900/30 border-cyan-300 dark:border-cyan-700",
+  trade: "bg-slate-100 dark:bg-slate-900/30 border-slate-300 dark:border-slate-700",
+  destruction: "bg-red-100 dark:bg-red-900/30 border-red-300 dark:border-red-700",
+  colonization: "bg-orange-100 dark:bg-orange-900/30 border-orange-300 dark:border-orange-700",
+  independence: "bg-teal-100 dark:bg-teal-900/30 border-teal-300 dark:border-teal-700",
 };
 
 export default function IslamicHistoryPage() {
