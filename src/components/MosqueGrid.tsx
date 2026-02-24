@@ -128,8 +128,12 @@ function useMosqueSearchParams() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get(PARAM_QUERY) ?? "";
-  // New users see Holy Sites by default; "all" when they've chosen it via URL
-  const filter = (searchParams.get(PARAM_FILTER) as FilterType) ?? "holy";
+  // Default to "all"; only "holy" / "tourist" / "biggest" narrow the list; invalid param → "all"
+  const rawFilter = searchParams.get(PARAM_FILTER);
+  const filter: FilterType =
+    rawFilter === "holy" || rawFilter === "tourist" || rawFilter === "biggest"
+      ? rawFilter
+      : "all";
   const viewParam = searchParams.get(PARAM_VIEW);
   const view: ViewType =
     viewParam === "grid" || viewParam === "swipe" || viewParam === "map" || viewParam === "table"

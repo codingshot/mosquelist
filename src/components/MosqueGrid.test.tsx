@@ -46,4 +46,38 @@ describe("MosqueGrid", () => {
     expect(screen.getByRole("button", { name: /grid view/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /swipe mode/i })).toBeInTheDocument();
   }, 20000);
+
+  it("defaults to All filter on /explore (no params)", async () => {
+    renderGrid("/explore");
+    const status = await screen.findByRole("status", { hidden: true }, { timeout: 12000 });
+    expect(status).toHaveTextContent(/\d+ mosques? found/);
+    // With "all", we show many more than just holy sites (3)
+    const match = status.textContent?.match(/(\d+)\s+mosques?\s+found/);
+    const count = match ? parseInt(match[1], 10) : 0;
+    expect(count).toBeGreaterThan(10);
+    expect(screen.getByRole("button", { name: /^All$/ })).toBeInTheDocument();
+  }, 20000);
+
+  it("filter=holy shows only holy sites and Holy Sites pill is selected", async () => {
+    renderGrid("/explore?filter=holy");
+    const status = await screen.findByRole("status", { hidden: true }, { timeout: 12000 });
+    expect(status).toHaveTextContent(/3 mosques found/);
+    expect(screen.getByRole("button", { name: /holy sites/i })).toBeInTheDocument();
+  }, 20000);
+
+  it("invalid filter param defaults to all", async () => {
+    renderGrid("/explore?filter=invalid");
+    const status = await screen.findByRole("status", { hidden: true }, { timeout: 12000 });
+    expect(status).toHaveTextContent(/\d+ mosques? found/);
+    const match = status.textContent?.match(/(\d+)\s+mosques?\s+found/);
+    const count = match ? parseInt(match[1], 10) : 0;
+    expect(count).toBeGreaterThan(10);
+  }, 20000);
+
+  it("search and filter combine: q and filter=holy", async () => {
+    renderGrid("/explore?q=Mecca&filter=holy");
+    const status = await screen.findByRole("status", { hidden: true }, { timeout: 12000 });
+    expect(status).toHaveTextContent(/mosques? found/);
+    expect(screen.getByRole("link", { name: /Masjid al-Haram|al-Haram/i })).toBeInTheDocument();
+  }, 20000);
 });
