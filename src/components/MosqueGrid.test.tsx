@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { BucketListProvider } from "@/contexts/BucketListContext";
@@ -79,5 +79,18 @@ describe("MosqueGrid", () => {
     const status = await screen.findByRole("status", { hidden: true }, { timeout: 12000 });
     expect(status).toHaveTextContent(/mosques? found/);
     expect(screen.getByRole("link", { name: /Masjid al-Haram|al-Haram/i })).toBeInTheDocument();
+  }, 20000);
+
+  it("clicking All when filter=holy shows all mosques", async () => {
+    renderGrid("/explore?filter=holy");
+    const status = await screen.findByRole("status", { hidden: true }, { timeout: 12000 });
+    expect(status).toHaveTextContent(/3 mosques found/);
+    const allButton = screen.getByRole("button", { name: /^All$/ });
+    fireEvent.click(allButton);
+    const statusAfter = await screen.findByRole("status", { hidden: true }, { timeout: 3000 });
+    expect(statusAfter).toHaveTextContent(/\d+ mosques? found/);
+    const match = statusAfter.textContent?.match(/(\d+)\s+mosques?\s+found/);
+    const count = match ? parseInt(match[1], 10) : 0;
+    expect(count).toBeGreaterThan(10);
   }, 20000);
 });

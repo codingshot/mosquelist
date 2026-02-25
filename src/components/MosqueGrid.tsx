@@ -97,6 +97,9 @@ const PARAM_FACILITY_GUIDED = "facilityGuided";
 const PARAM_FACILITY_WHEELCHAIR = "facilityWheelchair";
 
 type FilterType = "all" | "holy" | "tourist" | "biggest";
+/** Default quick filter when no valid filter param in URL (explore shows all mosques). */
+const DEFAULT_FILTER: FilterType = "all";
+const VALID_QUICK_FILTERS: FilterType[] = ["holy", "tourist", "biggest"];
 type ViewType = "grid" | "swipe" | "map" | "table";
 type SortType =
   | "relevance"
@@ -128,12 +131,12 @@ function useMosqueSearchParams() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get(PARAM_QUERY) ?? "";
-  // Default to "all"; only "holy" / "tourist" / "biggest" narrow the list; invalid param → "all"
-  const rawFilter = searchParams.get(PARAM_FILTER);
+  // Default to "all"; only "holy" / "tourist" / "biggest" narrow the list; invalid or missing param → "all"
+  const rawFilter = searchParams.get(PARAM_FILTER)?.trim() ?? null;
   const filter: FilterType =
-    rawFilter === "holy" || rawFilter === "tourist" || rawFilter === "biggest"
-      ? rawFilter
-      : "all";
+    rawFilter !== null && (VALID_QUICK_FILTERS as string[]).includes(rawFilter)
+      ? (rawFilter as FilterType)
+      : DEFAULT_FILTER;
   const viewParam = searchParams.get(PARAM_VIEW);
   const view: ViewType =
     viewParam === "grid" || viewParam === "swipe" || viewParam === "map" || viewParam === "table"
@@ -233,6 +236,19 @@ function useMosqueSearchParams() {
   const clearAllFilters = useCallback(() => {
     setSearchParams(new URLSearchParams(), { replace: true });
   }, [setSearchParams]);
+
+  // When we default to "all" but URL has a filter param (invalid or "all"), remove it so the bar stays in sync
+  useEffect(() => {
+    if (filter !== DEFAULT_FILTER || !searchParams.has(PARAM_FILTER)) return;
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.delete(PARAM_FILTER);
+        return next;
+      },
+      { replace: true },
+    );
+  }, [filter, searchParams, setSearchParams]);
 
   return {
     query,
