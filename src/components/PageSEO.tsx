@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_URL = "https://mosquelist.com";
-const DEFAULT_IMAGE = `${SITE_URL}/meta.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/mosquelistmeta.jpeg`;
 
 interface PageSEOProps {
   title: string;

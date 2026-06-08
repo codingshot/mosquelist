@@ -59,7 +59,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-        globIgnores: ["**/mosquelistmeta1.png", "**/favicon.svg"],
+        globIgnores: ["**/mosquelistmeta.jpeg", "**/favicon.svg"],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         navigateFallback: "/index.html",
         runtimeCaching: [

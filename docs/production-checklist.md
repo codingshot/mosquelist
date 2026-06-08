@@ -16,7 +16,7 @@ Use this checklist before deploying to production or declaring an "app launch." 
 ## 2. SEO & Discoverability
 
 - [x] **Meta title & description** — `index.html` has correct title and description (199+ mosques, 50+ countries); keywords and author set.
-- [x] **Open Graph** — `og:title`, `og:description`, `og:image` (1200×630), `og:url`, `og:type`, `og:image:alt`; `og:image` URL is absolute (`https://mosquelist.com/meta.png`).
+- [x] **Open Graph** — `og:title`, `og:description`, `og:image` (1200×630), `og:url`, `og:type`, `og:image:alt`; `og:image` URL is absolute (`https://mosquelist.com/mosquelistmeta.jpeg`).
 - [x] **Twitter Card** — `twitter:card` (summary_large_image), `twitter:title`, `twitter:description`, `twitter:image`, `twitter:image:alt`.
 - [x] **Canonical** — `<link rel="canonical" href="https://mosquelist.com" />` on homepage; dynamic pages set canonical via `PageSEO` where applicable.
 - [x] **robots.txt** — Allows crawlers; `Sitemap: https://mosquelist.com/sitemap.xml`; no accidental disallow of key paths.
@@ -52,7 +52,7 @@ Use this checklist before deploying to production or declaring an "app launch." 
 ## 6. Content & Copy
 
 - [x] **Homepage meta** — Description and og/twitter text match current product (199+ mosques, 50+ countries, map, bucket list, fact-checked guides).
-- [x] **Share image** — `public/meta.png` exists at 1200×630 for og/twitter.
+- [x] **Share image** — `public/mosquelistmeta.jpeg` exists at 1200×630 for og/twitter.
 - [x] **Favicon & icons** — Favicon, apple-touch-icon, web app manifest icons present and linked.
 
 ---

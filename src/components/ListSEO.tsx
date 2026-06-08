@@ -3,7 +3,7 @@ import type { CuratedList } from "@/types/list";
 import type { Mosque } from "@/types/mosque";
 
 const SITE_URL = "https://mosquelist.com";
-const DEFAULT_IMAGE = `${SITE_URL}/mosquelistmeta1.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/mosquelistmeta.jpeg`;
 
 interface ListSEOProps {
   list: CuratedList;
