@@ -4,6 +4,7 @@ import {
   formatYearDisplay, 
   formatEstablishmentRange,
   getEstablishmentYearRange,
+  yearRangeOverlaps,
   validateMosqueDate,
   ISLAMIC_HISTORY_PERIODS 
 } from "./timeline-utils";
@@ -86,6 +87,19 @@ describe("getEstablishmentYearRange", () => {
 
   it("returns same start/end for exact year", () => {
     expect(getEstablishmentYearRange("638 CE")).toEqual({ start: 638, end: 638 });
+  });
+});
+
+describe("yearRangeOverlaps", () => {
+  it("matches century ranges against filter windows", () => {
+    expect(yearRangeOverlaps("14th century", 1300, 1400)).toBe(true);
+    expect(yearRangeOverlaps("14th century", 1350, 1400)).toBe(true);
+    expect(yearRangeOverlaps("14th century", 1400, 1500)).toBe(false);
+  });
+
+  it("matches exact years", () => {
+    expect(yearRangeOverlaps("638 CE", 600, 700)).toBe(true);
+    expect(yearRangeOverlaps("638 CE", 700, 800)).toBe(false);
   });
 });
 

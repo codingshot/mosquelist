@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "@/pages/Index";
 import ExplorePage from "@/pages/ExplorePage";
 import TimelinePage from "@/pages/TimelinePage";
+import IslamicHistoryPage from "@/pages/IslamicHistoryPage";
 import BucketListPage from "@/pages/BucketListPage";
 import ListsPage from "@/pages/ListsPage";
 import ListDetailPage from "@/pages/ListDetailPage";
@@ -68,6 +69,20 @@ describe("All pages load", () => {
     );
     await screen.findByRole("main");
     expect(screen.getByRole("heading", { name: /timeline of major mosques/i })).toBeInTheDocument();
+  });
+
+  it("Islamic History (/islamic-history) loads", async () => {
+    render(
+      <MemoryRouter initialEntries={["/islamic-history"]}>
+        <AllProviders>
+          <Routes>
+            <Route path="/islamic-history" element={<IslamicHistoryPage />} />
+          </Routes>
+        </AllProviders>
+      </MemoryRouter>
+    );
+    await screen.findByRole("main");
+    expect(screen.getByRole("heading", { name: /islamic history timeline/i })).toBeInTheDocument();
   });
 
   it("Bucket list (/bucket-list) loads", async () => {

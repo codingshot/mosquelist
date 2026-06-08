@@ -17,38 +17,52 @@ export const mosques: Mosque[] = [...mosquesById.values()];
 // Re-export for backwards compatibility
 export { parseEstablishmentYear };
 
-/** 
- * Timeline expanded from JSON events plus any current mosque with an established date not already in the list.
- * Properly handles century notation (e.g., "15th century" -> ~1450).
+/**
+ * Mosque timeline events from JSON (keeps multiple entries per mosque when present).
+ * Context events (isContextEvent / empty mosqueId) are exported separately.
  */
-const timelineEvents: TimelineEvent[] = (() => {
-  const byId = new Map<string, TimelineEvent>(timelineRaw.map((e) => [e.mosqueId, e]));
+const { timelineEvents, timelineContextEvents } = (() => {
+  const mosqueEvents: TimelineEvent[] = [];
+  const contextEvents: TimelineEvent[] = [];
+  const mosqueIdsWithExplicitEvent = new Set<string>();
+
+  for (const e of timelineRaw) {
+    if (e.isContextEvent || !e.mosqueId?.trim()) {
+      if (e.isContextEvent) contextEvents.push(e);
+      continue;
+    }
+    mosqueEvents.push(e);
+    mosqueIdsWithExplicitEvent.add(e.mosqueId);
+  }
+
   for (const m of mosquesList) {
-    if (byId.has(m.id)) continue;
+    if (mosqueIdsWithExplicitEvent.has(m.id)) continue;
     const year = parseEstablishmentYear(m.established);
     if (year <= 0) continue;
-    
-    // Validate historical accuracy (log warnings in dev)
+
     if (process.env.NODE_ENV === "development") {
       const validation = validateMosqueDate(m.established, m.id);
       if (!validation.valid || validation.warning) {
         console.warn(`[Timeline] ${m.name}: ${validation.warning}`);
       }
     }
-    
-    byId.set(m.id, {
-      year: m.established, // Keep original string for display
+
+    mosqueEvents.push({
+      year: m.established,
       mosque: m.name,
       mosqueId: m.id,
       event: `Completed in ${m.location}`,
     });
   }
-  return [...byId.values()].sort(
-    (a, b) => parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year)
+
+  mosqueEvents.sort(
+    (a, b) => parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year),
   );
+
+  return { timelineEvents: mosqueEvents, timelineContextEvents: contextEvents };
 })();
 
-export { timelineEvents };
+export { timelineEvents, timelineContextEvents };
 
 export function getMosqueById(id: string): Mosque | undefined {
   return mosques.find((m) => m.id === id);

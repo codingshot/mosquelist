@@ -51,6 +51,16 @@ export function parseEstablishmentYear(established: string): number {
  * - "638 CE" -> { start: 638, end: 638 }
  * - "705–715 CE" -> { start: 705, end: 715 } (if we parse end; currently end = start for ranges)
  */
+/** True when an established date's range overlaps a filter range [min, max] (inclusive). */
+export function yearRangeOverlaps(
+  established: string,
+  filterMin: number,
+  filterMax: number,
+): boolean {
+  const { start, end } = getEstablishmentYearRange(established);
+  return start <= filterMax && end >= filterMin;
+}
+
 export function getEstablishmentYearRange(established: string): { start: number; end: number } {
   const str = String(established).toLowerCase();
   const centuryMatch = str.match(/(\d{1,2})(?:st|nd|rd|th)\s*century/i);

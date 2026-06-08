@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { mosques, getMosqueById, getUniqueCountries, getUniqueArchitecturalStyles } from "./mosques";
+import {
+  mosques,
+  timelineEvents,
+  timelineContextEvents,
+  getMosqueById,
+  getUniqueCountries,
+  getUniqueArchitecturalStyles,
+} from "./mosques";
 
 describe("mosques data", () => {
   it("exports non-empty mosques array", () => {
@@ -102,6 +109,22 @@ describe("mosques data", () => {
         expect(typeof m.address, `${m.name} (${m.id}) address`).toBe("string");
         expect(m.address.trim().length, `${m.name} (${m.id}) address`).toBeGreaterThan(0);
       }
+    });
+  });
+
+  it("timelineEvents resolve to existing mosques", () => {
+    const ids = new Set(mosques.map((m) => m.id));
+    timelineEvents.forEach((e) => {
+      expect(ids.has(e.mosqueId), `orphan timeline event: ${e.mosqueId}`).toBe(true);
+    });
+  });
+
+  it("loads context events separately from mosque events", () => {
+    expect(timelineContextEvents.length).toBeGreaterThan(50);
+    timelineContextEvents.forEach((e) => {
+      expect(e.isContextEvent).toBe(true);
+      expect(e.mosque).toBeTruthy();
+      expect(e.event).toBeTruthy();
     });
   });
 });

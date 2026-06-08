@@ -119,6 +119,11 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/islamic-history" className="inline-block py-1.5 min-h-[40px] touch-manipulation text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded text-sm">
+                  Islamic History
+                </Link>
+              </li>
+              <li>
                 <Link to="/bucket-list" className="inline-block py-1.5 min-h-[40px] touch-manipulation text-background/80 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foreground focus-visible:rounded text-sm">
                   My Bucket List
                 </Link>

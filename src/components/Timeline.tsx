@@ -1,8 +1,13 @@
 import { useMemo, useState, useRef, useCallback, memo } from "react";
 import { Link } from "react-router-dom";
-import { timelineEvents, mosques, getUniqueCountries } from "@/data/mosques";
+import { timelineEvents, timelineContextEvents, mosques, getUniqueCountries } from "@/data/mosques";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
-import { parseEstablishmentYear, formatYearDisplay, ISLAMIC_HISTORY_PERIODS } from "@/lib/timeline-utils";
+import {
+  parseEstablishmentYear,
+  formatYearDisplay,
+  ISLAMIC_HISTORY_PERIODS,
+  yearRangeOverlaps,
+} from "@/lib/timeline-utils";
 import { Calendar, ArrowUpDown, MapPin, ChevronRight, History, ExternalLink, Search } from "lucide-react";
 import {
   Select,
@@ -21,6 +26,18 @@ import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import type { TimelineEvent } from "@/types/mosque";
 import type { Mosque } from "@/types/mosque";
 
+type HistoryCategory =
+  | "era"
+  | "migration"
+  | "expansion"
+  | "caliphate"
+  | "architecture"
+  | "education"
+  | "trade"
+  | "destruction"
+  | "colonization"
+  | "independence";
+
 /** Context event type with source URL */
 interface ContextEvent {
   isContextEvent: true;
@@ -28,40 +45,61 @@ interface ContextEvent {
   label: string;
   description: string;
   source: string;
-  category: "era" | "migration" | "expansion" | "caliphate" | "architecture" | "education" | "colonization" | "independence";
+  category: HistoryCategory;
 }
 
 /** Build combined timeline with mosque events and Islamic history context */
 function buildCombinedTimeline(
-  mosqueEvents: TimelineEvent[], 
+  mosqueEvents: TimelineEvent[],
   includeContext: boolean,
-  categoryFilter: string
+  categoryFilter: string,
+  sortOrder: SortOrder,
+  jsonContextEvents: TimelineEvent[],
 ): (TimelineEvent | ContextEvent)[] {
   let contextEvents: ContextEvent[] = [];
-  
+
   if (includeContext) {
-    // Combine mosque events with history periods
-    contextEvents = ISLAMIC_HISTORY_PERIODS.map((p) => ({
+    const fromPeriods: ContextEvent[] = ISLAMIC_HISTORY_PERIODS.map((p) => ({
       isContextEvent: true as const,
       year: String(p.year),
       label: p.label,
       description: p.description,
       source: p.source,
-      category: p.category,
+      category: p.category as HistoryCategory,
     }));
-    
-    // Filter context events by category if specified
+
+    const fromJson: ContextEvent[] = jsonContextEvents.map((e) => ({
+      isContextEvent: true as const,
+      year: e.year,
+      label: e.mosque,
+      description: e.event,
+      source: e.source ?? "",
+      category: (e.category ?? "era") as HistoryCategory,
+    }));
+
+    const seen = new Set<string>();
+    contextEvents = [...fromPeriods, ...fromJson].filter((e) => {
+      const key = `${e.year}|${e.label}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
     if (categoryFilter) {
       contextEvents = contextEvents.filter((e) => e.category === categoryFilter);
     }
   }
-  
-  const combined = [...mosqueEvents, ...contextEvents];
-  return combined.sort((a, b) => {
-    const yearA = parseEstablishmentYear(a.year);
-    const yearB = parseEstablishmentYear(b.year);
-    return yearA - yearB;
-  });
+
+  // History category filter shows only context milestones, not all mosques
+  const mosqueSlice =
+    includeContext && categoryFilter ? [] : mosqueEvents;
+
+  const combined = [...mosqueSlice, ...contextEvents];
+  const order = sortOrder === "newest" ? -1 : 1;
+  return combined.sort(
+    (a, b) =>
+      order * (parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year)),
+  );
 }
 
 type SortOrder = "oldest" | "newest";
@@ -114,6 +152,8 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
     { value: "education", label: "Education" },
     { value: "era", label: "Historical Eras" },
     { value: "migration", label: "Migration" },
+    { value: "trade", label: "Trade & Commerce" },
+    { value: "destruction", label: "Destruction & Loss" },
   ];
   
   const mosqueTypeOptions = [
@@ -129,27 +169,28 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   const countries = useMemo(() => getUniqueCountries(), []);
   const regions = useMemo(() => getUniqueRegions(countries), [countries]);
   
-  // Jump to year handler
   const handleJumpToYear = useCallback(() => {
     const year = parseInt(jumpToYear, 10);
-    if (isNaN(year) || year < MIN_YEAR || year > MAX_YEAR) return;
-    
-    // Find the event closest to this year
-    const targetId = `year-marker-${year}`;
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth", block: "center" });
-    } else {
-      // Find closest event
-      const closestEvent = displayedEvents.find(e => parseEstablishmentYear(e.year) >= year);
-      if (closestEvent && timelineRef.current) {
-        const eventIndex = displayedEvents.indexOf(closestEvent);
-        const eventElements = timelineRef.current.querySelectorAll("[data-timeline-event]");
-        if (eventElements[eventIndex]) {
-          eventElements[eventIndex].scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }
-    }
+    if (isNaN(year) || year < MIN_YEAR || year > MAX_YEAR || !timelineRef.current) return;
+
+    const elements = Array.from(
+      timelineRef.current.querySelectorAll<HTMLElement>("[data-timeline-event]"),
+    );
+    if (elements.length === 0) return;
+
+    const withYears = elements.map((el) => ({
+      el,
+      year: parseInt(el.getAttribute("data-year") ?? "0", 10),
+    }));
+
+    const atOrAfter = withYears.find((w) => w.year >= year);
+    const target =
+      atOrAfter ??
+      withYears.reduce((best, cur) =>
+        Math.abs(cur.year - year) < Math.abs(best.year - year) ? cur : best,
+      );
+
+    target.el.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [jumpToYear]);
 
   const filteredAndSortedEvents = useMemo(() => {
@@ -165,10 +206,9 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
         }
         if (visitorFriendlyOnly && !mosque.touristFriendly) return false;
         
-        // Year range filter (use effective range from radio)
-        const eventYear = parseEstablishmentYear(event.year);
+        // Year range filter — overlap for century notation (e.g. 14th century = 1300–1399)
         const [minY, maxY] = yearRangeMode === "all" ? [MIN_YEAR, MAX_YEAR] : yearRange;
-        if (eventYear < minY || eventYear > maxY) return false;
+        if (!yearRangeOverlaps(event.year, minY, maxY)) return false;
         
         // Architecture style filter
         if (architectureStyle && mosque.architecturalStyle !== architectureStyle) return false;
@@ -206,13 +246,24 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
 
   // Combine with Islamic history context if enabled (also apply year range)
   const combinedEvents = useMemo(() => {
-    const combined = buildCombinedTimeline(filteredAndSortedEvents, showHistoryContext && !isPreview, eventCategory);
-    // Apply year range to combined events
-    return combined.filter(e => {
-      const year = parseEstablishmentYear(e.year);
-      return year >= effectiveYearRange[0] && year <= effectiveYearRange[1];
-    });
-  }, [filteredAndSortedEvents, showHistoryContext, isPreview, eventCategory, effectiveYearRange]);
+    const combined = buildCombinedTimeline(
+      filteredAndSortedEvents,
+      showHistoryContext && !isPreview,
+      eventCategory,
+      sortOrder,
+      timelineContextEvents,
+    );
+    return combined.filter((e) =>
+      yearRangeOverlaps(e.year, effectiveYearRange[0], effectiveYearRange[1]),
+    );
+  }, [
+    filteredAndSortedEvents,
+    showHistoryContext,
+    isPreview,
+    eventCategory,
+    sortOrder,
+    effectiveYearRange,
+  ]);
 
   // Apply limit for preview mode - use combinedEvents for full page, filteredAndSortedEvents for preview
   const displayedEvents = isPreview
@@ -248,7 +299,11 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Journey through history—from 622 CE to today—and discover when
-            the world's most significant mosques and holy sites were built.
+            the world&apos;s most significant mosques and holy sites were built.
+            {" "}
+            <Link to="/islamic-history" className="text-primary hover:underline">
+              View full Islamic history timeline
+            </Link>
           </p>
         </header>
 
@@ -422,7 +477,12 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
             </div>
 
             {/* Reset - only show when filters active */}
-            {(activeAdvancedFilters > 0 || region || country || eventCategory || visitorFriendlyOnly) && (
+            {(activeAdvancedFilters > 0 ||
+              region ||
+              country ||
+              eventCategory ||
+              visitorFriendlyOnly ||
+              sortOrder !== "oldest") && (
               <Button
                 variant="ghost"
                 size="sm"
@@ -436,6 +496,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                   setCountry("");
                   setEventCategory("");
                   setVisitorFriendlyOnly(false);
+                  setSortOrder("oldest");
                 }}
                 className="h-8 text-xs text-muted-foreground hover:text-foreground"
               >
@@ -466,9 +527,11 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           <div className="space-y-6 md:space-y-8" role="list">
             {displayedEvents.length === 0 ? (
               <p className="text-center text-muted-foreground py-12">
-                {visitorFriendlyOnly
-                  ? "No visitor-friendly mosques match the selected filters. Try a different region or country, or clear Non-Muslims can visit."
-                  : "No mosques match the selected filters. Try a different region or country."}
+                {eventCategory && showHistoryContext
+                  ? "No history events match this category and year range. Try a different event type or widen the year range."
+                  : visitorFriendlyOnly
+                    ? "No visitor-friendly mosques match the selected filters. Try a different region or country, or clear Non-Muslims can visit."
+                    : "No events match the selected filters. Try a different region, country, or year range."}
               </p>
             ) : (
             displayedEvents.map((event, index) => {
@@ -483,6 +546,8 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                 return (
                   <div
                     key={`context-${contextEvent.year}-${index}`}
+                    data-timeline-event
+                    data-year={parseEstablishmentYear(contextEvent.year)}
                     className={`relative flex items-center gap-6 ${
                       index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                     }`}
@@ -548,6 +613,8 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               return (
                 <div
                   key={`${mosqueEvent.mosqueId}-${mosqueEvent.year}-${index}`}
+                  data-timeline-event
+                  data-year={parseEstablishmentYear(mosqueEvent.year)}
                   className={`relative flex items-center gap-6 ${
                     index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
