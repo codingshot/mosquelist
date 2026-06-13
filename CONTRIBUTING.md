@@ -5,7 +5,7 @@ Thank you for helping improve MosqueList. You can add new mosques, fix existing 
 ## How to contribute
 
 1. **Report issues or suggest mosques**  
-   Open an issue on GitHub: [github.com/codingshot/mosquelist/issues](https://github.com/codingshot/mosquelist/issues)  
+   Open an issue on GitHub: [github.com/codingshot/mosquelist/issues](https://github.com/ummahbuild/mosquelist/issues)  
    When you click **New issue**, choose a template:
    - **Bug report** — something isn’t working (include device, browser, steps)
    - **Feature request** — an idea or improvement
@@ -22,7 +22,7 @@ Thank you for helping improve MosqueList. You can add new mosques, fix existing 
    Open **Contribute** from the footer (or go to `/contributing`).
 
 3. **Submit changes**
-   - Fork the repo: [github.com/codingshot/mosquelist](https://github.com/codingshot/mosquelist)
+   - Fork the repo: [github.com/codingshot/mosquelist](https://github.com/ummahbuild/mosquelist)
    - Add or edit entries in `src/data/mosques.json` (one object per mosque inside the `mosques` array)
    - Use the schema and examples on the Contribute page; keep `id` URL-safe (lowercase, hyphens)
    - Add at least one **source** (e.g. Wikipedia or official site) in the `sources` array
@@ -45,4 +45,4 @@ Thank you for helping improve MosqueList. You can add new mosques, fix existing 
 
 ## Questions?
 
-Open an issue or discussion at [github.com/codingshot/mosquelist](https://github.com/codingshot/mosquelist).
+Open an issue or discussion at [github.com/codingshot/mosquelist](https://github.com/ummahbuild/mosquelist).

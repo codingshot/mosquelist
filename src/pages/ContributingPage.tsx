@@ -13,8 +13,8 @@ import {
   citiesNeedingMoreMosques,
 } from "@/data/contributing-gaps";
 
-const GITHUB_REPO = "https://github.com/codingshot/mosquelist";
-const GITHUB_ISSUES = "https://github.com/codingshot/mosquelist/issues";
+const GITHUB_REPO = "https://github.com/ummahbuild/mosquelist";
+const GITHUB_ISSUES = "https://github.com/ummahbuild/mosquelist/issues";
 
 const SCHEMA_EXAMPLE = `{
   "id": "my-mosque-slug",

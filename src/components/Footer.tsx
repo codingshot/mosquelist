@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 const UMMAH_BUILD_X = "https://x.com/ummahbuild";
 const UMMAH_BUILD_LINKEDIN = "https://www.linkedin.com/company/ummah-build/";
-const GITHUB_REPO = "https://github.com/codingshot/mosquelist";
+const GITHUB_REPO = "https://github.com/ummahbuild/mosquelist";
 
 export const Footer = () => {
   const navigate = useNavigate();
