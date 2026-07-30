@@ -120,7 +120,7 @@ export default function ContributingPage() {
     <div className="min-h-screen bg-background">
       <PageSEO
         title="Contribute - MosqueList | Add or Update Mosque Data"
-        description="Contribute to MosqueList: add new mosques, update data, or report issues. JSON schema, form, and guidelines. GitHub: codingshot/mosquelist."
+        description="Contribute to MosqueList: add new mosques, update data, or report issues. JSON schema, form, and guidelines. GitHub: ummahbuild/mosquelist."
         path="/contributing"
       />
       <Navigation />
@@ -393,7 +393,7 @@ export default function ContributingPage() {
             <p className="text-sm text-muted-foreground">
               Copy this and add it to <code className="bg-muted px-1 rounded">src/data/mosques.json</code> inside the <code className="bg-muted px-1 rounded">mosques</code> array. Then open a Pull Request at{" "}
               <a href={GITHUB_REPO} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                github.com/codingshot/mosquelist
+                github.com/ummahbuild/mosquelist
               </a>.
             </p>
             <div className="relative">
