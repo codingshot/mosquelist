@@ -52,6 +52,14 @@ export const COUNTRY_TO_REGION: Record<string, string> = {
   "Burkina Faso": "West Africa",
   Mauritania: "West Africa",
   Gambia: "West Africa",
+  "Sierra Leone": "West Africa",
+  Chad: "Central Africa",
+
+  // Central Africa
+  "Central African Republic": "Central Africa",
+  "Democratic Republic of the Congo": "Central Africa",
+  Congo: "Central Africa",
+  Gabon: "Central Africa",
   
   // Southern Africa
   "South Africa": "Southern Africa",
@@ -146,6 +154,7 @@ export const REGIONS = [
   "North Africa",
   "East Africa",
   "West Africa",
+  "Central Africa",
   "Southern Africa",
   "South Asia",
   "Southeast Asia",

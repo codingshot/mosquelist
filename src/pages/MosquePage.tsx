@@ -39,9 +39,6 @@ export default function MosquePage() {
   const { id } = useParams<{ id: string }>();
   const mosque = id ? getMosqueBySlug(id) : undefined;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
   const { isFavorite, toggleFavorite } = useFavorites();
   const { bucketList, addToBucketList } = useBucketList();
 
@@ -72,6 +69,26 @@ export default function MosquePage() {
   }, []);
   const closeGallery = useCallback(() => setGalleryOpen(false), []);
   const [failedThumbs, setFailedThumbs] = useState<Set<number>>(new Set());
+
+  // Reset UI state when navigating between mosques (avoids stale gallery index / open modal)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setActiveImageIndex(0);
+    setGalleryStartIndex(0);
+    setGalleryOpen(false);
+    setShareOpen(false);
+    setFailedThumbs(new Set());
+  }, [id]);
+
+  // Keep hero image index in range if gallery shrinks
+  useEffect(() => {
+    if (galleryImages.length === 0) {
+      setActiveImageIndex(0);
+      return;
+    }
+    setActiveImageIndex((i) => Math.min(i, galleryImages.length - 1));
+  }, [galleryImages.length]);
+
   const relatedMosques = useMemo(
     () => (mosque ? getRelatedMosques(mosque, 6) : []),
     [mosque]
@@ -80,6 +97,10 @@ export default function MosquePage() {
     () => (mosque ? getListsContainingMosque(mosque.id) : []),
     [mosque]
   );
+  const safeImageIndex =
+    galleryImages.length > 0
+      ? Math.min(Math.max(0, activeImageIndex), galleryImages.length - 1)
+      : 0;
 
   if (!mosque) {
     return (
@@ -166,7 +187,7 @@ export default function MosquePage() {
           <div className="relative overflow-hidden rounded-xl border border-border bg-card mosque-card-shadow">
             <div
               className="relative h-56 sm:h-72 md:h-80 cursor-default"
-              onDoubleClick={hasGallery ? () => openGallery(activeImageIndex) : undefined}
+              onDoubleClick={hasGallery ? () => openGallery(safeImageIndex) : undefined}
               role={hasGallery ? "button" : undefined}
               tabIndex={hasGallery ? 0 : undefined}
               onKeyDown={
@@ -174,7 +195,7 @@ export default function MosquePage() {
                   ? (e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
-                        openGallery(activeImageIndex);
+                        openGallery(safeImageIndex);
                       }
                     }
                   : undefined
@@ -182,7 +203,7 @@ export default function MosquePage() {
               aria-label={hasGallery ? "Double-click or press Enter to open image gallery" : undefined}
             >
               <img
-                src={galleryImages[activeImageIndex] || heroImageSrc.src}
+                src={galleryImages[safeImageIndex] || heroImageSrc.src}
                 alt={mosque.name}
                 loading="eager"
                 decoding="async"
@@ -203,7 +224,7 @@ export default function MosquePage() {
                   className="print:hidden absolute top-4 left-4 gap-1.5 bg-card/90 backdrop-blur-sm hover:bg-card min-h-[44px]"
                   onClick={(e) => {
                     e.stopPropagation();
-                    openGallery();
+                    openGallery(safeImageIndex);
                   }}
                   aria-label={`Open gallery (${galleryImages.length} images)`}
                 >
@@ -281,12 +302,12 @@ export default function MosquePage() {
                         onClick={() => setActiveImageIndex(idx)}
                         onDoubleClick={() => openGallery(idx)}
                         className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                          idx === activeImageIndex
+                          idx === safeImageIndex
                             ? "ring-2 ring-primary ring-offset-2 ring-offset-background"
                             : "opacity-70 hover:opacity-100"
                         }`}
                         aria-label={`View image ${idx + 1} of ${galleryImages.length}`}
-                        aria-pressed={idx === activeImageIndex}
+                        aria-pressed={idx === safeImageIndex}
                       >
                         <img
                           src={img}
@@ -386,8 +407,12 @@ export default function MosquePage() {
                   <DropdownMenuContent align="start" className="w-56">
                     <DropdownMenuItem
                       onClick={async () => {
-                        await navigator.clipboard.writeText(locationDisplay);
-                        toast.success("Copied to clipboard");
+                        try {
+                          await navigator.clipboard.writeText(locationDisplay);
+                          toast.success("Copied to clipboard");
+                        } catch {
+                          toast.error("Could not copy — try selecting the text instead");
+                        }
                       }}
                     >
                       <Copy className="h-4 w-4 mr-2" />
