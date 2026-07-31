@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useCallback, memo } from "react";
+import { useMemo, useState, useRef, useCallback, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { timelineEvents, timelineContextEvents, mosques, getUniqueCountries } from "@/data/mosques";
 import { getUniqueRegions, getRegionForCountry } from "@/data/regions";
@@ -26,6 +26,11 @@ import { getMosqueImageSrc, setMosqueImageFallback } from "@/lib/mosque-image";
 import type { TimelineEvent } from "@/types/mosque";
 import type { Mosque } from "@/types/mosque";
 
+/** Initial batch size — keeps first paint fast (History off ≈ 200 mosques; History on ≈ 400+) */
+const ITEMS_PER_PAGE = 24;
+
+type SortOrder = "oldest" | "newest";
+
 type HistoryCategory =
   | "era"
   | "migration"
@@ -38,7 +43,6 @@ type HistoryCategory =
   | "colonization"
   | "independence";
 
-/** Context event type with source URL */
 interface ContextEvent {
   isContextEvent: true;
   year: string;
@@ -48,6 +52,12 @@ interface ContextEvent {
   category: HistoryCategory;
 }
 
+type TimelineItem = TimelineEvent | ContextEvent;
+
+function isContextEvent(event: TimelineItem): event is ContextEvent {
+  return "isContextEvent" in event && event.isContextEvent === true;
+}
+
 /** Build combined timeline with mosque events and Islamic history context */
 function buildCombinedTimeline(
   mosqueEvents: TimelineEvent[],
@@ -55,7 +65,7 @@ function buildCombinedTimeline(
   categoryFilter: string,
   sortOrder: SortOrder,
   jsonContextEvents: TimelineEvent[],
-): (TimelineEvent | ContextEvent)[] {
+): TimelineItem[] {
   let contextEvents: ContextEvent[] = [];
 
   if (includeContext) {
@@ -102,20 +112,171 @@ function buildCombinedTimeline(
   );
 }
 
-type SortOrder = "oldest" | "newest";
-
-// Get all unique architecture styles from mosques
 const allArchitectureStyles = Array.from(
-  new Set(mosques.map(m => m.architecturalStyle).filter(Boolean))
+  new Set(mosques.map((m) => m.architecturalStyle).filter(Boolean)),
 ).sort() as string[];
 
-// Get min/max years from data
 const allYears = [
-  ...timelineEvents.map(e => parseEstablishmentYear(e.year)),
-  ...ISLAMIC_HISTORY_PERIODS.map(p => p.year)
-].filter(y => y > 0);
+  ...timelineEvents.map((e) => parseEstablishmentYear(e.year)),
+  ...ISLAMIC_HISTORY_PERIODS.map((p) => p.year),
+].filter((y) => y > 0);
 const MIN_YEAR = Math.min(...allYears);
 const MAX_YEAR = Math.max(...allYears, new Date().getFullYear());
+
+const categoryOptions = [
+  { value: "all", label: "All events" },
+  { value: "expansion", label: "Islamic Expansion" },
+  { value: "colonization", label: "Colonization" },
+  { value: "independence", label: "Independence" },
+  { value: "caliphate", label: "Caliphates" },
+  { value: "architecture", label: "Architecture" },
+  { value: "education", label: "Education" },
+  { value: "era", label: "Historical Eras" },
+  { value: "migration", label: "Migration" },
+  { value: "trade", label: "Trade & Commerce" },
+  { value: "destruction", label: "Destruction & Loss" },
+];
+
+const mosqueTypeOptions = [
+  { value: "all", label: "All mosques" },
+  { value: "holySite", label: "Holy Sites" },
+  { value: "womenArea", label: "Women's Prayer Area" },
+  { value: "touristFriendly", label: "Tourist-Friendly" },
+  { value: "sunni", label: "Sunni Tradition" },
+  { value: "shia", label: "Shia Tradition" },
+];
+
+const ContextEventRow = memo(function ContextEventRow({
+  event,
+  index,
+}: {
+  event: ContextEvent;
+  index: number;
+}) {
+  return (
+    <div
+      data-timeline-event
+      data-year={parseEstablishmentYear(event.year)}
+      className={`relative flex items-center gap-6 ${
+        index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+      }`}
+    >
+      <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-emerald-500 dark:bg-emerald-600 border-4 border-background z-10 md:-translate-x-1/2" />
+      <div
+        className={`ml-12 md:ml-0 md:w-1/2 ${
+          index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
+        }`}
+      >
+        <div className="bg-emerald-50 dark:bg-emerald-950/40 rounded-lg shadow-md border border-emerald-200 dark:border-emerald-800 overflow-hidden min-w-0">
+          <div className="p-4 sm:p-5">
+            <div className="flex items-center gap-2 mb-1">
+              <History className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
+              <span className="text-xs font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-wide">
+                Islamic History
+              </span>
+            </div>
+            <span className="font-handwriting text-xl sm:text-2xl text-emerald-800 dark:text-emerald-300 font-semibold">
+              {formatYearDisplay(event.year)}
+            </span>
+            <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
+              {event.label}
+            </h3>
+            <p className="text-muted-foreground text-sm sm:text-base mt-2">{event.description}</p>
+            {event.source && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a
+                    href={event.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 hover:underline mt-2"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                    Source
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="max-w-xs">
+                  <p className="text-xs break-all">{event.source}</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="hidden md:block md:w-1/2" />
+    </div>
+  );
+});
+
+const MosqueEventRow = memo(function MosqueEventRow({
+  event,
+  mosque,
+  index,
+}: {
+  event: TimelineEvent;
+  mosque: Mosque | undefined;
+  index: number;
+}) {
+  const { src: imageSrc, fallbackUrl: imageFallback } = mosque
+    ? getMosqueImageSrc(mosque)
+    : { src: "/placeholder.svg", fallbackUrl: null };
+
+  return (
+    <div
+      data-timeline-event
+      data-year={parseEstablishmentYear(event.year)}
+      className={`relative flex items-center gap-6 ${
+        index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+      }`}
+    >
+      <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background z-10 md:-translate-x-1/2" />
+      <div
+        className={`ml-12 md:ml-0 md:w-1/2 ${
+          index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
+        }`}
+      >
+        <div className="bg-card rounded-lg shadow-lg border border-border mosque-card-shadow overflow-hidden min-w-0">
+          <div className={`flex ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}>
+            <div className="shrink-0 w-24 sm:w-28 md:w-32 self-stretch min-h-0 overflow-hidden bg-muted">
+              <Link to={`/mosque/${event.mosqueId}`} className="block h-full w-full">
+                <img
+                  src={imageSrc}
+                  alt={mosque ? `${mosque.name} - ${event.year}` : ""}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    setMosqueImageFallback(e.currentTarget, imageFallback);
+                  }}
+                />
+              </Link>
+            </div>
+            <div className="p-4 sm:p-5 min-w-0 flex-1">
+              <span className="font-handwriting text-xl sm:text-2xl text-primary font-semibold">
+                {formatYearDisplay(event.year)}
+              </span>
+              <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
+                <Link
+                  to={`/mosque/${event.mosqueId}`}
+                  className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
+                >
+                  {event.mosque}
+                </Link>
+              </h3>
+              <p className="text-muted-foreground text-sm sm:text-base mt-2">{event.event}</p>
+              {mosque?.location && mosque?.country && (
+                <p className="text-xs text-muted-foreground mt-1.5">
+                  {mosque.location}, {mosque.country}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="hidden md:block md:w-1/2" />
+    </div>
+  );
+});
 
 interface TimelineProps {
   /** Limit displayed events (for homepage preview) */
@@ -130,74 +291,27 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
   const [region, setRegion] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [visitorFriendlyOnly, setVisitorFriendlyOnly] = useState(false);
-  const [showHistoryContext, setShowHistoryContext] = useState(!isPreview);
+  // Off by default — History adds 200+ milestones and made /timeline feel broken
+  const [showHistoryContext, setShowHistoryContext] = useState(false);
   const [eventCategory, setEventCategory] = useState<string>("");
-  
-  // Advanced filters
   const [yearRange, setYearRange] = useState<[number, number]>([MIN_YEAR, MAX_YEAR]);
   const [yearRangeMode, setYearRangeMode] = useState<"all" | "custom">("all");
   const [jumpToYear, setJumpToYear] = useState<string>("");
   const [architectureStyle, setArchitectureStyle] = useState<string>("");
   const [mosqueType, setMosqueType] = useState<string>("");
-  
-  const timelineRef = useRef<HTMLDivElement>(null);
+  const [page, setPage] = useState(1);
+  const [pendingJumpYear, setPendingJumpYear] = useState<number | null>(null);
 
-  const categoryOptions = [
-    { value: "all", label: "All events" },
-    { value: "expansion", label: "Islamic Expansion" },
-    { value: "colonization", label: "Colonization" },
-    { value: "independence", label: "Independence" },
-    { value: "caliphate", label: "Caliphates" },
-    { value: "architecture", label: "Architecture" },
-    { value: "education", label: "Education" },
-    { value: "era", label: "Historical Eras" },
-    { value: "migration", label: "Migration" },
-    { value: "trade", label: "Trade & Commerce" },
-    { value: "destruction", label: "Destruction & Loss" },
-  ];
-  
-  const mosqueTypeOptions = [
-    { value: "all", label: "All mosques" },
-    { value: "holySite", label: "Holy Sites" },
-    { value: "womenArea", label: "Women's Prayer Area" },
-    { value: "touristFriendly", label: "Tourist-Friendly" },
-    { value: "sunni", label: "Sunni Tradition" },
-    { value: "shia", label: "Shia Tradition" },
-  ];
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   const mosqueById = useMemo(() => new Map(mosques.map((m) => [m.id, m])), []);
   const countries = useMemo(() => getUniqueCountries(), []);
   const regions = useMemo(() => getUniqueRegions(countries), [countries]);
-  
-  const handleJumpToYear = useCallback(() => {
-    const year = parseInt(jumpToYear, 10);
-    if (isNaN(year) || year < MIN_YEAR || year > MAX_YEAR || !timelineRef.current) return;
-
-    const elements = Array.from(
-      timelineRef.current.querySelectorAll<HTMLElement>("[data-timeline-event]"),
-    );
-    if (elements.length === 0) return;
-
-    const withYears = elements.map((el) => ({
-      el,
-      year: parseInt(el.getAttribute("data-year") ?? "0", 10),
-    }));
-
-    const atOrAfter = withYears.find((w) => w.year >= year);
-    const target =
-      atOrAfter ??
-      withYears.reduce((best, cur) =>
-        Math.abs(cur.year - year) < Math.abs(best.year - year) ? cur : best,
-      );
-
-    target.el.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [jumpToYear]);
 
   const filteredAndSortedEvents = useMemo(() => {
     let list = timelineEvents.filter((event) => {
       const mosque = mosqueById.get(event.mosqueId);
       if (!mosque) return false;
-      // In preview mode, skip filters
       if (!isPreview) {
         if (country && mosque.country !== country) return false;
         if (region) {
@@ -205,15 +319,12 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           if (mosqueRegion !== region) return false;
         }
         if (visitorFriendlyOnly && !mosque.touristFriendly) return false;
-        
-        // Year range filter — overlap for century notation (e.g. 14th century = 1300–1399)
+
         const [minY, maxY] = yearRangeMode === "all" ? [MIN_YEAR, MAX_YEAR] : yearRange;
         if (!yearRangeOverlaps(event.year, minY, maxY)) return false;
-        
-        // Architecture style filter
+
         if (architectureStyle && mosque.architecturalStyle !== architectureStyle) return false;
-        
-        // Mosque type filter
+
         if (mosqueType) {
           switch (mosqueType) {
             case "holySite":
@@ -237,14 +348,26 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
       return true;
     });
     const order = sortOrder === "newest" ? -1 : 1;
-    list = [...list].sort((a, b) => order * (parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year)));
+    list = [...list].sort(
+      (a, b) => order * (parseEstablishmentYear(a.year) - parseEstablishmentYear(b.year)),
+    );
     return list;
-  }, [timelineEvents, mosqueById, country, region, sortOrder, isPreview, visitorFriendlyOnly, yearRange, yearRangeMode, architectureStyle, mosqueType]);
+  }, [
+    mosqueById,
+    country,
+    region,
+    sortOrder,
+    isPreview,
+    visitorFriendlyOnly,
+    yearRange,
+    yearRangeMode,
+    architectureStyle,
+    mosqueType,
+  ]);
 
   const effectiveYearRange: [number, number] =
     yearRangeMode === "all" ? [MIN_YEAR, MAX_YEAR] : yearRange;
 
-  // Combine with Islamic history context if enabled (also apply year range)
   const combinedEvents = useMemo(() => {
     const combined = buildCombinedTimeline(
       filteredAndSortedEvents,
@@ -265,28 +388,120 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
     effectiveYearRange,
   ]);
 
-  // Apply limit for preview mode - use combinedEvents for full page, filteredAndSortedEvents for preview
-  const displayedEvents = isPreview
-    ? filteredAndSortedEvents.slice(0, limit)
-    : combinedEvents;
-  const hasMore = isPreview && filteredAndSortedEvents.length > limit;
-  
-  // Count active advanced filters
+  const fullEventList = isPreview ? filteredAndSortedEvents : combinedEvents;
+
+  // Reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [
+    sortOrder,
+    region,
+    country,
+    visitorFriendlyOnly,
+    showHistoryContext,
+    eventCategory,
+    yearRange,
+    yearRangeMode,
+    architectureStyle,
+    mosqueType,
+  ]);
+
+  const visibleCount = isPreview
+    ? Math.min(limit ?? ITEMS_PER_PAGE, fullEventList.length)
+    : Math.min(page * ITEMS_PER_PAGE, fullEventList.length);
+
+  const displayedEvents = fullEventList.slice(0, visibleCount);
+  const hasMorePreview = isPreview && filteredAndSortedEvents.length > (limit ?? 0);
+  const hasMoreFull = !isPreview && visibleCount < fullEventList.length;
+
+  const scrollToYear = useCallback((year: number) => {
+    if (!timelineRef.current) return false;
+    const elements = Array.from(
+      timelineRef.current.querySelectorAll<HTMLElement>("[data-timeline-event]"),
+    );
+    if (elements.length === 0) return false;
+
+    const withYears = elements.map((el) => ({
+      el,
+      year: parseInt(el.getAttribute("data-year") ?? "0", 10),
+    }));
+
+    const atOrAfter = withYears.find((w) => w.year >= year);
+    const target =
+      atOrAfter ??
+      withYears.reduce((best, cur) =>
+        Math.abs(cur.year - year) < Math.abs(best.year - year) ? cur : best,
+      );
+
+    target.el.scrollIntoView({ behavior: "smooth", block: "center" });
+    return true;
+  }, []);
+
+  const handleJumpToYear = useCallback(() => {
+    const year = parseInt(jumpToYear, 10);
+    if (isNaN(year) || year < MIN_YEAR || year > MAX_YEAR) return;
+
+    // Expand pages until the target year is in the loaded slice, then scroll
+    const idx = fullEventList.findIndex((e) => parseEstablishmentYear(e.year) >= year);
+    const targetIndex = idx >= 0 ? idx : fullEventList.length - 1;
+    if (targetIndex < 0) return;
+
+    const neededPage = Math.ceil((targetIndex + 1) / ITEMS_PER_PAGE);
+    if (neededPage > page) {
+      setPage(neededPage);
+      setPendingJumpYear(year);
+    } else {
+      scrollToYear(year);
+    }
+  }, [jumpToYear, fullEventList, page, scrollToYear]);
+
+  useEffect(() => {
+    if (pendingJumpYear == null) return;
+    const id = requestAnimationFrame(() => {
+      scrollToYear(pendingJumpYear);
+      setPendingJumpYear(null);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [pendingJumpYear, displayedEvents.length, scrollToYear]);
+
   const activeAdvancedFilters = [
     yearRangeMode === "custom" && (yearRange[0] !== MIN_YEAR || yearRange[1] !== MAX_YEAR),
     architectureStyle,
     mosqueType,
   ].filter(Boolean).length;
 
+  const hasActiveFilters =
+    activeAdvancedFilters > 0 ||
+    region ||
+    country ||
+    eventCategory ||
+    visitorFriendlyOnly ||
+    showHistoryContext ||
+    sortOrder !== "oldest";
+
+  const resetFilters = () => {
+    setYearRange([MIN_YEAR, MAX_YEAR]);
+    setYearRangeMode("all");
+    setArchitectureStyle("");
+    setMosqueType("");
+    setJumpToYear("");
+    setRegion("");
+    setCountry("");
+    setEventCategory("");
+    setVisitorFriendlyOnly(false);
+    setShowHistoryContext(false);
+    setSortOrder("oldest");
+    setPage(1);
+  };
+
   return (
-    <section 
-      id="timeline" 
+    <section
+      id="timeline"
       className="py-16 md:py-24 bg-background scroll-mt-20"
       aria-labelledby="timeline-heading"
       role="region"
     >
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <header className="text-center mb-8 md:mb-12">
           <div className="inline-flex items-center gap-2 bg-secondary px-4 py-2 rounded-full mb-4" aria-hidden="true">
             <Calendar className="w-4 h-4 text-primary" aria-hidden="true" />
@@ -307,12 +522,9 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
           </p>
         </header>
 
-        {/* Sort & Filters — hidden in preview mode */}
         {showFilters && (
         <div className="mb-6 md:mb-8 max-w-5xl mx-auto">
-          {/* Compact Filter Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
-            {/* Sort */}
             <Select value={sortOrder} onValueChange={(v) => setSortOrder(v as SortOrder)}>
               <SelectTrigger className="h-10 text-sm" aria-label="Sort timeline">
                 <ArrowUpDown className="mr-1.5 h-3.5 w-3.5 shrink-0" />
@@ -324,7 +536,6 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </SelectContent>
             </Select>
 
-            {/* Region */}
             <Select value={region || "all"} onValueChange={(v) => setRegion(v === "all" ? "" : v)}>
               <SelectTrigger className="h-10 text-sm" aria-label="Filter by region">
                 <MapPin className="mr-1.5 h-3.5 w-3.5 shrink-0" />
@@ -338,7 +549,6 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </SelectContent>
             </Select>
 
-            {/* Country */}
             <Select value={country || "all"} onValueChange={(v) => setCountry(v === "all" ? "" : v)}>
               <SelectTrigger className="h-10 text-sm" aria-label="Filter by country">
                 <SelectValue placeholder="Country" />
@@ -351,8 +561,11 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </SelectContent>
             </Select>
 
-            {/* Event Type */}
-            <Select value={eventCategory || "all"} onValueChange={(v) => setEventCategory(v === "all" ? "" : v)}>
+            <Select
+              value={eventCategory || "all"}
+              onValueChange={(v) => setEventCategory(v === "all" ? "" : v)}
+              disabled={!showHistoryContext}
+            >
               <SelectTrigger className="h-10 text-sm" aria-label="Filter by event type">
                 <History className="mr-1.5 h-3.5 w-3.5 shrink-0" />
                 <SelectValue placeholder="Event type" />
@@ -364,7 +577,6 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </SelectContent>
             </Select>
 
-            {/* Architecture Style */}
             <Select value={architectureStyle || "all"} onValueChange={(v) => setArchitectureStyle(v === "all" ? "" : v)}>
               <SelectTrigger className="h-10 text-sm" aria-label="Filter by architecture">
                 <SelectValue placeholder="Style" />
@@ -377,7 +589,6 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </SelectContent>
             </Select>
 
-            {/* Mosque Type */}
             <Select value={mosqueType || "all"} onValueChange={(v) => setMosqueType(v === "all" ? "" : v)}>
               <SelectTrigger className="h-10 text-sm" aria-label="Filter by mosque type">
                 <SelectValue placeholder="Type" />
@@ -390,9 +601,7 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
             </Select>
           </div>
 
-          {/* Second Row: Year Range + Toggles + Jump */}
           <div className="flex flex-col sm:flex-row gap-3 mt-3 items-start sm:items-center">
-            {/* Year Range Slider - compact */}
             <div className="flex items-center gap-2 flex-1 min-w-0 max-w-md">
               <span className="text-xs text-muted-foreground whitespace-nowrap">{effectiveYearRange[0]}</span>
               <Slider
@@ -409,7 +618,6 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               <span className="text-xs text-muted-foreground whitespace-nowrap">{effectiveYearRange[1]} CE</span>
             </div>
 
-            {/* Jump to Year - compact */}
             <div className="flex items-center gap-1.5">
               <Input
                 type="number"
@@ -419,14 +627,20 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                 min={MIN_YEAR}
                 max={MAX_YEAR}
                 className="h-8 w-20 text-sm"
+                aria-label="Jump to year"
                 onKeyDown={(e) => e.key === "Enter" && handleJumpToYear()}
               />
-              <Button size="sm" variant="secondary" onClick={handleJumpToYear} className="h-8 px-2">
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={handleJumpToYear}
+                className="h-8 px-2"
+                aria-label="Jump to year"
+              >
                 <Search className="h-3.5 w-3.5" />
               </Button>
             </div>
 
-            {/* Year range mode: All years / Custom - end side of timeline years filter */}
             <RadioGroup
               value={yearRangeMode}
               onValueChange={(v) => {
@@ -452,7 +666,6 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </div>
             </RadioGroup>
 
-            {/* Toggles - compact */}
             <div className="flex items-center gap-2 flex-wrap">
               <label className="flex items-center gap-1.5 text-xs cursor-pointer px-2 py-1.5 rounded border border-border bg-background hover:bg-secondary/50">
                 <input
@@ -468,7 +681,10 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                 <input
                   type="checkbox"
                   checked={showHistoryContext}
-                  onChange={(e) => setShowHistoryContext(e.target.checked)}
+                  onChange={(e) => {
+                    setShowHistoryContext(e.target.checked);
+                    if (!e.target.checked) setEventCategory("");
+                  }}
                   className="h-3.5 w-3.5 rounded border-border"
                 />
                 <span className="hidden sm:inline">History events</span>
@@ -476,28 +692,11 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
               </label>
             </div>
 
-            {/* Reset - only show when filters active */}
-            {(activeAdvancedFilters > 0 ||
-              region ||
-              country ||
-              eventCategory ||
-              visitorFriendlyOnly ||
-              sortOrder !== "oldest") && (
+            {hasActiveFilters && (
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => {
-                  setYearRange([MIN_YEAR, MAX_YEAR]);
-                  setYearRangeMode("all");
-                  setArchitectureStyle("");
-                  setMosqueType("");
-                  setJumpToYear("");
-                  setRegion("");
-                  setCountry("");
-                  setEventCategory("");
-                  setVisitorFriendlyOnly(false);
-                  setSortOrder("oldest");
-                }}
+                onClick={resetFilters}
                 className="h-8 text-xs text-muted-foreground hover:text-foreground"
               >
                 Reset
@@ -505,25 +704,25 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
             )}
           </div>
 
-          {/* Results count - inline */}
           <p className="text-xs text-muted-foreground mt-2">
-            {displayedEvents.length} event{displayedEvents.length !== 1 ? "s" : ""}
-            {showHistoryContext && ` (${filteredAndSortedEvents.length} mosques)`}
+            Showing {displayedEvents.length} of {fullEventList.length} event
+            {fullEventList.length !== 1 ? "s" : ""}
+            {showHistoryContext && ` · ${filteredAndSortedEvents.length} mosques`}
+            {!showHistoryContext && (
+              <span className="ml-1">· turn on History events for milestones</span>
+            )}
           </p>
         </div>
         )}
 
-        {/* Timeline */}
-        <div 
-          ref={timelineRef} 
+        <div
+          ref={timelineRef}
           className="relative max-w-4xl mx-auto"
           role="feed"
-          aria-label={`Timeline showing ${displayedEvents.length} events`}
+          aria-label={`Timeline showing ${displayedEvents.length} of ${fullEventList.length} events`}
         >
-          {/* Center Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2" aria-hidden="true" />
 
-          {/* Events (filtered & sorted) */}
           <div className="space-y-6 md:space-y-8" role="list">
             {displayedEvents.length === 0 ? (
               <p className="text-center text-muted-foreground py-12">
@@ -534,149 +733,48 @@ export const Timeline = ({ limit, showFilters = true }: TimelineProps) => {
                     : "No events match the selected filters. Try a different region, country, or year range."}
               </p>
             ) : (
-            displayedEvents.map((event, index) => {
-              // Check if this is a context event (Islamic history milestone)
-              const isContext = "isContextEvent" in event && event.isContextEvent;
-              
-              if (isContext) {
-                // Cast to context event type
-                const contextEvent = event as ContextEvent;
-                
-                // Render context event (Islamic history milestone)
-                return (
-                  <div
-                    key={`context-${contextEvent.year}-${index}`}
-                    data-timeline-event
-                    data-year={parseEstablishmentYear(contextEvent.year)}
-                    className={`relative flex items-center gap-6 ${
-                      index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                    }`}
-                  >
-                    {/* Dot - accent color for context events */}
-                    <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-emerald-500 dark:bg-emerald-600 border-4 border-background z-10 md:-translate-x-1/2" />
-
-                    {/* Content - styled differently for context events */}
-                    <div
-                      className={`ml-12 md:ml-0 md:w-1/2 ${
-                        index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
-                      }`}
-                    >
-                      <div className="bg-emerald-50 dark:bg-emerald-950/40 rounded-lg shadow-md border border-emerald-200 dark:border-emerald-800 overflow-hidden min-w-0">
-                        <div className="p-4 sm:p-5">
-                          <div className="flex items-center gap-2 mb-1">
-                            <History className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
-                            <span className="text-xs font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-wide">
-                              Islamic History
-                            </span>
-                          </div>
-                          <span className="font-handwriting text-xl sm:text-2xl text-emerald-800 dark:text-emerald-300 font-semibold">
-                            {formatYearDisplay(contextEvent.year)}
-                          </span>
-                          <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
-                            {contextEvent.label}
-                          </h3>
-                          <p className="text-muted-foreground text-sm sm:text-base mt-2">{contextEvent.description}</p>
-                          {/* Source link — only when context event has a source URL */}
-                          {contextEvent.source && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <a
-                                  href={contextEvent.source}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 hover:underline mt-2"
-                                >
-                                  <ExternalLink className="h-3 w-3" />
-                                  Source
-                                </a>
-                              </TooltipTrigger>
-                              <TooltipContent side="bottom" className="max-w-xs">
-                                <p className="text-xs break-all">{contextEvent.source}</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Empty space for alternating layout */}
-                    <div className="hidden md:block md:w-1/2" />
-                  </div>
-                );
-              }
-              
-              // Regular mosque event
-              const mosqueEvent = event as TimelineEvent;
-              const mosque = mosqueById.get(mosqueEvent.mosqueId);
-              const { src: imageSrc, fallbackUrl: imageFallback } = mosque ? getMosqueImageSrc(mosque) : { src: "/placeholder.svg", fallbackUrl: null };
-
-              return (
-                <div
-                  key={`${mosqueEvent.mosqueId}-${mosqueEvent.year}-${index}`}
-                  data-timeline-event
-                  data-year={parseEstablishmentYear(mosqueEvent.year)}
-                  className={`relative flex items-center gap-6 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Dot */}
-                  <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background z-10 md:-translate-x-1/2" />
-
-                  {/* Content */}
-                  <div
-                    className={`ml-12 md:ml-0 md:w-1/2 ${
-                      index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
-                    }`}
-                  >
-                    <div className="bg-card rounded-lg shadow-lg border border-border mosque-card-shadow overflow-hidden min-w-0">
-                      <div className={`flex ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}>
-                        <div className="shrink-0 w-24 sm:w-28 md:w-32 self-stretch min-h-0 overflow-hidden bg-muted">
-                          <Link to={`/mosque/${mosqueEvent.mosqueId}`} className="block h-full w-full">
-                            <img
-                              src={imageSrc}
-                              alt={mosque ? `${mosque.name} - ${mosqueEvent.year}` : ""}
-                              className="h-full w-full object-cover"
-                              loading="lazy"
-                              decoding="async"
-                              onError={(e) => {
-                                setMosqueImageFallback(e.currentTarget, imageFallback);
-                              }}
-                            />
-                          </Link>
-                        </div>
-                        <div className="p-4 sm:p-5 min-w-0 flex-1">
-                          <span className="font-handwriting text-xl sm:text-2xl text-primary font-semibold">
-                            {formatYearDisplay(mosqueEvent.year)}
-                          </span>
-                          <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mt-1">
-                            <Link
-                              to={`/mosque/${mosqueEvent.mosqueId}`}
-                              className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded"
-                            >
-                              {mosqueEvent.mosque}
-                            </Link>
-                          </h3>
-                          <p className="text-muted-foreground text-sm sm:text-base mt-2">{mosqueEvent.event}</p>
-                          {mosque?.location && mosque?.country && (
-                            <p className="text-xs text-muted-foreground mt-1.5">
-                              {mosque.location}, {mosque.country}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Empty space for alternating layout */}
-                  <div className="hidden md:block md:w-1/2" />
-                </div>
-              );
-            })
+              displayedEvents.map((event, index) =>
+                isContextEvent(event) ? (
+                  <ContextEventRow
+                    key={`context-${event.year}-${event.label}-${index}`}
+                    event={event}
+                    index={index}
+                  />
+                ) : (
+                  <MosqueEventRow
+                    key={`${event.mosqueId}-${event.year}-${index}`}
+                    event={event}
+                    mosque={mosqueById.get(event.mosqueId)}
+                    index={index}
+                  />
+                ),
+              )
             )}
           </div>
 
-          {/* See All link for preview mode */}
-          {hasMore && (
+          {hasMoreFull && (
+            <div className="text-center mt-10">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => setPage((p) => p + 1)}
+                className="gap-2"
+              >
+                Load more events
+                <span className="text-muted-foreground font-normal">
+                  ({Math.min(ITEMS_PER_PAGE, fullEventList.length - visibleCount)} more)
+                </span>
+              </Button>
+            </div>
+          )}
+
+          {!isPreview && !hasMoreFull && fullEventList.length > ITEMS_PER_PAGE && (
+            <p className="text-center text-sm text-muted-foreground mt-8">
+              End of timeline · {fullEventList.length} events
+            </p>
+          )}
+
+          {hasMorePreview && (
             <div className="text-center mt-10">
               <Button variant="outline" size="lg" asChild>
                 <Link to="/timeline" className="gap-2">
